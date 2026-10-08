@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free percentage calculator. Calculate percentages, percentage increases, decreases, and more.">
+    <title>Percentage Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/percentage-calculator">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Percentage Calculator</h1>
+                <p>Calculate what percentage one number is of another, or find percentage increases and decreases.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Calculation Type</label>
+                    <select id="calcType" onchange="updateForm()">
+                        <option value="percent-of">What is X% of Y?</option>
+                        <option value="what-percent">X is what % of Y?</option>
+                        <option value="increase">Percentage Increase</option>
+                        <option value="decrease">Percentage Decrease</option>
+                    </select>
+                </div>
+
+                <div id="percentOfForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Percentage (%)</label>
+                            <input type="number" id="percent" placeholder="e.g., 25" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Number</label>
+                            <input type="number" id="number" placeholder="e.g., 100" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="whatPercentForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Number</label>
+                            <input type="number" id="num1" placeholder="e.g., 25" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Number</label>
+                            <input type="number" id="num2" placeholder="e.g., 100" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="increaseForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Original Value</label>
+                            <input type="number" id="original" placeholder="e.g., 100" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>New Value</label>
+                            <input type="number" id="newVal" placeholder="e.g., 150" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="decreaseForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Original Value</label>
+                            <input type="number" id="decOriginal" placeholder="e.g., 150" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>New Value</label>
+                            <input type="number" id="decNewVal" placeholder="e.g., 100" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculatePercentage()">Calculate</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Result</h3>
+                <div class="result-value" id="resultValue">-</div>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>How to Calculate Percentages</h3>
+                <p><strong>What is X% of Y?</strong> Multiply the percentage by the number and divide by 100.</p>
+                <p><strong>X is what % of Y?</strong> Divide X by Y and multiply by 100.</p>
+                <p><strong>Percentage Increase:</strong> ((New - Original) / Original) × 100</p>
+                <p><strong>Percentage Decrease:</strong> ((Original - New) / Original) × 100</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">What is a percentage?</div>
+                    <div class="faq-answer">A percentage is a number expressed as a fraction of 100. For example, 50% means 50 out of 100.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How do I calculate 15% of 200?</div>
+                    <div class="faq-answer">Multiply 15 by 200 and divide by 100. (15 × 200) ÷ 100 = 30.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What's the difference between percentage increase and decrease?</div>
+                    <div class="faq-answer">Percentage increase shows growth ((New - Original) / Original × 100), while decrease shows decline ((Original - New) / Original × 100).</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/discount-calculator.html">Discount Calculator</a></li>
+                    <li><a href="/tip-calculator.html">Tip Calculator</a></li>
+                    <li><a href="/compound-interest-calculator.html">Compound Interest Calculator</a></li>
+                    <li><a href="/salary-calculator.html">Salary Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function updateForm() {
+            const type = document.getElementById('calcType').value;
+            document.getElementById('percentOfForm').style.display = type === 'percent-of' ? 'block' : 'none';
+            document.getElementById('whatPercentForm').style.display = type === 'what-percent' ? 'block' : 'none';
+            document.getElementById('increaseForm').style.display = type === 'increase' ? 'block' : 'none';
+            document.getElementById('decreaseForm').style.display = type === 'decrease' ? 'block' : 'none';
+            document.getElementById('resultBox').classList.remove('show');
+        }
+
+        function calculatePercentage() {
+            const type = document.getElementById('calcType').value;
+            let result, details;
+
+            if (type === 'percent-of') {
+                const percent = parseFloat(document.getElementById('percent').value);
+                const number = parseFloat(document.getElementById('number').value);
+                if (isNaN(percent) || isNaN(number)) {
+                    alert('Please enter valid numbers');
+                    return;
+                }
+                result = (percent / 100) * number;
+                details = `${percent}% of ${number} = ${result.toFixed(2)}`;
+            } else if (type === 'what-percent') {
+                const num1 = parseFloat(document.getElementById('num1').value);
+                const num2 = parseFloat(document.getElementById('num2').value);
+                if (isNaN(num1) || isNaN(num2) || num2 === 0) {
+                    alert('Please enter valid numbers');
+                    return;
+                }
+                result = (num1 / num2) * 100;
+                details = `${num1} is ${result.toFixed(2)}% of ${num2}`;
+            } else if (type === 'increase') {
+                const original = parseFloat(document.getElementById('original').value);
+                const newVal = parseFloat(document.getElementById('newVal').value);
+                if (isNaN(original) || isNaN(newVal) || original === 0) {
+                    alert('Please enter valid numbers');
+                    return;
+                }
+                result = ((newVal - original) / original) * 100;
+                details = `From ${original} to ${newVal} is a ${result.toFixed(2)}% increase`;
+            } else if (type === 'decrease') {
+                const decOriginal = parseFloat(document.getElementById('decOriginal').value);
+                const decNewVal = parseFloat(document.getElementById('decNewVal').value);
+                if (isNaN(decOriginal) || isNaN(decNewVal) || decOriginal === 0) {
+                    alert('Please enter valid numbers');
+                    return;
+                }
+                result = ((decOriginal - decNewVal) / decOriginal) * 100;
+                details = `From ${decOriginal} to ${decNewVal} is a ${result.toFixed(2)}% decrease`;
+            }
+
+            document.getElementById('resultValue').textContent = result.toFixed(2);
+            document.getElementById('resultDetails').textContent = details;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculatePercentage();
+            }
+        });
+    </script>
+</body>
+</html>
