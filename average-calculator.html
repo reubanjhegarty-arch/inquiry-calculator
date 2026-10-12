@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free average calculator. Calculate mean, median, and other averages.">
+    <title>Average Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/average-calculator.html">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Average Calculator</h1>
+                <p>Calculate mean, median, and other statistics for your numbers.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Enter Numbers (comma-separated)</label>
+                    <textarea id="numbersList" placeholder="e.g., 10, 20, 30, 40, 50" style="width: 100%; padding: 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 16px; font-family: inherit; resize: vertical; min-height: 100px;"></textarea>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateAverage()">Calculate</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Statistics</h3>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>Types of Averages</h3>
+                <p><strong>Mean (Average):</strong> Sum of all numbers ÷ Count of numbers</p>
+                <p><strong>Median:</strong> Middle value when numbers are sorted</p>
+                <p><strong>Mode:</strong> Most frequently occurring number</p>
+                <p><strong>Range:</strong> Difference between highest and lowest values</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">What's the difference between mean and median?</div>
+                    <div class="faq-answer">Mean is the average (sum ÷ count). Median is the middle value when sorted. Median is better when there are outliers.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What's the mode?</div>
+                    <div class="faq-answer">Mode is the number that appears most frequently in your dataset.</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function calculateAverage() {
+            const input = document.getElementById('numbersList').value;
+            if (!input.trim()) {
+                alert('Please enter some numbers');
+                return;
+            }
+
+            const numbers = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+            
+            if (numbers.length === 0) {
+                alert('Please enter valid numbers');
+                return;
+            }
+
+            numbers.sort((a, b) => a - b);
+
+            // Mean
+            const mean = numbers.reduce((a, b) => a + b, 0) / numbers.length;
+
+            // Median
+            const median = numbers.length % 2 === 0 
+                ? (numbers[numbers.length / 2 - 1] + numbers[numbers.length / 2]) / 2 
+                : numbers[Math.floor(numbers.length / 2)];
+
+            // Mode
+            const frequency = {};
+            let mode = null;
+            let maxFreq = 0;
+            numbers.forEach(n => {
+                frequency[n] = (frequency[n] || 0) + 1;
+                if (frequency[n] > maxFreq) {
+                    maxFreq = frequency[n];
+                    mode = n;
+                }
+            });
+
+            // Range
+            const range = Math.max(...numbers) - Math.min(...numbers);
+
+            // Standard Deviation
+            const variance = numbers.reduce((sum, n) => sum + Math.pow(n - mean, 2), 0) / numbers.length;
+            const stdDev = Math.sqrt(variance);
+
+            document.getElementById('resultDetails').innerHTML = `
+                <strong>Count:</strong> ${numbers.length}<br>
+                <strong>Mean (Average):</strong> ${mean.toFixed(2)}<br>
+                <strong>Median:</strong> ${median.toFixed(2)}<br>
+                <strong>Mode:</strong> ${mode}<br>
+                <strong>Range:</strong> ${range.toFixed(2)}<br>
+                <strong>Min:</strong> ${Math.min(...numbers).toFixed(2)}<br>
+                <strong>Max:</strong> ${Math.max(...numbers).toFixed(2)}<br>
+                <strong>Standard Deviation:</strong> ${stdDev.toFixed(2)}
+            `;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                calculateAverage();
+            }
+        });
+    </script>
+</body>
+</html>
