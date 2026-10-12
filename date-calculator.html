@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free date calculator. Calculate days between dates, add/subtract days from dates.">
+    <title>Date Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/date-calculator.html">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Date Calculator</h1>
+                <p>Calculate the number of days between two dates or add/subtract days from a date.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Calculation Type</label>
+                    <select id="calcType" onchange="updateDateForm()">
+                        <option value="difference">Days Between Dates</option>
+                        <option value="add">Add Days to Date</option>
+                        <option value="subtract">Subtract Days from Date</option>
+                    </select>
+                </div>
+
+                <div id="differenceForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="date" id="startDate">
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" id="endDate">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="addForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="addDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Days to Add</label>
+                            <input type="number" id="addDays" placeholder="e.g., 30" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="subtractForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" id="subtractDate">
+                        </div>
+                        <div class="form-group">
+                            <label>Days to Subtract</label>
+                            <input type="number" id="subtractDays" placeholder="e.g., 30" step="1">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateDate()">Calculate</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Result</h3>
+                <div class="result-value" id="resultValue">-</div>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>Date Calculations</h3>
+                <p><strong>Days Between:</strong> Count the number of days from one date to another</p>
+                <p><strong>Add Days:</strong> Find the date that is X days after a given date</p>
+                <p><strong>Subtract Days:</strong> Find the date that is X days before a given date</p>
+                <p>All calculations account for leap years and varying month lengths.</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">Does this calculator include the start date?</div>
+                    <div class="faq-answer">For "days between," we count from the start date to the end date. The exact count depends on whether you include both dates.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does it handle leap years?</div>
+                    <div class="faq-answer">This calculator automatically accounts for leap years (every 4 years, except centuries unless divisible by 400).</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/age-calculator.html">Age Calculator</a></li>
+                    <li><a href="/time-calculator.html">Time Calculator</a></li>
+                    <li><a href="/days-until-calculator.html">Days Until Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function updateDateForm() {
+            const type = document.getElementById('calcType').value;
+            document.getElementById('differenceForm').style.display = type === 'difference' ? 'block' : 'none';
+            document.getElementById('addForm').style.display = type === 'add' ? 'block' : 'none';
+            document.getElementById('subtractForm').style.display = type === 'subtract' ? 'block' : 'none';
+            document.getElementById('resultBox').classList.remove('show');
+        }
+
+        function calculateDate() {
+            const type = document.getElementById('calcType').value;
+            let result, details;
+
+            if (type === 'difference') {
+                const start = new Date(document.getElementById('startDate').value);
+                const end = new Date(document.getElementById('endDate').value);
+                if (!start || !end) {
+                    alert('Please select both dates');
+                    return;
+                }
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                result = `${diffDays} days`;
+                details = `From ${start.toDateString()} to ${end.toDateString()}<br>Difference: ${diffDays} days`;
+            } else if (type === 'add') {
+                const date = new Date(document.getElementById('addDate').value);
+                const days = parseInt(document.getElementById('addDays').value);
+                if (!date || isNaN(days)) {
+                    alert('Please enter valid date and number');
+                    return;
+                }
+                const newDate = new Date(date);
+                newDate.setDate(newDate.getDate() + days);
+                result = newDate.toDateString();
+                details = `${date.toDateString()} + ${days} days<br>Result: ${newDate.toDateString()}`;
+            } else if (type === 'subtract') {
+                const date = new Date(document.getElementById('subtractDate').value);
+                const days = parseInt(document.getElementById('subtractDays').value);
+                if (!date || isNaN(days)) {
+                    alert('Please enter valid date and number');
+                    return;
+                }
+                const newDate = new Date(date);
+                newDate.setDate(newDate.getDate() - days);
+                result = newDate.toDateString();
+                details = `${date.toDateString()} - ${days} days<br>Result: ${newDate.toDateString()}`;
+            }
+
+            document.getElementById('resultValue').textContent = result;
+            document.getElementById('resultDetails').innerHTML = details;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateDate();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('startDate').value = today;
+            document.getElementById('endDate').value = today;
+            document.getElementById('addDate').value = today;
+            document.getElementById('subtractDate').value = today;
+        });
+    </script>
+</body>
+</html>
