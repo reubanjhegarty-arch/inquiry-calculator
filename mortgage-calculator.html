@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Mortgage Calculator. Calculate monthly mortgage repayments, interest, property taxes, insurance, and total loan cost.">
+    <title>Mortgage Calculator - Inquiry Calculator</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc; --text: #0f172a; --muted: #64748b; --border: #e2e8f0; --card: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+        a { text-decoration: none; color: inherit; }
+        .navbar { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 19px; font-weight: 800; display: flex; gap: 8px; align-items: center; }
+        .logo span { background: var(--primary); color: #fff; padding: 3px 7px; border-radius: 6px; font-size: 13px; }
+        .nav-links { display: flex; gap: 18px; list-style: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+        .nav-links a:hover { color: var(--primary); }
+        .page-wrap { max-width: 860px; margin: 40px auto 70px; padding: 0 16px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+        .header p { color: var(--muted); font-size: 15px; }
+        .calc-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 30px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        label { font-size: 13px; font-weight: 700; color: var(--text); }
+        input, select { padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; outline: none; background: #fff; }
+        input:focus, select:focus { border-color: var(--primary); }
+        .btn-calc { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.15s; }
+        .btn-calc:hover { background: var(--primary-hover); }
+        .result-box { display: none; margin-top: 25px; padding: 22px; background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 10px; }
+        .result-box.show { display: block; }
+        .result-val { font-size: 34px; font-weight: 800; color: var(--primary); margin: 6px 0 14px; }
+        .result-breakdown { font-size: 14px; color: var(--text); line-height: 1.8; }
+        .info-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 25px; }
+        .info-card h3 { font-size: 17px; margin-bottom: 12px; color: var(--text); }
+        .info-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+        footer { background: #0f172a; color: #94a3b8; padding: 40px 20px; text-align: center; font-size: 13px; }
+        @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span>Inquiry</span> Calculator</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-wrap">
+        <div class="header">
+            <h1>Mortgage Calculator</h1>
+            <p>Calculate your estimated monthly repayments, interest, property taxes, and home insurance.</p>
+        </div>
+
+        <div class="calc-box">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Home Value ($)</label>
+                    <input type="number" id="homePrice" placeholder="e.g. 550000" step="1000">
+                </div>
+                <div class="form-group">
+                    <label>Down Payment ($)</label>
+                    <input type="number" id="downPayment" placeholder="e.g. 110000" step="1000">
+                </div>
+                <div class="form-group">
+                    <label>Annual Interest Rate (%)</label>
+                    <input type="number" id="interestRate" placeholder="e.g. 6.25" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label>Loan Term (Years)</label>
+                    <select id="loanTerm">
+                        <option value="30">30 Years</option>
+                        <option value="25">25 Years</option>
+                        <option value="20">20 Years</option>
+                        <option value="15">15 Years</option>
+                        <option value="10">10 Years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Annual Property Tax ($ / year)</label>
+                    <input type="number" id="annualTax" placeholder="e.g. 3200" value="0">
+                </div>
+                <div class="form-group">
+                    <label>Annual Home Insurance ($ / year)</label>
+                    <input type="number" id="annualInsurance" placeholder="e.g. 1400" value="0">
+                </div>
+            </div>
+
+            <button class="btn-calc" onclick="calculateMortgage()">Calculate Repayments</button>
+
+            <div id="resBox" class="result-box">
+                <div style="font-size: 13px; font-weight: 700; color: #1e40af; text-transform: uppercase;">Estimated Total Monthly Repayment</div>
+                <div id="monthlyPayment" class="result-val">$0.00 / mo</div>
+                <div id="breakdown" class="result-breakdown"></div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>How Mortgages Are Calculated</h3>
+            <p><strong>Principal & Interest:</strong> M = P × [r(1+r)^n] ÷ [(1+r)^n - 1], where P is loan principal, r is the monthly interest rate, and n is the total number of monthly payments.</p>
+            <p><strong>Escrow Costs:</strong> Property taxes and insurance are split into 12 equal monthly instalments and added to the principal and interest payment.</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2025 Inquiry Calculator. All rights reserved.</footer>
+
+    <script>
+        function calculateMortgage() {
+            const homePrice = parseFloat(document.getElementById('homePrice').value);
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const annualRate = parseFloat(document.getElementById('interestRate').value);
+            const years = parseInt(document.getElementById('loanTerm').value);
+            const taxYear = parseFloat(document.getElementById('annualTax').value) || 0;
+            const insYear = parseFloat(document.getElementById('annualInsurance').value) || 0;
+
+            if (isNaN(homePrice) || isNaN(annualRate) || homePrice <= 0 || annualRate < 0) {
+                alert('Please enter valid positive numbers for Home Price and Interest Rate.');
+                return;
+            }
+
+            const principal = homePrice - downPayment;
+            if (principal <= 0) {
+                alert('Down payment cannot be greater than or equal to the home price.');
+                return;
+            }
+
+            const r = (annualRate / 100) / 12;
+            const n = years * 12;
+
+            let piPayment = 0;
+            if (r === 0) {
+                piPayment = principal / n;
+            } else {
+                piPayment = principal * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+            }
+
+            const monthlyTax = taxYear / 12;
+            const monthlyIns = insYear / 12;
+            const totalMonthly = piPayment + monthlyTax + monthlyIns;
+
+            const totalRepaid = piPayment * n;
+            const totalInterest = totalRepaid - principal;
+
+            document.getElementById('monthlyPayment').textContent = '$' + totalMonthly.toFixed(2) + ' / mo';
+            document.getElementById('breakdown').innerHTML = `
+                <strong>Loan Principal:</strong> $${principal.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                <strong>Principal & Interest:</strong> $${piPayment.toFixed(2)}/mo<br>
+                <strong>Property Taxes:</strong> $${monthlyTax.toFixed(2)}/mo<br>
+                <strong>Home Insurance:</strong> $${monthlyIns.toFixed(2)}/mo<br>
+                <hr style="border:0;border-top:1px solid #bfdbfe;margin:10px 0;">
+                <strong>Total Interest Over ${years} Years:</strong> $${totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                <strong>Total Cost of Loan:</strong> $${totalRepaid.toLocaleString(undefined, {minimumFractionDigits: 2})}
+            `;
+            document.getElementById('resBox').classList.add('show');
+        }
+    </script>
+</body>
+</html>
