@@ -44,12 +44,44 @@
         <div class="container">
             <h1>Free Online Calculators</h1>
             <p>Accurate calculations for percentages, loans, dates, conversions, and more</p>
-            <div class="search-box">
+                       <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search calculators... (e.g., percentage, loan, age)">
                 <button onclick="searchCalculators()">Search</button>
             </div>
         </div>
     </header>
+
+    <!-- Embedded Scientific Calculator -->
+    <section class="container" style="margin: 60px 0;">
+        <h2 style="text-align: center; margin-bottom: 30px;">Quick Scientific Calculator</h2>
+        <div style="background: #1f2937; border-radius: 12px; padding: 20px; max-width: 500px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+            <div style="background: #111; color: #10b981; font-size: 24px; padding: 20px; border-radius: 6px; text-align: right; margin-bottom: 20px; word-wrap: break-word; word-break: break-all; min-height: 40px; font-family: 'Courier New', monospace; font-weight: 600;" id="calcDisplay">0</div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;">
+                <button onclick="calcClear()" style="padding: 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; grid-column: span 2;">AC</button>
+                <button onclick="calcAppendOp('/')" style="padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">÷</button>
+                <button onclick="calcAppendOp('*')" style="padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">×</button>
+
+                <button onclick="calcAppendNum('7')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">7</button>
+                <button onclick="calcAppendNum('8')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">8</button>
+                <button onclick="calcAppendNum('9')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">9</button>
+                <button onclick="calcAppendOp('-')" style="padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">−</button>
+
+                <button onclick="calcAppendNum('4')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">4</button>
+                <button onclick="calcAppendNum('5')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">5</button>
+                <button onclick="calcAppendNum('6')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">6</button>
+                <button onclick="calcAppendOp('+')" style="padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">+</button>
+
+                <button onclick="calcAppendNum('1')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">1</button>
+                <button onclick="calcAppendNum('2')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">2</button>
+                <button onclick="calcAppendNum('3')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">3</button>
+                <button onclick="calcFunction('sqrt')" style="padding: 12px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px;">√</button>
+
+                <button onclick="calcAppendNum('0')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; grid-column: span 2;">0</button>
+                <button onclick="calcAppendNum('.')" style="padding: 12px; background: #374151; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">.</button>
+                <button onclick="calcCalculate()" style="padding: 12px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">=</button>
+            </div>
+        </div>
+    </section>
 
     <main class="container">
         <section class="featured-calculators">
