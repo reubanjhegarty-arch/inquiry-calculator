@@ -3,21 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online calculators for percentages, loans, age, dates, and more. Instant results with detailed explanations.">
+    <meta name="description" content="Free online calculators for percentages, loans, age, dates, scientific calculations, and more. Instant results with step-by-step solutions.">
     <meta name="theme-color" content="#1e40af">
     <title>Inquiry Calculator - Free Online Calculators & Tools</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="canonical" href="https://inquirycalculator.com/">
     <link rel="stylesheet" href="/style.css">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Inquiry Calculator",
-        "url": "https://inquirycalculator.com",
-        "description": "Free online calculators for percentages, loans, dates, and more"
-    }
-    </script>
+    <style>
+        .calc-wrapper {
+            max-width: 650px;
+            margin: 25px auto 35px;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            border: 1px solid #e5e7eb;
+        }
+        .calc-screen {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px 20px;
+            text-align: right;
+            font-size: 30px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            word-break: break-all;
+            min-height: 48px;
+        }
+        .btn-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+        .btn-grid button {
+            padding: 12px 6px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            background: #ffffff;
+            color: #1e293b;
+        }
+        .btn-grid button:hover {
+            background: #f1f5f9;
+        }
+        .btn-grid button:active {
+            transform: scale(0.96);
+        }
+        .btn-grid .fn-btn {
+            background: #f8fafc;
+            color: #1e40af;
+            font-size: 13px;
+        }
+        .btn-grid .op-btn {
+            background: #f1f5f9;
+            color: #0f172a;
+            font-weight: 700;
+        }
+        .btn-grid .eq-btn {
+            background: #1e40af;
+            color: #ffffff;
+            border-color: #1e40af;
+            grid-column: span 3;
+            font-size: 16px;
+        }
+        .btn-grid .eq-btn:hover {
+            background: #1d4ed8;
+        }
+        .btn-grid .del-btn {
+            background: #fee2e2;
+            color: #b91c1c;
+            border-color: #fecaca;
+        }
+        .btn-grid .clear-btn {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            grid-column: span 2;
+        }
+        .btn-grid .clear-btn:hover {
+            background: #dc2626;
+        }
+        @media (max-width: 600px) {
+            .btn-grid button {
+                padding: 10px 4px;
+                font-size: 12px;
+            }
+            .calc-screen {
+                font-size: 24px;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -40,125 +121,140 @@
         </div>
     </nav>
 
+    <!-- Top Hero Section with Scientific Calc + Search -->
     <header class="hero">
         <div class="container">
             <h1>Free Online Calculators</h1>
-            <p>Accurate calculations for percentages, loans, dates, conversions, and more</p>
+            <p>Fast, accurate calculations for everyday finance, math, time, and science.</p>
             
-            <!-- Scientific Calculator -->
-            <div style="max-width: 700px; margin: 40px auto 50px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 30px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
-                
-                <!-- Display -->
-                <div id="calcDisplay" style="background: #f3f4f6; border: 2px solid #d1d5db; border-radius: 8px; padding: 20px; text-align: right; font-size: 28px; font-weight: 600; color: #1f2937; margin-bottom: 25px; font-family: 'Courier New', monospace; word-break: break-all; min-height: 45px; letter-spacing: 0.5px;">0</div>
+            <!-- Centered Scientific Calculator -->
+            <div class="calc-wrapper">
+                <div id="calcDisplay" class="calc-screen">0</div>
 
-                <!-- Buttons Grid -->
-                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
-                    
-                    <!-- Row 1: Trigonometry -->
-                    <button onclick="calcFunc('sin')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">sin</button>
-                    <button onclick="calcFunc('cos')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">cos</button>
-                    <button onclick="calcFunc('tan')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">tan</button>
-                    <button onclick="calcFunc('asin')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">asin</button>
-                    <button onclick="calcFunc('acos')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">acos</button>
-                    <button onclick="calcFunc('atan')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">atan</button>
+                <div class="btn-grid">
+                    <!-- Row 1 -->
+                    <button class="fn-btn" onclick="calcFunc('sin')">sin</button>
+                    <button class="fn-btn" onclick="calcFunc('cos')">cos</button>
+                    <button class="fn-btn" onclick="calcFunc('tan')">tan</button>
+                    <button class="fn-btn" onclick="calcFunc('asin')">asin</button>
+                    <button class="fn-btn" onclick="calcFunc('acos')">acos</button>
+                    <button class="fn-btn" onclick="calcFunc('atan')">atan</button>
 
-                    <!-- Row 2: Logarithms & Powers -->
-                    <button onclick="calcFunc('log')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">log</button>
-                    <button onclick="calcFunc('ln')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">ln</button>
-                    <button onclick="calcFunc('sqrt')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">√</button>
-                    <button onclick="calcFunc('cbrt')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">∛</button>
-                    <button onclick="calcFunc('fact')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">n!</button>
-                    <button onclick="calcFunc('pow')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">x^y</button>
+                    <!-- Row 2 -->
+                    <button class="fn-btn" onclick="calcFunc('log')">log</button>
+                    <button class="fn-btn" onclick="calcFunc('ln')">ln</button>
+                    <button class="fn-btn" onclick="calcFunc('sqrt')">√</button>
+                    <button class="fn-btn" onclick="calcFunc('cbrt')">∛</button>
+                    <button class="fn-btn" onclick="calcFunc('pow')">x^y</button>
+                    <button class="fn-btn" onclick="calcFunc('fact')">n!</button>
 
-                    <!-- Row 3: Constants & Operations -->
-                    <button onclick="calcFunc('pi')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">π</button>
-                    <button onclick="calcFunc('e')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">e</button>
-                    <button onclick="calcFunc('abs')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">|x|</button>
-                    <button onclick="calcFunc('exp')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">e^x</button>
-                    <button onclick="calcFunc('deg')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">°</button>
-                    <button onclick="calcFunc('1/x')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">1/x</button>
+                    <!-- Row 3 -->
+                    <button class="fn-btn" onclick="calcFunc('pi')">π</button>
+                    <button class="fn-btn" onclick="calcFunc('e')">e</button>
+                    <button class="fn-btn" onclick="calcFunc('abs')">|x|</button>
+                    <button class="fn-btn" onclick="calcFunc('1/x')">1/x</button>
+                    <button class="op-btn" onclick="calcParens('(')">(</button>
+                    <button class="op-btn" onclick="calcParens(')')">)</button>
 
-                    <!-- Row 4: Numbers -->
-                    <button onclick="calcNum('7')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">7</button>
-                    <button onclick="calcNum('8')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">8</button>
-                    <button onclick="calcNum('9')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">9</button>
-                    <button onclick="calcOp('/')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">÷</button>
-                    <button onclick="calcOp('%')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">%</button>
-                    <button onclick="calcBackspace()" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #6b7280; font-size: 12px;">DEL</button>
+                    <!-- Row 4 -->
+                    <button onclick="calcNum('7')">7</button>
+                    <button onclick="calcNum('8')">8</button>
+                    <button onclick="calcNum('9')">9</button>
+                    <button class="op-btn" onclick="calcOp('/')">÷</button>
+                    <button class="op-btn" onclick="calcOp('%')">%</button>
+                    <button class="del-btn" onclick="calcBackspace()">DEL</button>
 
-                    <!-- Row 5: Numbers -->
-                    <button onclick="calcNum('4')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">4</button>
-                    <button onclick="calcNum('5')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">5</button>
-                    <button onclick="calcNum('6')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">6</button>
-                    <button onclick="calcOp('*')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">×</button>
-                    <button onclick="calcSign()" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">+/−</button>
-                    <button onclick="calcParens('(')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">(</button>
+                    <!-- Row 5 -->
+                    <button onclick="calcNum('4')">4</button>
+                    <button onclick="calcNum('5')">5</button>
+                    <button onclick="calcNum('6')">6</button>
+                    <button class="op-btn" onclick="calcOp('*')">×</button>
+                    <button class="op-btn" onclick="calcSign()">+/−</button>
+                    <button class="fn-btn" onclick="calcFunc('exp')">e^x</button>
 
-                    <!-- Row 6: Numbers -->
-                    <button onclick="calcNum('1')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">1</button>
-                    <button onclick="calcNum('2')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">2</button>
-                    <button onclick="calcNum('3')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">3</button>
-                    <button onclick="calcOp('-')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">−</button>
-                    <button onclick="calcNum('0')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; grid-column: span 2;">0</button>
-                    <button onclick="calcParens(')')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">)</button>
+                    <!-- Row 6 -->
+                    <button onclick="calcNum('1')">1</button>
+                    <button onclick="calcNum('2')">2</button>
+                    <button onclick="calcNum('3')">3</button>
+                    <button class="op-btn" onclick="calcOp('-')">−</button>
+                    <button class="clear-btn" onclick="calcClear()">AC (Clear)</button>
 
-                    <!-- Row 7: Bottom -->
-                    <button onclick="calcNum('.')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">.</button>
-                    <button onclick="calcOp('+')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">+</button>
-                    <button onclick="calcEqual()" style="padding: 12px; background: #1e40af; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; grid-column: span 3;">=</button>
-                    <button onclick="calcClear()" style="padding: 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; grid-column: span 2; font-size: 13px;">Clear</button>
+                    <!-- Row 7 -->
+                    <button onclick="calcNum('0')">0</button>
+                    <button onclick="calcNum('.')">.</button>
+                    <button class="op-btn" onclick="calcOp('+')">+</button>
+                    <button class="eq-btn" onclick="calcEqual()">=</button>
                 </div>
             </div>
 
-            <!-- Search Bar -->
+            <!-- Search Bar Directly Below Calculator -->
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search calculators... (e.g., percentage, loan, age)">
+                <input type="text" id="searchInput" placeholder="Search any calculator... (e.g. loan, percentage, age)">
                 <button onclick="searchCalculators()">Search</button>
             </div>
         </div>
     </header>
 
+    <!-- Popular Calculators Section -->
     <main class="container">
-        <section class="featured-calculators">
-            <h2>Popular Calculators</h2>
+        <section class="featured-calculators" style="margin-top: 60px;">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 32px;">Popular Calculators</h2>
+            
             <div class="calculator-grid">
                 <a href="/percentage-calculator.html" class="calc-card">
                     <h3>Percentage Calculator</h3>
-                    <p>Calculate percentages, increases, and decreases</p>
-                </a>
-                <a href="/age-calculator.html" class="calc-card">
-                    <h3>Age Calculator</h3>
-                    <p>Find your exact age in years, months, and days</p>
+                    <p>Calculate simple percentages, percentage increases, and percentage decreases.</p>
                 </a>
                 <a href="/loan-calculator.html" class="calc-card">
                     <h3>Loan Calculator</h3>
-                    <p>Calculate monthly payments and interest</p>
+                    <p>Estimate monthly repayments, total interest paid, and full loan terms.</p>
+                </a>
+                <a href="/age-calculator.html" class="calc-card">
+                    <h3>Age Calculator</h3>
+                    <p>Determine your exact age in years, months, days, hours, and minutes.</p>
                 </a>
                 <a href="/discount-calculator.html" class="calc-card">
                     <h3>Discount Calculator</h3>
-                    <p>Calculate savings and final prices</p>
+                    <p>Work out retail discounts, sales tax savings, and final checkout prices.</p>
                 </a>
                 <a href="/compound-interest-calculator.html" class="calc-card">
                     <h3>Compound Interest</h3>
-                    <p>Calculate investment growth over time</p>
+                    <p>Calculate long-term investment growth and compounding returns over time.</p>
                 </a>
                 <a href="/bmi-calculator.html" class="calc-card">
                     <h3>BMI Calculator</h3>
-                    <p>Find your body mass index</p>
+                    <p>Find your Body Mass Index with healthy weight and category ranges.</p>
+                </a>
+                <a href="/salary-calculator.html" class="calc-card">
+                    <h3>Salary Calculator</h3>
+                    <p>Convert your pay between annual, monthly, weekly, daily, and hourly rates.</p>
                 </a>
                 <a href="/tip-calculator.html" class="calc-card">
                     <h3>Tip Calculator</h3>
-                    <p>Calculate tips and split bills</p>
+                    <p>Calculate restaurant tips and split the bill evenly across multiple people.</p>
                 </a>
                 <a href="/unit-converter.html" class="calc-card">
                     <h3>Unit Converter</h3>
-                    <p>Convert between different units</p>
+                    <p>Convert metrics across length, weight, volume, and temperature instantly.</p>
+                </a>
+                <a href="/date-calculator.html" class="calc-card">
+                    <h3>Date Calculator</h3>
+                    <p>Count exact days between two dates or add/subtract days from a date.</p>
+                </a>
+                <a href="/time-calculator.html" class="calc-card">
+                    <h3>Time Calculator</h3>
+                    <p>Add, subtract, and convert units between hours, minutes, and seconds.</p>
+                </a>
+                <a href="/gpa-calculator.html" class="calc-card">
+                    <h3>GPA Calculator</h3>
+                    <p>Calculate high school or college cumulative grade point averages.</p>
                 </a>
             </div>
         </section>
 
-        <section class="categories">
-            <h2>Browse by Category</h2>
+        <!-- Categories Section -->
+        <section class="categories" style="margin-top: 70px;">
+            <h2 style="text-align: center; margin-bottom: 30px; font-size: 32px;">Browse by Category</h2>
             <div class="category-grid">
                 <div class="category">
                     <h3>Finance</h3>
@@ -179,33 +275,25 @@
                     </ul>
                 </div>
                 <div class="category">
-                    <h3>Math & Science</h3>
+                    <h3>Math & Conversion</h3>
                     <ul>
                         <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
                         <li><a href="/unit-converter.html">Unit Converter</a></li>
-                        <li><a href="/scientific-calculator.html">Scientific Calculator</a></li>
                         <li><a href="/average-calculator.html">Average Calculator</a></li>
                     </ul>
                 </div>
                 <div class="category">
-                    <h3>Education</h3>
-                    <ul>
-                        <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
-                        <li><a href="/average-calculator.html">Average Calculator</a></li>
-                        <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
-                    </ul>
-                </div>
-                <div class="category">
-                    <h3>Health & Fitness</h3>
+                    <h3>Health & Education</h3>
                     <ul>
                         <li><a href="/bmi-calculator.html">BMI Calculator</a></li>
+                        <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section class="all-calculators-link" style="text-align: center; margin: 60px 0;">
-            <a href="/calculators.html" style="display: inline-block; padding: 15px 40px; background: #1e40af; color: white; text-decoration: none; border-radius: 6px; font-weight: 600; transition: background 0.3s;">View All Calculators</a>
+        <section style="text-align: center; margin: 60px 0;">
+            <a href="/calculators.html" style="display: inline-block; padding: 14px 36px; background: #1e40af; color: white; text-decoration: none; border-radius: 6px; font-weight: 600;">View All Calculators →</a>
         </section>
     </main>
 
@@ -214,7 +302,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>Inquiry Calculator</h4>
-                    <p>Fast, accurate, free calculators for everyday use.</p>
+                    <p>Fast, accurate, free calculators for everyday personal, academic, and financial needs.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Quick Links</h4>
@@ -240,40 +328,7 @@
 
     <script src="/script.js"></script>
     <script>
-        const calculators = [
-            { name: 'Percentage Calculator', url: '/percentage-calculator.html', keywords: ['percentage', 'percent', '%'] },
-            { name: 'Age Calculator', url: '/age-calculator.html', keywords: ['age', 'birthday', 'old'] },
-            { name: 'Loan Calculator', url: '/loan-calculator.html', keywords: ['loan', 'mortgage', 'payment'] },
-            { name: 'Discount Calculator', url: '/discount-calculator.html', keywords: ['discount', 'sale', 'price'] },
-            { name: 'BMI Calculator', url: '/bmi-calculator.html', keywords: ['bmi', 'body mass', 'weight', 'health'] },
-            { name: 'Compound Interest', url: '/compound-interest-calculator.html', keywords: ['compound', 'interest', 'investment'] },
-            { name: 'Tip Calculator', url: '/tip-calculator.html', keywords: ['tip', 'gratuity', 'bill'] },
-            { name: 'Unit Converter', url: '/unit-converter.html', keywords: ['convert', 'units', 'length', 'weight'] },
-            { name: 'Salary Calculator', url: '/salary-calculator.html', keywords: ['salary', 'wage', 'pay', 'hourly'] },
-            { name: 'Date Calculator', url: '/date-calculator.html', keywords: ['date', 'days', 'between'] },
-            { name: 'Time Calculator', url: '/time-calculator.html', keywords: ['time', 'hours', 'minutes'] },
-            { name: 'GPA Calculator', url: '/gpa-calculator.html', keywords: ['gpa', 'grade', 'school'] },
-            { name: 'Average Calculator', url: '/average-calculator.html', keywords: ['average', 'mean', 'median'] },
-            { name: 'Scientific Calculator', url: '/scientific-calculator.html', keywords: ['scientific', 'math', 'sqrt', 'sine'] }
-        ];
-
-        function searchCalculators() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            if (!query) return;
-
-            for (let calc of calculators) {
-                for (let keyword of calc.keywords) {
-                    if (keyword.includes(query) || query.includes(keyword)) {
-                        window.location.href = calc.url;
-                        return;
-                    }
-                }
-            }
-
-            alert('Calculator not found. Try searching for: percentage, age, loan, discount, bmi, compound interest, tip, unit, salary, date, time, gpa, average, or scientific');
-        }
-
-        // Scientific Calculator Functions
+        // Scientific Calculator Engine
         let calcExpr = '';
         const calcDisplay = document.getElementById('calcDisplay');
 
@@ -310,11 +365,10 @@
             else if (func === 'e') calcExpr += '2.71828182846';
             else if (func === 'abs') calcExpr += 'Math.abs(';
             else if (func === 'exp') calcExpr += 'Math.exp(';
-            else if (func === 'deg') calcExpr += '*0.0174533';
             else if (func === '1/x') calcExpr += '1/(';
             else if (func === 'fact') {
                 const num = parseInt(calcExpr);
-                if (!isNaN(num)) {
+                if (!isNaN(num) && num >= 0 && num <= 170) {
                     const factorial = (n) => n <= 1 ? 1 : n * factorial(n - 1);
                     calcExpr = factorial(num).toString();
                 }
@@ -324,9 +378,17 @@
 
         function calcEqual() {
             try {
-                let result = eval(calcExpr);
+                if (!calcExpr) return;
+                let sanitized = calcExpr;
+                // Auto close brackets if opened
+                const openCount = (sanitized.match(/\(/g) || []).length;
+                const closeCount = (sanitized.match(/\)/g) || []).length;
+                if (openCount > closeCount) {
+                    sanitized += ')'.repeat(openCount - closeCount);
+                }
+                const result = Function('"use strict";return (' + sanitized + ')')();
                 calcExpr = result.toString();
-                calcDisplay.textContent = parseFloat(result.toFixed(8));
+                calcDisplay.textContent = parseFloat(Number(result).toFixed(8));
             } catch (e) {
                 calcDisplay.textContent = 'Error';
                 calcExpr = '';
@@ -339,8 +401,14 @@
         }
 
         function calcSign() {
-            if (calcExpr) calcExpr = '(-' + calcExpr + ')';
-            calcDisplay.textContent = calcExpr;
+            if (calcExpr) {
+                if (calcExpr.startsWith('(-') && calcExpr.endsWith(')')) {
+                    calcExpr = calcExpr.slice(2, -1);
+                } else {
+                    calcExpr = '(-' + calcExpr + ')';
+                }
+                calcDisplay.textContent = calcExpr;
+            }
         }
 
         function calcClear() {
@@ -348,25 +416,57 @@
             calcDisplay.textContent = '0';
         }
 
+        // Global Search Routing
+        const directory = [
+            { name: 'Percentage Calculator', url: '/percentage-calculator.html', tags: ['percent', 'percentage', '%', 'increase', 'decrease'] },
+            { name: 'Loan Calculator', url: '/loan-calculator.html', tags: ['loan', 'mortgage', 'payment', 'interest', 'car loan'] },
+            { name: 'Age Calculator', url: '/age-calculator.html', tags: ['age', 'birthday', 'how old', 'days old', 'years'] },
+            { name: 'Discount Calculator', url: '/discount-calculator.html', tags: ['discount', 'sale', 'off', 'savings', 'price'] },
+            { name: 'Compound Interest', url: '/compound-interest-calculator.html', tags: ['compound', 'interest', 'invest', 'growth'] },
+            { name: 'BMI Calculator', url: '/bmi-calculator.html', tags: ['bmi', 'body mass', 'weight', 'health', 'fitness'] },
+            { name: 'Salary Calculator', url: '/salary-calculator.html', tags: ['salary', 'wage', 'hourly', 'paycheck', 'annual'] },
+            { name: 'Tip Calculator', url: '/tip-calculator.html', tags: ['tip', 'bill', 'gratuity', 'split'] },
+            { name: 'Unit Converter', url: '/unit-converter.html', tags: ['convert', 'units', 'kg to lbs', 'miles', 'temperature'] },
+            { name: 'Date Calculator', url: '/date-calculator.html', tags: ['date', 'days between', 'calendar'] },
+            { name: 'Time Calculator', url: '/time-calculator.html', tags: ['time', 'hours', 'minutes', 'seconds', 'add time'] },
+            { name: 'GPA Calculator', url: '/gpa-calculator.html', tags: ['gpa', 'grades', 'college', 'school'] },
+            { name: 'Average Calculator', url: '/average-calculator.html', tags: ['average', 'mean', 'median', 'mode'] }
+        ];
+
+        function searchCalculators() {
+            const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+            if (!query) return;
+
+            for (let item of directory) {
+                if (item.name.toLowerCase().includes(query) || item.tags.some(t => t.includes(query) || query.includes(t))) {
+                    window.location.href = item.url;
+                    return;
+                }
+            }
+            alert('Calculator not found. Try searching for: percentage, loan, age, discount, bmi, salary, or date.');
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            if (searchInput) {
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        searchCalculators();
-                    }
+            const input = document.getElementById('searchInput');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') searchCalculators();
                 });
             }
         });
 
+        // Keyboard support
         document.addEventListener('keydown', function(e) {
+            // Don't intercept typing in search box
+            if (document.activeElement === document.getElementById('searchInput')) return;
+
             if (e.key >= '0' && e.key <= '9') calcNum(e.key);
             if (e.key === '.') calcNum('.');
             if (e.key === '+') calcOp('+');
             if (e.key === '-') calcOp('-');
             if (e.key === '*') calcOp('*');
             if (e.key === '/') { e.preventDefault(); calcOp('/'); }
-            if (e.key === 'Enter') calcEqual();
+            if (e.key === 'Enter') { e.preventDefault(); calcEqual(); }
             if (e.key === 'Backspace') calcBackspace();
             if (e.key === 'Escape') calcClear();
         });
