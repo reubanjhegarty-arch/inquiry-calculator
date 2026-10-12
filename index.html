@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50' y='68' font-size='56' font-family='system-ui,-apple-system,sans-serif' font-weight='800' fill='white' text-anchor='middle'>IC</text></svg>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Inquiry Calculator — Free online calculators for math, finance, fitness, dates, and science.">
     <title>Inquiry Calculator - Free Online Calculators</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50' y='68' font-size='56' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>IC</text></svg>">
 
     <style>
         *, *::before, *::after {
@@ -246,7 +246,6 @@
             pointer-events: none;
         }
 
-        /* Floating Live Suggestions Dropdown */
         .suggestions-dropdown {
             display: none;
             position: absolute;
@@ -551,7 +550,7 @@
     <section class="search-area">
         <div class="search-input-box">
             <span class="search-icon">🔍</span>
-            <input type="text" id="homeSearch" placeholder="Search calculators (e.g. mortgage, loan, calorie, tax)..." autocomplete="off">
+            <input type="text" id="homeSearch" placeholder="Search calculators (e.g. mortgage, loan, calorie, tax, electricity)..." autocomplete="off">
         </div>
 
         <div id="homeDropdown" class="suggestions-dropdown"></div>
@@ -578,9 +577,21 @@
                 <h3>Calorie & TDEE Calculator</h3>
                 <p>Find daily maintenance calories, BMR, and targets for weight loss or muscle gain.</p>
             </a>
+            <a href="electricity-calculator.html" class="card">
+                <h3>Electricity Cost Calculator</h3>
+                <p>Calculate appliance power consumption and running costs per hour, day, and month.</p>
+            </a>
             <a href="fuel-cost-calculator.html" class="card">
                 <h3>Fuel Cost Calculator</h3>
                 <p>Calculate road trip petrol costs, consumption (L/100km & MPG), and passenger splits.</p>
+            </a>
+            <a href="overtime-calculator.html" class="card">
+                <h3>Overtime Pay Calculator</h3>
+                <p>Calculate regular hours, 1.5x time-and-a-half, and 2.0x double-time penalty rates.</p>
+            </a>
+            <a href="aspect-ratio-calculator.html" class="card">
+                <h3>Aspect Ratio Calculator</h3>
+                <p>Calculate screen proportions, pixel scaling (16:9, 21:9, 4:3), and image sizing.</p>
             </a>
             <a href="percentage-calculator.html" class="card">
                 <h3>Percentage Calculator</h3>
@@ -594,10 +605,6 @@
                 <h3>BMI Calculator</h3>
                 <p>Calculate Body Mass Index and healthy category weight ranges.</p>
             </a>
-            <a href="age-calculator.html" class="card">
-                <h3>Age Calculator</h3>
-                <p>Find your exact age in years, months, days, hours, and minutes.</p>
-            </a>
             <a href="download-time-calculator.html" class="card">
                 <h3>Download Time Calculator</h3>
                 <p>Estimate game and file download durations based on your internet speed.</p>
@@ -609,6 +616,10 @@
             <a href="loan-calculator.html" class="card">
                 <h3>Personal Loan Calculator</h3>
                 <p>Estimate monthly personal loan repayments and total interest costs.</p>
+            </a>
+            <a href="age-calculator.html" class="card">
+                <h3>Age Calculator</h3>
+                <p>Find your exact age in years, months, days, hours, and minutes.</p>
             </a>
         </div>
 
@@ -623,12 +634,15 @@
                     <li><a href="car-loan-calculator.html">Car Loan Calculator</a></li>
                     <li><a href="loan-calculator.html">Personal Loan</a></li>
                     <li><a href="tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="overtime-calculator.html">Overtime Pay</a></li>
                     <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
                 </ul>
             </div>
             <div class="cat-group">
                 <h4>Travel & Tech</h4>
                 <ul>
+                    <li><a href="electricity-calculator.html">Electricity Cost</a></li>
+                    <li><a href="aspect-ratio-calculator.html">Aspect Ratio</a></li>
                     <li><a href="fuel-cost-calculator.html">Fuel Cost Calculator</a></li>
                     <li><a href="download-time-calculator.html">Download Time</a></li>
                     <li><a href="unit-converter.html">Unit Converter</a></li>
@@ -769,94 +783,93 @@
             historyDisplay.textContent = '';
         }
 
-        // Live Search Index
-        const siteCalculators = [
-                   // Live Search Index
+        // Live Search Index (All 23 Calculators)
         const siteCalculators = [
             { name: 'Mortgage Calculator', url: 'mortgage-calculator.html', tag: 'Finance', desc: 'Monthly repayments, interest, property taxes & home insurance.', keys: 'mortgage home house loan property interest amortization borrowing' },
             { name: 'Car Loan Calculator', url: 'car-loan-calculator.html', tag: 'Finance', desc: 'Auto loan payments, trade-in deductions, and total interest.', keys: 'car auto vehicle loan financing dealership trade in automobile' },
             { name: 'Personal Loan Calculator', url: 'loan-calculator.html', tag: 'Finance', desc: 'Calculate personal and bank loan repayments.', keys: 'loan personal borrow repayment debt bank credit' },
             { name: 'Salary & Tax Calculator', url: 'tax-calculator.html', tag: 'Finance', desc: 'Estimate income tax brackets, Medicare, and take-home pay.', keys: 'tax salary income wage take home pay ATO paycheck deductions' },
             { name: 'Salary Converter', url: 'salary-calculator.html', tag: 'Finance', desc: 'Convert pay between hourly, weekly, monthly, and annual rates.', keys: 'salary wage hourly wage rate convert work earnings' },
-            { name: 'Calorie & TDEE Calculator', url: 'calorie-calculator.html', tag: 'Health', desc: 'Daily calories for weight loss, maintenance, or muscle gain.', keys: 'calorie tdee bmr weight loss diet deficit fitness nutrition gain food' },
-            { name: 'Fuel Cost Calculator', url: 'fuel-cost-calculator.html', tag: 'Travel', desc: 'Trip petrol expenses, fuel economy (L/100km & MPG), and split costs.', keys: 'fuel petrol gas road trip consumption mileage distance commute car' },
-            { name: 'Download Time Calculator', url: 'download-time-calculator.html', tag: 'Tech', desc: 'Estimate download duration for games and files.', keys: 'download time internet speed bandwidth file size game steam mbps wifi' },
-            { name: 'Percentage Calculator', url: 'percentage-calculator.html', tag: 'Math', desc: 'Calculate percentages, increases, decreases, and fractions.', keys: 'percentage percent % fraction increase decrease difference' },
+            { name: 'Overtime Pay Calculator', url: 'overtime-calculator.html', tag: 'Finance', desc: 'Calculate time-and-a-half (1.5x) and double-time (2.0x) penalty rates.', keys: 'overtime pay rate time and a half double time wage penalty' },
             { name: 'Compound Interest', url: 'compound-interest-calculator.html', tag: 'Finance', desc: 'Simulate long-term investing and compound returns.', keys: 'compound interest investing investment savings bank growth stocks' },
-            { name: 'BMI Calculator', url: 'bmi-calculator.html', tag: 'Health', desc: 'Compute Body Mass Index and healthy weight categories.', keys: 'bmi body mass index weight height health fitness obesity' },
             { name: 'Discount Calculator', url: 'discount-calculator.html', tag: 'Finance', desc: 'Calculate shopping sales, percentage off, and final prices.', keys: 'discount sale shopping savings clearance price promo coupon' },
             { name: 'Tip Calculator', url: 'tip-calculator.html', tag: 'Finance', desc: 'Calculate restaurant gratuity and split meal bills.', keys: 'tip bill restaurant gratuity food split dining' },
+            { name: 'Calorie & TDEE Calculator', url: 'calorie-calculator.html', tag: 'Health', desc: 'Daily calories for weight loss, maintenance, or muscle gain.', keys: 'calorie tdee bmr weight loss diet deficit fitness nutrition gain food' },
+            { name: 'BMI Calculator', url: 'bmi-calculator.html', tag: 'Health', desc: 'Compute Body Mass Index and healthy weight categories.', keys: 'bmi body mass index weight height health fitness obesity' },
+            { name: 'Electricity Cost Calculator', url: 'electricity-calculator.html', tag: 'Tech', desc: 'Appliance power usage, kWh rates, and monthly electricity bills.', keys: 'electricity power watts kwh bill appliance running cost energy' },
+            { name: 'Download Time Calculator', url: 'download-time-calculator.html', tag: 'Tech', desc: 'Estimate download duration for games and files.', keys: 'download time internet speed bandwidth file size game steam mbps wifi' },
+            { name: 'Aspect Ratio Calculator', url: 'aspect-ratio-calculator.html', tag: 'Tech', desc: 'Screen scaling, image ratios (16:9, 21:9, 4:3), and pixel sizing.', keys: 'aspect ratio resolution 16 9 screen pixels resize scale width height' },
+            { name: 'Fuel Cost Calculator', url: 'fuel-cost-calculator.html', tag: 'Travel', desc: 'Trip petrol expenses, fuel economy (L/100km & MPG), and split costs.', keys: 'fuel petrol gas road trip consumption mileage distance commute car' },
+            { name: 'Percentage Calculator', url: 'percentage-calculator.html', tag: 'Math', desc: 'Calculate percentages, increases, decreases, and fractions.', keys: 'percentage percent % fraction increase decrease difference' },
+            { name: 'Scientific Calculator', url: 'scientific-calculator.html', tag: 'Math', desc: 'Advanced trigonometry, logarithms, powers, and roots.', keys: 'scientific math sin cos tan log sqrt power algebra' },
+            { name: 'Unit Converter', url: 'unit-converter.html', tag: 'Math', desc: 'Convert length, weight, volume, and temperature.', keys: 'unit converter convert length weight temperature volume kg lbs' },
+            { name: 'Average Calculator', url: 'average-calculator.html', tag: 'Math', desc: 'Calculate mean, median, mode, range, and standard deviation.', keys: 'average mean median mode range statistics math dataset' },
+            { name: 'GPA Calculator', url: 'gpa-calculator.html', tag: 'Education', desc: 'Calculate weighted or cumulative grade point averages.', keys: 'gpa grade school college university marks academic' },
             { name: 'Age Calculator', url: 'age-calculator.html', tag: 'Time', desc: 'Exact age in years, months, days, hours, and minutes.', keys: 'age birthday birth date how old years days months' },
             { name: 'Date Calculator', url: 'date-calculator.html', tag: 'Time', desc: 'Count calendar days between dates or add/subtract days.', keys: 'date days between calendar add days subtract count' },
-            { name: 'Time Calculator', url: 'time-calculator.html', tag: 'Time', desc: 'Add, subtract, and convert units of time.', keys: 'time hours minutes seconds duration convert clock' },
-            { name: 'Unit Converter', url: 'unit-converter.html', tag: 'Math', desc: 'Convert length, weight, volume, and temperature.', keys: 'unit converter convert length weight temperature volume kg lbs' },
-            { name: 'Scientific Calculator', url: 'scientific-calculator.html', tag: 'Math', desc: 'Advanced trigonometry, logarithms, powers, and roots.', keys: 'scientific math sin cos tan log sqrt power algebra' },
-            { name: 'GPA Calculator', url: 'gpa-calculator.html', tag: 'Education', desc: 'Calculate weighted or cumulative grade point averages.', keys: 'gpa grade school college university marks academic' },
-            { name: 'Average Calculator', url: 'average-calculator.html', tag: 'Math', desc: 'Calculate mean, median, mode, range, and standard deviation.', keys: 'average mean median mode range statistics math dataset' },
-            { name: 'Electricity Cost Calculator', url: 'electricity-calculator.html', tag: 'Tech', desc: 'Appliance power usage, kWh rates, and monthly electricity bills.', keys: 'electricity power watts kwh bill appliance running cost energy' },
-            { name: 'Overtime Pay Calculator', url: 'overtime-calculator.html', tag: 'Finance', desc: 'Calculate time-and-a-half (1.5x) and double-time (2.0x) penalty rates.', keys: 'overtime pay rate time and a half double time wage penalty' },
-            { name: 'Aspect Ratio Calculator', url: 'aspect-ratio-calculator.html', tag: 'Tech', desc: 'Screen scaling, image ratios (16:9, 21:9, 4:3), and pixel sizing.', keys: 'aspect ratio resolution 16 9 screen pixels resize scale width height' }
+            { name: 'Time Calculator', url: 'time-calculator.html', tag: 'Time', desc: 'Add, subtract, and convert units of time.', keys: 'time hours minutes seconds duration convert clock' }
         ];
-    
 
         const searchInput = document.getElementById('homeSearch');
         const dropdown = document.getElementById('homeDropdown');
 
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase().trim();
+        if (searchInput && dropdown) {
+            searchInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
 
-            if (query.length === 0) {
-                dropdown.style.display = 'none';
-                dropdown.innerHTML = '';
-                return;
-            }
+                if (query.length === 0) {
+                    dropdown.style.display = 'none';
+                    dropdown.innerHTML = '';
+                    return;
+                }
 
-            const matches = siteCalculators.filter(item => {
-                return item.name.toLowerCase().includes(query) ||
-                       item.desc.toLowerCase().includes(query) ||
-                       item.keys.includes(query);
+                const matches = siteCalculators.filter(item => {
+                    return item.name.toLowerCase().includes(query) ||
+                           item.desc.toLowerCase().includes(query) ||
+                           item.keys.includes(query);
+                });
+
+                if (matches.length > 0) {
+                    dropdown.innerHTML = matches.map(item => `
+                        <a href="${item.url}" class="dropdown-item">
+                            <div class="item-main">
+                                <h4>${item.name}</h4>
+                                <p>${item.desc}</p>
+                            </div>
+                            <span class="item-badge">${item.tag}</span>
+                        </a>
+                    `).join('');
+                    dropdown.style.display = 'block';
+                } else {
+                    dropdown.innerHTML = `
+                        <div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 13px;">
+                            No matching calculators found for "<strong>${escapeHtml(query)}</strong>"
+                        </div>
+                    `;
+                    dropdown.style.display = 'block';
+                }
             });
 
-            if (matches.length > 0) {
-                dropdown.innerHTML = matches.map(item => `
-                    <a href="${item.url}" class="dropdown-item">
-                        <div class="item-main">
-                            <h4>${item.name}</h4>
-                            <p>${item.desc}</p>
-                        </div>
-                        <span class="item-badge">${item.tag}</span>
-                    </a>
-                `).join('');
-                dropdown.style.display = 'block';
-            } else {
-                dropdown.innerHTML = `
-                    <div style="padding: 16px; text-align: center; color: var(--text-muted); font-size: 13px;">
-                        No matching calculators found for "<strong>${escapeHtml(query)}</strong>"
-                    </div>
-                `;
-                dropdown.style.display = 'block';
-            }
-        });
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.style.display = 'none';
+                }
+            });
+
+            // Re-open if user clicks back in with query
+            searchInput.addEventListener('focus', function() {
+                if (this.value.trim().length > 0) {
+                    this.dispatchEvent(new Event('input'));
+                }
+            });
+        }
 
         function escapeHtml(string) {
             return String(string).replace(/[&<>"'`=\/]/g, function (s) {
                 return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' })[s];
             });
         }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.style.display = 'none';
-            }
-        });
-
-        // Re-open if user clicks back in with query
-        searchInput.addEventListener('focus', function() {
-            if (this.value.trim().length > 0) {
-                this.dispatchEvent(new Event('input'));
-            }
-        });
     </script>
 </body>
 </html>
