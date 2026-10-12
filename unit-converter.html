@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free unit converter. Convert between different measurement units instantly.">
+    <title>Unit Converter - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/unit-converter">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Unit Converter</h1>
+                <p>Convert between different units of measurement instantly.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Conversion Type</label>
+                    <select id="conversionType" onchange="updateConversion()">
+                        <option value="length">Length (km, m, ft, miles)</option>
+                        <option value="weight">Weight (kg, lbs, oz, g)</option>
+                        <option value="temperature">Temperature (°C, °F)</option>
+                        <option value="volume">Volume (L, gal, ml)</option>
+                    </select>
+                </div>
+
+                <div id="lengthForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="number" id="lengthFrom" placeholder="e.g., 5" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="lengthFromUnit">
+                                <option value="m">Meters (m)</option>
+                                <option value="km">Kilometers (km)</option>
+                                <option value="ft">Feet (ft)</option>
+                                <option value="miles">Miles</option>
+                                <option value="cm">Centimeters (cm)</option>
+                                <option value="inches">Inches</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" id="lengthTo" readonly placeholder="Result">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="lengthToUnit">
+                                <option value="km">Kilometers (km)</option>
+                                <option value="m">Meters (m)</option>
+                                <option value="ft">Feet (ft)</option>
+                                <option value="miles">Miles</option>
+                                <option value="cm">Centimeters (cm)</option>
+                                <option value="inches">Inches</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="weightForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="number" id="weightFrom" placeholder="e.g., 70" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="weightFromUnit">
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="lbs">Pounds (lbs)</option>
+                                <option value="g">Grams (g)</option>
+                                <option value="oz">Ounces (oz)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" id="weightTo" readonly placeholder="Result">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="weightToUnit">
+                                <option value="lbs">Pounds (lbs)</option>
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="g">Grams (g)</option>
+                                <option value="oz">Ounces (oz)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="temperatureForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="number" id="tempFrom" placeholder="e.g., 25" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="tempFromUnit">
+                                <option value="c">Celsius (°C)</option>
+                                <option value="f">Fahrenheit (°F)</option>
+                                <option value="k">Kelvin (K)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" id="tempTo" readonly placeholder="Result">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="tempToUnit">
+                                <option value="f">Fahrenheit (°F)</option>
+                                <option value="c">Celsius (°C)</option>
+                                <option value="k">Kelvin (K)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="volumeForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="number" id="volumeFrom" placeholder="e.g., 1" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="volumeFromUnit">
+                                <option value="l">Liters (L)</option>
+                                <option value="gal">Gallons (gal)</option>
+                                <option value="ml">Milliliters (ml)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>To</label>
+                            <input type="text" id="volumeTo" readonly placeholder="Result">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="volumeToUnit">
+                                <option value="gal">Gallons (gal)</option>
+                                <option value="l">Liters (L)</option>
+                                <option value="ml">Milliliters (ml)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="convert()">Convert</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="explanation">
+                <h3>Common Conversions</h3>
+                <p><strong>Length:</strong> 1 km = 1000 m = 0.621 miles = 3281 feet</p>
+                <p><strong>Weight:</strong> 1 kg = 2.205 lbs = 1000 g = 35.27 oz</p>
+                <p><strong>Temperature:</strong> °F = (°C × 9/5) + 32</p>
+                <p><strong>Volume:</strong> 1 L = 0.264 gallons = 1000 ml</p>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="/bmi-calculator.html">BMI Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        const conversions = {
+            length: {
+                m: 1,
+                km: 0.001,
+                ft: 3.28084,
+                miles: 0.000621371,
+                cm: 100,
+                inches: 39.3701
+            },
+            weight: {
+                kg: 1,
+                lbs: 2.20462,
+                g: 1000,
+                oz: 35.274
+            },
+            volume: {
+                l: 1,
+                gal: 0.264172,
+                ml: 1000
+            }
+        };
+
+        function updateConversion() {
+            const type = document.getElementById('conversionType').value;
+            document.getElementById('lengthForm').style.display = type === 'length' ? 'block' : 'none';
+            document.getElementById('weightForm').style.display = type === 'weight' ? 'block' : 'none';
+            document.getElementById('temperatureForm').style.display = type === 'temperature' ? 'block' : 'none';
+            document.getElementById('volumeForm').style.display = type === 'volume' ? 'block' : 'none';
+        }
+
+        function convert() {
+            const type = document.getElementById('conversionType').value;
+
+            if (type === 'length') {
+                const value = parseFloat(document.getElementById('lengthFrom').value);
+                const fromUnit = document.getElementById('lengthFromUnit').value;
+                const toUnit = document.getElementById('lengthToUnit').value;
+                if (isNaN(value)) { alert('Please enter a number'); return; }
+                const result = (value / conversions.length[fromUnit]) * conversions.length[toUnit];
+                document.getElementById('lengthTo').value = result.toFixed(4);
+            } else if (type === 'weight') {
+                const value = parseFloat(document.getElementById('weightFrom').value);
+                const fromUnit = document.getElementById('weightFromUnit').value;
+                const toUnit = document.getElementById('weightToUnit').value;
+                if (isNaN(value)) { alert('Please enter a number'); return; }
+                const result = (value / conversions.weight[fromUnit]) * conversions.weight[toUnit];
+                document.getElementById('weightTo').value = result.toFixed(4);
+            } else if (type === 'temperature') {
+                const value = parseFloat(document.getElementById('tempFrom').value);
+                const fromUnit = document.getElementById('tempFromUnit').value;
+                const toUnit = document.getElementById('tempToUnit').value;
+                if (isNaN(value)) { alert('Please enter a number'); return; }
+                
+                let celsius;
+                if (fromUnit === 'c') celsius = value;
+                else if (fromUnit === 'f') celsius = (value - 32) * 5/9;
+                else celsius = value - 273.15;
+
+                let result;
+                if (toUnit === 'c') result = celsius;
+                else if (toUnit === 'f') result = (celsius * 9/5) + 32;
+                else result = celsius + 273.15;
+
+                document.getElementById('tempTo').value = result.toFixed(2);
+            } else if (type === 'volume') {
+                const value = parseFloat(document.getElementById('volumeFrom').value);
+                const fromUnit = document.getElementById('volumeFromUnit').value;
+                const toUnit = document.getElementById('volumeToUnit').value;
+                if (isNaN(value)) { alert('Please enter a number'); return; }
+                const result = (value / conversions.volume[fromUnit]) * conversions.volume[toUnit];
+                document.getElementById('volumeTo').value = result.toFixed(4);
+            }
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                convert();
+            }
+        });
+    </script>
+</body>
+</html>
