@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free salary calculator. Calculate annual, monthly, weekly, and hourly pay.">
+    <title>Salary Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/salary-calculator">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Salary Calculator</h1>
+                <p>Convert between annual, monthly, weekly, daily, and hourly pay rates.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Input Type</label>
+                    <select id="inputType" onchange="updateSalaryForm()">
+                        <option value="annual">Annual Salary</option>
+                        <option value="monthly">Monthly Salary</option>
+                        <option value="weekly">Weekly Salary</option>
+                        <option value="hourly">Hourly Rate</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label id="inputLabel">Annual Salary ($)</label>
+                        <input type="number" id="salaryInput" placeholder="e.g., 50000" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Hours per Week</label>
+                        <input type="number" id="hoursPerWeek" placeholder="e.g., 40" step="0.5" value="40">
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateSalary()">Calculate</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Salary Breakdown</h3>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>Salary Calculations</h3>
+                <p><strong>Annual to Monthly:</strong> Annual ÷ 12</p>
+                <p><strong>Annual to Weekly:</strong> Annual ÷ 52</p>
+                <p><strong>Annual to Daily:</strong> Annual ÷ 260 (working days)</p>
+                <p><strong>Annual to Hourly:</strong> Annual ÷ (Hours per Week × 52)</p>
+                <p>Calculations assume standard work weeks. Actual pay may vary based on benefits, overtime, and taxes.</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">How many working hours in a year?</div>
+                    <div class="faq-answer">Roughly 2,080 hours (40 hours/week × 52 weeks). This can vary based on holidays, vacation days, and sick leave.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How many working days in a year?</div>
+                    <div class="faq-answer">Typically 260 working days (52 weeks × 5 days). This doesn't account for holidays or vacation time.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Does this include taxes?</div>
+                    <div class="faq-answer">No, this calculator shows gross salary (before taxes). Your net pay will be lower after taxes and deductions.</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="/compound-interest-calculator.html">Compound Interest Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function updateSalaryForm() {
+            const type = document.getElementById('inputType').value;
+            const label = document.getElementById('inputLabel');
+            
+            if (type === 'annual') label.textContent = 'Annual Salary ($)';
+            else if (type === 'monthly') label.textContent = 'Monthly Salary ($)';
+            else if (type === 'weekly') label.textContent = 'Weekly Salary ($)';
+            else label.textContent = 'Hourly Rate ($)';
+            
+            document.getElementById('resultBox').classList.remove('show');
+        }
+
+        function calculateSalary() {
+            const inputType = document.getElementById('inputType').value;
+            const input = parseFloat(document.getElementById('salaryInput').value);
+            const hoursPerWeek = parseFloat(document.getElementById('hoursPerWeek').value);
+
+            if (isNaN(input)) {
+                alert('Please enter a valid number');
+                return;
+            }
+
+            if (input <= 0) {
+                alert('Please enter a positive value');
+                return;
+            }
+
+            let annual;
+            if (inputType === 'annual') annual = input;
+            else if (inputType === 'monthly') annual = input * 12;
+            else if (inputType === 'weekly') annual = input * 52;
+            else annual = input * hoursPerWeek * 52;
+
+            const monthly = annual / 12;
+            const weekly = annual / 52;
+            const daily = annual / 260;
+            const hourly = annual / (hoursPerWeek * 52);
+
+            document.getElementById('resultDetails').innerHTML = `
+                <strong>Annual:</strong> $${annual.toFixed(2)}<br>
+                <strong>Monthly:</strong> $${monthly.toFixed(2)}<br>
+                <strong>Weekly:</strong> $${weekly.toFixed(2)}<br>
+                <strong>Daily:</strong> $${daily.toFixed(2)}<br>
+                <strong>Hourly:</strong> $${hourly.toFixed(2)}<br>
+                <hr style="margin: 15px 0; border: none; border-top: 1px solid #e5e7eb;">
+                <p style="font-size: 13px; color: #6b7280;">
+                    Based on ${hoursPerWeek} hours/week, 260 working days/year
+                </p>
+            `;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateSalary();
+            }
+        });
+    </script>
+</body>
+</html>
