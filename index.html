@@ -44,7 +44,74 @@
         <div class="container">
             <h1>Free Online Calculators</h1>
             <p>Accurate calculations for percentages, loans, dates, conversions, and more</p>
-                       <div class="search-box">
+            
+            <!-- Scientific Calculator -->
+            <div style="max-width: 700px; margin: 40px auto 50px; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 30px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+                
+                <!-- Display -->
+                <div id="calcDisplay" style="background: #f3f4f6; border: 2px solid #d1d5db; border-radius: 8px; padding: 20px; text-align: right; font-size: 28px; font-weight: 600; color: #1f2937; margin-bottom: 25px; font-family: 'Courier New', monospace; word-break: break-all; min-height: 45px; letter-spacing: 0.5px;">0</div>
+
+                <!-- Buttons Grid -->
+                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;">
+                    
+                    <!-- Row 1: Trigonometry -->
+                    <button onclick="calcFunc('sin')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">sin</button>
+                    <button onclick="calcFunc('cos')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">cos</button>
+                    <button onclick="calcFunc('tan')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">tan</button>
+                    <button onclick="calcFunc('asin')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">asin</button>
+                    <button onclick="calcFunc('acos')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">acos</button>
+                    <button onclick="calcFunc('atan')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px; transition: all 0.2s;">atan</button>
+
+                    <!-- Row 2: Logarithms & Powers -->
+                    <button onclick="calcFunc('log')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">log</button>
+                    <button onclick="calcFunc('ln')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">ln</button>
+                    <button onclick="calcFunc('sqrt')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">√</button>
+                    <button onclick="calcFunc('cbrt')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">∛</button>
+                    <button onclick="calcFunc('fact')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">n!</button>
+                    <button onclick="calcFunc('pow')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">x^y</button>
+
+                    <!-- Row 3: Constants & Operations -->
+                    <button onclick="calcFunc('pi')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">π</button>
+                    <button onclick="calcFunc('e')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">e</button>
+                    <button onclick="calcFunc('abs')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">|x|</button>
+                    <button onclick="calcFunc('exp')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">e^x</button>
+                    <button onclick="calcFunc('deg')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">°</button>
+                    <button onclick="calcFunc('1/x')" style="padding: 12px; background: #f3f4f6; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #1e40af; font-size: 12px;">1/x</button>
+
+                    <!-- Row 4: Numbers -->
+                    <button onclick="calcNum('7')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">7</button>
+                    <button onclick="calcNum('8')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">8</button>
+                    <button onclick="calcNum('9')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">9</button>
+                    <button onclick="calcOp('/')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">÷</button>
+                    <button onclick="calcOp('%')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">%</button>
+                    <button onclick="calcBackspace()" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; color: #6b7280; font-size: 12px;">DEL</button>
+
+                    <!-- Row 5: Numbers -->
+                    <button onclick="calcNum('4')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">4</button>
+                    <button onclick="calcNum('5')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">5</button>
+                    <button onclick="calcNum('6')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">6</button>
+                    <button onclick="calcOp('*')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">×</button>
+                    <button onclick="calcSign()" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">+/−</button>
+                    <button onclick="calcParens('(')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">(</button>
+
+                    <!-- Row 6: Numbers -->
+                    <button onclick="calcNum('1')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">1</button>
+                    <button onclick="calcNum('2')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">2</button>
+                    <button onclick="calcNum('3')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">3</button>
+                    <button onclick="calcOp('-')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">−</button>
+                    <button onclick="calcNum('0')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; grid-column: span 2;">0</button>
+                    <button onclick="calcParens(')')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">)</button>
+
+                    <!-- Row 7: Bottom -->
+                    <button onclick="calcNum('.')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">.</button>
+                    <button onclick="calcOp('+')" style="padding: 12px; background: white; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px;">+</button>
+                    <button onclick="calcEqual()" style="padding: 12px; background: #1e40af; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; grid-column: span 3;">=</button>
+                    <button onclick="calcClear()" style="padding: 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; grid-column: span 2; font-size: 13px;">Clear All</button>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-box">
                 <input type="text" id="searchInput" placeholder="Search calculators... (e.g., percentage, loan, age)">
                 <button onclick="searchCalculators()">Search</button>
             </div>
