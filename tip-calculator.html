@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free tip calculator. Calculate tips and split bills easily.">
+    <title>Tip Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/tip-calculator">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Tip Calculator</h1>
+                <p>Calculate tips and split the bill between multiple people.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Bill Amount ($)</label>
+                        <input type="number" id="billAmount" placeholder="e.g., 50" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>Tip Percentage (%)</label>
+                        <input type="number" id="tipPercent" placeholder="e.g., 15" step="0.01" value="15">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Number of People</label>
+                        <input type="number" id="numPeople" placeholder="e.g., 1" step="1" min="1" value="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Tax (%)</label>
+                        <input type="number" id="tax" placeholder="e.g., 0" step="0.01" value="0">
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateTip()">Calculate</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Bill Summary</h3>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>How to Calculate Tips</h3>
+                <p><strong>Tip Amount:</strong> (Bill Amount × Tip Percentage) ÷ 100</p>
+                <p><strong>Total with Tip:</strong> Bill Amount + Tip Amount</p>
+                <p><strong>Per Person:</strong> Total ÷ Number of People</p>
+                <p>Common tip percentages: 15% (standard), 18% (good), 20% (excellent)</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">What's a standard tip percentage?</div>
+                    <div class="faq-answer">In the US, 15% is standard, 18% is good service, and 20%+ is excellent. In other countries, tipping customs vary.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Should I tip on the pre-tax or post-tax amount?</div>
+                    <div class="faq-answer">Traditionally, tip on the pre-tax amount. However, many people now tip on the total bill including tax.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do I tip at all restaurants?</div>
+                    <div class="faq-answer">Tipping is customary at sit-down restaurants with servers. For fast food or takeout, tipping is optional.</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="/discount-calculator.html">Discount Calculator</a></li>
+                    <li><a href="/salary-calculator.html">Salary Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function calculateTip() {
+            const billAmount = parseFloat(document.getElementById('billAmount').value);
+            const tipPercent = parseFloat(document.getElementById('tipPercent').value);
+            const numPeople = parseInt(document.getElementById('numPeople').value);
+            const taxPercent = parseFloat(document.getElementById('tax').value);
+
+            if (isNaN(billAmount) || isNaN(tipPercent) || isNaN(numPeople)) {
+                alert('Please enter valid numbers');
+                return;
+            }
+
+            if (billAmount <= 0 || numPeople < 1) {
+                alert('Please enter positive values');
+                return;
+            }
+
+            const taxAmount = billAmount * (taxPercent / 100);
+            const billWithTax = billAmount + taxAmount;
+            const tipAmount = billWithTax * (tipPercent / 100);
+            const totalAmount = billWithTax + tipAmount;
+            const perPerson = totalAmount / numPeople;
+
+            document.getElementById('resultDetails').innerHTML = `
+                <strong>Subtotal:</strong> $${billAmount.toFixed(2)}<br>
+                <strong>Tax (${taxPercent}%):</strong> $${taxAmount.toFixed(2)}<br>
+                <strong>Bill with Tax:</strong> $${billWithTax.toFixed(2)}<br>
+                <strong>Tip (${tipPercent}%):</strong> $${tipAmount.toFixed(2)}<br>
+                <strong>Total Amount:</strong> $${totalAmount.toFixed(2)}<br>
+                <hr style="margin: 15px 0; border: none; border-top: 1px solid #e5e7eb;">
+                <strong style="font-size: 18px;">Per Person (${numPeople}):</strong> $${perPerson.toFixed(2)}
+            `;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateTip();
+            }
+        });
+    </script>
+</body>
+</html>
