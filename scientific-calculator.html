@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free scientific calculator with advanced math functions.">
+    <title>Scientific Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/scientific-calculator.html">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .scientific-calc {
+            background: #1f2937;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 400px;
+            margin: 30px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .display {
+            background: #111;
+            color: #10b981;
+            font-size: 28px;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: right;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+            word-break: break-all;
+            min-height: 40px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .calc-btn {
+            padding: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: white;
+        }
+
+        .calc-btn.number {
+            background: #374151;
+        }
+
+        .calc-btn.number:hover {
+            background: #4b5563;
+        }
+
+        .calc-btn.operator {
+            background: #f59e0b;
+        }
+
+        .calc-btn.operator:hover {
+            background: #d97706;
+        }
+
+        .calc-btn.function {
+            background: #3b82f6;
+            font-size: 12px;
+        }
+
+        .calc-btn.function:hover {
+            background: #2563eb;
+        }
+
+        .calc-btn.equals {
+            background: #10b981;
+            grid-column: span 2;
+        }
+
+        .calc-btn.equals:hover {
+            background: #059669;
+        }
+
+        .calc-btn.clear {
+            background: #ef4444;
+            grid-column: span 2;
+        }
+
+        .calc-btn.clear:hover {
+            background: #dc2626;
+        }
+
+        .calc-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Scientific Calculator</h1>
+                <p>Advanced calculator with trigonometric, logarithmic, and other math functions.</p>
+            </div>
+
+            <div class="scientific-calc">
+                <div class="display" id="display">0</div>
+                <div class="calc-buttons">
+                    <button class="calc-btn clear" onclick="clearDisplay()">AC</button>
+                    <button class="calc-btn operator" onclick="appendOperator('/')">&divide;</button>
+                    <button class="calc-btn operator" onclick="appendOperator('*')">×</button>
+
+                    <button class="calc-btn function" onclick="appendFunction('sin')">sin</button>
+                    <button class="calc-btn function" onclick="appendFunction('cos')">cos</button>
+                    <button class="calc-btn function" onclick="appendFunction('tan')">tan</button>
+                    <button class="calc-btn function" onclick="appendFunction('sqrt')">√</button>
+
+                    <button class="calc-btn number" onclick="appendNumber('7')">7</button>
+                    <button class="calc-btn number" onclick="appendNumber('8')">8</button>
+                    <button class="calc-btn number" onclick="appendNumber('9')">9</button>
+                    <button class="calc-btn operator" onclick="appendOperator('-')">−</button>
+
+                    <button class="calc-btn number" onclick="appendNumber('4')">4</button>
+                    <button class="calc-btn number" onclick="appendNumber('5')">5</button>
+                    <button class="calc-btn number" onclick="appendNumber('6')">6</button>
+                    <button class="calc-btn operator" onclick="appendOperator('+')">+</button>
+
+                    <button class="calc-btn number" onclick="appendNumber('1')">1</button>
+                    <button class="calc-btn number" onclick="appendNumber('2')">2</button>
+                    <button class="calc-btn number" onclick="appendNumber('3')">3</button>
+                    <button class="calc-btn function" onclick="appendFunction('log')">log</button>
+
+                    <button class="calc-btn number" onclick="appendNumber('0')">0</button>
+                    <button class="calc-btn number" onclick="appendNumber('.')">.</button>
+                    <button class="calc-btn function" onclick="appendFunction('pow')">x²</button>
+                    <button class="calc-btn function" onclick="toggleSign()">+/−</button>
+
+                    <button class="calc-btn equals" onclick="calculate()">=</button>
+                    <button class="calc-btn function" onclick="appendFunction('pi')">π</button>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="explanation">
+                <h3>Scientific Calculator Functions</h3>
+                <p><strong>Basic:</strong> +, −, ×, ÷</p>
+                <p><strong>Trigonometry:</strong> sin, cos, tan (in radians)</p>
+                <p><strong>Advanced:</strong> √ (square root), x² (square), log (logarithm), π (pi)</p>
+                <p>Use standard mathematical order of operations (PEMDAS).</p>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="/average-calculator.html">Average Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        let display = document.getElementById('display');
+        let expression = '';
+        let lastResult = '';
+
+        function appendNumber(num) {
+            expression += num;
+            updateDisplay();
+        }
+
+        function appendOperator(op) {
+            if (expression === '' && lastResult !== '') {
+                expression = lastResult;
+            }
+            if (expression !== '' && !expression.endsWith('+') && !expression.endsWith('-') && !expression.endsWith('*') && !expression.endsWith('/')) {
+                expression += op;
+                updateDisplay();
+            }
+        }
+
+        function appendFunction(func) {
+            if (func === 'sin') expression += 'Math.sin(';
+            else if (func === 'cos') expression += 'Math.cos(';
+            else if (func === 'tan') expression += 'Math.tan(';
+            else if (func === 'sqrt') expression += 'Math.sqrt(';
+            else if (func === 'log') expression += 'Math.log10(';
+            else if (func === 'pow') {
+                if (expression !== '') expression += '**2';
+            }
+            else if (func === 'pi') expression += '3.14159265359';
+            updateDisplay();
+        }
+
+        function toggleSign() {
+            if (expression !== '') {
+                expression = '(-' + expression + ')';
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            if (expression === '') {
+                display.textContent = '0';
+            } else {
+                display.textContent = expression;
+            }
+        }
+
+        function calculate() {
+            try {
+                // Replace Math functions with proper syntax
+                let calcExpression = expression
+                    .replace(/Math\.sin\(/g, 'Math.sin(')
+                    .replace(/Math\.cos\(/g, 'Math.cos(')
+                    .replace(/Math\.tan\(/g, 'Math.tan(')
+                    .replace(/Math\.sqrt\(/g, 'Math.sqrt(')
+                    .replace(/Math\.log10\(/g, 'Math.log10(');
+
+                lastResult = eval(calcExpression);
+                expression = lastResult.toString();
+                updateDisplay();
+            } catch (error) {
+                display.textContent = 'Error';
+                expression = '';
+                setTimeout(() => {
+                    display.textContent = '0';
+                }, 1500);
+            }
+        }
+
+        function clearDisplay() {
+            expression = '';
+            lastResult = '';
+            updateDisplay();
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            if (event.key >= '0' && event.key <= '9') appendNumber(event.key);
+            if (event.key === '.') appendNumber('.');
+            if (event.key === '+') appendOperator('+');
+            if (event.key === '-') appendOperator('-');
+            if (event.key === '*') appendOperator('*');
+            if (event.key === '/') { event.preventDefault(); appendOperator('/'); }
+            if (event.key === 'Enter') calculate();
+            if (event.key === 'Escape') clearDisplay();
+        });
+    </script>
+</body>
+</html>
