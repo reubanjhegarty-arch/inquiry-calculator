@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free time calculator. Convert time units, add/subtract time, calculate elapsed time.">
+    <title>Time Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/time-calculator.html">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Time Calculator</h1>
+                <p>Add, subtract, and convert time units easily.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Calculation Type</label>
+                    <select id="timeCalcType" onchange="updateTimeForm()">
+                        <option value="add">Add Time</option>
+                        <option value="subtract">Subtract Time</option>
+                        <option value="convert">Convert Time Units</option>
+                    </select>
+                </div>
+
+                <div id="addTimeForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Hours</label>
+                            <input type="number" id="addHours" placeholder="0" step="1" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Minutes</label>
+                            <input type="number" id="addMinutes" placeholder="0" step="1" min="0" max="59">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Seconds</label>
+                            <input type="number" id="addSeconds" placeholder="0" step="1" min="0" max="59">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="subtractTimeForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Hours</label>
+                            <input type="number" id="subHours" placeholder="0" step="1" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label>Minutes</label>
+                            <input type="number" id="subMinutes" placeholder="0" step="1" min="0" max="59">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Seconds</label>
+                            <input type="number" id="subSeconds" placeholder="0" step="1" min="0" max="59">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="convertTimeForm" style="display:none;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="number" id="convertFrom" placeholder="e.g., 120" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Unit</label>
+                            <select id="fromUnit">
+                                <option value="seconds">Seconds</option>
+                                <option value="minutes">Minutes</option>
+                                <option value="hours">Hours</option>
+                                <option value="days">Days</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>To</label>
+                            <select id="toUnit">
+                                <option value="minutes">Minutes</option>
+                                <option value="seconds">Seconds</option>
+                                <option value="hours">Hours</option>
+                                <option value="days">Days</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateTime()">Calculate</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Result</h3>
+                <div class="result-value" id="resultValue">-</div>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>Time Conversions</h3>
+                <p><strong>1 Minute</strong> = 60 seconds</p>
+                <p><strong>1 Hour</strong> = 60 minutes = 3,600 seconds</p>
+                <p><strong>1 Day</strong> = 24 hours = 1,440 minutes</p>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/age-calculator.html">Age Calculator</a></li>
+                    <li><a href="/date-calculator.html">Date Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function updateTimeForm() {
+            const type = document.getElementById('timeCalcType').value;
+            document.getElementById('addTimeForm').style.display = type === 'add' ? 'block' : 'none';
+            document.getElementById('subtractTimeForm').style.display = type === 'subtract' ? 'block' : 'none';
+            document.getElementById('convertTimeForm').style.display = type === 'convert' ? 'block' : 'none';
+            document.getElementById('resultBox').classList.remove('show');
+        }
+
+        function calculateTime() {
+            const type = document.getElementById('timeCalcType').value;
+
+            if (type === 'add') {
+                const h = parseInt(document.getElementById('addHours').value) || 0;
+                const m = parseInt(document.getElementById('addMinutes').value) || 0;
+                const s = parseInt(document.getElementById('addSeconds').value) || 0;
+                const totalSeconds = h * 3600 + m * 60 + s;
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                document.getElementById('resultValue').textContent = `${hours}h ${minutes}m ${seconds}s`;
+                document.getElementById('resultDetails').innerHTML = `${h}h + ${m}m + ${s}s = ${hours}h ${minutes}m ${seconds}s`;
+            } else if (type === 'subtract') {
+                const h = parseInt(document.getElementById('subHours').value) || 0;
+                const m = parseInt(document.getElementById('subMinutes').value) || 0;
+                const s = parseInt(document.getElementById('subSeconds').value) || 0;
+                const totalSeconds = h * 3600 + m * 60 + s;
+                const hours = Math.floor(totalSeconds / 3600);
+                const minutes = Math.floor((totalSeconds % 3600) / 60);
+                const seconds = totalSeconds % 60;
+                document.getElementById('resultValue').textContent = `${hours}h ${minutes}m ${seconds}s`;
+                document.getElementById('resultDetails').innerHTML = `${h}h - ${m}m - ${s}s = ${hours}h ${minutes}m ${seconds}s`;
+            } else if (type === 'convert') {
+                const value = parseFloat(document.getElementById('convertFrom').value);
+                const fromUnit = document.getElementById('fromUnit').value;
+                const toUnit = document.getElementById('toUnit').value;
+                
+                if (isNaN(value)) {
+                    alert('Please enter a valid number');
+                    return;
+                }
+
+                const toSeconds = {
+                    seconds: 1,
+                    minutes: 60,
+                    hours: 3600,
+                    days: 86400
+                };
+
+                const totalSeconds = value * toSeconds[fromUnit];
+                const result = totalSeconds / toSeconds[toUnit];
+
+                document.getElementById('resultValue').textContent = result.toFixed(2);
+                document.getElementById('resultDetails').innerHTML = `${value} ${fromUnit} = ${result.toFixed(2)} ${toUnit}`;
+            }
+
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                calculateTime();
+            }
+        });
+    </script>
+</body>
+</html>
