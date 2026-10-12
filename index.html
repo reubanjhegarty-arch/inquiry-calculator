@@ -22,15 +22,25 @@
             --text-dark: #0f172a;
             --text-muted: #64748b;
             --border: #e2e8f0;
-            --radius: 12px;
+            --radius: 16px;
+            
+            /* Category Accent Colors */
+            --finance-color: #10b981;
+            --health-color: #f43f5e;
+            --tech-color: #8b5cf6;
+            --math-color: #f59e0b;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.05) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
             color: var(--text-dark);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
         }
 
         a {
@@ -40,178 +50,103 @@
 
         /* --- NAVBAR --- */
         .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border);
-            padding: 14px 24px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            padding: 16px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             color: var(--text-dark);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            letter-spacing: -0.03em;
         }
 
         .logo span {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
             color: #fff;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 700;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: normal;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 24px;
         }
 
         .nav-links a {
             color: var(--text-muted);
             font-weight: 600;
             font-size: 14px;
-            transition: color 0.15s;
+            transition: all 0.2s;
+            padding: 6px 12px;
+            border-radius: 8px;
         }
 
         .nav-links a:hover {
             color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
         }
 
-        /* --- HERO & HEADER --- */
-        .hero {
-            text-align: center;
-            padding: 40px 20px 20px;
-        }
-
-        .hero h1 {
-            font-size: 34px;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            color: var(--text-dark);
-            margin-bottom: 8px;
-        }
-
-        .hero p {
-            font-size: 16px;
-            color: var(--text-muted);
-            max-width: 550px;
+        /* --- HERO SPLIT SECTION --- */
+        .hero-section {
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        /* --- SCIENTIFIC CALCULATOR CHASSIS --- */
-        .calc-wrapper {
-            max-width: 580px;
-            margin: 30px auto;
-            padding: 0 16px;
-        }
-
-        .calculator {
-            background: #0f172a;
-            border-radius: 20px;
-            padding: 22px;
-            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.35);
-        }
-
-        .screen {
-            background: #020617;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            padding: 16px 20px;
-            text-align: right;
-            margin-bottom: 18px;
-        }
-
-        .screen-history {
-            font-size: 13px;
-            color: #64748b;
-            min-height: 18px;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .screen-main {
-            font-size: 34px;
-            font-weight: 700;
-            color: #f8fafc;
-            font-family: 'Courier New', Courier, monospace;
-            word-break: break-all;
-        }
-
-        .calc-grid {
+            padding: 60px 24px;
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 7px;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 48px;
+            align-items: center;
         }
 
-        .btn {
-            padding: 13px 4px;
-            border-radius: 8px;
-            border: 1px solid #1e293b;
-            background: #1e293b;
-            color: #f8fafc;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            user-select: none;
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
         }
 
-        .btn:hover { background: #334155; }
-        .btn:active { transform: scale(0.96); }
-
-        .btn-fn {
-            background: #090d16;
-            color: #38bdf8;
-            font-size: 12px;
-            border-color: #1e293b;
-        }
-        .btn-fn:hover { background: #1e293b; }
-
-        .btn-op {
-            background: #334155;
-            color: #f1f5f9;
-            font-weight: 700;
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 850;
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+            color: var(--text-dark);
         }
 
-        .btn-del {
-            background: #450a0a;
-            color: #fca5a5;
-            border-color: #7f1d1d;
+        .hero-content h1 span {
+            background: linear-gradient(135deg, var(--primary), #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .btn-del:hover { background: #7f1d1d; }
 
-        .btn-clear {
-            background: #dc2626;
-            color: #ffffff;
-            border-color: #dc2626;
-            grid-column: span 2;
-        }
-        .btn-clear:hover { background: #b91c1c; }
-
-        .btn-eq {
-            background: var(--primary);
-            color: #ffffff;
-            border-color: var(--primary);
-            grid-column: span 3;
+        .hero-content p {
             font-size: 18px;
-            font-weight: 700;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 520px;
         }
-        .btn-eq:hover { background: var(--primary-hover); }
 
-        /* --- INTERACTIVE SEARCH SECTION WITH DROPDOWN --- */
+        /* --- INTERACTIVE SEARCH INSIDE HERO --- */
         .search-area {
-            max-width: 580px;
-            margin: 0 auto 50px;
-            padding: 0 16px;
             position: relative;
+            max-width: 520px;
+            width: 100%;
         }
 
         .search-input-box {
@@ -222,26 +157,27 @@
 
         .search-input-box input {
             width: 100%;
-            padding: 15px 20px 15px 48px;
-            font-size: 16px;
+            padding: 18px 20px 18px 54px;
+            font-size: 15px;
+            font-weight: 500;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             outline: none;
             background: #ffffff;
             color: var(--text-dark);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
             transition: all 0.2s ease;
         }
 
         .search-input-box input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+            box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.15), 0 10px 25px -5px rgba(37, 99, 235, 0.1);
         }
 
         .search-icon {
             position: absolute;
-            left: 18px;
-            font-size: 18px;
+            left: 20px;
+            font-size: 20px;
             color: var(--text-muted);
             pointer-events: none;
         }
@@ -250,15 +186,15 @@
             display: none;
             position: absolute;
             top: calc(100% + 8px);
-            left: 16px;
-            right: 16px;
+            left: 0;
+            right: 0;
             background: #ffffff;
-            border: 2px solid #2563eb;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.2);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
             max-height: 380px;
             overflow-y: auto;
-            z-index: 99999;
+            z-index: 99;
             text-align: left;
         }
 
@@ -310,93 +246,257 @@
             margin-left: 12px;
         }
 
-        /* --- CONTENT CONTAINERS --- */
+        /* --- SCIENTIFIC CALCULATOR CHASSIS --- */
+        .calc-wrapper {
+            width: 100%;
+            max-width: 480px;
+            justify-self: center;
+        }
+
+        .calculator {
+            background: linear-gradient(145deg, #0f172a, #1e293b);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 
+                0 30px 60px -15px rgba(15, 23, 42, 0.45),
+                inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+
+        .screen {
+            background: #020617;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 18px 22px;
+            text-align: right;
+            margin-bottom: 20px;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .screen-history {
+            font-size: 13px;
+            color: #64748b;
+            min-height: 20px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            letter-spacing: 0.5px;
+        }
+
+        .screen-main {
+            font-size: 36px;
+            font-weight: 700;
+            color: #38bdf8;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            word-break: break-all;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
+            margin-top: 4px;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 14px 4px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            background: #1e293b;
+            color: #f8fafc;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .btn:hover { 
+            background: #334155; 
+            border-color: rgba(255,255,255,0.1);
+        }
+        .btn:active { transform: scale(0.94); }
+
+        .btn-fn {
+            background: rgba(15, 23, 42, 0.6);
+            color: #38bdf8;
+            font-size: 12px;
+        }
+        .btn-fn:hover { background: #1e293b; }
+
+        .btn-op {
+            background: rgba(255, 255, 255, 0.08);
+            color: #f1f5f9;
+            font-weight: 700;
+        }
+
+        .btn-del {
+            background: #450a0a;
+            color: #fca5a5;
+            border-color: #7f1d1d;
+        }
+        .btn-del:hover { background: #7f1d1d; }
+
+        .btn-clear {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            grid-column: span 2;
+        }
+        .btn-clear:hover { background: #dc2626; }
+
+        .btn-eq {
+            background: linear-gradient(135deg, var(--primary), #1d4ed8);
+            color: #ffffff;
+            border-color: var(--primary);
+            grid-column: span 3;
+            font-size: 18px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+        }
+        .btn-eq:hover { 
+            background: linear-gradient(135deg, var(--primary-hover), #1d4ed8);
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
+        }
+
+        /* --- CONTENT CONTAINER --- */
         .main-container {
-            max-width: 1050px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 80px;
+            padding: 20px 24px 80px;
         }
 
         .section-title {
-            font-size: 24px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
             color: var(--text-dark);
-            margin-bottom: 20px;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
             text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 40px;
         }
 
         /* --- TOOLS GRID --- */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 18px;
-            margin-bottom: 60px;
+            gap: 20px;
+            margin-bottom: 80px;
         }
 
         .card {
             background: #ffffff;
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 20px;
-            display: block;
-            transition: all 0.2s ease;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Color Bar Indicator Left Side */
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border);
+            transition: width 0.2s ease;
         }
 
         .card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
-            transform: translateY(-2px);
+            border-color: transparent;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+            transform: translateY(-4px);
         }
 
-        .card h3 {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 6px;
+        .card:hover::before {
+            width: 6px;
         }
+
+        /* Category Color Mappings */
+        .card.finance::before { background: var(--finance-color); }
+        .card.health::before { background: var(--health-color); }
+        .card.tech::before { background: var(--tech-color); }
+        .card.travel::before { background: var(--tech-color); }
+        .card.math::before { background: var(--math-color); }
+        .card.time::before { background: var(--math-color); }
+
+        .card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            transition: color 0.2s;
+        }
+
+        .card.finance:hover h3 { color: var(--finance-color); }
+        .card.health:hover h3 { color: var(--health-color); }
+        .card.tech:hover h3 { color: var(--tech-color); }
+        .card.travel:hover h3 { color: var(--tech-color); }
+        .card.math:hover h3 { color: var(--math-color); }
+        .card.time:hover h3 { color: var(--math-color); }
 
         .card p {
             font-size: 13px;
             color: var(--text-muted);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* --- CATEGORIES BUCKET --- */
         .category-bucket {
             background: #ffffff;
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
 
         .cat-group h4 {
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 14px;
+            font-weight: 800;
             color: var(--text-dark);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+
+        .cat-group.finance-group h4 { color: var(--finance-color); }
+        .cat-group.tech-group h4 { color: var(--tech-color); }
+        .cat-group.health-group h4 { color: var(--health-color); }
+        .cat-group.math-group h4 { color: var(--math-color); }
 
         .cat-group ul {
             list-style: none;
         }
 
         .cat-group li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .cat-group a {
             color: var(--text-muted);
             font-size: 14px;
-            transition: color 0.15s;
+            transition: all 0.2s;
         }
 
         .cat-group a:hover {
-            color: var(--primary);
+            color: var(--text-dark);
             text-decoration: underline;
         }
 
@@ -404,27 +504,30 @@
         footer {
             background: #0f172a;
             color: #94a3b8;
-            padding: 50px 20px 30px;
+            padding: 70px 24px 40px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .footer-content {
-            max-width: 1050px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1.2fr repeat(2, 0.9fr);
+            gap: 48px;
             padding-bottom: 40px;
             border-bottom: 1px solid #1e293b;
         }
 
         .footer-col h5 {
             color: #f8fafc;
-            font-size: 15px;
-            margin-bottom: 14px;
+            font-size: 16px;
+            margin-bottom: 18px;
+            font-weight: 700;
         }
 
         .footer-col p {
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.6;
         }
 
@@ -433,12 +536,12 @@
         }
 
         .footer-col li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .footer-col a {
             color: #94a3b8;
-            font-size: 13px;
+            font-size: 14px;
             transition: color 0.15s;
         }
 
@@ -448,16 +551,65 @@
 
         .footer-copy {
             text-align: center;
-            font-size: 12px;
-            margin-top: 25px;
+            font-size: 13px;
+            margin-top: 30px;
             color: #64748b;
         }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 26px; }
-            .calc-grid .btn { padding: 11px 2px; font-size: 12px; }
-            .screen-main { font-size: 26px; }
-            .tools-grid { grid-template-columns: 1fr; }
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 1024px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+                padding: 40px 24px;
+            }
+            .hero-content {
+                align-items: center;
+            }
+            .hero-content p {
+                margin: 0 auto;
+            }
+            .search-area {
+                margin: 0 auto;
+            }
+            .footer-content {
+                grid-template-columns: 1fr repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 14px 16px;
+            }
+            .nav-links {
+                gap: 10px;
+            }
+            .nav-links a {
+                font-size: 13px;
+                padding: 4px 8px;
+            }
+            .hero-content h1 {
+                font-size: 34px;
+            }
+            .calc-grid .btn { 
+                padding: 12px 2px; 
+                font-size: 12px; 
+            }
+            .screen-main { 
+                font-size: 28px; 
+            }
+            .tools-grid { 
+                grid-template-columns: 1fr; 
+            }
+            .category-bucket {
+                padding: 24px;
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
         }
     </style>
 </head>
@@ -475,149 +627,152 @@
         </ul>
     </nav>
 
-    <!-- Header Section -->
-    <header class="hero">
-        <h1>Free Online Calculators</h1>
-        <p>Instant, precise calculations for finance, health, time, and math.</p>
+    <!-- Main Hero Split Container -->
+    <header class="hero-section">
+        <!-- Hero Content (Left column) -->
+        <div class="hero-content">
+            <h1>Free Online <span>Calculators</span></h1>
+            <p>Instant, precise calculation software designed for finance, health, tech, and mathematics.</p>
+            
+            <!-- Floating interactive search engine stays perfectly inside the Hero column -->
+            <div class="search-area">
+                <div class="search-input-box">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="homeSearch" placeholder="Search calculators (e.g. mortgage, loan, calorie)..." autocomplete="off">
+                </div>
+                <div id="homeDropdown" class="suggestions-dropdown"></div>
+            </div>
+        </div>
+
+        <!-- Interactive Scientific Calculator (Right column) -->
+        <div class="calc-wrapper">
+            <div class="calculator">
+                <div class="screen">
+                    <div id="calcHist" class="screen-history"></div>
+                    <div id="calcDisplay" class="screen-main">0</div>
+                </div>
+
+                <div class="calc-grid">
+                    <!-- Functions Row 1 -->
+                    <button class="btn btn-fn" onclick="calcFunc('sin')">sin</button>
+                    <button class="btn btn-fn" onclick="calcFunc('cos')">cos</button>
+                    <button class="btn btn-fn" onclick="calcFunc('tan')">tan</button>
+                    <button class="btn btn-fn" onclick="calcFunc('asin')">asin</button>
+                    <button class="btn btn-fn" onclick="calcFunc('acos')">acos</button>
+                    <button class="btn btn-fn" onclick="calcFunc('atan')">atan</button>
+
+                    <!-- Functions Row 2 -->
+                    <button class="btn btn-fn" onclick="calcFunc('log')">log</button>
+                    <button class="btn btn-fn" onclick="calcFunc('ln')">ln</button>
+                    <button class="btn btn-fn" onclick="calcFunc('sqrt')">√</button>
+                    <button class="btn btn-fn" onclick="calcFunc('cbrt')">∛</button>
+                    <button class="btn btn-fn" onclick="calcFunc('pow')">x^y</button>
+                    <button class="btn btn-fn" onclick="calcFunc('fact')">n!</button>
+
+                    <!-- Constants & Brackets -->
+                    <button class="btn btn-fn" onclick="calcFunc('pi')">π</button>
+                    <button class="btn btn-fn" onclick="calcFunc('e')">e</button>
+                    <button class="btn btn-fn" onclick="calcFunc('abs')">|x|</button>
+                    <button class="btn btn-fn" onclick="calcFunc('1/x')">1/x</button>
+                    <button class="btn btn-op" onclick="calcParens('(')">(</button>
+                    <button class="btn btn-op" onclick="calcParens(')')">)</button>
+
+                    <!-- Numbers Row 1 -->
+                    <button class="btn" onclick="calcNum('7')">7</button>
+                    <button class="btn" onclick="calcNum('8')">8</button>
+                    <button class="btn" onclick="calcNum('9')">9</button>
+                    <button class="btn btn-op" onclick="calcOp('/')">÷</button>
+                    <button class="btn btn-op" onclick="calcOp('%')">%</button>
+                    <button class="btn btn-del" onclick="calcBackspace()">DEL</button>
+
+                    <!-- Numbers Row 2 -->
+                    <button class="btn" onclick="calcNum('4')">4</button>
+                    <button class="btn" onclick="calcNum('5')">5</button>
+                    <button class="btn" onclick="calcNum('6')">6</button>
+                    <button class="btn btn-op" onclick="calcOp('*')">×</button>
+                    <button class="btn btn-op" onclick="calcSign()">+/−</button>
+                    <button class="btn btn-fn" onclick="calcFunc('exp')">e^x</button>
+
+                    <!-- Numbers Row 3 -->
+                    <button class="btn" onclick="calcNum('1')">1</button>
+                    <button class="btn" onclick="calcNum('2')">2</button>
+                    <button class="btn" onclick="calcNum('3')">3</button>
+                    <button class="btn btn-op" onclick="calcOp('-')">−</button>
+                    <button class="btn btn-clear" onclick="calcClear()">AC (Clear)</button>
+
+                    <!-- Numbers Row 4 -->
+                    <button class="btn" onclick="calcNum('0')">0</button>
+                    <button class="btn" onclick="calcNum('.')">.</button>
+                    <button class="btn btn-op" onclick="calcOp('+')">+</button>
+                    <button class="btn btn-eq" onclick="calcEqual()">=</button>
+                </div>
+            </div>
+        </div>
     </header>
-
-    <!-- Centered Scientific Calculator -->
-    <section class="calc-wrapper">
-        <div class="calculator">
-            <div class="screen">
-                <div id="calcHist" class="screen-history"></div>
-                <div id="calcDisplay" class="screen-main">0</div>
-            </div>
-
-            <div class="calc-grid">
-                <!-- Functions Row 1 -->
-                <button class="btn btn-fn" onclick="calcFunc('sin')">sin</button>
-                <button class="btn btn-fn" onclick="calcFunc('cos')">cos</button>
-                <button class="btn btn-fn" onclick="calcFunc('tan')">tan</button>
-                <button class="btn btn-fn" onclick="calcFunc('asin')">asin</button>
-                <button class="btn btn-fn" onclick="calcFunc('acos')">acos</button>
-                <button class="btn btn-fn" onclick="calcFunc('atan')">atan</button>
-
-                <!-- Functions Row 2 -->
-                <button class="btn btn-fn" onclick="calcFunc('log')">log</button>
-                <button class="btn btn-fn" onclick="calcFunc('ln')">ln</button>
-                <button class="btn btn-fn" onclick="calcFunc('sqrt')">√</button>
-                <button class="btn btn-fn" onclick="calcFunc('cbrt')">∛</button>
-                <button class="btn btn-fn" onclick="calcFunc('pow')">x^y</button>
-                <button class="btn btn-fn" onclick="calcFunc('fact')">n!</button>
-
-                <!-- Constants & Brackets -->
-                <button class="btn btn-fn" onclick="calcFunc('pi')">π</button>
-                <button class="btn btn-fn" onclick="calcFunc('e')">e</button>
-                <button class="btn btn-fn" onclick="calcFunc('abs')">|x|</button>
-                <button class="btn btn-fn" onclick="calcFunc('1/x')">1/x</button>
-                <button class="btn btn-op" onclick="calcParens('(')">(</button>
-                <button class="btn btn-op" onclick="calcParens(')')">)</button>
-
-                <!-- Numbers Row 1 -->
-                <button class="btn" onclick="calcNum('7')">7</button>
-                <button class="btn" onclick="calcNum('8')">8</button>
-                <button class="btn" onclick="calcNum('9')">9</button>
-                <button class="btn btn-op" onclick="calcOp('/')">÷</button>
-                <button class="btn btn-op" onclick="calcOp('%')">%</button>
-                <button class="btn btn-del" onclick="calcBackspace()">DEL</button>
-
-                <!-- Numbers Row 2 -->
-                <button class="btn" onclick="calcNum('4')">4</button>
-                <button class="btn" onclick="calcNum('5')">5</button>
-                <button class="btn" onclick="calcNum('6')">6</button>
-                <button class="btn btn-op" onclick="calcOp('*')">×</button>
-                <button class="btn btn-op" onclick="calcSign()">+/−</button>
-                <button class="btn btn-fn" onclick="calcFunc('exp')">e^x</button>
-
-                <!-- Numbers Row 3 -->
-                <button class="btn" onclick="calcNum('1')">1</button>
-                <button class="btn" onclick="calcNum('2')">2</button>
-                <button class="btn" onclick="calcNum('3')">3</button>
-                <button class="btn btn-op" onclick="calcOp('-')">−</button>
-                <button class="btn btn-clear" onclick="calcClear()">AC (Clear)</button>
-
-                <!-- Numbers Row 4 -->
-                <button class="btn" onclick="calcNum('0')">0</button>
-                <button class="btn" onclick="calcNum('.')">.</button>
-                <button class="btn btn-op" onclick="calcOp('+')">+</button>
-                <button class="btn btn-eq" onclick="calcEqual()">=</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Search Bar with Floating Suggestions Menu -->
-    <section class="search-area">
-        <div class="search-input-box">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="homeSearch" placeholder="Search calculators (e.g. mortgage, loan, calorie, tax, electricity)..." autocomplete="off">
-        </div>
-
-        <div id="homeDropdown" class="suggestions-dropdown"></div>
-    </section>
 
     <!-- Main Content & Tools Grid -->
     <main class="main-container">
         <h2 class="section-title">Popular Calculators</h2>
+        <p class="section-subtitle">Click on any calculator utility below to make precise calculations.</p>
 
         <div class="tools-grid">
-            <a href="mortgage-calculator.html" class="card">
+            <a href="mortgage-calculator.html" class="card finance">
                 <h3>Mortgage Calculator</h3>
                 <p>Calculate monthly repayments, total interest, property taxes, and home insurance.</p>
             </a>
-            <a href="car-loan-calculator.html" class="card">
+            <a href="car-loan-calculator.html" class="card finance">
                 <h3>Car Loan Calculator</h3>
                 <p>Estimate vehicle financing payments, trade-in deductions, and total interest.</p>
             </a>
-            <a href="tax-calculator.html" class="card">
+            <a href="tax-calculator.html" class="card finance">
                 <h3>Salary & Tax Calculator</h3>
                 <p>Calculate estimated income tax deductions, Medicare levy, and net take-home pay.</p>
             </a>
-            <a href="calorie-calculator.html" class="card">
+            <a href="calorie-calculator.html" class="card health">
                 <h3>Calorie & TDEE Calculator</h3>
                 <p>Find daily maintenance calories, BMR, and targets for weight loss or muscle gain.</p>
             </a>
-            <a href="electricity-calculator.html" class="card">
+            <a href="electricity-calculator.html" class="card tech">
                 <h3>Electricity Cost Calculator</h3>
                 <p>Calculate appliance power consumption and running costs per hour, day, and month.</p>
             </a>
-            <a href="fuel-cost-calculator.html" class="card">
+            <a href="fuel-cost-calculator.html" class="card travel">
                 <h3>Fuel Cost Calculator</h3>
                 <p>Calculate road trip petrol costs, consumption (L/100km & MPG), and passenger splits.</p>
             </a>
-            <a href="overtime-calculator.html" class="card">
+            <a href="overtime-calculator.html" class="card finance">
                 <h3>Overtime Pay Calculator</h3>
                 <p>Calculate regular hours, 1.5x time-and-a-half, and 2.0x double-time penalty rates.</p>
             </a>
-            <a href="aspect-ratio-calculator.html" class="card">
+            <a href="aspect-ratio-calculator.html" class="card tech">
                 <h3>Aspect Ratio Calculator</h3>
                 <p>Calculate screen proportions, pixel scaling (16:9, 21:9, 4:3), and image sizing.</p>
             </a>
-            <a href="percentage-calculator.html" class="card">
+            <a href="percentage-calculator.html" class="card math">
                 <h3>Percentage Calculator</h3>
                 <p>Calculate base percentages, percentage increases, and percentage drops.</p>
             </a>
-            <a href="compound-interest-calculator.html" class="card">
+            <a href="compound-interest-calculator.html" class="card finance">
                 <h3>Compound Interest</h3>
                 <p>Simulate long-term investing and compounding bank deposits over time.</p>
             </a>
-            <a href="bmi-calculator.html" class="card">
+            <a href="bmi-calculator.html" class="card health">
                 <h3>BMI Calculator</h3>
                 <p>Calculate Body Mass Index and healthy category weight ranges.</p>
             </a>
-            <a href="download-time-calculator.html" class="card">
+            <a href="download-time-calculator.html" class="card tech">
                 <h3>Download Time Calculator</h3>
                 <p>Estimate game and file download durations based on your internet speed.</p>
             </a>
-            <a href="discount-calculator.html" class="card">
+            <a href="discount-calculator.html" class="card finance">
                 <h3>Discount Calculator</h3>
                 <p>Calculate sales discounts, retail savings, and final prices.</p>
             </a>
-            <a href="loan-calculator.html" class="card">
+            <a href="loan-calculator.html" class="card finance">
                 <h3>Personal Loan Calculator</h3>
                 <p>Estimate monthly personal loan repayments and total interest costs.</p>
             </a>
-            <a href="age-calculator.html" class="card">
+            <a href="age-calculator.html" class="card time">
                 <h3>Age Calculator</h3>
                 <p>Find your exact age in years, months, days, hours, and minutes.</p>
             </a>
@@ -625,9 +780,10 @@
 
         <!-- Browse Categories -->
         <h2 class="section-title">Browse by Category</h2>
+        <p class="section-subtitle">Navigate through our custom engineered calculation modules.</p>
 
         <div class="category-bucket">
-            <div class="cat-group">
+            <div class="cat-group finance-group">
                 <h4>Finance</h4>
                 <ul>
                     <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
@@ -638,7 +794,7 @@
                     <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
                 </ul>
             </div>
-            <div class="cat-group">
+            <div class="cat-group tech-group">
                 <h4>Travel & Tech</h4>
                 <ul>
                     <li><a href="electricity-calculator.html">Electricity Cost</a></li>
@@ -648,14 +804,14 @@
                     <li><a href="unit-converter.html">Unit Converter</a></li>
                 </ul>
             </div>
-            <div class="cat-group">
+            <div class="cat-group health-group">
                 <h4>Health & Fitness</h4>
                 <ul>
                     <li><a href="calorie-calculator.html">Calorie & TDEE</a></li>
                     <li><a href="bmi-calculator.html">BMI Calculator</a></li>
                 </ul>
             </div>
-            <div class="cat-group">
+            <div class="cat-group math-group">
                 <h4>Time & Math</h4>
                 <ul>
                     <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
