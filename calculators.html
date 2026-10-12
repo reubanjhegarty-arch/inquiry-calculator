@@ -3,139 +3,686 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="All calculators - Browse our complete collection of free online calculators.">
-    <title>All Calculators - Inquiry Calculator</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="canonical" href="https://inquirycalculator.com/calculators.html">
-    <link rel="stylesheet" href="/style.css">
+    <meta name="description" content="All Calculators - Browse our complete directory of free online calculators for finance, health, time, math, and science.">
+    <title>All Calculators Directory - Inquiry Calculator</title>
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            background: var(--primary);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 14px;
+            transition: color 0.15s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        /* --- DIRECTORY HEADER & LIVE SEARCH --- */
+        .dir-header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 45px 20px 35px;
+            text-align: center;
+        }
+
+        .dir-header h1 {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .dir-header p {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 580px;
+            margin: 0 auto 28px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 15px 20px 15px 48px;
+            font-size: 16px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            outline: none;
+            background: #f8fafc;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+
+        .search-container input:focus {
+            background: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        /* --- CATEGORY PILLS --- */
+        .filters-bar {
+            max-width: 1100px;
+            margin: 30px auto 10px;
+            padding: 0 20px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        /* --- RESULTS GRID --- */
+        .grid-container {
+            max-width: 1100px;
+            margin: 30px auto 80px;
+            padding: 0 20px;
+        }
+
+        .counter-badge {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 18px;
+        }
+
+        .calc-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .calc-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
+        }
+
+        .card-top {
+            margin-bottom: 14px;
+        }
+
+        .card-tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: #eff6ff;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .calc-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .calc-card:hover h3 {
+            color: var(--primary);
+        }
+
+        .calc-card p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .card-arrow {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Empty State */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .no-results h3 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .no-results p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 50px 20px 30px;
+        }
+
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .footer-col h5 {
+            color: #f8fafc;
+            font-size: 15px;
+            margin-bottom: 14px;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col a {
+            color: #94a3b8;
+            font-size: 13px;
+            transition: color 0.15s;
+        }
+
+        .footer-col a:hover {
+            color: #f8fafc;
+        }
+
+        .footer-copy {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 25px;
+            color: #64748b;
+        }
+
+        @media(max-width: 600px) {
+            .dir-header h1 { font-size: 26px; }
+            .calculators-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Navigation -->
     <nav class="navbar">
-        <div class="container">
-            <div class="logo">
-                <a href="/">
-                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
-                </a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/calculators.html">All Calculators</a></li>
-                <li><a href="/about.html">About</a></li>
-            </ul>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+        <a href="index.html" class="logo">
+            <span>Inquiry</span> Calculator
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="calculators.html" class="active">All Calculators</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
     </nav>
 
-    <div class="container">
-        <div style="max-width: 1000px; margin: 40px auto;">
-            <h1 style="text-align: center; margin-bottom: 10px;">All Calculators</h1>
-            <p style="text-align: center; color: #6b7280; margin-bottom: 40px;">Browse our complete collection of free online calculators</p>
-
-            <h2 style="margin-top: 40px; color: #1e40af;">Finance Calculators</h2>
-            <div class="calculator-grid">
-                <a href="/loan-calculator.html" class="calc-card">
-                    <h3>Loan Calculator</h3>
-                    <p>Calculate monthly payments and total interest</p>
-                </a>
-                <a href="/compound-interest-calculator.html" class="calc-card">
-                    <h3>Compound Interest</h3>
-                    <p>Calculate investment growth with compound interest</p>
-                </a>
-                <a href="/salary-calculator.html" class="calc-card">
-                    <h3>Salary Calculator</h3>
-                    <p>Convert between annual, monthly, and hourly pay</p>
-                </a>
-                <a href="/discount-calculator.html" class="calc-card">
-                    <h3>Discount Calculator</h3>
-                    <p>Calculate discounts and final prices</p>
-                </a>
-                <a href="/tip-calculator.html" class="calc-card">
-                    <h3>Tip Calculator</h3>
-                    <p>Calculate tips and split bills</p>
-                </a>
-            </div>
-
-            <h2 style="margin-top: 40px; color: #1e40af;">Math & Science Calculators</h2>
-            <div class="calculator-grid">
-                <a href="/percentage-calculator.html" class="calc-card">
-                    <h3>Percentage Calculator</h3>
-                    <p>Calculate percentages and percent changes</p>
-                </a>
-                <a href="/scientific-calculator.html" class="calc-card">
-                    <h3>Scientific Calculator</h3>
-                    <p>Advanced math with trigonometry and logarithms</p>
-                </a>
-                <a href="/average-calculator.html" class="calc-card">
-                    <h3>Average Calculator</h3>
-                    <p>Calculate mean, median, and statistics</p>
-                </a>
-                <a href="/unit-converter.html" class="calc-card">
-                    <h3>Unit Converter</h3>
-                    <p>Convert length, weight, temperature, volume</p>
-                </a>
-            </div>
-
-            <h2 style="margin-top: 40px; color: #1e40af;">Date & Time Calculators</h2>
-            <div class="calculator-grid">
-                <a href="/age-calculator.html" class="calc-card">
-                    <h3>Age Calculator</h3>
-                    <p>Find your exact age in years, months, and days</p>
-                </a>
-                <a href="/date-calculator.html" class="calc-card">
-                    <h3>Date Calculator</h3>
-                    <p>Calculate days between dates</p>
-                </a>
-                <a href="/time-calculator.html" class="calc-card">
-                    <h3>Time Calculator</h3>
-                    <p>Add, subtract, and convert time units</p>
-                </a>
-            </div>
-
-            <h2 style="margin-top: 40px; color: #1e40af;">Education Calculators</h2>
-            <div class="calculator-grid">
-                <a href="/gpa-calculator.html" class="calc-card">
-                    <h3>GPA Calculator</h3>
-                    <p>Calculate your cumulative grade point average</p>
-                </a>
-            </div>
-
-            <h2 style="margin-top: 40px; color: #1e40af;">Health & Fitness Calculators</h2>
-            <div class="calculator-grid">
-                <a href="/bmi-calculator.html" class="calc-card">
-                    <h3>BMI Calculator</h3>
-                    <p>Find your body mass index and health category</p>
-                </a>
-            </div>
+    <!-- Header & Interactive Search -->
+    <header class="dir-header">
+        <h1>All Calculators</h1>
+        <p>Search any calculation tool or browse by category below.</p>
+        
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="liveSearch" placeholder="Type to search (e.g. mortgage, car loan, calorie, tax, fuel)..." autocomplete="off" autofocus>
         </div>
+    </header>
+
+    <!-- Category Filters -->
+    <div class="filters-bar">
+        <button class="filter-btn active" onclick="setCategory('all', this)">All</button>
+        <button class="filter-btn" onclick="setCategory('finance', this)">Finance & Loans</button>
+        <button class="filter-btn" onclick="setCategory('math', this)">Math & Science</button>
+        <button class="filter-btn" onclick="setCategory('health', this)">Health & Fitness</button>
+        <button class="filter-btn" onclick="setCategory('time', this)">Date & Time</button>
+        <button class="filter-btn" onclick="setCategory('travel', this)">Travel & Tech</button>
     </div>
 
+    <!-- Cards Grid -->
+    <main class="grid-container">
+        <div id="resultsCount" class="counter-badge">Showing 18 calculators</div>
+
+        <div class="calculators-grid" id="toolsGrid">
+
+            <!-- 1. Mortgage -->
+            <a href="mortgage-calculator.html" class="calc-card" data-cat="finance" data-tags="mortgage home loan house property interest amortization escrow payment">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Mortgage Calculator</h3>
+                    <p>Calculate monthly repayments, total interest, property taxes, and home insurance.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 2. Car Loan -->
+            <a href="car-loan-calculator.html" class="calc-card" data-cat="finance" data-tags="car loan auto vehicle payment interest trade-in automobile financing">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Car Loan Calculator</h3>
+                    <p>Estimate monthly vehicle financing payments, trade-in deductions, and total loan charges.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 3. General Loan -->
+            <a href="loan-calculator.html" class="calc-card" data-cat="finance" data-tags="loan personal borrow repayment interest bank debt credit">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Loan Calculator</h3>
+                    <p>Standard amortized repayment calculator for personal, bank, and commercial loans.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 4. Salary & Tax -->
+            <a href="tax-calculator.html" class="calc-card" data-cat="finance" data-tags="tax salary income wage take home pay ATO medicare gross net paycheck">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Salary & Tax Calculator</h3>
+                    <p>Calculate estimated income tax deductions, Medicare levy, and take-home pay.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 5. Wage Conversion -->
+            <a href="salary-calculator.html" class="calc-card" data-cat="finance" data-tags="salary wage hourly annual weekly paycheck convert earnings pay rate">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Salary Converter</h3>
+                    <p>Convert wages easily between hourly, weekly, fortnightly, monthly, and annual figures.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 6. Compound Interest -->
+            <a href="compound-interest-calculator.html" class="calc-card" data-cat="finance" data-tags="compound interest investing investment savings bank growth stocks portfolio">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Compound Interest</h3>
+                    <p>Simulate long-term investing growth, savings interest, and recurring monthly contributions.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 7. Discount Calculator -->
+            <a href="discount-calculator.html" class="calc-card" data-cat="finance" data-tags="discount sale percentage off shopping saving retail clearance price promo">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Discount Calculator</h3>
+                    <p>Find total sales savings, discounted prices, and multi-tier retail markdowns.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 8. Tip Calculator -->
+            <a href="tip-calculator.html" class="calc-card" data-cat="finance" data-tags="tip bill restaurant gratuity food split dining check server">
+                <div class="card-top">
+                    <span class="card-tag">Finance</span>
+                    <h3>Tip Calculator</h3>
+                    <p>Calculate service tip percentages and split meal bills evenly across multiple people.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 9. Percentage Calculator -->
+            <a href="percentage-calculator.html" class="calc-card" data-cat="math" data-tags="percentage percent % fraction math increase decrease difference">
+                <div class="card-top">
+                    <span class="card-tag">Math</span>
+                    <h3>Percentage Calculator</h3>
+                    <p>Calculate base percentages, percentage increases, and percentage drops effortlessly.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 10. Scientific Calculator -->
+            <a href="scientific-calculator.html" class="calc-card" data-cat="math" data-tags="scientific math sin cos tan trigonometry logarithm square root power algebra">
+                <div class="card-top">
+                    <span class="card-tag">Math</span>
+                    <h3>Scientific Calculator</h3>
+                    <p>Advanced calculation workstation with trigonometry, logarithms, powers, and constants.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 11. Average Calculator -->
+            <a href="average-calculator.html" class="calc-card" data-cat="math" data-tags="average mean median mode range standard deviation statistics math dataset">
+                <div class="card-top">
+                    <span class="card-tag">Math</span>
+                    <h3>Average Calculator</h3>
+                    <p>Find the mean, median, mode, range, and standard deviation for any list of numbers.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 12. Unit Converter -->
+            <a href="unit-converter.html" class="calc-card" data-cat="math" data-tags="unit converter convert length weight temperature volume metric imperial kg lbs">
+                <div class="card-top">
+                    <span class="card-tag">Math</span>
+                    <h3>Unit Converter</h3>
+                    <p>Convert metrics across length, weight, volume, and temperature formats instantly.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 13. Calorie & TDEE -->
+            <a href="calorie-calculator.html" class="calc-card" data-cat="health" data-tags="calorie tdee bmr weight loss diet deficit fitness nutrition gain food">
+                <div class="card-top">
+                    <span class="card-tag">Health</span>
+                    <h3>Calorie & TDEE Calculator</h3>
+                    <p>Calculate your daily maintenance calories, BMR, and energy needs for weight loss or muscle gain.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 14. BMI Calculator -->
+            <a href="bmi-calculator.html" class="calc-card" data-cat="health" data-tags="bmi body mass index weight height health fitness obesity overweight">
+                <div class="card-top">
+                    <span class="card-tag">Health</span>
+                    <h3>BMI Calculator</h3>
+                    <p>Compute Body Mass Index with adult weight classes and metric or imperial units.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 15. GPA Calculator -->
+            <a href="gpa-calculator.html" class="calc-card" data-cat="math" data-tags="gpa grade school college university marks weighted academic credits">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>GPA Calculator</h3>
+                    <p>Calculate high school or college cumulative and weighted grade point averages.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 16. Fuel Cost -->
+            <a href="fuel-cost-calculator.html" class="calc-card" data-cat="travel" data-tags="fuel petrol gas road trip consumption mileage distance travel split car">
+                <div class="card-top">
+                    <span class="card-tag">Travel</span>
+                    <h3>Fuel Cost Calculator</h3>
+                    <p>Estimate trip petrol expenses, fuel consumption (L/100km & MPG), and passenger splits.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 17. Download Time -->
+            <a href="download-time-calculator.html" class="calc-card" data-cat="travel" data-tags="download time internet speed bandwidth file size game steam transfer mbps">
+                <div class="card-top">
+                    <span class="card-tag">Tech</span>
+                    <h3>Download Time Calculator</h3>
+                    <p>Estimate download duration for games, files, and video streams based on your internet speed.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 18. Age Calculator -->
+            <a href="age-calculator.html" class="calc-card" data-cat="time" data-tags="age birthday birth date how old years days months time">
+                <div class="card-top">
+                    <span class="card-tag">Time</span>
+                    <h3>Age Calculator</h3>
+                    <p>Find your exact age in years, months, days, hours, and minutes from any birthdate.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 19. Date Calculator -->
+            <a href="date-calculator.html" class="calc-card" data-cat="time" data-tags="date days between calendar add days subtract count calendar">
+                <div class="card-top">
+                    <span class="card-tag">Time</span>
+                    <h3>Date Calculator</h3>
+                    <p>Count exact calendar days between two dates or add/subtract days from any date.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <!-- 20. Time Calculator -->
+            <a href="time-calculator.html" class="calc-card" data-cat="time" data-tags="time hours minutes seconds add time duration convert clock">
+                <div class="card-top">
+                    <span class="card-tag">Time</span>
+                    <h3>Time Calculator</h3>
+                    <p>Add, subtract, and convert time units across hours, minutes, and seconds.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+        </div>
+
+        <!-- No Results Found Message -->
+        <div id="noResults" class="no-results">
+            <h3>No calculators found</h3>
+            <p>Try searching for keywords like <em>"mortgage"</em>, <em>"loan"</em>, <em>"calorie"</em>, or <em>"tax"</em>.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Inquiry Calculator</h4>
-                    <p>Fast, accurate, free calculators for everyday use.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="/about.html">About</a></li>
-                        <li><a href="/contact.html">Contact</a></li>
-                        <li><a href="/privacy.html">Privacy Policy</a></li>
-                        <li><a href="/terms.html">Terms of Use</a></li>
-                    </ul>
-                </div>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h5>Inquiry Calculator</h5>
+                <p>Fast, reliable, free calculation tools for personal finance, health, time, and everyday utility.</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            <div class="footer-col">
+                <h5>Legal</h5>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Company</h5>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
         </div>
+        <p class="footer-copy">&copy; 2025 Inquiry Calculator. All rights reserved.</p>
     </footer>
 
-    <script src="/script.js"></script>
+    <!-- Live Search & Filtering Logic -->
+    <script>
+        const searchInput = document.getElementById('liveSearch');
+        const cards = Array.from(document.querySelectorAll('.calc-card'));
+        const noResults = document.getElementById('noResults');
+        const countBadge = document.getElementById('resultsCount');
+        let currentCategory = 'all';
+
+        function filterItems() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+            let firstMatch = null;
+
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                const tags = (card.getAttribute('data-tags') || '').toLowerCase();
+                const cat = (card.getAttribute('data-cat') || '').toLowerCase();
+
+                const matchesQuery = query === '' || 
+                                     title.includes(query) || 
+                                     desc.includes(query) || 
+                                     tags.includes(query);
+
+                const matchesCat = currentCategory === 'all' || cat === currentCategory;
+
+                if (matchesQuery && matchesCat) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                    if (!firstMatch) firstMatch = card;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            countBadge.textContent = `Showing ${visibleCount} calculator${visibleCount === 1 ? '' : 's'}`;
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+
+            return firstMatch;
+        }
+
+        // Live typing filter
+        searchInput.addEventListener('input', filterItems);
+
+        // Press Enter to immediately open the top matching calculator
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const topMatch = filterItems();
+                if (topMatch) {
+                    window.location.href = topMatch.getAttribute('href');
+                }
+            }
+        });
+
+        // Category pill click handler
+        function setCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            filterItems();
+        }
+
+        // Check if there is a search term in the URL query string (e.g. calculators.html?search=mortgage)
+        window.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const queryParam = params.get('search');
+            if (queryParam) {
+                searchInput.value = queryParam;
+                filterItems();
+            }
+        });
+    </script>
 </body>
 </html>
