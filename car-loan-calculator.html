@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Car Loan Calculator. Calculate monthly car payments, total loan cost, vehicle interest, and trade-in deductions.">
+    <title>Car Loan Calculator - Inquiry Calculator</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root { --primary: #2563eb; --primary-hover: #1d4ed8; --bg: #f8fafc; --text: #0f172a; --muted: #64748b; --border: #e2e8f0; --card: #ffffff; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+        a { text-decoration: none; color: inherit; }
+        .navbar { background: #fff; border-bottom: 1px solid var(--border); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 19px; font-weight: 800; display: flex; gap: 8px; align-items: center; }
+        .logo span { background: var(--primary); color: #fff; padding: 3px 7px; border-radius: 6px; font-size: 13px; }
+        .nav-links { display: flex; gap: 18px; list-style: none; font-size: 14px; font-weight: 600; color: var(--muted); }
+        .nav-links a:hover { color: var(--primary); }
+        .page-wrap { max-width: 860px; margin: 40px auto 70px; padding: 0 16px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+        .header p { color: var(--muted); font-size: 15px; }
+        .calc-box { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.04); margin-bottom: 30px; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 22px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        label { font-size: 13px; font-weight: 700; color: var(--text); }
+        input, select { padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; outline: none; background: #fff; }
+        input:focus, select:focus { border-color: var(--primary); }
+        .btn-calc { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.15s; }
+        .btn-calc:hover { background: var(--primary-hover); }
+        .result-box { display: none; margin-top: 25px; padding: 22px; background: #eff6ff; border: 2px solid #bfdbfe; border-radius: 10px; }
+        .result-box.show { display: block; }
+        .result-val { font-size: 34px; font-weight: 800; color: var(--primary); margin: 6px 0 14px; }
+        .result-breakdown { font-size: 14px; color: var(--text); line-height: 1.8; }
+        .info-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 25px; }
+        .info-card h3 { font-size: 17px; margin-bottom: 12px; }
+        .info-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 10px; }
+        footer { background: #0f172a; color: #94a3b8; padding: 40px 20px; text-align: center; font-size: 13px; }
+        @media(max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo"><span>Inquiry</span> Calculator</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <div class="page-wrap">
+        <div class="header">
+            <h1>Car Loan Calculator</h1>
+            <p>Calculate your estimated monthly auto payment, finance charges, and interest costs.</p>
+        </div>
+
+        <div class="calc-box">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Vehicle Price ($)</label>
+                    <input type="number" id="vehiclePrice" placeholder="e.g. 32000" step="500">
+                </div>
+                <div class="form-group">
+                    <label>Cash Down Payment ($)</label>
+                    <input type="number" id="downPayment" placeholder="e.g. 5000" value="0" step="500">
+                </div>
+                <div class="form-group">
+                    <label>Trade-in Value ($)</label>
+                    <input type="number" id="tradeIn" placeholder="e.g. 3000" value="0" step="500">
+                </div>
+                <div class="form-group">
+                    <label>Interest Rate (% APR)</label>
+                    <input type="number" id="interestRate" placeholder="e.g. 7.5" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label>Loan Term</label>
+                    <select id="loanMonths">
+                        <option value="36">36 Months (3 Years)</option>
+                        <option value="48">48 Months (4 Years)</option>
+                        <option value="60" selected>60 Months (5 Years)</option>
+                        <option value="72">72 Months (6 Years)</option>
+                        <option value="84">84 Months (7 Years)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sales Tax Rate (%)</label>
+                    <input type="number" id="taxRate" placeholder="e.g. 5" value="0" step="0.1">
+                </div>
+            </div>
+
+            <button class="btn-calc" onclick="calculateCarLoan()">Calculate Monthly Payment</button>
+
+            <div id="resBox" class="result-box">
+                <div style="font-size: 13px; font-weight: 700; color: #1e40af; text-transform: uppercase;">Estimated Monthly Payment</div>
+                <div id="monthlyPay" class="result-val">$0.00 / mo</div>
+                <div id="breakdown" class="result-breakdown"></div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>Car Financing Tips</h3>
+            <p><strong>Shorter terms save money:</strong> While a 72 or 84-month loan lowers your monthly repayment, you pay significantly more in total interest.</p>
+            <p><strong>The 20/4/10 Rule:</strong> Put down at least 20%, finance for no more than 4 years, and ensure total vehicle costs (loan, fuel, insurance) stay under 10% of your gross monthly income.</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2025 Inquiry Calculator. All rights reserved.</footer>
+
+    <script>
+        function calculateCarLoan() {
+            const price = parseFloat(document.getElementById('vehiclePrice').value);
+            const down = parseFloat(document.getElementById('downPayment').value) || 0;
+            const trade = parseFloat(document.getElementById('tradeIn').value) || 0;
+            const rate = parseFloat(document.getElementById('interestRate').value);
+            const months = parseInt(document.getElementById('loanMonths').value);
+            const taxPct = parseFloat(document.getElementById('taxRate').value) || 0;
+
+            if (isNaN(price) || isNaN(rate) || price <= 0 || rate < 0) {
+                alert('Please enter valid positive values for vehicle price and interest rate.');
+                return;
+            }
+
+            const taxAmount = (price - trade) * (taxPct / 100);
+            const principal = (price + taxAmount) - down - trade;
+
+            if (principal <= 0) {
+                alert('Your down payment and trade-in cover the full price of the vehicle!');
+                return;
+            }
+
+            const r = (rate / 100) / 12;
+
+            let monthlyPayment = 0;
+            if (r === 0) {
+                monthlyPayment = principal / months;
+            } else {
+                monthlyPayment = principal * (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+            }
+
+            const totalPaid = monthlyPayment * months;
+            const totalInterest = totalPaid - principal;
+
+            document.getElementById('monthlyPay').textContent = '$' + monthlyPayment.toFixed(2) + ' / mo';
+            document.getElementById('breakdown').innerHTML = `
+                <strong>Total Amount Financed:</strong> $${principal.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                <strong>Estimated Sales Tax:</strong> $${taxAmount.toFixed(2)}<br>
+                <strong>Total Interest Paid:</strong> $${totalInterest.toLocaleString(undefined, {minimumFractionDigits: 2})}<br>
+                <strong>Total Cost Over ${months} Months:</strong> $${(totalPaid + down + trade).toLocaleString(undefined, {minimumFractionDigits: 2})}
+            `;
+            document.getElementById('resBox').classList.add('show');
+        }
+    </script>
+</body>
+</html>
