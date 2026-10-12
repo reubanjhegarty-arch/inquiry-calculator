@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free GPA calculator. Calculate your grade point average easily.">
+    <title>GPA Calculator - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="canonical" href="https://inquirycalculator.com/gpa-calculator.html">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>GPA Calculator</h1>
+                <p>Calculate your cumulative grade point average from your courses.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div id="gradesList"></div>
+                <button class="calculate-btn" onclick="addGrade()" style="background: #10b981; margin-bottom: 20px;">+ Add Grade</button>
+                <button class="calculate-btn" onclick="calculateGPA()">Calculate GPA</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Your GPA</h3>
+                <div class="result-value" id="resultValue">-</div>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>How GPA is Calculated</h3>
+                <p><strong>GPA Formula:</strong> (Sum of (Grade Points × Credits)) ÷ Total Credits</p>
+                <p><strong>Grade Scale (4.0):</strong> A=4.0, A-=3.7, B+=3.3, B=3.0, B-=2.7, C+=2.3, C=2.0, D=1.0, F=0.0</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">What's a good GPA?</div>
+                    <div class="faq-answer">A GPA of 3.5 or higher is typically considered excellent. Most colleges want a 3.0+ GPA.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Does this calculator include weighted GPA?</div>
+                    <div class="faq-answer">Yes, you can assign credit hours to each course to calculate weighted GPA.</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/average-calculator.html">Average Calculator</a></li>
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        let gradeCount = 0;
+
+        function addGrade() {
+            gradeCount++;
+            const gradesList = document.getElementById('gradesList');
+            const gradeHtml = `
+                <div class="calculator-form" style="margin-bottom: 15px; padding: 20px;">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Course Name</label>
+                            <input type="text" class="courseName" placeholder="e.g., Math 101">
+                        </div>
+                        <div class="form-group">
+                            <label>Grade</label>
+                            <select class="courseGrade">
+                                <option value="4.0">A (4.0)</option>
+                                <option value="3.7">A- (3.7)</option>
+                                <option value="3.3">B+ (3.3)</option>
+                                <option value="3.0">B (3.0)</option>
+                                <option value="2.7">B- (2.7)</option>
+                                <option value="2.3">C+ (2.3)</option>
+                                <option value="2.0">C (2.0)</option>
+                                <option value="1.0">D (1.0)</option>
+                                <option value="0.0">F (0.0)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Credit Hours</label>
+                            <input type="number" class="creditHours" placeholder="e.g., 3" step="0.5" min="0.5" value="3">
+                        </div>
+                        <div class="form-group" style="display: flex; align-items: flex-end;">
+                            <button onclick="removeGrade(this)" style="width: 100%; padding: 12px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            gradesList.insertAdjacentHTML('beforeend', gradeHtml);
+        }
+
+        function removeGrade(btn) {
+            btn.closest('.calculator-form').remove();
+        }
+
+        function calculateGPA() {
+            const grades = document.querySelectorAll('.calculator-form');
+            if (grades.length === 0) {
+                alert('Please add at least one grade');
+                return;
+            }
+
+            let totalPoints = 0;
+            let totalCredits = 0;
+
+            grades.forEach(grade => {
+                const gp = parseFloat(grade.querySelector('.courseGrade').value);
+                const ch = parseFloat(grade.querySelector('.creditHours').value);
+                totalPoints += gp * ch;
+                totalCredits += ch;
+            });
+
+            if (totalCredits === 0) {
+                alert('Please enter valid credit hours');
+                return;
+            }
+
+            const gpa = totalPoints / totalCredits;
+            document.getElementById('resultValue').textContent = gpa.toFixed(2);
+            document.getElementById('resultDetails').innerHTML = `
+                <strong>Cumulative GPA:</strong> ${gpa.toFixed(2)}<br>
+                <strong>Total Credits:</strong> ${totalCredits}<br>
+                <strong>Grade Points Earned:</strong> ${totalPoints.toFixed(2)}
+            `;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        // Add first grade field by default
+        addGrade();
+    </script>
+</body>
+</html>
