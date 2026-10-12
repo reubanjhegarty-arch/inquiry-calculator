@@ -116,5 +116,17 @@
     <loc>https://inquirycalculator.com/average-calculator.html</loc>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://inquirycalculator.com/electricity-calculator.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inquirycalculator.com/overtime-calculator.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://inquirycalculator.com/aspect-ratio-calculator.html</loc>
+    <priority>0.8</priority>
+  </url>
+  
 </urlset>
