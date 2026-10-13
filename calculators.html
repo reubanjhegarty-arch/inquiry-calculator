@@ -9,14 +9,14 @@
 
     <style>
         *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
         }
 
         :root {
@@ -115,7 +115,6 @@
             margin: 0 auto 28px;
         }
 
-        /* Search Container & Dropdown */
         .search-wrapper {
             max-width: 620px;
             margin: 0 auto;
@@ -155,7 +154,6 @@
             pointer-events: none;
         }
 
-        /* Live Suggestions Dropdown */
         .suggestions-dropdown {
             display: none;
             position: absolute;
@@ -406,53 +404,53 @@
             color: #64748b;
         }
 
-       @media (max-width: 600px) {
-    .navbar {
-        padding: 12px 14px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .logo {
-        font-size: 17px;
-        gap: 6px;
-    }
-    .logo span {
-        font-size: 12px;
-        padding: 3px 7px;
-    }
-    .nav-links {
-        gap: 4px;
-    }
-    .nav-links a {
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-    .dir-header {
-        padding: 30px 16px 24px;
-    }
-    .dir-header h1 {
-        font-size: 24px;
-    }
-    .dir-header p {
-        font-size: 14px;
-        margin-bottom: 20px;
-    }
-    .search-input-box input {
-        padding: 13px 16px 13px 42px;
-        font-size: 14px;
-    }
-    .filters-bar {
-        gap: 6px;
-        margin: 20px auto 8px;
-    }
-    .filter-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-    .calculators-grid {
-        grid-template-columns: 1fr;
-    }
-}
+        @media (max-width: 600px) {
+            .navbar {
+                padding: 12px 14px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .logo {
+                font-size: 17px;
+                gap: 6px;
+            }
+            .logo span {
+                font-size: 12px;
+                padding: 3px 7px;
+            }
+            .nav-links {
+                gap: 4px;
+            }
+            .nav-links a {
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+            .dir-header {
+                padding: 30px 16px 24px;
+            }
+            .dir-header h1 {
+                font-size: 24px;
+            }
+            .dir-header p {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+            .search-input-box input {
+                padding: 13px 16px 13px 42px;
+                font-size: 14px;
+            }
+            .filters-bar {
+                gap: 6px;
+                margin: 20px auto 8px;
+            }
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -480,7 +478,6 @@
                 <input type="text" id="liveSearch" placeholder="Search (e.g. loan, tax, calorie, percentage)..." autocomplete="off">
             </div>
 
-            <!-- Floating Live Suggestions Dropdown -->
             <div id="suggestionsMenu" class="suggestions-dropdown"></div>
         </div>
     </header>
@@ -497,13 +494,12 @@
 
     <!-- Cards Grid -->
     <main class="grid-container">
-        <div id="resultsCount" class="counter-badge">Showing 26 calculators</div>
+        <div id="resultsCount" class="counter-badge">Showing 32 calculators</div>
 
         <div class="calculators-grid" id="toolsGrid">
 
             <!-- ========== FINANCE ========== -->
 
-            <!-- Mortgage -->
             <a href="mortgage-calculator.html" class="calc-card" data-cat="finance" data-tags="mortgage home loan house property interest amortization escrow payment borrowing">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -513,7 +509,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Car Loan -->
             <a href="car-loan-calculator.html" class="calc-card" data-cat="finance" data-tags="car loan auto vehicle payment interest trade-in automobile financing dealership">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -523,7 +518,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- General Loan -->
             <a href="loan-calculator.html" class="calc-card" data-cat="finance" data-tags="loan personal borrow repayment interest bank debt credit personal loan">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -533,7 +527,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Salary & Tax -->
             <a href="tax-calculator.html" class="calc-card" data-cat="finance" data-tags="tax salary income wage take home pay ATO medicare gross net paycheck deductions">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -543,7 +536,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Wage Conversion -->
             <a href="salary-calculator.html" class="calc-card" data-cat="finance" data-tags="salary wage hourly annual weekly paycheck convert earnings pay rate work hours">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -553,7 +545,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Overtime Pay -->
             <a href="overtime-calculator.html" class="calc-card" data-cat="finance" data-tags="overtime pay rate time and a half double time wage penalty hours 1.5x 2.0x">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -563,7 +554,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Compound Interest -->
             <a href="compound-interest-calculator.html" class="calc-card" data-cat="finance" data-tags="compound interest investing investment savings bank growth stocks portfolio returns">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -573,7 +563,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Discount Calculator -->
             <a href="discount-calculator.html" class="calc-card" data-cat="finance" data-tags="discount sale percentage off shopping saving retail clearance price promo coupon">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -583,7 +572,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Tip Calculator -->
             <a href="tip-calculator.html" class="calc-card" data-cat="finance" data-tags="tip bill restaurant gratuity food split dining check server hospitality">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -593,7 +581,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Sales Tax Calculator -->
             <a href="sales-tax-calculator.html" class="calc-card" data-cat="finance" data-tags="sales tax vat gst receipt total pretax reverse shopping rate state local">
                 <div class="card-top">
                     <span class="card-tag">Finance</span>
@@ -605,7 +592,6 @@
 
             <!-- ========== MATH & SCIENCE ========== -->
 
-            <!-- Percentage Calculator -->
             <a href="percentage-calculator.html" class="calc-card" data-cat="math" data-tags="percentage percent % fraction math increase decrease difference change">
                 <div class="card-top">
                     <span class="card-tag">Math</span>
@@ -615,7 +601,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Scientific Calculator -->
             <a href="scientific-calculator.html" class="calc-card" data-cat="math" data-tags="scientific math sin cos tan trigonometry logarithm square root power algebra functions">
                 <div class="card-top">
                     <span class="card-tag">Math</span>
@@ -625,7 +610,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Average Calculator -->
             <a href="average-calculator.html" class="calc-card" data-cat="math" data-tags="average mean median mode range standard deviation statistics math dataset">
                 <div class="card-top">
                     <span class="card-tag">Math</span>
@@ -635,7 +619,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Fraction Calculator -->
             <a href="fraction-calculator.html" class="calc-card" data-cat="math" data-tags="fraction mixed numbers numerator denominator simplify add subtract multiply divide math">
                 <div class="card-top">
                     <span class="card-tag">Math</span>
@@ -645,7 +628,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Unit Converter -->
             <a href="unit-converter.html" class="calc-card" data-cat="math" data-tags="unit converter convert length weight temperature volume metric imperial kg lbs miles">
                 <div class="card-top">
                     <span class="card-tag">Math</span>
@@ -655,7 +637,8 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- GPA Calculator -->
+            <!-- ========== EDUCATION ========== -->
+
             <a href="gpa-calculator.html" class="calc-card" data-cat="math" data-tags="gpa grade school college university marks weighted academic credits education">
                 <div class="card-top">
                     <span class="card-tag">Education</span>
@@ -665,9 +648,62 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
+            <a href="cgpa-calculator.html" class="calc-card" data-cat="math" data-tags="cgpa cumulative gpa semester credits university college overall grade point education">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>CGPA Calculator</h3>
+                    <p>Calculate cumulative GPA across multiple semesters with credit hour weighting.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <a href="grade-calculator.html" class="calc-card" data-cat="math" data-tags="grade final exam score needed weighted class course assignment education">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>Final Grade Calculator</h3>
+                    <p>Find out what score you need on your final exam to achieve your desired course grade.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <a href="test-score-calculator.html" class="calc-card" data-cat="math" data-tags="test score quiz exam percentage letter grade pass fail correct wrong education">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>Test Score Calculator</h3>
+                    <p>Convert raw test scores to percentages, letter grades, and pass/fail status.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <a href="word-counter.html" class="calc-card" data-cat="math" data-tags="word counter character sentence paragraph essay writing count reading time education">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>Word Counter</h3>
+                    <p>Count words, characters, sentences, paragraphs, and estimated reading time instantly.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <a href="reading-time-calculator.html" class="calc-card" data-cat="math" data-tags="reading time book pages wpm speed article essay words per minute education">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>Reading Time Calculator</h3>
+                    <p>Estimate how long it takes to read a book, article, or essay based on word count.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
+            <a href="study-time-calculator.html" class="calc-card" data-cat="math" data-tags="study time plan exam schedule hours daily weekly credits pomodoro revision education">
+                <div class="card-top">
+                    <span class="card-tag">Education</span>
+                    <h3>Study Time Calculator</h3>
+                    <p>Plan your study schedule by calculating daily study hours needed before an exam.</p>
+                </div>
+                <div class="card-arrow">Open tool &rarr;</div>
+            </a>
+
             <!-- ========== HEALTH & FITNESS ========== -->
 
-            <!-- Calorie & TDEE -->
             <a href="calorie-calculator.html" class="calc-card" data-cat="health" data-tags="calorie tdee bmr weight loss diet deficit fitness nutrition gain food metabolism">
                 <div class="card-top">
                     <span class="card-tag">Health</span>
@@ -677,7 +713,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- BMI Calculator -->
             <a href="bmi-calculator.html" class="calc-card" data-cat="health" data-tags="bmi body mass index weight height health fitness obesity overweight underweight">
                 <div class="card-top">
                     <span class="card-tag">Health</span>
@@ -687,7 +722,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Pregnancy Due Date -->
             <a href="due-date-calculator.html" class="calc-card" data-cat="health" data-tags="pregnancy due date baby birth gestation trimester lmp conception ivf week prenatal">
                 <div class="card-top">
                     <span class="card-tag">Health</span>
@@ -699,7 +733,6 @@
 
             <!-- ========== TRAVEL & TECH ========== -->
 
-            <!-- Fuel Cost -->
             <a href="fuel-cost-calculator.html" class="calc-card" data-cat="travel" data-tags="fuel petrol gas road trip consumption mileage distance travel split car commute">
                 <div class="card-top">
                     <span class="card-tag">Travel</span>
@@ -709,7 +742,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Electricity Cost -->
             <a href="electricity-calculator.html" class="calc-card" data-cat="travel" data-tags="electricity power watts kwh bill appliance running cost energy consumption rate">
                 <div class="card-top">
                     <span class="card-tag">Tech</span>
@@ -719,7 +751,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Download Time -->
             <a href="download-time-calculator.html" class="calc-card" data-cat="travel" data-tags="download time internet speed bandwidth file size game steam transfer mbps wifi">
                 <div class="card-top">
                     <span class="card-tag">Tech</span>
@@ -729,7 +760,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Aspect Ratio -->
             <a href="aspect-ratio-calculator.html" class="calc-card" data-cat="travel" data-tags="aspect ratio resolution 16 9 21 4 3 screen pixels resize scale width height image video">
                 <div class="card-top">
                     <span class="card-tag">Tech</span>
@@ -741,7 +771,6 @@
 
             <!-- ========== DATE & TIME ========== -->
 
-            <!-- Age Calculator -->
             <a href="age-calculator.html" class="calc-card" data-cat="time" data-tags="age birthday birth date how old years days months time calendar">
                 <div class="card-top">
                     <span class="card-tag">Time</span>
@@ -751,7 +780,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Date Calculator -->
             <a href="date-calculator.html" class="calc-card" data-cat="time" data-tags="date days between calendar add days subtract count calendar schedule">
                 <div class="card-top">
                     <span class="card-tag">Time</span>
@@ -761,7 +789,6 @@
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
 
-            <!-- Time Calculator -->
             <a href="time-calculator.html" class="calc-card" data-cat="time" data-tags="time hours minutes seconds add time duration convert clock stopwatch">
                 <div class="card-top">
                     <span class="card-tag">Time</span>
@@ -770,69 +797,9 @@
                 </div>
                 <div class="card-arrow">Open tool &rarr;</div>
             </a>
-                        <!-- Final Grade Calculator -->
-            <a href="grade-calculator.html" class="calc-card" data-cat="math" data-tags="grade final exam score needed weighted class course assignment education">
-                <div class="card-top">
-                    <span class="card-tag">Education</span>
-                    <h3>Final Grade Calculator</h3>
-                    <p>Find out what score you need on your final exam to achieve your desired course grade.</p>
-                </div>
-                <div class="card-arrow">Open tool &rarr;</div>
-            </a>
-
-            <!-- Test Score Calculator -->
-            <a href="test-score-calculator.html" class="calc-card" data-cat="math" data-tags="test score quiz exam percentage letter grade pass fail correct wrong education">
-                <div class="card-top">
-                    <span class="card-tag">Education</span>
-                    <h3>Test Score Calculator</h3>
-                    <p>Convert raw test scores to percentages, letter grades, and pass/fail status.</p>
-                </div>
-                <div class="card-arrow">Open tool &rarr;</div>
-            </a>
-
-            <!-- Word Counter -->
-            <a href="word-counter.html" class="calc-card" data-cat="math" data-tags="word counter character sentence paragraph essay writing count reading time education">
-                <div class="card-top">
-                    <span class="card-tag">Education</span>
-                    <h3>Word Counter</h3>
-                    <p>Count words, characters, sentences, paragraphs, and estimated reading time instantly.</p>
-                </div>
-                <div class="card-arrow">Open tool &rarr;</div>
-            </a>
-
-            <!-- Reading Time Calculator -->
-            <a href="reading-time-calculator.html" class="calc-card" data-cat="math" data-tags="reading time book pages wpm speed article essay words per minute education">
-                <div class="card-top">
-                    <span class="card-tag">Education</span>
-                    <h3>Reading Time Calculator</h3>
-                    <p>Estimate how long it takes to read a book, article, or essay based on word count.</p>
-                </div>
-                <div class="card-arrow">Open tool &rarr;</div>
-            </a>
-
-            <!-- CGPA Calculator -->
-            <a href="cgpa-calculator.html" class="calc-card" data-cat="math" data-tags="cgpa cumulative gpa semester credits university college overall grade point education">
-                <div class="card-top">
-                    <span class="card-tag">Education</span>
-                    <h3>CGPA Calculator</h3>
-                    <p>Calculate cumulative GPA across multiple semesters with credit hour weighting.</p>
-                </div>
-                <div class="card-arrow">Open tool &rarr;</div>
-            </a>
-
-            <!-- Study Time Calculator -->
-            <a href="study-time-calculator.html" class="calc-card" data-cat="math" data-tags="study time plan exam schedule hours daily weekly credits pomodoro revision education">
-                <div class="card-top">
-                    <span class="card-tag">Education</span>
-                    <h3>Study Time Calculator</h3>
-                    <p>Plan your study schedule by calculating daily study hours needed before an exam.</p>
-                </div>
-                <div class="card-arrow">Open tool &rarr;</div>
-            </a>
 
         </div>
 
-        <!-- No Results Found -->
         <div id="noResults" class="no-results">
             <h3>No calculators found</h3>
             <p>Try searching for keywords like <em>"loan"</em>, <em>"tax"</em>, <em>"calorie"</em>, or <em>"math"</em>.</p>
@@ -864,7 +831,6 @@
         <p class="footer-copy">&copy; 2025 Inquiry Calculator. All rights reserved.</p>
     </footer>
 
-    <!-- Interactive Suggestions & Filtering Logic -->
     <script>
         const searchInput = document.getElementById('liveSearch');
         const dropdown = document.getElementById('suggestionsMenu');
@@ -873,7 +839,6 @@
         const countBadge = document.getElementById('resultsCount');
         let currentCategory = 'all';
 
-        // Pre-build a lightweight data index from the cards
         const calculatorIndex = cards.map(card => {
             return {
                 title: card.querySelector('h3').textContent,
@@ -889,7 +854,6 @@
         function handleSearch() {
             const query = searchInput.value.toLowerCase().trim();
 
-            // 1. Update the Dropdown Menu
             if (query.length === 0) {
                 dropdown.style.display = 'none';
                 dropdown.innerHTML = '';
@@ -921,7 +885,6 @@
                 }
             }
 
-            // 2. Also Filter the Main Card Grid below
             let visibleCount = 0;
             calculatorIndex.forEach(item => {
                 const matchesQuery = query === '' || 
@@ -951,24 +914,20 @@
             });
         }
 
-        // Event Listeners
         searchInput.addEventListener('input', handleSearch);
 
-        // Hide dropdown if user clicks anywhere outside the search box
         document.addEventListener('click', function(e) {
             if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.style.display = 'none';
             }
         });
 
-        // Re-open dropdown if user clicks back into input with text
         searchInput.addEventListener('focus', function() {
             if (searchInput.value.trim().length > 0) {
                 handleSearch();
             }
         });
 
-        // Category Filter Tabs
         function setCategory(cat, btn) {
             currentCategory = cat;
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
