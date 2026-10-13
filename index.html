@@ -542,39 +542,78 @@
             }
         }
 
-        @media (max-width: 640px) {
-            .navbar {
-                padding: 14px 16px;
-            }
-            .nav-links {
-                gap: 10px;
-            }
-            .nav-links a {
-                font-size: 13px;
-                padding: 4px 8px;
-            }
-            .hero-content h1 {
-                font-size: 34px;
-            }
-            .calc-grid .btn { 
-                padding: 12px 2px; 
-                font-size: 12px; 
-            }
-            .screen-main { 
-                font-size: 28px; 
-            }
-            .tools-grid { 
-                grid-template-columns: 1fr; 
-            }
-            .category-bucket {
-                padding: 24px;
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-        }
+      @media (max-width: 640px) {
+    .navbar {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .logo {
+        font-size: 17px;
+        gap: 7px;
+    }
+    .logo span {
+        font-size: 12px;
+        padding: 3px 7px;
+    }
+    .nav-links {
+        gap: 4px;
+    }
+    .nav-links a {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    .hero-section {
+        padding: 30px 16px;
+        gap: 30px;
+    }
+    .hero-content h1 {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+    .hero-content p {
+        font-size: 15px;
+    }
+    .search-input-box input {
+        padding: 14px 16px 14px 44px;
+        font-size: 14px;
+    }
+    .section-title {
+        font-size: 22px;
+    }
+    .section-subtitle {
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+    .calc-wrapper {
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .calculator {
+        padding: 14px;
+    }
+    .calc-grid {
+        gap: 5px;
+    }
+    .calc-grid .btn {
+        padding: 10px 2px;
+        font-size: 11px;
+    }
+    .screen-main {
+        font-size: 24px;
+    }
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    .category-bucket {
+        padding: 20px;
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}
     </style>
 </head>
 <body>
