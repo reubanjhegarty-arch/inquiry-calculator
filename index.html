@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Inquiry Calculator — Free online calculators for math, finance, fitness, dates, and science.">
@@ -12,17 +12,16 @@
 
     <style>
         *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        /* --- NEUTRAL PALETTE, SPARSE BLUE ACCENTS --- */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #f8fafc;
@@ -36,7 +35,6 @@
             color: inherit;
         }
 
-        /* --- NAVBAR --- */
         .navbar {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
@@ -92,7 +90,6 @@
             background: rgba(37, 99, 235, 0.05);
         }
 
-        /* --- HERO SPLIT SECTION --- */
         .hero-section {
             max-width: 1200px;
             margin: 0 auto;
@@ -130,7 +127,6 @@
             max-width: 520px;
         }
 
-        /* --- INTERACTIVE SEARCH INSIDE HERO --- */
         .search-area {
             position: relative;
             max-width: 520px;
@@ -234,14 +230,12 @@
             margin-left: 12px;
         }
 
-        /* --- SCIENTIFIC CALCULATOR CHASSIS --- */
         .calc-wrapper {
             width: 100%;
             max-width: 480px;
             justify-self: center;
         }
 
-        /* CALCULATOR: NO BACKGROUND, SEE-THROUGH */
         .calculator {
             background: transparent;
             border: 1px solid #e2e8f0;
@@ -297,7 +291,7 @@
             user-select: none;
         }
 
-        .btn:hover { 
+        .btn:hover {
             border-color: #2563eb;
             color: #2563eb;
         }
@@ -339,12 +333,11 @@
             font-weight: 700;
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
         }
-        .btn-eq:hover { 
+        .btn-eq:hover {
             background: #1d4ed8;
             box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
         }
 
-        /* --- CONTENT CONTAINER --- */
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -367,7 +360,6 @@
             margin-bottom: 40px;
         }
 
-        /* --- TOOLS GRID --- */
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -414,32 +406,7 @@
             color: #64748b;
             line-height: 1.6;
         }
-                    <a href="grade-calculator.html" class="card education">
-                <h3>Final Grade Calculator</h3>
-                <p>Find out what score you need on your final exam to achieve your desired grade.</p>
-            </a>
-            <a href="test-score-calculator.html" class="card education">
-                <h3>Test Score Calculator</h3>
-                <p>Convert raw test scores to percentages, letter grades, and pass/fail status.</p>
-            </a>
-            <a href="word-counter.html" class="card education">
-                <h3>Word Counter</h3>
-                <p>Count words, characters, sentences, paragraphs, and estimated reading time.</p>
-            </a>
-            <a href="reading-time-calculator.html" class="card education">
-                <h3>Reading Time Calculator</h3>
-                <p>Estimate how long it takes to read a book, article, or essay.</p>
-            </a>
-            <a href="cgpa-calculator.html" class="card education">
-                <h3>CGPA Calculator</h3>
-                <p>Calculate cumulative GPA across multiple semesters with credit hour weighting.</p>
-            </a>
-            <a href="study-time-calculator.html" class="card education">
-                <h3>Study Time Calculator</h3>
-                <p>Plan daily study hours needed before an exam based on total prep time.</p>
-            </a>
 
-        /* --- CATEGORIES BUCKET --- */
         .category-bucket {
             background: #fff;
             border: 1px solid #e2e8f0;
@@ -450,18 +417,6 @@
             gap: 32px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
-                    <div class="cat-group education-group">
-                <h4>Education</h4>
-                <ul>
-                    <li><a href="gpa-calculator.html">GPA Calculator</a></li>
-                    <li><a href="cgpa-calculator.html">CGPA Calculator</a></li>
-                    <li><a href="grade-calculator.html">Final Grade Calculator</a></li>
-                    <li><a href="test-score-calculator.html">Test Score Calculator</a></li>
-                    <li><a href="word-counter.html">Word Counter</a></li>
-                    <li><a href="reading-time-calculator.html">Reading Time Calculator</a></li>
-                    <li><a href="study-time-calculator.html">Study Time Calculator</a></li>
-                </ul>
-            </div>
 
         .cat-group h4 {
             font-size: 14px;
@@ -500,7 +455,6 @@
             text-decoration: underline;
         }
 
-        /* --- FOOTER --- */
         footer {
             background: #0f172a;
             color: #94a3b8;
@@ -556,7 +510,6 @@
             color: #64748b;
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 1024px) {
             .hero-section {
                 grid-template-columns: 1fr;
@@ -578,83 +531,82 @@
             }
         }
 
-      @media (max-width: 640px) {
-    .navbar {
-        padding: 12px 14px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .logo {
-        font-size: 17px;
-        gap: 7px;
-    }
-    .logo span {
-        font-size: 12px;
-        padding: 3px 7px;
-    }
-    .nav-links {
-        gap: 4px;
-    }
-    .nav-links a {
-        font-size: 12px;
-        padding: 4px 6px;
-    }
-    .hero-section {
-        padding: 30px 16px;
-        gap: 30px;
-    }
-    .hero-content h1 {
-        font-size: 28px;
-        line-height: 1.2;
-    }
-    .hero-content p {
-        font-size: 15px;
-    }
-    .search-input-box input {
-        padding: 14px 16px 14px 44px;
-        font-size: 14px;
-    }
-    .section-title {
-        font-size: 22px;
-    }
-    .section-subtitle {
-        font-size: 13px;
-        margin-bottom: 24px;
-    }
-    .calc-wrapper {
-        max-width: 100%;
-        overflow: hidden;
-    }
-    .calculator {
-        padding: 14px;
-    }
-    .calc-grid {
-        gap: 5px;
-    }
-    .calc-grid .btn {
-        padding: 10px 2px;
-        font-size: 11px;
-    }
-    .screen-main {
-        font-size: 24px;
-    }
-    .tools-grid {
-        grid-template-columns: 1fr;
-    }
-    .category-bucket {
-        padding: 20px;
-        grid-template-columns: 1fr;
-    }
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-}
+        @media (max-width: 640px) {
+            .navbar {
+                padding: 12px 14px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .logo {
+                font-size: 17px;
+                gap: 7px;
+            }
+            .logo span {
+                font-size: 12px;
+                padding: 3px 7px;
+            }
+            .nav-links {
+                gap: 4px;
+            }
+            .nav-links a {
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+            .hero-section {
+                padding: 30px 16px;
+                gap: 30px;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+                line-height: 1.2;
+            }
+            .hero-content p {
+                font-size: 15px;
+            }
+            .search-input-box input {
+                padding: 14px 16px 14px 44px;
+                font-size: 14px;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+            .section-subtitle {
+                font-size: 13px;
+                margin-bottom: 24px;
+            }
+            .calc-wrapper {
+                max-width: 100%;
+                overflow: hidden;
+            }
+            .calculator {
+                padding: 14px;
+            }
+            .calc-grid {
+                gap: 5px;
+            }
+            .calc-grid .btn {
+                padding: 10px 2px;
+                font-size: 11px;
+            }
+            .screen-main {
+                font-size: 24px;
+            }
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            .category-bucket {
+                padding: 20px;
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <a href="index.html" class="logo">
             <span>Inquiry</span> Calculator
@@ -666,14 +618,10 @@
         </ul>
     </nav>
 
-    <!-- Main Hero Split Container -->
     <header class="hero-section">
-        <!-- Hero Content (Left column) -->
         <div class="hero-content">
             <h1>Free Online <span>Calculators</span></h1>
             <p>Instant, precise calculation software designed for finance, health, tech, and mathematics.</p>
-            
-            <!-- Floating interactive search engine stays perfectly inside the Hero column -->
             <div class="search-area">
                 <div class="search-input-box">
                     <span class="search-icon">🔍</span>
@@ -683,63 +631,48 @@
             </div>
         </div>
 
-        <!-- Interactive Scientific Calculator (Right column) -->
         <div class="calc-wrapper">
             <div class="calculator">
                 <div class="screen">
                     <div id="calcHist" class="screen-history"></div>
                     <div id="calcDisplay" class="screen-main">0</div>
                 </div>
-
                 <div class="calc-grid">
-                    <!-- Functions Row 1 -->
                     <button class="btn btn-fn" onclick="calcFunc('sin')">sin</button>
                     <button class="btn btn-fn" onclick="calcFunc('cos')">cos</button>
                     <button class="btn btn-fn" onclick="calcFunc('tan')">tan</button>
                     <button class="btn btn-fn" onclick="calcFunc('asin')">asin</button>
                     <button class="btn btn-fn" onclick="calcFunc('acos')">acos</button>
                     <button class="btn btn-fn" onclick="calcFunc('atan')">atan</button>
-
-                    <!-- Functions Row 2 -->
                     <button class="btn btn-fn" onclick="calcFunc('log')">log</button>
                     <button class="btn btn-fn" onclick="calcFunc('ln')">ln</button>
                     <button class="btn btn-fn" onclick="calcFunc('sqrt')">√</button>
                     <button class="btn btn-fn" onclick="calcFunc('cbrt')">∛</button>
                     <button class="btn btn-fn" onclick="calcFunc('pow')">x^y</button>
                     <button class="btn btn-fn" onclick="calcFunc('fact')">n!</button>
-
-                    <!-- Constants & Brackets -->
                     <button class="btn btn-fn" onclick="calcFunc('pi')">π</button>
                     <button class="btn btn-fn" onclick="calcFunc('e')">e</button>
                     <button class="btn btn-fn" onclick="calcFunc('abs')">|x|</button>
                     <button class="btn btn-fn" onclick="calcFunc('1/x')">1/x</button>
                     <button class="btn btn-op" onclick="calcParens('(')">(</button>
                     <button class="btn btn-op" onclick="calcParens(')')">)</button>
-
-                    <!-- Numbers Row 1 -->
                     <button class="btn" onclick="calcNum('7')">7</button>
                     <button class="btn" onclick="calcNum('8')">8</button>
                     <button class="btn" onclick="calcNum('9')">9</button>
                     <button class="btn btn-op" onclick="calcOp('/')">÷</button>
                     <button class="btn btn-op" onclick="calcOp('%')">%</button>
                     <button class="btn btn-del" onclick="calcBackspace()">DEL</button>
-
-                    <!-- Numbers Row 2 -->
                     <button class="btn" onclick="calcNum('4')">4</button>
                     <button class="btn" onclick="calcNum('5')">5</button>
                     <button class="btn" onclick="calcNum('6')">6</button>
                     <button class="btn btn-op" onclick="calcOp('*')">×</button>
                     <button class="btn btn-op" onclick="calcSign()">+/−</button>
                     <button class="btn btn-fn" onclick="calcFunc('exp')">e^x</button>
-
-                    <!-- Numbers Row 3 -->
                     <button class="btn" onclick="calcNum('1')">1</button>
                     <button class="btn" onclick="calcNum('2')">2</button>
                     <button class="btn" onclick="calcNum('3')">3</button>
                     <button class="btn btn-op" onclick="calcOp('-')">−</button>
                     <button class="btn btn-clear" onclick="calcClear()">AC (Clear)</button>
-
-                    <!-- Numbers Row 4 -->
                     <button class="btn" onclick="calcNum('0')">0</button>
                     <button class="btn" onclick="calcNum('.')">.</button>
                     <button class="btn btn-op" onclick="calcOp('+')">+</button>
@@ -749,7 +682,6 @@
         </div>
     </header>
 
-    <!-- Main Content & Tools Grid -->
     <main class="main-container">
         <h2 class="section-title">Popular Calculators</h2>
         <p class="section-subtitle">Click on any calculator utility below to make precise calculations.</p>
@@ -835,9 +767,32 @@
                 <h3>Fraction Calculator</h3>
                 <p>Add, subtract, multiply, and divide fractions and mixed numbers with steps.</p>
             </a>
+            <a href="grade-calculator.html" class="card education">
+                <h3>Final Grade Calculator</h3>
+                <p>Find out what score you need on your final exam to achieve your desired grade.</p>
+            </a>
+            <a href="test-score-calculator.html" class="card education">
+                <h3>Test Score Calculator</h3>
+                <p>Convert raw test scores to percentages, letter grades, and pass/fail status.</p>
+            </a>
+            <a href="word-counter.html" class="card education">
+                <h3>Word Counter</h3>
+                <p>Count words, characters, sentences, paragraphs, and estimated reading time.</p>
+            </a>
+            <a href="reading-time-calculator.html" class="card education">
+                <h3>Reading Time Calculator</h3>
+                <p>Estimate how long it takes to read a book, article, or essay.</p>
+            </a>
+            <a href="cgpa-calculator.html" class="card education">
+                <h3>CGPA Calculator</h3>
+                <p>Calculate cumulative GPA across multiple semesters with credit hour weighting.</p>
+            </a>
+            <a href="study-time-calculator.html" class="card education">
+                <h3>Study Time Calculator</h3>
+                <p>Plan daily study hours needed before an exam based on total prep time.</p>
+            </a>
         </div>
 
-        <!-- Browse Categories -->
         <h2 class="section-title">Browse by Category</h2>
         <p class="section-subtitle">Navigate through our custom engineered calculation modules.</p>
 
@@ -891,12 +846,17 @@
                 <h4>Education</h4>
                 <ul>
                     <li><a href="gpa-calculator.html">GPA Calculator</a></li>
+                    <li><a href="cgpa-calculator.html">CGPA Calculator</a></li>
+                    <li><a href="grade-calculator.html">Final Grade Calculator</a></li>
+                    <li><a href="test-score-calculator.html">Test Score Calculator</a></li>
+                    <li><a href="word-counter.html">Word Counter</a></li>
+                    <li><a href="reading-time-calculator.html">Reading Time Calculator</a></li>
+                    <li><a href="study-time-calculator.html">Study Time Calculator</a></li>
                 </ul>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-col">
@@ -921,9 +881,7 @@
         <p class="footer-copy">&copy; 2025 Inquiry Calculator. All rights reserved.</p>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // Scientific Calculator Engine
         let calcExpr = '';
         const display = document.getElementById('calcDisplay');
         const historyDisplay = document.getElementById('calcHist');
@@ -980,7 +938,6 @@
                 const openC = (sanitized.match(/\(/g) || []).length;
                 const closeC = (sanitized.match(/\)/g) || []).length;
                 if (openC > closeC) sanitized += ')'.repeat(openC - closeC);
-                
                 const result = Function('"use strict";return (' + sanitized + ')')();
                 calcExpr = result.toString();
                 display.textContent = parseFloat(Number(result).toFixed(8));
@@ -1012,7 +969,6 @@
             historyDisplay.textContent = '';
         }
 
-        // Live Search Index (All Calculators)
         const siteCalculators = [
             { name: 'Mortgage Calculator', url: 'mortgage-calculator.html', tag: 'Finance', desc: 'Monthly repayments, interest, property taxes & home insurance.', keys: 'mortgage home house loan property interest amortization borrowing' },
             { name: 'Car Loan Calculator', url: 'car-loan-calculator.html', tag: 'Finance', desc: 'Auto loan payments, trade-in deductions, and total interest.', keys: 'car auto vehicle loan financing dealership trade in automobile' },
@@ -1037,16 +993,16 @@
             { name: 'Average Calculator', url: 'average-calculator.html', tag: 'Math', desc: 'Calculate mean, median, mode, range, and standard deviation.', keys: 'average mean median mode range statistics math dataset' },
             { name: 'Fraction Calculator', url: 'fraction-calculator.html', tag: 'Math', desc: 'Add, subtract, multiply, divide fractions and mixed numbers.', keys: 'fraction mixed numbers numerator denominator simplify add subtract multiply divide' },
             { name: 'GPA Calculator', url: 'gpa-calculator.html', tag: 'Education', desc: 'Calculate weighted or cumulative grade point averages.', keys: 'gpa grade school college university marks academic 4.0 credits semester' },
+            { name: 'CGPA Calculator', url: 'cgpa-calculator.html', tag: 'Education', desc: 'Calculate cumulative GPA across multiple semesters.', keys: 'cgpa cumulative gpa semester credits university college overall' },
+            { name: 'Final Grade Calculator', url: 'grade-calculator.html', tag: 'Education', desc: 'Find what score you need on your final exam.', keys: 'grade final exam score needed weighted class course' },
+            { name: 'Test Score Calculator', url: 'test-score-calculator.html', tag: 'Education', desc: 'Convert raw test scores to percentages and letter grades.', keys: 'test score quiz exam percentage letter grade pass fail' },
+            { name: 'Word Counter', url: 'word-counter.html', tag: 'Education', desc: 'Count words, characters, sentences, and reading time.', keys: 'word counter character sentence paragraph essay writing count' },
+            { name: 'Reading Time Calculator', url: 'reading-time-calculator.html', tag: 'Education', desc: 'Estimate how long it takes to read any text or book.', keys: 'reading time book pages wpm speed article essay' },
+            { name: 'Study Time Calculator', url: 'study-time-calculator.html', tag: 'Education', desc: 'Plan daily study hours before an exam or deadline.', keys: 'study time plan exam schedule hours daily weekly credits pomodoro' },
             { name: 'Age Calculator', url: 'age-calculator.html', tag: 'Time', desc: 'Exact age in years, months, days, hours, and minutes.', keys: 'age birthday birth date how old years days months' },
             { name: 'Date Calculator', url: 'date-calculator.html', tag: 'Time', desc: 'Count calendar days between dates or add/subtract days.', keys: 'date days between calendar add days subtract count' },
             { name: 'Time Calculator', url: 'time-calculator.html', tag: 'Time', desc: 'Add, subtract, and convert units of time.', keys: 'time hours minutes seconds duration convert clock' }
         ];
-                    { name: 'Final Grade Calculator', url: 'grade-calculator.html', tag: 'Education', desc: 'Find what score you need on your final exam.', keys: 'grade final exam score needed weighted class course' },
-            { name: 'Test Score Calculator', url: 'test-score-calculator.html', tag: 'Education', desc: 'Convert raw test scores to percentages and letter grades.', keys: 'test score quiz exam percentage letter grade pass fail' },
-            { name: 'Word Counter', url: 'word-counter.html', tag: 'Education', desc: 'Count words, characters, sentences, and reading time.', keys: 'word counter character sentence paragraph essay writing count' },
-            { name: 'Reading Time Calculator', url: 'reading-time-calculator.html', tag: 'Education', desc: 'Estimate how long it takes to read any text or book.', keys: 'reading time book pages wpm speed article essay' },
-            { name: 'CGPA Calculator', url: 'cgpa-calculator.html', tag: 'Education', desc: 'Calculate cumulative GPA across multiple semesters.', keys: 'cgpa cumulative gpa semester credits university college overall' },
-            { name: 'Study Time Calculator', url: 'study-time-calculator.html', tag: 'Education', desc: 'Plan daily study hours before an exam or deadline.', keys: 'study time plan exam schedule hours daily weekly credits pomodoro' },
 
         const searchInput = document.getElementById('homeSearch');
         const dropdown = document.getElementById('homeDropdown');
@@ -1088,14 +1044,12 @@
                 }
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', function(e) {
                 if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
                     dropdown.style.display = 'none';
                 }
             });
 
-            // Re-open if user clicks back in with query
             searchInput.addEventListener('focus', function() {
                 if (this.value.trim().length > 0) {
                     this.dispatchEvent(new Event('input'));
