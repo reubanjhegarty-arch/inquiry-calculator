@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free word counter tool. Count words, characters, sentences, paragraphs, and estimated reading time.">
+    <title>Word Counter - Inquiry Calculator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50' y='68' font-size='56' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>IC</text></svg>">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Word Counter</h1>
+                <p>Paste or type text to instantly count words, characters, sentences, paragraphs, and reading time.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-group">
+                    <label>Your Text</label>
+                    <textarea id="textInput" rows="10" placeholder="Paste or type your text here..." style="width:100%;padding:14px;border:1px solid #ddd;border-radius:8px;font-size:15px;font-family:inherit;resize:vertical;line-height:1.6;" oninput="countWords()"></textarea>
+                </div>
+
+                <button class="calculate-btn" onclick="countWords()">Count Words</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Statistics</h3>
+                <div class="result-value" id="resultValue">0 words</div>
+                <div class="result-details" id="resultDetails">
+                    <strong>Characters:</strong> 0<br>
+                    <strong>Characters (no spaces):</strong> 0<br>
+                    <strong>Sentences:</strong> 0<br>
+                    <strong>Paragraphs:</strong> 0<br>
+                    <strong>Reading Time:</strong> 0 min<br>
+                    <strong>Speaking Time:</strong> 0 min
+                </div>
+            </div>
+
+            <div class="explanation">
+                <h3>How It Works</h3>
+                <p><strong>Words:</strong> Split by whitespace, counting each distinct word.</p>
+                <p><strong>Sentences:</strong> Counted by periods, exclamation marks, and question marks.</p>
+                <p><strong>Reading Time:</strong> Based on an average reading speed of 225 words per minute.</p>
+                <p><strong>Speaking Time:</strong> Based on an average speaking pace of 150 words per minute.</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">How many words is a typical essay?</div>
+                    <div class="faq-answer">A standard essay is 250–500 words (1–2 pages). A college essay is typically 500–1,500 words. A research paper ranges from 3,000–10,000 words.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How many pages is 1,000 words?</div>
+                    <div class="faq-answer">Approximately 2 pages single-spaced or 4 pages double-spaced in a standard 12pt font with normal margins.</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/reading-time-calculator.html">Reading Time Calculator</a></li>
+                    <li><a href="/grade-calculator.html">Final Grade Calculator</a></li>
+                    <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function countWords() {
+            var text = document.getElementById('textInput').value;
+            var trimmed = text.trim();
+
+            var words = trimmed === '' ? 0 : trimmed.split(/\s+/).length;
+            var chars = text.length;
+            var charsNoSpace = text.replace(/\s/g, '').length;
+            var sentences = trimmed === '' ? 0 : (trimmed.match(/[.!?]+/g) || []).length;
+            var paragraphs = trimmed === '' ? 0 : trimmed.split(/\n\s*\n/).filter(function(p) { return p.trim().length > 0; }).length;
+            if (paragraphs === 0 && words > 0) paragraphs = 1;
+            var readMin = (words / 225).toFixed(1);
+            var speakMin = (words / 150).toFixed(1);
+            var pages = (words / 250).toFixed(1);
+
+            document.getElementById('resultValue').textContent = words + ' word' + (words !== 1 ? 's' : '');
+            document.getElementById('resultDetails').innerHTML =
+                '<strong>Characters:</strong> ' + chars.toLocaleString() + '<br>' +
+                '<strong>Characters (no spaces):</strong> ' + charsNoSpace.toLocaleString() + '<br>' +
+                '<strong>Sentences:</strong> ' + sentences + '<br>' +
+                '<strong>Paragraphs:</strong> ' + paragraphs + '<br>' +
+                '<strong>Pages (approx):</strong> ' + pages + '<br>' +
+                '<hr style="border:0;border-top:1px solid #e0e0e0;margin:10px 0;">' +
+                '<strong>Reading Time:</strong> ' + readMin + ' min<br>' +
+                '<strong>Speaking Time:</strong> ' + speakMin + ' min';
+            document.getElementById('resultBox').classList.add('show');
+        }
+    </script>
+</body>
+</html>
