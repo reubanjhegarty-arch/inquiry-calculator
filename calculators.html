@@ -406,10 +406,53 @@
             color: #64748b;
         }
 
-        @media(max-width: 600px) {
-            .dir-header h1 { font-size: 26px; }
-            .calculators-grid { grid-template-columns: 1fr; }
-        }
+       @media (max-width: 600px) {
+    .navbar {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .logo {
+        font-size: 17px;
+        gap: 6px;
+    }
+    .logo span {
+        font-size: 12px;
+        padding: 3px 7px;
+    }
+    .nav-links {
+        gap: 4px;
+    }
+    .nav-links a {
+        font-size: 12px;
+        padding: 4px 6px;
+    }
+    .dir-header {
+        padding: 30px 16px 24px;
+    }
+    .dir-header h1 {
+        font-size: 24px;
+    }
+    .dir-header p {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    .search-input-box input {
+        padding: 13px 16px 13px 42px;
+        font-size: 14px;
+    }
+    .filters-bar {
+        gap: 6px;
+        margin: 20px auto 8px;
+    }
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    .calculators-grid {
+        grid-template-columns: 1fr;
+    }
+}
     </style>
 </head>
 <body>
