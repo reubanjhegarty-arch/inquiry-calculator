@@ -402,6 +402,7 @@
         .card.travel:hover h3 { color: #8b5cf6; }
         .card.math:hover h3 { color: #f59e0b; }
         .card.time:hover h3 { color: #f59e0b; }
+        .card.education:hover h3 { color: #0ea5e9; }
 
         .card p {
             font-size: 13px;
@@ -437,6 +438,7 @@
         .cat-group.tech-group h4 { color: #8b5cf6; }
         .cat-group.health-group h4 { color: #f43f5e; }
         .cat-group.math-group h4 { color: #f59e0b; }
+        .cat-group.education-group h4 { color: #0ea5e9; }
 
         .cat-group ul {
             list-style: none;
@@ -733,6 +735,26 @@
                 <h3>Age Calculator</h3>
                 <p>Find your exact age in years, months, days, hours, and minutes.</p>
             </a>
+            <a href="tip-calculator.html" class="card finance">
+                <h3>Tip Calculator</h3>
+                <p>Calculate restaurant gratuity, total bill amounts, and split costs between diners.</p>
+            </a>
+            <a href="sales-tax-calculator.html" class="card finance">
+                <h3>Sales Tax Calculator</h3>
+                <p>Calculate sales tax, final receipt totals, or reverse-calculate pre-tax prices.</p>
+            </a>
+            <a href="due-date-calculator.html" class="card health">
+                <h3>Pregnancy Due Date Calculator</h3>
+                <p>Estimate your baby's due date, current gestational week, and trimester.</p>
+            </a>
+            <a href="gpa-calculator.html" class="card education">
+                <h3>GPA Calculator</h3>
+                <p>Calculate semester and cumulative Grade Point Average on a 4.0 scale.</p>
+            </a>
+            <a href="fraction-calculator.html" class="card math">
+                <h3>Fraction Calculator</h3>
+                <p>Add, subtract, multiply, and divide fractions and mixed numbers with steps.</p>
+            </a>
         </div>
 
         <!-- Browse Categories -->
@@ -747,8 +769,12 @@
                     <li><a href="car-loan-calculator.html">Car Loan Calculator</a></li>
                     <li><a href="loan-calculator.html">Personal Loan</a></li>
                     <li><a href="tax-calculator.html">Income Tax Calculator</a></li>
+                    <li><a href="salary-calculator.html">Salary Converter</a></li>
                     <li><a href="overtime-calculator.html">Overtime Pay</a></li>
                     <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
+                    <li><a href="discount-calculator.html">Discount Calculator</a></li>
+                    <li><a href="tip-calculator.html">Tip Calculator</a></li>
+                    <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
                 </ul>
             </div>
             <div class="cat-group tech-group">
@@ -766,15 +792,25 @@
                 <ul>
                     <li><a href="calorie-calculator.html">Calorie & TDEE</a></li>
                     <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+                    <li><a href="due-date-calculator.html">Pregnancy Due Date</a></li>
                 </ul>
             </div>
             <div class="cat-group math-group">
                 <h4>Time & Math</h4>
                 <ul>
                     <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
+                    <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
+                    <li><a href="average-calculator.html">Average Calculator</a></li>
+                    <li><a href="fraction-calculator.html">Fraction Calculator</a></li>
                     <li><a href="age-calculator.html">Age Calculator</a></li>
                     <li><a href="date-calculator.html">Date Calculator</a></li>
                     <li><a href="time-calculator.html">Time Calculator</a></li>
+                </ul>
+            </div>
+            <div class="cat-group education-group">
+                <h4>Education</h4>
+                <ul>
+                    <li><a href="gpa-calculator.html">GPA Calculator</a></li>
                 </ul>
             </div>
         </div>
@@ -896,7 +932,7 @@
             historyDisplay.textContent = '';
         }
 
-        // Live Search Index (All 23 Calculators)
+        // Live Search Index (All Calculators)
         const siteCalculators = [
             { name: 'Mortgage Calculator', url: 'mortgage-calculator.html', tag: 'Finance', desc: 'Monthly repayments, interest, property taxes & home insurance.', keys: 'mortgage home house loan property interest amortization borrowing' },
             { name: 'Car Loan Calculator', url: 'car-loan-calculator.html', tag: 'Finance', desc: 'Auto loan payments, trade-in deductions, and total interest.', keys: 'car auto vehicle loan financing dealership trade in automobile' },
@@ -906,9 +942,11 @@
             { name: 'Overtime Pay Calculator', url: 'overtime-calculator.html', tag: 'Finance', desc: 'Calculate time-and-a-half (1.5x) and double-time (2.0x) penalty rates.', keys: 'overtime pay rate time and a half double time wage penalty' },
             { name: 'Compound Interest', url: 'compound-interest-calculator.html', tag: 'Finance', desc: 'Simulate long-term investing and compound returns.', keys: 'compound interest investing investment savings bank growth stocks' },
             { name: 'Discount Calculator', url: 'discount-calculator.html', tag: 'Finance', desc: 'Calculate shopping sales, percentage off, and final prices.', keys: 'discount sale shopping savings clearance price promo coupon' },
-            { name: 'Tip Calculator', url: 'tip-calculator.html', tag: 'Finance', desc: 'Calculate restaurant gratuity and split meal bills.', keys: 'tip bill restaurant gratuity food split dining' },
+            { name: 'Tip Calculator', url: 'tip-calculator.html', tag: 'Finance', desc: 'Calculate restaurant gratuity and split meal bills.', keys: 'tip bill restaurant gratuity food split dining service' },
+            { name: 'Sales Tax Calculator', url: 'sales-tax-calculator.html', tag: 'Finance', desc: 'Calculate sales tax, totals, or reverse-calculate pre-tax prices.', keys: 'sales tax vat gst receipt total pretax reverse shopping' },
             { name: 'Calorie & TDEE Calculator', url: 'calorie-calculator.html', tag: 'Health', desc: 'Daily calories for weight loss, maintenance, or muscle gain.', keys: 'calorie tdee bmr weight loss diet deficit fitness nutrition gain food' },
             { name: 'BMI Calculator', url: 'bmi-calculator.html', tag: 'Health', desc: 'Compute Body Mass Index and healthy weight categories.', keys: 'bmi body mass index weight height health fitness obesity' },
+            { name: 'Pregnancy Due Date Calculator', url: 'due-date-calculator.html', tag: 'Health', desc: 'Estimate your baby\'s due date, gestational week, and trimester.', keys: 'pregnancy due date baby birth gestation trimester lmp conception ivf week' },
             { name: 'Electricity Cost Calculator', url: 'electricity-calculator.html', tag: 'Tech', desc: 'Appliance power usage, kWh rates, and monthly electricity bills.', keys: 'electricity power watts kwh bill appliance running cost energy' },
             { name: 'Download Time Calculator', url: 'download-time-calculator.html', tag: 'Tech', desc: 'Estimate download duration for games and files.', keys: 'download time internet speed bandwidth file size game steam mbps wifi' },
             { name: 'Aspect Ratio Calculator', url: 'aspect-ratio-calculator.html', tag: 'Tech', desc: 'Screen scaling, image ratios (16:9, 21:9, 4:3), and pixel sizing.', keys: 'aspect ratio resolution 16 9 screen pixels resize scale width height' },
@@ -917,7 +955,8 @@
             { name: 'Scientific Calculator', url: 'scientific-calculator.html', tag: 'Math', desc: 'Advanced trigonometry, logarithms, powers, and roots.', keys: 'scientific math sin cos tan log sqrt power algebra' },
             { name: 'Unit Converter', url: 'unit-converter.html', tag: 'Math', desc: 'Convert length, weight, volume, and temperature.', keys: 'unit converter convert length weight temperature volume kg lbs' },
             { name: 'Average Calculator', url: 'average-calculator.html', tag: 'Math', desc: 'Calculate mean, median, mode, range, and standard deviation.', keys: 'average mean median mode range statistics math dataset' },
-            { name: 'GPA Calculator', url: 'gpa-calculator.html', tag: 'Education', desc: 'Calculate weighted or cumulative grade point averages.', keys: 'gpa grade school college university marks academic' },
+            { name: 'Fraction Calculator', url: 'fraction-calculator.html', tag: 'Math', desc: 'Add, subtract, multiply, divide fractions and mixed numbers.', keys: 'fraction mixed numbers numerator denominator simplify add subtract multiply divide' },
+            { name: 'GPA Calculator', url: 'gpa-calculator.html', tag: 'Education', desc: 'Calculate weighted or cumulative grade point averages.', keys: 'gpa grade school college university marks academic 4.0 credits semester' },
             { name: 'Age Calculator', url: 'age-calculator.html', tag: 'Time', desc: 'Exact age in years, months, days, hours, and minutes.', keys: 'age birthday birth date how old years days months' },
             { name: 'Date Calculator', url: 'date-calculator.html', tag: 'Time', desc: 'Count calendar days between dates or add/subtract days.', keys: 'date days between calendar add days subtract count' },
             { name: 'Time Calculator', url: 'time-calculator.html', tag: 'Time', desc: 'Add, subtract, and convert units of time.', keys: 'time hours minutes seconds duration convert clock' }
