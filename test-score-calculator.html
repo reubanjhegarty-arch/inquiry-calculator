@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free test score calculator. Convert raw scores to percentages, letter grades, and pass/fail status.">
+    <title>Test Score Calculator - Inquiry Calculator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50' y='68' font-size='56' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>IC</text></svg>">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <span class="logo-text">Inquiry<br><span class="logo-sub">Calculator</span></span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/about.html">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="calculator-container">
+            <div class="calculator-header">
+                <h1>Test Score Calculator</h1>
+                <p>Convert raw test scores to percentages, letter grades, and find how many you can miss.</p>
+            </div>
+
+            <div class="calculator-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Questions Correct</label>
+                        <input type="number" id="questionsCorrect" placeholder="e.g., 42" min="0" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Questions</label>
+                        <input type="number" id="totalQuestions" placeholder="e.g., 50" min="1" step="1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Grading Scale</label>
+                    <select id="gradingScale">
+                        <option value="standard">Standard (A = 90%+)</option>
+                        <option value="plusminus">Plus/Minus (A+ = 97%+)</option>
+                        <option value="seven">7-Point (A = 93%+)</option>
+                    </select>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateTestScore()">Calculate Score</button>
+            </div>
+
+            <div class="ad-placeholder">Advertisement</div>
+
+            <div class="result-box" id="resultBox">
+                <h3>Result</h3>
+                <div class="result-value" id="resultValue">-</div>
+                <div class="result-details" id="resultDetails"></div>
+            </div>
+
+            <div class="explanation">
+                <h3>Grading Scales</h3>
+                <p><strong>Standard:</strong> A (90-100%), B (80-89%), C (70-79%), D (60-69%), F (below 60%)</p>
+                <p><strong>Plus/Minus:</strong> A+ (97-100%), A (93-96%), A- (90-92%), B+ (87-89%), etc.</p>
+                <p><strong>7-Point:</strong> A (93-100%), B (85-92%), C (77-84%), D (70-76%), F (below 70%)</p>
+            </div>
+
+            <div class="faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">How is the percentage calculated?</div>
+                    <div class="faq-answer">Percentage = (Questions Correct ÷ Total Questions) × 100. This gives you the raw score percentage before any curve.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Does this account for partial credit?</div>
+                    <div class="faq-answer">Enter your total earned points as "Questions Correct" and total possible points as "Total Questions" to handle partial credit situations.</div>
+                </div>
+            </div>
+
+            <div class="related-calculators">
+                <h3>Related Calculators</h3>
+                <ul class="related-list">
+                    <li><a href="/grade-calculator.html">Final Grade Calculator</a></li>
+                    <li><a href="/gpa-calculator.html">GPA Calculator</a></li>
+                    <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Inquiry Calculator</h4>
+                    <p>Fast, accurate, free calculators for everyday use.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/contact.html">Contact</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Use</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+    <script>
+        function getLetterGrade(pct, scale) {
+            if (scale === 'plusminus') {
+                if (pct >= 97) return 'A+';
+                if (pct >= 93) return 'A';
+                if (pct >= 90) return 'A-';
+                if (pct >= 87) return 'B+';
+                if (pct >= 83) return 'B';
+                if (pct >= 80) return 'B-';
+                if (pct >= 77) return 'C+';
+                if (pct >= 73) return 'C';
+                if (pct >= 70) return 'C-';
+                if (pct >= 67) return 'D+';
+                if (pct >= 63) return 'D';
+                if (pct >= 60) return 'D-';
+                return 'F';
+            } else if (scale === 'seven') {
+                if (pct >= 93) return 'A';
+                if (pct >= 85) return 'B';
+                if (pct >= 77) return 'C';
+                if (pct >= 70) return 'D';
+                return 'F';
+            } else {
+                if (pct >= 90) return 'A';
+                if (pct >= 80) return 'B';
+                if (pct >= 70) return 'C';
+                if (pct >= 60) return 'D';
+                return 'F';
+            }
+        }
+
+        function calculateTestScore() {
+            var correct = parseFloat(document.getElementById('questionsCorrect').value);
+            var total = parseFloat(document.getElementById('totalQuestions').value);
+            var scale = document.getElementById('gradingScale').value;
+
+            if (isNaN(correct) || isNaN(total) || total <= 0) {
+                alert('Please enter valid numbers');
+                return;
+            }
+
+            if (correct > total) {
+                alert('Correct answers cannot exceed total questions');
+                return;
+            }
+
+            var pct = (correct / total) * 100;
+            var wrong = total - correct;
+            var letter = getLetterGrade(pct, scale);
+            var passFail = pct >= 60 ? '✅ Pass' : '❌ Fail';
+
+            var missTable = '';
+            var grades = scale === 'plusminus'
+                ? [['A+',97],['A',93],['A-',90],['B+',87],['B',83],['B-',80],['C+',77],['C',73],['C-',70],['D',60]]
+                : scale === 'seven'
+                    ? [['A',93],['B',85],['C',77],['D',70]]
+                    : [['A',90],['B',80],['C',70],['D',60]];
+
+            missTable = '<hr style="border:0;border-top:1px solid #e0e0e0;margin:10px 0;"><strong>Max Questions You Can Miss:</strong><br>';
+            for (var i = 0; i < grades.length; i++) {
+                var needed = Math.ceil(total * (grades[i][1] / 100));
+                var canMiss = total - needed;
+                missTable += grades[i][0] + ' (' + grades[i][1] + '%): can miss ' + Math.max(0, canMiss) + ' of ' + total + '<br>';
+            }
+
+            document.getElementById('resultValue').textContent = pct.toFixed(1) + '% (' + letter + ')';
+            document.getElementById('resultDetails').innerHTML =
+                '<strong>Score:</strong> ' + correct + ' / ' + total + '<br>' +
+                '<strong>Percentage:</strong> ' + pct.toFixed(2) + '%<br>' +
+                '<strong>Letter Grade:</strong> ' + letter + '<br>' +
+                '<strong>Wrong Answers:</strong> ' + wrong + '<br>' +
+                '<strong>Status:</strong> ' + passFail +
+                missTable;
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') calculateTestScore();
+        });
+    </script>
+</body>
+</html>
