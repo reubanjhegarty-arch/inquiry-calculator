@@ -1,1 +1,104 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Have questions or feedback? Get in touch with the Inquiry Calculator team."><title>Contact Us - Inquiry Calculator</title><link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2"/><link rel="shortcut icon" href="/favicon.ico?v=2"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2"/><link rel="canonical" href="https://inquirycalculator.com/contact.html"><link rel="stylesheet" href="style.css"></head><body><nav><div class="wrap nav"><a class="brand" href="index.html">Inquiry<span>Calculator</span></a><div class="nav-links"><a href="index.html">Home</a><a href="calculators.html">All Calculators</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div></nav><main class="wrap"><h1>Contact Us</h1><p>Have questions or feedback? Get in touch with the Inquiry Calculator team.</p><form id="f"><label>Your Name</label><input type="text" id="n" required><label>Your Email</label><input type="text" id="e" required><label>Message</label><textarea id="m" rows="5" style="width:100%;padding:12px;border:1px solid #DED1B8;border-radius:4px" required></textarea><button type="submit">Send Message</button></form><div id="result" class="result"></div></main><footer><div class="wrap foot"><div>&copy; 2025 InquiryCalculator</div><div class="foot-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer><script>f.onsubmit=e=>{e.preventDefault();result.innerHTML='Thank you for reaching out! We will get back to you shortly.';result.style.display='block';f.reset()}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Contact Inquiry Calculator - Get in touch with our team.">
+    <title>Contact Us - Inquiry Calculator</title>
+    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <link rel="shortcut icon" href="/favicon.ico?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <link rel="canonical" href="https://inquirycalculator.com/contact.html">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">Inquiry<span>Calculator</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="calculators.html">All Calculators</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+    <h1>Contact Us</h1>
+    <p>Have questions, feedback, or calculator requests? Send us a message below.</p>
+
+    <!-- REAL WORKING EMAIL FORM -->
+    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+        <!-- PASTE YOUR ACCESS KEY HERE -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+        <input type="hidden" name="subject" value="New Contact Form Submission - Inquiry Calculator">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+        <label for="name">Your Name</label>
+        <input type="text" name="name" id="name" required placeholder="John Doe">
+
+        <label for="email">Your Email</label>
+        <input type="email" name="email" id="email" required placeholder="john@example.com">
+
+        <label for="message">Message</label>
+        <textarea name="message" id="message" rows="5" style="width:100%;padding:12px;border:1px solid #DED1B8;border-radius:4px" required placeholder="How can we help?"></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+
+    <div id="result" class="result" style="display:none;"></div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>&copy; 2025 InquiryCalculator. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  const result = document.getElementById('result');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    result.style.display = "block";
+    result.innerHTML = "Sending message...";
+
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: json
+    })
+    .then(async (response) => {
+        let res = await response.json();
+        if (response.status == 200) {
+            result.innerHTML = "✓ Message sent successfully! We will get back to you soon.";
+            form.reset();
+        } else {
+            result.innerHTML = res.message || "Something went wrong. Please try again.";
+        }
+    })
+    .catch(error => {
+        result.innerHTML = "Something went wrong. Please check your connection.";
+    });
+  });
+</script>
+
+</body>
+</html>
