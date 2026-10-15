@@ -1,1078 +1,229 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
-<link rel="shortcut icon" href="/favicon.ico?v=2" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
-<meta name="apple-mobile-web-app-title" content="InquiryCalculator" />
-<link rel="manifest" href="/site.webmanifest?v=2" />
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    
-    <meta name="description" content="Inquiry Calculator — Free online calculators for math, finance, fitness, dates, and science.">
     <title>Inquiry Calculator - Free Online Calculators</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232563eb'/><text x='50' y='68' font-size='56' font-family='sans-serif' font-weight='800' fill='white' text-anchor='middle'>IC</text></svg>">
+    <meta name="description" content="Inquiry Calculator — Free online calculators for math, finance, fitness, dates, and science.">
+    <meta name="theme-color" content="#F6F1E7">
+    <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <link rel="shortcut icon" href="/favicon.ico?v=2" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+    <meta name="apple-mobile-web-app-title" content="InquiryCalculator" />
+    <link rel="manifest" href="/site.webmanifest?v=2" />
 
     <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f8fafc;
-            color: #0f172a;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .navbar {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid #e2e8f0;
-            padding: 16px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 800;
-            color: #0f172a;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: -0.03em;
-        }
-
-        .logo span {
-            background: #2563eb;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 800;
-            letter-spacing: normal;
-            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 24px;
-        }
-
-        .nav-links a {
-            color: #64748b;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.2s;
-            padding: 6px 12px;
-            border-radius: 8px;
-        }
-
-        .nav-links a:hover {
-            color: #2563eb;
-            background: rgba(37, 99, 235, 0.05);
-        }
-
-        .hero-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 24px;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 48px;
-            align-items: center;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .hero-content h1 {
-            font-size: 48px;
-            font-weight: 850;
-            line-height: 1.15;
-            letter-spacing: -0.04em;
-            color: #0f172a;
-        }
-
-        .hero-content h1 span {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 18px;
-            color: #64748b;
-            line-height: 1.6;
-            max-width: 520px;
-        }
-
-        .search-area {
-            position: relative;
-            max-width: 520px;
-            width: 100%;
-        }
-
-        .search-input-box {
-            position: relative;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-input-box input {
-            width: 100%;
-            padding: 18px 20px 18px 54px;
-            font-size: 15px;
-            font-weight: 500;
-            border: 2px solid #e2e8f0;
-            border-radius: 14px;
-            outline: none;
-            background: #fff;
-            color: #0f172a;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-        }
-
-        .search-input-box input:focus {
-            border-color: #2563eb;
-            box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.15), 0 10px 25px -5px rgba(37, 99, 235, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            font-size: 20px;
-            color: #64748b;
-            pointer-events: none;
-        }
-
-        .suggestions-dropdown {
-            display: none;
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0;
-            right: 0;
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 14px;
-            box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.25);
-            max-height: 380px;
-            overflow-y: auto;
-            z-index: 99;
-            text-align: left;
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            padding: 14px 18px;
-            border-bottom: 1px solid #f1f5f9;
-            transition: background 0.15s ease;
-            cursor: pointer;
-        }
-
-        .dropdown-item:last-child {
-            border-bottom: none;
-        }
-
-        .dropdown-item:hover {
-            background: #f8fafc;
-        }
-
-        .item-main h4 {
-            font-size: 15px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 2px;
-        }
-
-        .dropdown-item:hover .item-main h4 {
-            color: #2563eb;
-        }
-
-        .item-main p {
-            font-size: 12px;
-            color: #64748b;
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        .item-badge {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 2px 7px;
-            border-radius: 4px;
-            background: #eff6ff;
-            color: #2563eb;
-            white-space: nowrap;
-            margin-left: 12px;
-        }
-
-        .calc-wrapper {
-            width: 100%;
-            max-width: 480px;
-            justify-self: center;
-        }
-
-        .calculator {
-            background: transparent;
-            border: 1px solid #e2e8f0;
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: none;
-        }
-
-        .screen {
-            background: #020617;
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 16px;
-            padding: 18px 22px;
-            text-align: right;
-            margin-bottom: 20px;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5);
-        }
-
-        .screen-history {
-            font-size: 13px;
-            color: #64748b;
-            min-height: 20px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            letter-spacing: 0.5px;
-        }
-
-        .screen-main {
-            font-size: 36px;
-            font-weight: 700;
-            color: #38bdf8;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            word-break: break-all;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.15);
-            margin-top: 4px;
-        }
-
-        .calc-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 8px;
-        }
-
-        .btn {
-            padding: 14px 4px;
-            border-radius: 10px;
-            border: 1px solid #e2e8f0;
-            background: transparent;
-            color: #0f172a;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            user-select: none;
-        }
-
-        .btn:hover {
-            border-color: #2563eb;
-            color: #2563eb;
-        }
-        .btn:active { transform: scale(0.94); }
-
-        .btn-fn {
-            background: transparent;
-            color: #64748b;
-            font-size: 12px;
-        }
-        .btn-fn:hover { color: #2563eb; border-color: #2563eb; }
-
-        .btn-op {
-            background: transparent;
-            color: #64748b;
-            font-weight: 700;
-        }
-
-        .btn-del {
-            background: transparent;
-            color: #64748b;
-            border-color: #e2e8f0;
-        }
-        .btn-del:hover { color: #2563eb; border-color: #2563eb; }
-
-        .btn-clear {
-            background: transparent;
-            color: #b91c1c;
-            border-color: #dc2626;
-        }
-        .btn-clear:hover { color: #dc2626; border-color: #dc2626; }
-
-        .btn-eq {
-            background: #2563eb;
-            color: #ffffff;
-            border-color: #2563eb;
-            grid-column: span 3;
-            font-size: 18px;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
-        }
-        .btn-eq:hover {
-            background: #1d4ed8;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45);
-        }
-
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 24px 80px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 8px;
-            letter-spacing: -0.03em;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 15px;
-            color: #64748b;
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            margin-bottom: 80px;
-        }
-
-        .card {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            border-color: #2563eb;
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
-            transform: translateY(-4px);
-        }
-
-        .card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0f172a;
-            transition: color 0.2s;
-        }
-
-        .card.finance:hover h3 { color: #10b981; }
-        .card.health:hover h3 { color: #f43f5e; }
-        .card.tech:hover h3 { color: #8b5cf6; }
-        .card.travel:hover h3 { color: #8b5cf6; }
-        .card.math:hover h3 { color: #f59e0b; }
-        .card.time:hover h3 { color: #f59e0b; }
-        .card.education:hover h3 { color: #0ea5e9; }
-
-        .card p {
-            font-size: 13px;
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .category-bucket {
-            background: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 32px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-        }
-
-        .cat-group h4 {
-            font-size: 14px;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cat-group.finance-group h4 { color: #10b981; }
-        .cat-group.tech-group h4 { color: #8b5cf6; }
-        .cat-group.health-group h4 { color: #f43f5e; }
-        .cat-group.math-group h4 { color: #f59e0b; }
-        .cat-group.education-group h4 { color: #0ea5e9; }
-
-        .cat-group ul {
-            list-style: none;
-        }
-
-        .cat-group li {
-            margin-bottom: 10px;
-        }
-
-        .cat-group a {
-            color: #64748b;
-            font-size: 14px;
-            transition: all 0.2s;
-        }
-
-        .cat-group a:hover {
-            color: #0f172a;
-            text-decoration: underline;
-        }
-
-        footer {
-            background: #0f172a;
-            color: #94a3b8;
-            padding: 70px 24px 40px;
-            margin-top: 60px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1.2fr repeat(2, 0.9fr);
-            gap: 48px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid #1e293b;
-        }
-
-        .footer-col h5 {
-            color: #f8fafc;
-            font-size: 16px;
-            margin-bottom: 18px;
-            font-weight: 700;
-        }
-
-        .footer-col p {
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col a {
-            color: #94a3b8;
-            font-size: 14px;
-            transition: color 0.15s;
-        }
-
-        .footer-col a:hover {
-            color: #f8fafc;
-        }
-
-        .footer-copy {
-            text-align: center;
-            font-size: 13px;
-            margin-top: 30px;
-            color: #64748b;
-        }
-
-        @media (max-width: 1024px) {
-            .hero-section {
-                grid-template-columns: 1fr;
-                text-align: center;
-                gap: 40px;
-                padding: 40px 24px;
-            }
-            .hero-content {
-                align-items: center;
-            }
-            .hero-content p {
-                margin: 0 auto;
-            }
-            .search-area {
-                margin: 0 auto;
-            }
-            .footer-content {
-                grid-template-columns: 1fr repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .navbar {
-                padding: 12px 14px;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .logo {
-                font-size: 17px;
-                gap: 7px;
-            }
-            .logo span {
-                font-size: 12px;
-                padding: 3px 7px;
-            }
-            .nav-links {
-                gap: 4px;
-            }
-            .nav-links a {
-                font-size: 12px;
-                padding: 4px 6px;
-            }
-            .hero-section {
-                padding: 30px 16px;
-                gap: 30px;
-            }
-            .hero-content h1 {
-                font-size: 28px;
-                line-height: 1.2;
-            }
-            .hero-content p {
-                font-size: 15px;
-            }
-            .search-input-box input {
-                padding: 14px 16px 14px 44px;
-                font-size: 14px;
-            }
-            .section-title {
-                font-size: 22px;
-            }
-            .section-subtitle {
-                font-size: 13px;
-                margin-bottom: 24px;
-            }
-            .calc-wrapper {
-                max-width: 100%;
-                overflow: hidden;
-            }
-            .calculator {
-                padding: 14px;
-            }
-            .calc-grid {
-                gap: 5px;
-            }
-            .calc-grid .btn {
-                padding: 10px 2px;
-                font-size: 11px;
-            }
-            .screen-main {
-                font-size: 24px;
-            }
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-            .category-bucket {
-                padding: 20px;
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 28px;
-            }
-        }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#F6F1E7;color:#241A12;line-height:1.5}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+    /* ---------- top nav ---------- */
+    nav{background:#EFE7D6;border-bottom:1px solid #DED1B8}
+    .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+    .brand{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.3rem;color:#3E2E1F}
+    .brand span{color:#8A6D4F}
+    .nav-links{display:flex;gap:22px;font-size:.95rem}
+    .nav-links a{color:#5C4936}
+    .nav-links a:hover{color:#241A12}
+
+    /* ---------- ticker bar ---------- */
+    .ticker{background:#2E2318;overflow:hidden;white-space:nowrap}
+    .ticker-track{display:inline-flex;align-items:center;padding:9px 0;animation:tick 70s linear infinite}
+    .ticker:hover .ticker-track{animation-play-state:paused}
+    .ticker-track a{color:#EADFC8;font-size:.88rem;padding:0 16px;border-right:1px solid #4A3B2A}
+    .ticker-track a:last-child{border-right:none}
+    .ticker-track a:hover{color:#fff;text-decoration:underline}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
+
+    /* ---------- hero ---------- */
+    .hero{text-align:center;padding:58px 0 42px}
+    .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
+    .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:2.4rem;color:#2E2318;margin:10px 0 12px}
+    .hero p{max-width:580px;margin:0 auto;color:#5C4936}
+
+    /* ---------- sections & cards ---------- */
+    section{padding:24px 0}
+    .sec-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #DED1B8;padding-bottom:8px;margin-bottom:18px}
+    .sec-head h2{font-family:Georgia,"Times New Roman",serif;font-size:1.35rem;color:#3E2E1F}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+    .card{display:flex;flex-direction:column;background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:16px;transition:border-color .15s,transform .15s,box-shadow .15s}
+    .card:hover{border-color:#8A6D4F;transform:translateY(-2px);box-shadow:0 4px 10px rgba(46,35,24,.08)}
+    .card h3{font-size:1.02rem;color:#2E2318;margin-bottom:6px}
+    .card p{font-size:.9rem;color:#6B5844;flex:1}
+    .card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:14px}
+    .card-meta .tag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
+    .card-meta .arrow{color:#8A6D4F;font-weight:700}
+
+    /* ---------- footer ---------- */
+    footer{background:#2A1F15;color:#CBBBA0;margin-top:44px}
+    .foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;padding:26px 0;font-size:.9rem}
+    .foot-links{display:flex;gap:18px}
+    footer a:hover{color:#fff;text-decoration:underline}
+
+    @media (max-width:640px){
+      .hero h1{font-size:1.8rem}
+      .nav{flex-direction:column;height:auto;padding:12px 0;gap:8px}
+      .hero{padding:40px 0 30px}
+    }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <a href="index.html" class="logo">
-            <span>Inquiry</span> Calculator
-        </a>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="calculators.html">All Calculators</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
-    </nav>
+<nav>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">Inquiry<span>Calculator</span></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="calculators.html">All Calculators</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </div>
+</nav>
 
-    <header class="hero-section">
-        <div class="hero-content">
-            <h1>Free Online <span>Calculators</span></h1>
-            <p>Instant, precise calculation software designed for finance, health, tech, and mathematics.</p>
-            <div class="search-area">
-                <div class="search-input-box">
-                    <span class="search-icon">🔍</span>
-                    <input type="text" id="homeSearch" placeholder="Search calculators (e.g. mortgage, loan, calorie)..." autocomplete="off">
-                </div>
-                <div id="homeDropdown" class="suggestions-dropdown"></div>
-            </div>
-        </div>
+<div class="ticker" aria-label="Browse calculators">
+  <div class="ticker-track">
+    <a href="mortgage-calculator.html">Mortgage Calculator</a>
+    <a href="car-loan-calculator.html">Car Loan Calculator</a>
+    <a href="compound-interest-calculator.html">Compound Interest Calculator</a>
+    <a href="tax-calculator.html">Tax Calculator</a>
+    <a href="salary-calculator.html">Salary Calculator</a>
+    <a href="overtime-calculator.html">Overtime Calculator</a>
+    <a href="tip-calculator.html">Tip Calculator</a>
+    <a href="sales-tax-calculator.html">Sales Tax Calculator</a>
+    <a href="calorie-calculator.html">Calorie Calculator</a>
+    <a href="due-date-calculator.html">Due Date Calculator</a>
+    <a href="gpa-calculator.html">GPA Calculator</a>
+    <a href="grade-calculator.html">Grade Calculator</a>
+    <a href="test-score-calculator.html">Test Score Calculator</a>
+    <a href="word-counter.html">Word Counter</a>
+    <a href="reading-time-calculator.html">Reading Time Calculator</a>
+    <a href="study-time-calculator.html">Study Time Calculator</a>
+    <a href="percentage-calculator.html">Percentage Calculator</a>
+    <a href="scientific-calculator.html">Scientific Calculator</a>
+    <a href="average-calculator.html">Average Calculator</a>
+    <a href="unit-converter.html">Unit Converter</a>
+    <a href="aspect-ratio-calculator.html">Aspect Ratio Calculator</a>
+    <a href="fuel-cost-calculator.html">Fuel Cost Calculator</a>
+    <a href="electricity-calculator.html">Electricity Calculator</a>
+    <a href="download-time-calculator.html">Download Time Calculator</a>
+    <a href="date-calculator.html">Date Calculator</a>
+    <a href="time-calculator.html">Time Calculator</a>
+    <a href="mortgage-calculator.html" aria-hidden="true" tabindex="-1">Mortgage Calculator</a>
+    <a href="car-loan-calculator.html" aria-hidden="true" tabindex="-1">Car Loan Calculator</a>
+    <a href="compound-interest-calculator.html" aria-hidden="true" tabindex="-1">Compound Interest Calculator</a>
+    <a href="tax-calculator.html" aria-hidden="true" tabindex="-1">Tax Calculator</a>
+    <a href="salary-calculator.html" aria-hidden="true" tabindex="-1">Salary Calculator</a>
+    <a href="overtime-calculator.html" aria-hidden="true" tabindex="-1">Overtime Calculator</a>
+    <a href="tip-calculator.html" aria-hidden="true" tabindex="-1">Tip Calculator</a>
+    <a href="sales-tax-calculator.html" aria-hidden="true" tabindex="-1">Sales Tax Calculator</a>
+    <a href="calorie-calculator.html" aria-hidden="true" tabindex="-1">Calorie Calculator</a>
+    <a href="due-date-calculator.html" aria-hidden="true" tabindex="-1">Due Date Calculator</a>
+    <a href="gpa-calculator.html" aria-hidden="true" tabindex="-1">GPA Calculator</a>
+    <a href="grade-calculator.html" aria-hidden="true" tabindex="-1">Grade Calculator</a>
+    <a href="test-score-calculator.html" aria-hidden="true" tabindex="-1">Test Score Calculator</a>
+    <a href="word-counter.html" aria-hidden="true" tabindex="-1">Word Counter</a>
+    <a href="reading-time-calculator.html" aria-hidden="true" tabindex="-1">Reading Time Calculator</a>
+    <a href="study-time-calculator.html" aria-hidden="true" tabindex="-1">Study Time Calculator</a>
+    <a href="percentage-calculator.html" aria-hidden="true" tabindex="-1">Percentage Calculator</a>
+    <a href="scientific-calculator.html" aria-hidden="true" tabindex="-1">Scientific Calculator</a>
+    <a href="average-calculator.html" aria-hidden="true" tabindex="-1">Average Calculator</a>
+    <a href="unit-converter.html" aria-hidden="true" tabindex="-1">Unit Converter</a>
+    <a href="aspect-ratio-calculator.html" aria-hidden="true" tabindex="-1">Aspect Ratio Calculator</a>
+    <a href="fuel-cost-calculator.html" aria-hidden="true" tabindex="-1">Fuel Cost Calculator</a>
+    <a href="electricity-calculator.html" aria-hidden="true" tabindex="-1">Electricity Calculator</a>
+    <a href="download-time-calculator.html" aria-hidden="true" tabindex="-1">Download Time Calculator</a>
+    <a href="date-calculator.html" aria-hidden="true" tabindex="-1">Date Calculator</a>
+    <a href="time-calculator.html" aria-hidden="true" tabindex="-1">Time Calculator</a>
+  </div>
+</div>
 
-        <div class="calc-wrapper">
-            <div class="calculator">
-                <div class="screen">
-                    <div id="calcHist" class="screen-history"></div>
-                    <div id="calcDisplay" class="screen-main">0</div>
-                </div>
-                <div class="calc-grid">
-                    <button class="btn btn-fn" onclick="calcFunc('sin')">sin</button>
-                    <button class="btn btn-fn" onclick="calcFunc('cos')">cos</button>
-                    <button class="btn btn-fn" onclick="calcFunc('tan')">tan</button>
-                    <button class="btn btn-fn" onclick="calcFunc('asin')">asin</button>
-                    <button class="btn btn-fn" onclick="calcFunc('acos')">acos</button>
-                    <button class="btn btn-fn" onclick="calcFunc('atan')">atan</button>
-                    <button class="btn btn-fn" onclick="calcFunc('log')">log</button>
-                    <button class="btn btn-fn" onclick="calcFunc('ln')">ln</button>
-                    <button class="btn btn-fn" onclick="calcFunc('sqrt')">√</button>
-                    <button class="btn btn-fn" onclick="calcFunc('cbrt')">∛</button>
-                    <button class="btn btn-fn" onclick="calcFunc('pow')">x^y</button>
-                    <button class="btn btn-fn" onclick="calcFunc('fact')">n!</button>
-                    <button class="btn btn-fn" onclick="calcFunc('pi')">π</button>
-                    <button class="btn btn-fn" onclick="calcFunc('e')">e</button>
-                    <button class="btn btn-fn" onclick="calcFunc('abs')">|x|</button>
-                    <button class="btn btn-fn" onclick="calcFunc('1/x')">1/x</button>
-                    <button class="btn btn-op" onclick="calcParens('(')">(</button>
-                    <button class="btn btn-op" onclick="calcParens(')')">)</button>
-                    <button class="btn" onclick="calcNum('7')">7</button>
-                    <button class="btn" onclick="calcNum('8')">8</button>
-                    <button class="btn" onclick="calcNum('9')">9</button>
-                    <button class="btn btn-op" onclick="calcOp('/')">÷</button>
-                    <button class="btn btn-op" onclick="calcOp('%')">%</button>
-                    <button class="btn btn-del" onclick="calcBackspace()">DEL</button>
-                    <button class="btn" onclick="calcNum('4')">4</button>
-                    <button class="btn" onclick="calcNum('5')">5</button>
-                    <button class="btn" onclick="calcNum('6')">6</button>
-                    <button class="btn btn-op" onclick="calcOp('*')">×</button>
-                    <button class="btn btn-op" onclick="calcSign()">+/−</button>
-                    <button class="btn btn-fn" onclick="calcFunc('exp')">e^x</button>
-                    <button class="btn" onclick="calcNum('1')">1</button>
-                    <button class="btn" onclick="calcNum('2')">2</button>
-                    <button class="btn" onclick="calcNum('3')">3</button>
-                    <button class="btn btn-op" onclick="calcOp('-')">−</button>
-                    <button class="btn btn-clear" onclick="calcClear()">AC (Clear)</button>
-                    <button class="btn" onclick="calcNum('0')">0</button>
-                    <button class="btn" onclick="calcNum('.')">.</button>
-                    <button class="btn btn-op" onclick="calcOp('+')">+</button>
-                    <button class="btn btn-eq" onclick="calcEqual()">=</button>
-                </div>
-            </div>
-        </div>
-    </header>
+<header class="wrap hero">
+  <div class="eyebrow">Inquiry Calculator</div>
+  <h1>Free Online Calculators</h1>
+  <p>Quick, accurate tools for money, health, school, and everyday questions. No sign-up, no clutter — just answers.</p>
+</header>
 
-    <main class="main-container">
-        <h2 class="section-title">Popular Calculators</h2>
-        <p class="section-subtitle">Click on any calculator utility below to make precise calculations.</p>
+<main class="wrap">
 
-        <div class="tools-grid">
-            <a href="mortgage-calculator.html" class="card finance">
-                <h3>Mortgage Calculator</h3>
-                <p>Calculate monthly repayments, total interest, property taxes, and home insurance.</p>
-            </a>
-            <a href="car-loan-calculator.html" class="card finance">
-                <h3>Car Loan Calculator</h3>
-                <p>Estimate vehicle financing payments, trade-in deductions, and total interest.</p>
-            </a>
-            <a href="tax-calculator.html" class="card finance">
-                <h3>Salary & Tax Calculator</h3>
-                <p>Calculate estimated income tax deductions, Medicare levy, and net take-home pay.</p>
-            </a>
-            <a href="calorie-calculator.html" class="card health">
-                <h3>Calorie & TDEE Calculator</h3>
-                <p>Find daily maintenance calories, BMR, and targets for weight loss or muscle gain.</p>
-            </a>
-            <a href="electricity-calculator.html" class="card tech">
-                <h3>Electricity Cost Calculator</h3>
-                <p>Calculate appliance power consumption and running costs per hour, day, and month.</p>
-            </a>
-            <a href="fuel-cost-calculator.html" class="card travel">
-                <h3>Fuel Cost Calculator</h3>
-                <p>Calculate road trip petrol costs, consumption (L/100km & MPG), and passenger splits.</p>
-            </a>
-            <a href="overtime-calculator.html" class="card finance">
-                <h3>Overtime Pay Calculator</h3>
-                <p>Calculate regular hours, 1.5x time-and-a-half, and 2.0x double-time penalty rates.</p>
-            </a>
-            <a href="aspect-ratio-calculator.html" class="card tech">
-                <h3>Aspect Ratio Calculator</h3>
-                <p>Calculate screen proportions, pixel scaling (16:9, 21:9, 4:3), and image sizing.</p>
-            </a>
-            <a href="percentage-calculator.html" class="card math">
-                <h3>Percentage Calculator</h3>
-                <p>Calculate base percentages, percentage increases, and percentage drops.</p>
-            </a>
-            <a href="compound-interest-calculator.html" class="card finance">
-                <h3>Compound Interest</h3>
-                <p>Simulate long-term investing and compounding bank deposits over time.</p>
-            </a>
-            <a href="bmi-calculator.html" class="card health">
-                <h3>BMI Calculator</h3>
-                <p>Calculate Body Mass Index and healthy category weight ranges.</p>
-            </a>
-            <a href="download-time-calculator.html" class="card tech">
-                <h3>Download Time Calculator</h3>
-                <p>Estimate game and file download durations based on your internet speed.</p>
-            </a>
-            <a href="discount-calculator.html" class="card finance">
-                <h3>Discount Calculator</h3>
-                <p>Calculate sales discounts, retail savings, and final prices.</p>
-            </a>
-            <a href="loan-calculator.html" class="card finance">
-                <h3>Personal Loan Calculator</h3>
-                <p>Estimate monthly personal loan repayments and total interest costs.</p>
-            </a>
-            <a href="age-calculator.html" class="card time">
-                <h3>Age Calculator</h3>
-                <p>Find your exact age in years, months, days, hours, and minutes.</p>
-            </a>
-            <a href="tip-calculator.html" class="card finance">
-                <h3>Tip Calculator</h3>
-                <p>Calculate restaurant gratuity, total bill amounts, and split costs between diners.</p>
-            </a>
-            <a href="sales-tax-calculator.html" class="card finance">
-                <h3>Sales Tax Calculator</h3>
-                <p>Calculate sales tax, final receipt totals, or reverse-calculate pre-tax prices.</p>
-            </a>
-            <a href="due-date-calculator.html" class="card health">
-                <h3>Pregnancy Due Date Calculator</h3>
-                <p>Estimate your baby's due date, current gestational week, and trimester.</p>
-            </a>
-            <a href="gpa-calculator.html" class="card education">
-                <h3>GPA Calculator</h3>
-                <p>Calculate semester and cumulative Grade Point Average on a 4.0 scale.</p>
-            </a>
-            <a href="fraction-calculator.html" class="card math">
-                <h3>Fraction Calculator</h3>
-                <p>Add, subtract, multiply, and divide fractions and mixed numbers with steps.</p>
-            </a>
-            <a href="grade-calculator.html" class="card education">
-                <h3>Final Grade Calculator</h3>
-                <p>Find out what score you need on your final exam to achieve your desired grade.</p>
-            </a>
-            <a href="test-score-calculator.html" class="card education">
-                <h3>Test Score Calculator</h3>
-                <p>Convert raw test scores to percentages, letter grades, and pass/fail status.</p>
-            </a>
-            <a href="word-counter.html" class="card education">
-                <h3>Word Counter</h3>
-                <p>Count words, characters, sentences, paragraphs, and estimated reading time.</p>
-            </a>
-            <a href="reading-time-calculator.html" class="card education">
-                <h3>Reading Time Calculator</h3>
-                <p>Estimate how long it takes to read a book, article, or essay.</p>
-            </a>
-            <a href="cgpa-calculator.html" class="card education">
-                <h3>CGPA Calculator</h3>
-                <p>Calculate cumulative GPA across multiple semesters with credit hour weighting.</p>
-            </a>
-            <a href="study-time-calculator.html" class="card education">
-                <h3>Study Time Calculator</h3>
-                <p>Plan daily study hours needed before an exam based on total prep time.</p>
-            </a>
-        </div>
+  <section>
+    <div class="sec-head"><h2>Finance</h2></div>
+    <div class="grid">
+      <a class="card" href="mortgage-calculator.html"><h3>Mortgage Calculator</h3><p>Estimate monthly repayments, interest, and the total cost of a home loan.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="car-loan-calculator.html"><h3>Car Loan Calculator</h3><p>Work out monthly car payments and total interest before you visit the dealer.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="compound-interest-calculator.html"><h3>Compound Interest Calculator</h3><p>See how savings and investments grow with compound interest over time.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="tax-calculator.html"><h3>Tax Calculator</h3><p>Get a quick estimate of income tax on your annual earnings.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="salary-calculator.html"><h3>Salary Calculator</h3><p>Convert between hourly pay, monthly pay, and annual salary in seconds.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="overtime-calculator.html"><h3>Overtime Calculator</h3><p>Calculate overtime pay at time-and-a-half, double time, or custom rates.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="tip-calculator.html"><h3>Tip Calculator</h3><p>Work out the tip and split the bill evenly between any number of people.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="sales-tax-calculator.html"><h3>Sales Tax Calculator</h3><p>Add or remove sales tax from any price at any rate.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+    </div>
+  </section>
 
-        <h2 class="section-title">Browse by Category</h2>
-        <p class="section-subtitle">Navigate through our custom engineered calculation modules.</p>
+  <section>
+    <div class="sec-head"><h2>Health &amp; Fitness</h2></div>
+    <div class="grid">
+      <a class="card" href="calorie-calculator.html"><h3>Calorie Calculator</h3><p>Find your daily calorie needs based on your body, goals, and activity level.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="due-date-calculator.html"><h3>Due Date Calculator</h3><p>Estimate a pregnancy due date from the last period or conception date.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
+    </div>
+  </section>
 
-        <div class="category-bucket">
-            <div class="cat-group finance-group">
-                <h4>Finance</h4>
-                <ul>
-                    <li><a href="mortgage-calculator.html">Mortgage Calculator</a></li>
-                    <li><a href="car-loan-calculator.html">Car Loan Calculator</a></li>
-                    <li><a href="loan-calculator.html">Personal Loan</a></li>
-                    <li><a href="tax-calculator.html">Income Tax Calculator</a></li>
-                    <li><a href="salary-calculator.html">Salary Converter</a></li>
-                    <li><a href="overtime-calculator.html">Overtime Pay</a></li>
-                    <li><a href="compound-interest-calculator.html">Compound Interest</a></li>
-                    <li><a href="discount-calculator.html">Discount Calculator</a></li>
-                    <li><a href="tip-calculator.html">Tip Calculator</a></li>
-                    <li><a href="sales-tax-calculator.html">Sales Tax Calculator</a></li>
-                </ul>
-            </div>
-            <div class="cat-group tech-group">
-                <h4>Travel & Tech</h4>
-                <ul>
-                    <li><a href="electricity-calculator.html">Electricity Cost</a></li>
-                    <li><a href="aspect-ratio-calculator.html">Aspect Ratio</a></li>
-                    <li><a href="fuel-cost-calculator.html">Fuel Cost Calculator</a></li>
-                    <li><a href="download-time-calculator.html">Download Time</a></li>
-                    <li><a href="unit-converter.html">Unit Converter</a></li>
-                </ul>
-            </div>
-            <div class="cat-group health-group">
-                <h4>Health & Fitness</h4>
-                <ul>
-                    <li><a href="calorie-calculator.html">Calorie & TDEE</a></li>
-                    <li><a href="bmi-calculator.html">BMI Calculator</a></li>
-                    <li><a href="due-date-calculator.html">Pregnancy Due Date</a></li>
-                </ul>
-            </div>
-            <div class="cat-group math-group">
-                <h4>Time & Math</h4>
-                <ul>
-                    <li><a href="percentage-calculator.html">Percentage Calculator</a></li>
-                    <li><a href="scientific-calculator.html">Scientific Calculator</a></li>
-                    <li><a href="average-calculator.html">Average Calculator</a></li>
-                    <li><a href="fraction-calculator.html">Fraction Calculator</a></li>
-                    <li><a href="age-calculator.html">Age Calculator</a></li>
-                    <li><a href="date-calculator.html">Date Calculator</a></li>
-                    <li><a href="time-calculator.html">Time Calculator</a></li>
-                </ul>
-            </div>
-            <div class="cat-group education-group">
-                <h4>Education</h4>
-                <ul>
-                    <li><a href="gpa-calculator.html">GPA Calculator</a></li>
-                    <li><a href="cgpa-calculator.html">CGPA Calculator</a></li>
-                    <li><a href="grade-calculator.html">Final Grade Calculator</a></li>
-                    <li><a href="test-score-calculator.html">Test Score Calculator</a></li>
-                    <li><a href="word-counter.html">Word Counter</a></li>
-                    <li><a href="reading-time-calculator.html">Reading Time Calculator</a></li>
-                    <li><a href="study-time-calculator.html">Study Time Calculator</a></li>
-                </ul>
-            </div>
-        </div>
-    </main>
+  <section>
+    <div class="sec-head"><h2>Education</h2></div>
+    <div class="grid">
+      <a class="card" href="gpa-calculator.html"><h3>GPA Calculator</h3><p>Calculate your grade point average from your courses and credits.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="grade-calculator.html"><h3>Grade Calculator</h3><p>Find out what score you need on a final exam to hit your target grade.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="test-score-calculator.html"><h3>Test Score Calculator</h3><p>Convert raw scores into percentages and letter grades.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="word-counter.html"><h3>Word Counter</h3><p>Count words, characters, sentences, and paragraphs in any text.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="reading-time-calculator.html"><h3>Reading Time Calculator</h3><p>Estimate how many minutes a text takes to read at an average pace.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="study-time-calculator.html"><h3>Study Time Calculator</h3><p>Plan revision sessions and track total study hours per subject.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+    </div>
+  </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-col">
-                <h5>Inquiry Calculator</h5>
-                <p>Fast, reliable, free calculation tools for personal finance, health, time, and everyday utility.</p>
-            </div>
-            <div class="footer-col">
-                <h5>Legal</h5>
-                <ul>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
-                    <li><a href="terms.html">Terms of Use</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h5>Company</h5>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-        <p class="footer-copy">&copy; 2025 Inquiry Calculator. All rights reserved.</p>
-    </footer>
+  <section>
+    <div class="sec-head"><h2>Math &amp; Conversion</h2></div>
+    <div class="grid">
+      <a class="card" href="percentage-calculator.html"><h3>Percentage Calculator</h3><p>Calculate percentages of numbers, percentage change, and differences.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="scientific-calculator.html"><h3>Scientific Calculator</h3><p>A full scientific calculator with trig, powers, roots, and logarithms.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="average-calculator.html"><h3>Average Calculator</h3><p>Find the mean, median, mode, and range of any set of numbers.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="unit-converter.html"><h3>Unit Converter</h3><p>Convert length, weight, temperature, volume, and more.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="aspect-ratio-calculator.html"><h3>Aspect Ratio Calculator</h3><p>Resize widths and heights while keeping the exact aspect ratio.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+    </div>
+  </section>
 
-    <script>
-        let calcExpr = '';
-        const display = document.getElementById('calcDisplay');
-        const historyDisplay = document.getElementById('calcHist');
+  <section>
+    <div class="sec-head"><h2>Date &amp; Time</h2></div>
+    <div class="grid">
+      <a class="card" href="date-calculator.html"><h3>Date Calculator</h3><p>Add or subtract days from a date, or find the days between two dates.</p><div class="card-meta"><span class="tag">Date</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="time-calculator.html"><h3>Time Calculator</h3><p>Add and subtract hours and minutes for timesheets and schedules.</p><div class="card-meta"><span class="tag">Time</span><span class="arrow">&rarr;</span></div></a>
+    </div>
+  </section>
 
-        function calcNum(n) {
-            calcExpr += n;
-            display.textContent = calcExpr || '0';
-        }
+  <section>
+    <div class="sec-head"><h2>Everyday Utilities</h2></div>
+    <div class="grid">
+      <a class="card" href="fuel-cost-calculator.html"><h3>Fuel Cost Calculator</h3><p>Estimate the fuel cost of a trip based on distance and consumption.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="electricity-calculator.html"><h3>Electricity Calculator</h3><p>Work out what each appliance costs to run per day, month, and year.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="download-time-calculator.html"><h3>Download Time Calculator</h3><p>Estimate how long a file takes to download at any connection speed.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
+    </div>
+  </section>
 
-        function calcOp(op) {
-            if (calcExpr && !calcExpr.match(/[+\-*/%]$/)) {
-                calcExpr += op;
-                display.textContent = calcExpr;
-            }
-        }
+</main>
 
-        function calcParens(p) {
-            calcExpr += p;
-            display.textContent = calcExpr;
-        }
+<footer>
+  <div class="wrap foot">
+    <div>&copy; 2025 InquiryCalculator. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
 
-        function calcFunc(func) {
-            if (func === 'sin') calcExpr += 'Math.sin(';
-            else if (func === 'cos') calcExpr += 'Math.cos(';
-            else if (func === 'tan') calcExpr += 'Math.tan(';
-            else if (func === 'asin') calcExpr += 'Math.asin(';
-            else if (func === 'acos') calcExpr += 'Math.acos(';
-            else if (func === 'atan') calcExpr += 'Math.atan(';
-            else if (func === 'log') calcExpr += 'Math.log10(';
-            else if (func === 'ln') calcExpr += 'Math.log(';
-            else if (func === 'sqrt') calcExpr += 'Math.sqrt(';
-            else if (func === 'cbrt') calcExpr += 'Math.cbrt(';
-            else if (func === 'pow') calcExpr += '**';
-            else if (func === 'pi') calcExpr += '3.14159265359';
-            else if (func === 'e') calcExpr += '2.71828182846';
-            else if (func === 'abs') calcExpr += 'Math.abs(';
-            else if (func === 'exp') calcExpr += 'Math.exp(';
-            else if (func === '1/x') calcExpr += '1/(';
-            else if (func === 'fact') {
-                const n = parseInt(calcExpr);
-                if (!isNaN(n) && n >= 0 && n <= 170) {
-                    const f = (x) => x <= 1 ? 1 : x * f(x - 1);
-                    calcExpr = f(n).toString();
-                }
-            }
-            display.textContent = calcExpr;
-        }
-
-        function calcEqual() {
-            try {
-                if (!calcExpr) return;
-                historyDisplay.textContent = calcExpr + ' =';
-                let sanitized = calcExpr;
-                const openC = (sanitized.match(/\(/g) || []).length;
-                const closeC = (sanitized.match(/\)/g) || []).length;
-                if (openC > closeC) sanitized += ')'.repeat(openC - closeC);
-                const result = Function('"use strict";return (' + sanitized + ')')();
-                calcExpr = result.toString();
-                display.textContent = parseFloat(Number(result).toFixed(8));
-            } catch (e) {
-                display.textContent = 'Error';
-                calcExpr = '';
-            }
-        }
-
-        function calcBackspace() {
-            calcExpr = calcExpr.slice(0, -1);
-            display.textContent = calcExpr || '0';
-        }
-
-        function calcSign() {
-            if (calcExpr) {
-                if (calcExpr.startsWith('(-') && calcExpr.endsWith(')')) {
-                    calcExpr = calcExpr.slice(2, -1);
-                } else {
-                    calcExpr = '(-' + calcExpr + ')';
-                }
-                display.textContent = calcExpr;
-            }
-        }
-
-        function calcClear() {
-            calcExpr = '';
-            display.textContent = '0';
-            historyDisplay.textContent = '';
-        }
-
-        const siteCalculators = [
-            { name: 'Mortgage Calculator', url: 'mortgage-calculator.html', tag: 'Finance', desc: 'Monthly repayments, interest, property taxes & home insurance.', keys: 'mortgage home house loan property interest amortization borrowing' },
-            { name: 'Car Loan Calculator', url: 'car-loan-calculator.html', tag: 'Finance', desc: 'Auto loan payments, trade-in deductions, and total interest.', keys: 'car auto vehicle loan financing dealership trade in automobile' },
-            { name: 'Personal Loan Calculator', url: 'loan-calculator.html', tag: 'Finance', desc: 'Calculate personal and bank loan repayments.', keys: 'loan personal borrow repayment debt bank credit' },
-            { name: 'Salary & Tax Calculator', url: 'tax-calculator.html', tag: 'Finance', desc: 'Estimate income tax brackets, Medicare, and take-home pay.', keys: 'tax salary income wage take home pay ATO paycheck deductions' },
-            { name: 'Salary Converter', url: 'salary-calculator.html', tag: 'Finance', desc: 'Convert pay between hourly, weekly, monthly, and annual rates.', keys: 'salary wage hourly wage rate convert work earnings' },
-            { name: 'Overtime Pay Calculator', url: 'overtime-calculator.html', tag: 'Finance', desc: 'Calculate time-and-a-half (1.5x) and double-time (2.0x) penalty rates.', keys: 'overtime pay rate time and a half double time wage penalty' },
-            { name: 'Compound Interest', url: 'compound-interest-calculator.html', tag: 'Finance', desc: 'Simulate long-term investing and compound returns.', keys: 'compound interest investing investment savings bank growth stocks' },
-            { name: 'Discount Calculator', url: 'discount-calculator.html', tag: 'Finance', desc: 'Calculate shopping sales, percentage off, and final prices.', keys: 'discount sale shopping savings clearance price promo coupon' },
-            { name: 'Tip Calculator', url: 'tip-calculator.html', tag: 'Finance', desc: 'Calculate restaurant gratuity and split meal bills.', keys: 'tip bill restaurant gratuity food split dining service' },
-            { name: 'Sales Tax Calculator', url: 'sales-tax-calculator.html', tag: 'Finance', desc: 'Calculate sales tax, totals, or reverse-calculate pre-tax prices.', keys: 'sales tax vat gst receipt total pretax reverse shopping' },
-            { name: 'Calorie & TDEE Calculator', url: 'calorie-calculator.html', tag: 'Health', desc: 'Daily calories for weight loss, maintenance, or muscle gain.', keys: 'calorie tdee bmr weight loss diet deficit fitness nutrition gain food' },
-            { name: 'BMI Calculator', url: 'bmi-calculator.html', tag: 'Health', desc: 'Compute Body Mass Index and healthy weight categories.', keys: 'bmi body mass index weight height health fitness obesity' },
-            { name: 'Pregnancy Due Date Calculator', url: 'due-date-calculator.html', tag: 'Health', desc: 'Estimate your baby\'s due date, gestational week, and trimester.', keys: 'pregnancy due date baby birth gestation trimester lmp conception ivf week' },
-            { name: 'Electricity Cost Calculator', url: 'electricity-calculator.html', tag: 'Tech', desc: 'Appliance power usage, kWh rates, and monthly electricity bills.', keys: 'electricity power watts kwh bill appliance running cost energy' },
-            { name: 'Download Time Calculator', url: 'download-time-calculator.html', tag: 'Tech', desc: 'Estimate download duration for games and files.', keys: 'download time internet speed bandwidth file size game steam mbps wifi' },
-            { name: 'Aspect Ratio Calculator', url: 'aspect-ratio-calculator.html', tag: 'Tech', desc: 'Screen scaling, image ratios (16:9, 21:9, 4:3), and pixel sizing.', keys: 'aspect ratio resolution 16 9 screen pixels resize scale width height' },
-            { name: 'Fuel Cost Calculator', url: 'fuel-cost-calculator.html', tag: 'Travel', desc: 'Trip petrol expenses, fuel economy (L/100km & MPG), and split costs.', keys: 'fuel petrol gas road trip consumption mileage distance commute car' },
-            { name: 'Percentage Calculator', url: 'percentage-calculator.html', tag: 'Math', desc: 'Calculate percentages, increases, decreases, and fractions.', keys: 'percentage percent % fraction increase decrease difference' },
-            { name: 'Scientific Calculator', url: 'scientific-calculator.html', tag: 'Math', desc: 'Advanced trigonometry, logarithms, powers, and roots.', keys: 'scientific math sin cos tan log sqrt power algebra' },
-            { name: 'Unit Converter', url: 'unit-converter.html', tag: 'Math', desc: 'Convert length, weight, volume, and temperature.', keys: 'unit converter convert length weight temperature volume kg lbs' },
-            { name: 'Average Calculator', url: 'average-calculator.html', tag: 'Math', desc: 'Calculate mean, median, mode, range, and standard deviation.', keys: 'average mean median mode range statistics math dataset' },
-            { name: 'Fraction Calculator', url: 'fraction-calculator.html', tag: 'Math', desc: 'Add, subtract, multiply, divide fractions and mixed numbers.', keys: 'fraction mixed numbers numerator denominator simplify add subtract multiply divide' },
-            { name: 'GPA Calculator', url: 'gpa-calculator.html', tag: 'Education', desc: 'Calculate weighted or cumulative grade point averages.', keys: 'gpa grade school college university marks academic 4.0 credits semester' },
-            { name: 'CGPA Calculator', url: 'cgpa-calculator.html', tag: 'Education', desc: 'Calculate cumulative GPA across multiple semesters.', keys: 'cgpa cumulative gpa semester credits university college overall' },
-            { name: 'Final Grade Calculator', url: 'grade-calculator.html', tag: 'Education', desc: 'Find what score you need on your final exam.', keys: 'grade final exam score needed weighted class course' },
-            { name: 'Test Score Calculator', url: 'test-score-calculator.html', tag: 'Education', desc: 'Convert raw test scores to percentages and letter grades.', keys: 'test score quiz exam percentage letter grade pass fail' },
-            { name: 'Word Counter', url: 'word-counter.html', tag: 'Education', desc: 'Count words, characters, sentences, and reading time.', keys: 'word counter character sentence paragraph essay writing count' },
-            { name: 'Reading Time Calculator', url: 'reading-time-calculator.html', tag: 'Education', desc: 'Estimate how long it takes to read any text or book.', keys: 'reading time book pages wpm speed article essay' },
-            { name: 'Study Time Calculator', url: 'study-time-calculator.html', tag: 'Education', desc: 'Plan daily study hours before an exam or deadline.', keys: 'study time plan exam schedule hours daily weekly credits pomodoro' },
-            { name: 'Age Calculator', url: 'age-calculator.html', tag: 'Time', desc: 'Exact age in years, months, days, hours, and minutes.', keys: 'age birthday birth date how old years days months' },
-            { name: 'Date Calculator', url: 'date-calculator.html', tag: 'Time', desc: 'Count calendar days between dates or add/subtract days.', keys: 'date days between calendar add days subtract count' },
-            { name: 'Time Calculator', url: 'time-calculator.html', tag: 'Time', desc: 'Add, subtract, and convert units of time.', keys: 'time hours minutes seconds duration convert clock' }
-        ];
-
-        const searchInput = document.getElementById('homeSearch');
-        const dropdown = document.getElementById('homeDropdown');
-
-        if (searchInput && dropdown) {
-            searchInput.addEventListener('input', function() {
-                const query = this.value.toLowerCase().trim();
-
-                if (query.length === 0) {
-                    dropdown.style.display = 'none';
-                    dropdown.innerHTML = '';
-                    return;
-                }
-
-                const matches = siteCalculators.filter(item => {
-                    return item.name.toLowerCase().includes(query) ||
-                           item.desc.toLowerCase().includes(query) ||
-                           item.keys.includes(query);
-                });
-
-                if (matches.length > 0) {
-                    dropdown.innerHTML = matches.map(item => `
-                        <a href="${item.url}" class="dropdown-item">
-                            <div class="item-main">
-                                <h4>${item.name}</h4>
-                                <p>${item.desc}</p>
-                            </div>
-                            <span class="item-badge">${item.tag}</span>
-                        </a>
-                    `).join('');
-                    dropdown.style.display = 'block';
-                } else {
-                    dropdown.innerHTML = `
-                        <div style="padding: 16px; text-align: center; color: #64748b; font-size: 13px;">
-                            No matching calculators found for "<strong>${escapeHtml(query)}</strong>"
-                        </div>
-                    `;
-                    dropdown.style.display = 'block';
-                }
-            });
-
-            document.addEventListener('click', function(e) {
-                if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
-                    dropdown.style.display = 'none';
-                }
-            });
-
-            searchInput.addEventListener('focus', function() {
-                if (this.value.trim().length > 0) {
-                    this.dispatchEvent(new Event('input'));
-                }
-            });
-        }
-
-        function escapeHtml(string) {
-            return String(string).replace(/[&<>"'`=\/]/g, function (s) {
-                return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;' })[s];
-            });
-        }
-    </script>
 </body>
 </html>
