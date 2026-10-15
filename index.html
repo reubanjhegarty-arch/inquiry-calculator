@@ -23,16 +23,18 @@
     .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
     .brand{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.3rem;color:#3E2E1F}
     .brand span{color:#8A6D4F}
-    .nav-right{display:flex;align-items:center;gap:20px}
+    .nav-right{display:flex;align-items:center;gap:18px}
     .nav-links{display:flex;gap:18px;font-size:.95rem}
     .nav-links a{color:#5C4936;font-weight:500}
     .nav-links a:hover{color:#241A12}
-    .nav-auth{display:flex;gap:10px}
+    .nav-auth{display:flex;gap:10px;align-items:center}
     .btn-auth{padding:6px 14px;border-radius:4px;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .15s}
     .btn-login{background:transparent;border:1px solid #8A6D4F;color:#8A6D4F}
     .btn-login:hover{background:#8A6D4F;color:#fff}
     .btn-signup{background:#2E2318;border:1px solid #2E2318;color:#fff}
     .btn-signup:hover{background:#1A130C}
+    .btn-pro{background:#8A6D4F;color:#fff;border:none;padding:6px 12px;font-size:.85rem;font-weight:700;border-radius:4px;cursor:pointer}
+    .btn-pro:hover{background:#755B40}
 
     /* ---------- ticker bar ---------- */
     .ticker{background:#2E2318;overflow:hidden;white-space:nowrap}
@@ -92,17 +94,36 @@
     .ai-box button{background:#8A6D4F;color:#fff;border:none;padding:0 24px;font-weight:600;border-radius:4px;cursor:pointer;transition:background .2s;white-space:nowrap}
     .ai-box button:hover{background:#755B40}
     .ai-box button:disabled{background:#CBBBA0;cursor:not-allowed}
+    .ai-hint{font-size:.8rem;color:#8A6D4F;margin-top:-10px;margin-bottom:12px}
     .ai-result{background:#EFE7D6;border-left:4px solid #8A6D4F;padding:16px;border-radius:4px;font-size:1rem;color:#2E2318;white-space:pre-wrap;display:none}
 
-    /* Auth Modal */
+    /* Auth & Pricing Modals */
     .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(42,31,21,.6);z-index:100;align-items:center;justify-content:center}
     .modal-overlay.active{display:flex}
-    .modal-box{background:#FCF9F2;border:1px solid #E0D4BE;padding:32px;border-radius:4px;max-width:400px;width:90%;text-align:center}
+    .modal-box{background:#FCF9F2;border:1px solid #E0D4BE;padding:32px;border-radius:4px;max-width:440px;width:90%;text-align:center;position:relative}
     .modal-box h3{font-family:Georgia,serif;font-size:1.5rem;color:#2E2318;margin-bottom:12px}
     .modal-box p{color:#5C4936;font-size:.95rem;margin-bottom:20px}
-    .modal-box input{width:100%;padding:10px;margin-bottom:12px;border:1px solid #DED1B8;border-radius:4px;font-size:1rem}
-    .modal-box button{width:100%;padding:12px;background:#8A6D4F;color:#fff;border:none;border-radius:4px;font-weight:600;cursor:pointer}
+    .modal-box input{width:100%;padding:11px;margin-bottom:12px;border:1px solid #DED1B8;border-radius:4px;font-size:1rem}
+    .modal-box button.btn-primary{width:100%;padding:12px;background:#8A6D4F;color:#fff;border:none;border-radius:4px;font-weight:600;cursor:pointer;font-size:1rem}
+    .btn-google{width:100%;padding:11px;background:#fff;border:1px solid #DED1B8;color:#2E2318;border-radius:4px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:16px}
+    .btn-google:hover{background:#F6F1E7}
+    .divider{display:flex;align-items:center;margin:16px 0;color:#8A6D4F;font-size:.8rem}
+    .divider::before, .divider::after{content:"";flex:1;border-bottom:1px solid #DED1B8}
+    .divider span{padding:0 10px}
     .modal-close{margin-top:12px;background:none;border:none;color:#8A6D4F;cursor:pointer;font-size:.85rem;text-decoration:underline}
+
+    /* Pricing Plans Layout */
+    .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;text-align:left}
+    .plan-card{border:1px solid #DED1B8;background:#fff;padding:16px;border-radius:4px;display:flex;flex-direction:column}
+    .plan-card.featured{border:2px solid #8A6D4F;background:#FCF9F2}
+    .plan-card h4{font-family:Georgia,serif;color:#2E2318;font-size:1.1rem;margin-bottom:4px}
+    .plan-price{font-size:1.3rem;font-weight:700;color:#8A6D4F;margin-bottom:10px}
+    .plan-features{list-style:none;font-size:.82rem;color:#5C4936;flex:1;margin-bottom:14px}
+    .plan-features li{margin-bottom:6px;display:flex;align-items:center;gap:6px}
+
+    /* PRO Badges on Cards */
+    .card{position:relative}
+    .pro-badge{position:absolute;top:12px;right:12px;background:#8A6D4F;color:#fff;font-size:.65rem;font-weight:800;padding:2px 6px;border-radius:3px;letter-spacing:.05em}
 
     /* ---------- sections & cards ---------- */
     section{padding:20px 0}
@@ -132,6 +153,7 @@
       .hero-calc{width:100%;max-width:460px}
       .ai-box{flex-direction:column}
       .ai-box button{padding:12px}
+      .plans-grid{grid-template-columns:1fr}
     }
     </style>
 </head>
@@ -147,8 +169,9 @@
         <a href="about.html">About</a>
       </div>
       <div class="nav-auth">
-        <button class="btn-auth btn-login" onclick="openAuthModal('Log In', 'Welcome back! Enter your email to sign in.')">Log In</button>
-        <button class="btn-auth btn-signup" onclick="openAuthModal('Sign Up', 'Create a free account for unlimited AI questions.')">Sign Up</button>
+        <button class="btn-pro" onclick="openPricingModal()">Upgrade PRO</button>
+        <button class="btn-auth btn-login" onclick="openAuthModal('Log In', 'Welcome back! Sign in to access your account.')">Log In</button>
+        <button class="btn-auth btn-signup" onclick="openAuthModal('Sign Up', 'Create a free account for higher daily AI limits.')">Sign Up</button>
       </div>
     </div>
   </div>
@@ -270,6 +293,7 @@
       <textarea id="aiPrompt" placeholder="e.g. If I invest $5,000 at 7% compound interest for 10 years, how much will I have?"></textarea>
       <button id="aiSubmitBtn" onclick="askAI()">Ask AI</button>
     </div>
+    <div class="ai-hint">💡 Press <strong>Enter</strong> to submit (Shift+Enter for a new line)</div>
     <div id="aiResult" class="ai-result"></div>
   </div>
 </section>
@@ -283,8 +307,8 @@
       <a class="card" href="car-loan-calculator.html" data-keywords="car auto vehicle loan payment interest"><h3>Car Loan Calculator</h3><p>Work out monthly payments and interest for vehicles.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="compound-interest-calculator.html" data-keywords="compound interest savings investment growth yield"><h3>Compound Interest</h3><p>See how savings and investments grow over time.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="salary-calculator.html" data-keywords="salary wage hourly income pay job paycheck"><h3>Salary Calculator</h3><p>Convert between hourly pay, monthly, and annual salary.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="roi-calculator.html" data-keywords="roi return on investment profit yield"><h3>ROI Calculator</h3><p>Calculate Return on Investment percentage and profit.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="margin-calculator.html" data-keywords="margin profit gross business markup cost revenue"><h3>Margin Calculator</h3><p>Calculate gross profit and profit margin percentage.</p><div class="card-meta"><span class="tag">Business</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="amortization-calculator.html" onclick="checkProAccess(event)" data-keywords="amortization loan schedule interest breakdown"><span class="pro-badge">PRO</span><h3>Amortization Calculator</h3><p>Detailed loan schedule &amp; payment breakdown.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="roi-calculator.html" onclick="checkProAccess(event)" data-keywords="roi return on investment profit yield"><span class="pro-badge">PRO</span><h3>ROI Calculator</h3><p>Calculate Return on Investment percentage and profit.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
 
@@ -295,7 +319,7 @@
       <a class="card" href="calorie-calculator.html" data-keywords="calorie tdee bmr diet weight loss gain food"><h3>Calorie Calculator</h3><p>Find daily calorie needs based on goals and activity.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="bmi-calculator.html" data-keywords="bmi body mass index weight height fat fitness"><h3>BMI Calculator</h3><p>Calculate Body Mass Index in metric or imperial.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="bmr-calculator.html" data-keywords="bmr basal metabolic rate calories resting"><h3>BMR Calculator</h3><p>Calculate Basal Metabolic Rate (resting calories burned).</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="macros-calculator.html" data-keywords="macros protein carbs fat nutrition keto body building"><h3>Macros Calculator</h3><p>Calculate daily protein, carbs, and fat breakdown.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="macros-calculator.html" onclick="checkProAccess(event)" data-keywords="macros protein carbs fat nutrition keto body building"><span class="pro-badge">PRO</span><h3>Macros Calculator</h3><p>Calculate daily protein, carbs, and fat breakdown.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="ideal-weight-calculator.html" data-keywords="ideal weight target healthy body height"><h3>Ideal Weight Calculator</h3><p>Estimate healthy target body weight based on height.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="pace-calculator.html" data-keywords="pace running runner cycle speed km mile race"><h3>Pace Calculator</h3><p>Calculate running or cycling pace per km/mile.</p><div class="card-meta"><span class="tag">Fitness</span><span class="arrow">&rarr;</span></div></a>
     </div>
@@ -308,7 +332,7 @@
       <a class="card" href="percentage-calculator.html" data-keywords="percentage percent % fraction change ratio"><h3>Percentage Calculator</h3><p>Calculate percentages, changes, and differences.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="random-number-generator.html" data-keywords="random number generator picker roll dice rng probability"><h3>Random Number Generator</h3><p>Generate a random number within any range.</p><div class="card-meta"><span class="tag">Utility</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="unit-converter.html" data-keywords="unit converter convert length weight temperature distance feet meters kg lbs"><h3>Unit Converter</h3><p>Convert length, weight, temperature, and volume.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="fraction-calculator.html" data-keywords="fraction add subtract divide multiply math"><h3>Fraction Calculator</h3><p>Add, subtract, multiply, and divide fractions easily.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="present-value-calculator.html" onclick="checkProAccess(event)" data-keywords="present value PV future value money discount rate"><span class="pro-badge">PRO</span><h3>Present Value Calculator</h3><p>Calculate current worth of future cash flow.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
       <a class="card" href="calculators.html" data-keywords="all calculators directory list index"><h3>View All Calculators</h3><p>Browse our full directory of 45+ calculators.</p><div class="card-meta"><span class="tag">Directory</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
@@ -326,16 +350,60 @@
   </div>
 </footer>
 
-<!-- AUTH MODAL -->
+<!-- AUTH MODAL WITH GOOGLE LOGIN -->
 <div class="modal-overlay" id="authModal">
   <div class="modal-box">
     <h3 id="modalTitle">Log In</h3>
-    <p id="modalDesc">Enter your details to log in to Inquiry Calculator.</p>
-    <input type="email" placeholder="Email address">
-    <input type="password" placeholder="Password">
-    <button onclick="closeAuthModal()">Continue</button>
+    <p id="modalDesc">Sign in to sync your questions and access Pro features.</p>
+    
+    <button class="btn-google" onclick="loginWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+      Continue with Google
+    </button>
+    
+    <div class="divider"><span>OR EMAIL</span></div>
+
+    <input type="email" id="authEmail" placeholder="Email address">
+    <input type="password" id="authPass" placeholder="Password">
+    <button class="btn-primary" onclick="handleEmailAuth()">Continue</button>
     <br>
     <button class="modal-close" onclick="closeAuthModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- PRICING / PRO MODAL -->
+<div class="modal-overlay" id="pricingModal">
+  <div class="modal-box" style="max-width:520px">
+    <h3>Upgrade to Inquiry PRO</h3>
+    <p>Unlock exclusive financial calculators and unlimited AI problem solving.</p>
+    
+    <div class="plans-grid">
+      <div class="plan-card">
+        <h4>Free Plan</h4>
+        <div class="plan-price">$0</div>
+        <ul class="plan-features">
+          <li>✓ 30+ Standard Calculators</li>
+          <li>✓ 3 Daily AI Questions</li>
+          <li>✓ Basic Problem Solver</li>
+        </ul>
+        <button class="btn-auth btn-login" style="width:100%" onclick="closePricingModal()">Current Plan</button>
+      </div>
+
+      <div class="plan-card featured">
+        <h4>Pro Plan</h4>
+        <div class="plan-price">$4.99 <span style="font-size:.8rem;font-weight:400">/mo</span></div>
+        <ul class="plan-features">
+          <li>★ <strong>Unlimited AI Questions</strong></li>
+          <li>★ Exclusive Pro Calculators</li>
+          <li>★ Fast Llama 3.1 AI Model</li>
+          <li>★ Priority Support</li>
+        </ul>
+        <!-- REPLACE WITH YOUR STRIPE CHECKOUT LINK LATER -->
+        <button class="btn-primary" onclick="subscribePro()">Upgrade to Pro</button>
+      </div>
+    </div>
+
+    <button class="modal-close" onclick="closePricingModal()">Close</button>
   </div>
 </div>
 
@@ -482,12 +550,13 @@ searchInput.addEventListener('focus', function() {
 });
 </script>
 
-<!-- AI SOLVER BACKEND SCRIPT -->
+<!-- AI SOLVER & USER SUBSCRIPTION SCRIPT -->
 <script>
-// ⚠️ REPLACE THIS WITH YOUR CLOUDFLARE WORKER URL:
-const WORKER_URL = "https://inquiry-ai.reubanjhegarty.workers.dev";
+// YOUR CLOUDFLARE WORKER URL
+const WORKER_URL = "https://inquiry-ai.YOURNAME.workers.dev"; // ← Update your subdomain!
 
 const MAX_FREE_QUESTIONS = 3;
+let isProUser = false; // Set to true when user is subscribed
 
 function getTodayKey() {
   const d = new Date();
@@ -499,9 +568,15 @@ function getQuestionsUsed() {
 }
 
 function updateAICounter() {
+  const counter = document.getElementById('aiCounter');
+  if (isProUser) {
+    counter.textContent = "Inquiry PRO: Unlimited AI Access";
+    counter.style.background = "#8A6D4F";
+    counter.style.color = "#fff";
+    return;
+  }
   const used = getQuestionsUsed();
   const left = Math.max(0, MAX_FREE_QUESTIONS - used);
-  const counter = document.getElementById('aiCounter');
   counter.textContent = `Free Questions Left Today: ${left}/${MAX_FREE_QUESTIONS}`;
   
   if (left <= 0) {
@@ -509,6 +584,14 @@ function updateAICounter() {
     counter.style.color = "#EADFC8";
   }
 }
+
+// PRESS ENTER TO SUBMIT AI PROMPT
+document.getElementById('aiPrompt').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    askAI();
+  }
+});
 
 async function askAI() {
   const promptInput = document.getElementById('aiPrompt');
@@ -519,8 +602,8 @@ async function askAI() {
   if (!prompt) return;
 
   const used = getQuestionsUsed();
-  if (used >= MAX_FREE_QUESTIONS) {
-    openAuthModal("Free AI Limit Reached", "You've used your 3 free daily questions! Create a free account or log in to keep asking.");
+  if (!isProUser && used >= MAX_FREE_QUESTIONS) {
+    openPricingModal();
     return;
   }
 
@@ -540,19 +623,30 @@ async function askAI() {
 
     if (data.answer) {
       resultBox.textContent = data.answer;
-      localStorage.setItem(getTodayKey(), (used + 1).toString());
-      updateAICounter();
+      if (!isProUser) {
+        localStorage.setItem(getTodayKey(), (used + 1).toString());
+        updateAICounter();
+      }
     } else {
       resultBox.textContent = data.error || "Unable to solve at this moment. Please try again.";
     }
   } catch (err) {
-    resultBox.textContent = "Connection error. Make sure your Cloudflare Worker URL is configured correctly.";
+    resultBox.textContent = "Connection error. Make sure your Cloudflare Worker is running.";
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Ask AI";
   }
 }
 
+// PRO Gating for Calculators
+function checkProAccess(event) {
+  if (!isProUser) {
+    event.preventDefault();
+    openPricingModal();
+  }
+}
+
+// Modal Handlers
 function openAuthModal(title, desc) {
   if (title) document.getElementById('modalTitle').textContent = title;
   if (desc) document.getElementById('modalDesc').textContent = desc;
@@ -561,6 +655,29 @@ function openAuthModal(title, desc) {
 
 function closeAuthModal() {
   document.getElementById('authModal').classList.remove('active');
+}
+
+function openPricingModal() {
+  document.getElementById('pricingModal').classList.add('active');
+}
+
+function closePricingModal() {
+  document.getElementById('pricingModal').classList.remove('active');
+}
+
+function loginWithGoogle() {
+  alert("Google Auth Placeholder: To enable real Google Sign-In, link your free Firebase project API key.");
+  closeAuthModal();
+}
+
+function handleEmailAuth() {
+  alert("Email Auth Placeholder: Create a free Firebase account to enable real user database accounts.");
+  closeAuthModal();
+}
+
+function subscribePro() {
+  // Replace this alert with your Stripe Payment Link URL when ready
+  window.location.href = "https://buy.stripe.com/YOUR_STRIPE_LINK_HERE";
 }
 
 updateAICounter();
