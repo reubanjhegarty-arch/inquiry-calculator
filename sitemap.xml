@@ -2,6 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://inquirycalculator.com/</loc></url>
 <url><loc>https://inquirycalculator.com/calculators.html</loc></url>
+<url><loc>https://inquirycalculator.com/about.html</loc></url>
+<url><loc>https://inquirycalculator.com/contact.html</loc></url>
+<url><loc>https://inquirycalculator.com/privacy.html</loc></url>
+<url><loc>https://inquirycalculator.com/terms.html</loc></url>
+
+<!-- Finance -->
 <url><loc>https://inquirycalculator.com/mortgage-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/car-loan-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/loan-calculator.html</loc></url>
@@ -12,9 +18,24 @@
 <url><loc>https://inquirycalculator.com/discount-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/tip-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/sales-tax-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/margin-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/roi-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/amortization-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/inflation-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/rule-of-72-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/present-value-calculator.html</loc></url>
+
+<!-- Health & Fitness -->
 <url><loc>https://inquirycalculator.com/calorie-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/bmi-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/bmr-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/macros-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/ideal-weight-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/pace-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/ovulation-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/due-date-calculator.html</loc></url>
+
+<!-- Education & Text -->
 <url><loc>https://inquirycalculator.com/gpa-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/cgpa-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/grade-calculator.html</loc></url>
@@ -22,11 +43,17 @@
 <url><loc>https://inquirycalculator.com/word-counter.html</loc></url>
 <url><loc>https://inquirycalculator.com/reading-time-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/study-time-calculator.html</loc></url>
+
+<!-- Math & Science -->
 <url><loc>https://inquirycalculator.com/percentage-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/scientific-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/average-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/fraction-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/unit-converter.html</loc></url>
+<url><loc>https://inquirycalculator.com/probability-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/standard-deviation-calculator.html</loc></url>
+
+<!-- Utilities & Date -->
 <url><loc>https://inquirycalculator.com/aspect-ratio-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/fuel-cost-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/electricity-calculator.html</loc></url>
@@ -34,8 +61,6 @@
 <url><loc>https://inquirycalculator.com/age-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/date-calculator.html</loc></url>
 <url><loc>https://inquirycalculator.com/time-calculator.html</loc></url>
-<url><loc>https://inquirycalculator.com/about.html</loc></url>
-<url><loc>https://inquirycalculator.com/contact.html</loc></url>
-<url><loc>https://inquirycalculator.com/privacy.html</loc></url>
-<url><loc>https://inquirycalculator.com/terms.html</loc></url>
+<url><loc>https://inquirycalculator.com/random-number-generator.html</loc></url>
+<url><loc>https://inquirycalculator.com/business-days-calculator.html</loc></url>
 </urlset>
