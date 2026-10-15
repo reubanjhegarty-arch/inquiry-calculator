@@ -43,8 +43,48 @@
     .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
     .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:2.8rem;color:#2E2318;margin:12px 0 16px;line-height:1.1}
     .hero p{font-size:1.1rem;color:#5C4936;margin-bottom:24px}
-    .hero-buttons a{display:inline-block;background:#8A6D4F;color:#fff;padding:12px 24px;border-radius:4px;font-weight:600;font-size:.95rem;transition:background .2s}
-    .hero-buttons a:hover{background:#755B40}
+    .hero-buttons{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+    .hero-buttons a.btn{display:inline-block;background:#8A6D4F;color:#fff;padding:12px 24px;border-radius:4px;font-weight:600;font-size:.95rem;transition:background .2s}
+    .hero-buttons a.btn:hover{background:#755B40}
+
+    /* Search bar */
+    .search-wrap{width:100%;max-width:380px;position:relative}
+    .search-wrap input{
+      width:100%;
+      padding:12px 14px 12px 40px;
+      border:1px solid #DED1B8;
+      border-radius:4px;
+      background:#FCF9F2;
+      font-size:1rem;
+      color:#2E2318;
+      font-family:inherit;
+    }
+    .search-wrap input:focus{outline:none;border-color:#8A6D4F;box-shadow:0 0 0 3px rgba(138,109,79,.12)}
+    .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:#8A6D4F;fill:none;stroke-width:2}
+    #searchResults{
+      display:none;
+      position:absolute;
+      top:100%;
+      left:0;right:0;
+      background:#FCF9F2;
+      border:1px solid #DED1B8;
+      border-top:none;
+      border-radius:0 0 4px 4px;
+      max-height:280px;
+      overflow-y:auto;
+      z-index:50;
+      box-shadow:0 8px 20px rgba(46,35,24,.1);
+    }
+    #searchResults a{
+      display:block;
+      padding:10px 14px;
+      color:#2E2318;
+      font-size:.95rem;
+      border-bottom:1px solid #EFE7D6;
+    }
+    #searchResults a:hover{background:#EFE7D6}
+    #searchResults a:last-child{border-bottom:none}
+    #searchResults .no-match{padding:12px 14px;color:#8A6D4F;font-size:.9rem}
 
     /* ---------- advanced scientific calc ---------- */
     .hero-calc{width:460px;flex-shrink:0;background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:16px;box-shadow:0 12px 32px rgba(46,35,24,.08)}
@@ -54,7 +94,6 @@
     .calc-btn{background:#fff;border:1px solid #DED1B8;color:#2E2318;padding:8px 0;font-size:.95rem;font-weight:500;border-radius:4px;cursor:pointer;transition:background .1s}
     .calc-btn:hover{background:#EFE7D6}
     
-    /* Button variants */
     .calc-btn.fn{background:#F6F1E7;color:#5C4936}
     .calc-btn.num{background:#EADFC8;font-weight:600;font-size:1.1rem}
     .calc-btn.op{background:#F6F1E7;font-weight:700}
@@ -65,7 +104,6 @@
     .calc-btn.equal{background:#2E2318;color:#fff;border-color:#2E2318}
     .calc-btn.equal:hover{background:#1A130C}
 
-    /* Radio toggle styling */
     .deg-rad{display:flex;align-items:center;justify-content:center;gap:12px;background:#F6F1E7;border:1px solid #DED1B8;border-radius:4px;grid-column:span 2;font-size:.85rem;color:#5C4936}
     .deg-rad label{display:flex;align-items:center;gap:4px;cursor:pointer}
 
@@ -81,6 +119,7 @@
     .card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
     .card-meta .tag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
     .card-meta .arrow{color:#8A6D4F;font-weight:700}
+    .card.hidden{display:none}
 
     /* ---------- footer ---------- */
     footer{background:#2A1F15;color:#CBBBA0;margin-top:44px}
@@ -91,6 +130,8 @@
     @media (max-width:900px){
       .hero{flex-direction:column;text-align:center;padding:40px 0}
       .hero-text{max-width:100%}
+      .hero-buttons{align-items:center}
+      .search-wrap{max-width:100%}
       .hero-calc{width:100%;max-width:460px}
     }
     @media (max-width:640px){
@@ -125,8 +166,16 @@
     <div class="eyebrow">Welcome to</div>
     <h1>Inquiry Calculator</h1>
     <p>Quick, accurate tools for finance, health, school, and everyday questions. No sign-up, no clutter — just the answers you need.</p>
+    
     <div class="hero-buttons">
-      <a href="calculators.html">View All 25+ Calculators</a>
+      <a href="calculators.html" class="btn">View All 25+ Calculators</a>
+      
+      <!-- WORKING SEARCH BAR -->
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+        <input type="text" id="calcSearch" placeholder="Search calculators..." autocomplete="off">
+        <div id="searchResults"></div>
+      </div>
     </div>
   </div>
 
@@ -212,11 +261,11 @@
   <!-- Finance -->
   <section>
     <div class="sec-head"><h2>Finance</h2></div>
-    <div class="grid">
-      <a class="card" href="mortgage-calculator.html"><h3>Mortgage Calculator</h3><p>Estimate monthly repayments, interest, and total cost.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="car-loan-calculator.html"><h3>Car Loan Calculator</h3><p>Work out monthly payments and interest for vehicles.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="compound-interest-calculator.html"><h3>Compound Interest</h3><p>See how savings and investments grow over time.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="salary-calculator.html"><h3>Salary Calculator</h3><p>Convert between hourly pay, monthly, and annual salary.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+    <div class="grid" id="financeGrid">
+      <a class="card" href="mortgage-calculator.html" data-name="mortgage calculator"><h3>Mortgage Calculator</h3><p>Estimate monthly repayments, interest, and total cost.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="car-loan-calculator.html" data-name="car loan calculator"><h3>Car Loan Calculator</h3><p>Work out monthly payments and interest for vehicles.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="compound-interest-calculator.html" data-name="compound interest calculator"><h3>Compound Interest</h3><p>See how savings and investments grow over time.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="salary-calculator.html" data-name="salary calculator"><h3>Salary Calculator</h3><p>Convert between hourly pay, monthly, and annual salary.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
 
@@ -224,10 +273,10 @@
   <section>
     <div class="sec-head"><h2>Health &amp; Education</h2></div>
     <div class="grid">
-      <a class="card" href="calorie-calculator.html"><h3>Calorie Calculator</h3><p>Find daily calorie needs based on goals and activity.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="gpa-calculator.html"><h3>GPA Calculator</h3><p>Calculate your grade point average from courses.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="grade-calculator.html"><h3>Grade Calculator</h3><p>Find out what score you need on a final exam.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="reading-time-calculator.html"><h3>Reading Time</h3><p>Estimate how many minutes a text takes to read.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="calorie-calculator.html" data-name="calorie calculator"><h3>Calorie Calculator</h3><p>Find daily calorie needs based on goals and activity.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="gpa-calculator.html" data-name="gpa calculator"><h3>GPA Calculator</h3><p>Calculate your grade point average from courses.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="grade-calculator.html" data-name="grade calculator"><h3>Grade Calculator</h3><p>Find out what score you need on a final exam.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="reading-time-calculator.html" data-name="reading time calculator"><h3>Reading Time</h3><p>Estimate how many minutes a text takes to read.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
 
@@ -235,10 +284,10 @@
   <section>
     <div class="sec-head"><h2>Math &amp; Utilities</h2></div>
     <div class="grid">
-      <a class="card" href="percentage-calculator.html"><h3>Percentage Calculator</h3><p>Calculate percentages, changes, and differences.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="unit-converter.html"><h3>Unit Converter</h3><p>Convert length, weight, temperature, and volume.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="date-calculator.html"><h3>Date Calculator</h3><p>Add/subtract days, or find the time between dates.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="calculators.html"><h3>View All Calculators</h3><p>Browse our full directory of 25+ calculators.</p><div class="card-meta"><span class="tag">Directory</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="percentage-calculator.html" data-name="percentage calculator"><h3>Percentage Calculator</h3><p>Calculate percentages, changes, and differences.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="unit-converter.html" data-name="unit converter"><h3>Unit Converter</h3><p>Convert length, weight, temperature, and volume.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="date-calculator.html" data-name="date calculator"><h3>Date Calculator</h3><p>Add/subtract days, or find the time between dates.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="calculators.html" data-name="all calculators"><h3>View All Calculators</h3><p>Browse our full directory of 25+ calculators.</p><div class="card-meta"><span class="tag">Directory</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
 </main>
@@ -301,7 +350,6 @@
     display.textContent = show || "0";
   }
 
-  // Math helpers for eval
   function fact(n) { return n <= 1 ? 1 : n * fact(n - 1); }
   
   function calcEval() {
@@ -318,10 +366,8 @@
         .replace(/ln\(/g, 'Math.log(')
         .replace(/log\(/g, 'Math.log10(');
 
-      // Handle Factorials (basic regex for trailing !)
       eStr = eStr.replace(/(\d+)!/g, 'fact($1)');
 
-      // Handle Trig & Deg/Rad logic
       eStr = eStr.replace(/asin\(([^)]+)\)/g, isDeg ? '(Math.asin($1)*180/Math.PI)' : 'Math.asin($1)');
       eStr = eStr.replace(/acos\(([^)]+)\)/g, isDeg ? '(Math.acos($1)*180/Math.PI)' : 'Math.acos($1)');
       eStr = eStr.replace(/atan\(([^)]+)\)/g, isDeg ? '(Math.atan($1)*180/Math.PI)' : 'Math.atan($1)');
@@ -330,13 +376,11 @@
       eStr = eStr.replace(/cos\(([^)]+)\)/g, isDeg ? 'Math.cos(($1)*Math.PI/180)' : 'Math.cos($1)');
       eStr = eStr.replace(/tan\(([^)]+)\)/g, isDeg ? 'Math.tan(($1)*Math.PI/180)' : 'Math.tan($1)');
 
-      // Replace ^ with ** for powers
       eStr = eStr.replace(/\^/g, '**');
       
       let res = eval(eStr);
       if(isNaN(res) || !isFinite(res)) throw new Error("Invalid");
       
-      // format long decimals
       res = Math.round(res * 1000000000) / 1000000000;
       ans = res;
       calcStr = res.toString();
@@ -346,6 +390,92 @@
       display.textContent = "Error";
     }
   }
+</script>
+
+<!-- WORKING SEARCH -->
+<script>
+const allCalcs = [
+  {name:"Mortgage Calculator", url:"mortgage-calculator.html"},
+  {name:"Car Loan Calculator", url:"car-loan-calculator.html"},
+  {name:"Loan Calculator", url:"loan-calculator.html"},
+  {name:"Tax Calculator", url:"tax-calculator.html"},
+  {name:"Salary Calculator", url:"salary-calculator.html"},
+  {name:"Overtime Calculator", url:"overtime-calculator.html"},
+  {name:"Compound Interest Calculator", url:"compound-interest-calculator.html"},
+  {name:"Discount Calculator", url:"discount-calculator.html"},
+  {name:"Tip Calculator", url:"tip-calculator.html"},
+  {name:"Sales Tax Calculator", url:"sales-tax-calculator.html"},
+  {name:"Calorie Calculator", url:"calorie-calculator.html"},
+  {name:"BMI Calculator", url:"bmi-calculator.html"},
+  {name:"Due Date Calculator", url:"due-date-calculator.html"},
+  {name:"GPA Calculator", url:"gpa-calculator.html"},
+  {name:"CGPA Calculator", url:"cgpa-calculator.html"},
+  {name:"Grade Calculator", url:"grade-calculator.html"},
+  {name:"Test Score Calculator", url:"test-score-calculator.html"},
+  {name:"Word Counter", url:"word-counter.html"},
+  {name:"Reading Time Calculator", url:"reading-time-calculator.html"},
+  {name:"Study Time Calculator", url:"study-time-calculator.html"},
+  {name:"Percentage Calculator", url:"percentage-calculator.html"},
+  {name:"Scientific Calculator", url:"scientific-calculator.html"},
+  {name:"Average Calculator", url:"average-calculator.html"},
+  {name:"Fraction Calculator", url:"fraction-calculator.html"},
+  {name:"Unit Converter", url:"unit-converter.html"},
+  {name:"Aspect Ratio Calculator", url:"aspect-ratio-calculator.html"},
+  {name:"Fuel Cost Calculator", url:"fuel-cost-calculator.html"},
+  {name:"Electricity Calculator", url:"electricity-calculator.html"},
+  {name:"Download Time Calculator", url:"download-time-calculator.html"},
+  {name:"Age Calculator", url:"age-calculator.html"},
+  {name:"Date Calculator", url:"date-calculator.html"},
+  {name:"Time Calculator", url:"time-calculator.html"}
+];
+
+const searchInput = document.getElementById('calcSearch');
+const resultsBox = document.getElementById('searchResults');
+const cards = document.querySelectorAll('.card');
+
+searchInput.addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  
+  // Filter homepage cards
+  cards.forEach(card => {
+    const name = (card.getAttribute('data-name') || card.querySelector('h3').textContent).toLowerCase();
+    if (!q || name.includes(q)) {
+      card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
+    }
+  });
+
+  // Dropdown results
+  if (!q) {
+    resultsBox.style.display = 'none';
+    resultsBox.innerHTML = '';
+    return;
+  }
+
+  const matches = allCalcs.filter(c => c.name.toLowerCase().includes(q));
+  
+  if (matches.length === 0) {
+    resultsBox.innerHTML = '<div class="no-match">No calculators found</div>';
+  } else {
+    resultsBox.innerHTML = matches.map(c => 
+      `<a href="${c.url}">${c.name}</a>`
+    ).join('');
+  }
+  resultsBox.style.display = 'block';
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.search-wrap')) {
+    resultsBox.style.display = 'none';
+  }
+});
+
+// Open dropdown on focus if there's text
+searchInput.addEventListener('focus', function() {
+  if (this.value.trim()) resultsBox.style.display = 'block';
+});
 </script>
 
 <script src="script.js"></script>
