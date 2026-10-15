@@ -6,6 +6,8 @@
     <title>Inquiry Calculator - Free Online Calculators & AI Solver</title>
     <meta name="description" content="Free online calculators and AI problem solver for math, finance, fitness, dates, and science.">
     <meta name="theme-color" content="#F6F1E7">
+    
+    <!-- Favicons -->
     <link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
     <link rel="shortcut icon" href="/favicon.ico?v=2" />
@@ -18,7 +20,7 @@
     a{color:inherit;text-decoration:none}
     .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
-    /* ---------- top nav ---------- */
+    /* ---------- NAV ---------- */
     nav{background:#EFE7D6;border-bottom:1px solid #DED1B8}
     .nav{display:flex;align-items:center;justify-content:space-between;height:60px}
     .brand{font-family:Georgia,"Times New Roman",serif;font-weight:700;font-size:1.3rem;color:#3E2E1F}
@@ -36,7 +38,7 @@
     .btn-pro{background:#8A6D4F;color:#fff;border:none;padding:6px 12px;font-size:.85rem;font-weight:700;border-radius:4px;cursor:pointer}
     .btn-pro:hover{background:#755B40}
 
-    /* ---------- ticker bar ---------- */
+    /* ---------- TICKER ---------- */
     .ticker{background:#2E2318;overflow:hidden;white-space:nowrap}
     .ticker-track{display:inline-flex;align-items:center;padding:9px 0;animation:tick 70s linear infinite}
     .ticker:hover .ticker-track{animation-play-state:paused}
@@ -44,60 +46,66 @@
     .ticker-track a:last-child{border-right:none}
     .ticker-track a:hover{color:#fff;text-decoration:underline}
     @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
 
-    /* ---------- hero (side by side) ---------- */
+    /* ---------- HERO ---------- */
     .hero{display:flex;align-items:center;justify-content:space-between;padding:50px 0;gap:40px}
     .hero-text{flex:1;max-width:540px}
     .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
     .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:2.8rem;color:#2E2318;margin:12px 0 16px;line-height:1.1}
     .hero p{font-size:1.1rem;color:#5C4936;margin-bottom:24px}
-    .hero-buttons{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
-    .hero-buttons a.btn{display:inline-block;background:#8A6D4F;color:#fff;padding:12px 24px;border-radius:4px;font-weight:600;font-size:.95rem;transition:background .2s}
-    .hero-buttons a.btn:hover{background:#755B40}
-
-    /* Keyword Search bar */
-    .search-wrap{width:100%;max-width:420px;position:relative}
+    
+    /* SEARCH BAR */
+    .search-wrap{width:100%;max-width:420px;position:relative;margin-top:14px}
     .search-wrap input{width:100%;padding:12px 14px 12px 40px;border:1px solid #DED1B8;border-radius:4px;background:#FCF9F2;font-size:1rem;color:#2E2318;font-family:inherit}
     .search-wrap input:focus{outline:none;border-color:#8A6D4F;box-shadow:0 0 0 3px rgba(138,109,79,.12)}
     .search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:#8A6D4F;fill:none;stroke-width:2}
     #searchResults{display:none;position:absolute;top:100%;left:0;right:0;background:#FCF9F2;border:1px solid #DED1B8;border-top:none;border-radius:0 0 4px 4px;max-height:280px;overflow-y:auto;z-index:50;box-shadow:0 8px 20px rgba(46,35,24,.1)}
     #searchResults a{display:block;padding:10px 14px;color:#2E2318;font-size:.95rem;border-bottom:1px solid #EFE7D6}
     #searchResults a:hover{background:#EFE7D6}
-    #searchResults .no-match{padding:12px 14px;color:#8A6D4F;font-size:.9rem}
 
-    /* ---------- scientific calc ---------- */
+    /* ---------- SCIENTIFIC CALC ---------- */
     .hero-calc{width:460px;flex-shrink:0;background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:16px;box-shadow:0 12px 32px rgba(46,35,24,.08)}
-    .calc-display{background:#EFE7D6;border:1px solid #DED1B8;border-radius:4px;padding:12px 16px;font-size:1.8rem;text-align:right;color:#2E2318;margin-bottom:12px;min-height:64px;overflow-x:auto;font-family:monospace;letter-spacing:-1px}
+    .calc-display{background:#EFE7D6;border:1px solid #DED1B8;border-radius:4px;padding:12px 16px;font-size:1.8rem;text-align:right;color:#2E2318;margin-bottom:12px;min-height:64px;overflow-x:auto;font-family:monospace}
     .calc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-    .calc-btn{background:#fff;border:1px solid #DED1B8;color:#2E2318;padding:8px 0;font-size:.95rem;font-weight:500;border-radius:4px;cursor:pointer;transition:background .1s}
+    .calc-btn{background:#fff;border:1px solid #DED1B8;color:#2E2318;padding:8px 0;font-size:.95rem;font-weight:500;border-radius:4px;cursor:pointer}
     .calc-btn:hover{background:#EFE7D6}
     .calc-btn.fn{background:#F6F1E7;color:#5C4936}
     .calc-btn.num{background:#EADFC8;font-weight:600;font-size:1.1rem}
     .calc-btn.op{background:#F6F1E7;font-weight:700}
     .calc-btn.mem{background:#F6F1E7;color:#8A6D4F}
     .calc-btn.clear{background:#8A6D4F;color:#fff;border-color:#8A6D4F}
-    .calc-btn.clear:hover{background:#755B40}
     .calc-btn.equal{background:#2E2318;color:#fff;border-color:#2E2318}
-    .calc-btn.equal:hover{background:#1A130C}
-    .deg-rad{display:flex;align-items:center;justify-content:center;gap:12px;background:#F6F1E7;border:1px solid #DED1B8;border-radius:4px;grid-column:span 2;font-size:.85rem;color:#5C4936}
-    .deg-rad label{display:flex;align-items:center;gap:4px;cursor:pointer}
+    .deg-rad{display:flex;align-items:center;justify-content:center;gap:12px;background:#F6F1E7;border:1px solid #DED1B8;border-radius:4px;grid-column:span 2;font-size:.85rem}
 
-    /* ---------- AI PROBLEM SOLVER SECTION ---------- */
+    /* ---------- AI SOLVER ---------- */
     .ai-section{background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:32px;margin:10px auto 30px;box-shadow:0 8px 24px rgba(46,35,24,.04)}
     .ai-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;border-bottom:2px solid #DED1B8;padding-bottom:8px}
-    .ai-header h2{font-family:Georgia,"Times New Roman",serif;font-size:1.5rem;color:#2E2318}
+    .ai-header h2{font-family:Georgia,serif;font-size:1.5rem;color:#2E2318}
     .ai-counter{font-size:.85rem;font-weight:600;color:#8A6D4F;background:#EFE7D6;padding:4px 10px;border-radius:4px}
-    .ai-box{display:flex;gap:10px;margin-bottom:16px}
-    .ai-box textarea{flex:1;padding:12px;border:1px solid #DED1B8;border-radius:4px;font-size:1rem;font-family:inherit;background:#fff;color:#2E2318;resize:vertical;min-height:70px}
+    .ai-box{display:flex;gap:10px;margin-bottom:8px}
+    .ai-box textarea{flex:1;padding:12px;border:1px solid #DED1B8;border-radius:4px;font-size:1rem;font-family:inherit;resize:vertical;min-height:70px}
     .ai-box textarea:focus{outline:none;border-color:#8A6D4F}
-    .ai-box button{background:#8A6D4F;color:#fff;border:none;padding:0 24px;font-weight:600;border-radius:4px;cursor:pointer;transition:background .2s;white-space:nowrap}
+    .ai-box button{background:#8A6D4F;color:#fff;border:none;padding:0 24px;font-weight:600;border-radius:4px;cursor:pointer;white-space:nowrap}
     .ai-box button:hover{background:#755B40}
-    .ai-box button:disabled{background:#CBBBA0;cursor:not-allowed}
-    .ai-hint{font-size:.8rem;color:#8A6D4F;margin-top:-10px;margin-bottom:12px}
+    .ai-hint{font-size:.8rem;color:#8A6D4F;margin-bottom:12px}
     .ai-result{background:#EFE7D6;border-left:4px solid #8A6D4F;padding:16px;border-radius:4px;font-size:1rem;color:#2E2318;white-space:pre-wrap;display:none}
 
-    /* Auth & Pricing Modals */
+    /* ---------- GRIDS & CARDS ---------- */
+    section{padding:20px 0}
+    .sec-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #DED1B8;padding-bottom:8px;margin-bottom:20px}
+    .sec-head h2{font-family:Georgia,serif;font-size:1.4rem;color:#3E2E1F}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+    .card{position:relative;display:flex;flex-direction:column;background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:18px;transition:all .15s}
+    .card:hover{border-color:#8A6D4F;transform:translateY(-2px);box-shadow:0 4px 12px rgba(46,35,24,.06)}
+    .card h3{font-size:1.05rem;color:#2E2318;margin-bottom:6px}
+    .card p{font-size:.9rem;color:#6B5844;flex:1}
+    .card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+    .card-meta .tag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
+    .card-meta .arrow{color:#8A6D4F;font-weight:700}
+    .card.hidden{display:none}
+    .pro-badge{position:absolute;top:12px;right:12px;background:#8A6D4F;color:#fff;font-size:.65rem;font-weight:800;padding:2px 6px;border-radius:3px}
+
+    /* ---------- MODALS ---------- */
     .modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(42,31,21,.6);z-index:100;align-items:center;justify-content:center}
     .modal-overlay.active{display:flex}
     .modal-box{background:#FCF9F2;border:1px solid #E0D4BE;padding:32px;border-radius:4px;max-width:440px;width:90%;text-align:center;position:relative}
@@ -112,36 +120,16 @@
     .divider span{padding:0 10px}
     .modal-close{margin-top:12px;background:none;border:none;color:#8A6D4F;cursor:pointer;font-size:.85rem;text-decoration:underline}
 
-    /* Pricing Plans Layout */
+    /* Pricing Plans */
     .plans-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;text-align:left}
     .plan-card{border:1px solid #DED1B8;background:#fff;padding:16px;border-radius:4px;display:flex;flex-direction:column}
     .plan-card.featured{border:2px solid #8A6D4F;background:#FCF9F2}
-    .plan-card h4{font-family:Georgia,serif;color:#2E2318;font-size:1.1rem;margin-bottom:4px}
     .plan-price{font-size:1.3rem;font-weight:700;color:#8A6D4F;margin-bottom:10px}
     .plan-features{list-style:none;font-size:.82rem;color:#5C4936;flex:1;margin-bottom:14px}
-    .plan-features li{margin-bottom:6px;display:flex;align-items:center;gap:6px}
 
-    /* PRO Badges on Cards */
-    .card{position:relative}
-    .pro-badge{position:absolute;top:12px;right:12px;background:#8A6D4F;color:#fff;font-size:.65rem;font-weight:800;padding:2px 6px;border-radius:3px;letter-spacing:.05em}
-
-    /* ---------- sections & cards ---------- */
-    section{padding:20px 0}
-    .sec-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid #DED1B8;padding-bottom:8px;margin-bottom:20px}
-    .sec-head h2{font-family:Georgia,"Times New Roman",serif;font-size:1.4rem;color:#3E2E1F}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-    .card{display:flex;flex-direction:column;background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:18px;transition:all .15s}
-    .card:hover{border-color:#8A6D4F;transform:translateY(-2px);box-shadow:0 4px 12px rgba(46,35,24,.06)}
-    .card h3{font-size:1.05rem;color:#2E2318;margin-bottom:6px}
-    .card p{font-size:.9rem;color:#6B5844;flex:1}
-    .card-meta{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
-    .card-meta .tag{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
-    .card-meta .arrow{color:#8A6D4F;font-weight:700}
-    .card.hidden{display:none}
-
-    /* ---------- footer ---------- */
-    footer{background:#2A1F15;color:#CBBBA0;margin-top:44px}
-    .foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;padding:26px 0;font-size:.9rem}
+    /* ---------- FOOTER ---------- */
+    footer{background:#2A1F15;color:#CBBBA0;margin-top:44px;padding:26px 0}
+    .foot{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between;font-size:.9rem}
     .foot-links{display:flex;gap:18px}
     footer a:hover{color:#fff;text-decoration:underline}
 
@@ -154,6 +142,7 @@
       .ai-box{flex-direction:column}
       .ai-box button{padding:12px}
       .plans-grid{grid-template-columns:1fr}
+      .nav{flex-direction:column;height:auto;padding:12px 0;gap:8px}
     }
     </style>
 </head>
@@ -179,9 +168,9 @@
 
 <div class="ticker" aria-label="Browse calculators">
   <div class="ticker-track">
-    <a href="mortgage-calculator.html">Mortgage Calculator</a><a href="car-loan-calculator.html">Car Loan Calculator</a><a href="compound-interest-calculator.html">Compound Interest Calculator</a><a href="tax-calculator.html">Tax Calculator</a><a href="salary-calculator.html">Salary Calculator</a><a href="calorie-calculator.html">Calorie Calculator</a><a href="bmi-calculator.html">BMI Calculator</a><a href="due-date-calculator.html">Due Date Calculator</a><a href="gpa-calculator.html">GPA Calculator</a><a href="random-number-generator.html">Random Number Generator</a><a href="percentage-calculator.html">Percentage Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a><a href="car-loan-calculator.html">Car Loan Calculator</a><a href="compound-interest-calculator.html">Compound Interest Calculator</a><a href="tax-calculator.html">Tax Calculator</a><a href="salary-calculator.html">Salary Calculator</a><a href="calorie-calculator.html">Calorie Calculator</a><a href="bmi-calculator.html">BMI Calculator</a><a href="due-date-calculator.html">Due Date Calculator</a><a href="gpa-calculator.html">GPA Calculator</a><a href="random-number-generator.html">Random Number Gen</a><a href="percentage-calculator.html">Percentage Calculator</a>
     <!-- Ticker duplicate -->
-    <a href="mortgage-calculator.html" aria-hidden="true" tabindex="-1">Mortgage Calculator</a><a href="car-loan-calculator.html" aria-hidden="true" tabindex="-1">Car Loan Calculator</a><a href="compound-interest-calculator.html" aria-hidden="true" tabindex="-1">Compound Interest Calculator</a><a href="tax-calculator.html" aria-hidden="true" tabindex="-1">Tax Calculator</a><a href="salary-calculator.html" aria-hidden="true" tabindex="-1">Salary Calculator</a><a href="calorie-calculator.html" aria-hidden="true" tabindex="-1">Calorie Calculator</a><a href="bmi-calculator.html" aria-hidden="true" tabindex="-1">BMI Calculator</a><a href="due-date-calculator.html" aria-hidden="true" tabindex="-1">Due Date Calculator</a><a href="gpa-calculator.html" aria-hidden="true" tabindex="-1">GPA Calculator</a><a href="random-number-generator.html" aria-hidden="true" tabindex="-1">Random Number Generator</a><a href="percentage-calculator.html" aria-hidden="true" tabindex="-1">Percentage Calculator</a>
+    <a href="mortgage-calculator.html" aria-hidden="true" tabindex="-1">Mortgage Calculator</a><a href="car-loan-calculator.html" aria-hidden="true" tabindex="-1">Car Loan Calculator</a><a href="compound-interest-calculator.html" aria-hidden="true" tabindex="-1">Compound Interest Calculator</a><a href="tax-calculator.html" aria-hidden="true" tabindex="-1">Tax Calculator</a><a href="salary-calculator.html" aria-hidden="true" tabindex="-1">Salary Calculator</a><a href="calorie-calculator.html" aria-hidden="true" tabindex="-1">Calorie Calculator</a><a href="bmi-calculator.html" aria-hidden="true" tabindex="-1">BMI Calculator</a><a href="due-date-calculator.html" aria-hidden="true" tabindex="-1">Due Date Calculator</a><a href="gpa-calculator.html" aria-hidden="true" tabindex="-1">GPA Calculator</a><a href="random-number-generator.html" aria-hidden="true" tabindex="-1">Random Number Gen</a><a href="percentage-calculator.html" aria-hidden="true" tabindex="-1">Percentage Calculator</a>
   </div>
 </div>
 
@@ -192,8 +181,6 @@
     <p>Quick, accurate tools for finance, health, school, and everyday questions. Powered by smart calculators and AI.</p>
     
     <div class="hero-buttons">
-      <a href="calculators.html" class="btn">View All 45+ Calculators</a>
-      
       <!-- KEYWORD SEARCH BAR -->
       <div class="search-wrap">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
@@ -206,7 +193,6 @@
   <div class="hero-calc">
     <div class="calc-display" id="mainCalcDisplay">0</div>
     <div class="calc-grid">
-      <!-- Row 1 -->
       <button class="calc-btn fn" onclick="calcFn('sin(')">sin</button>
       <button class="calc-btn fn" onclick="calcFn('cos(')">cos</button>
       <button class="calc-btn fn" onclick="calcFn('tan(')">tan</button>
@@ -214,64 +200,46 @@
         <label><input type="radio" name="angle" id="rDeg" checked> Deg</label>
         <label><input type="radio" name="angle" id="rRad"> Rad</label>
       </div>
-
-      <!-- Row 2 -->
       <button class="calc-btn fn" onclick="calcFn('asin(')">sin⁻¹</button>
       <button class="calc-btn fn" onclick="calcFn('acos(')">cos⁻¹</button>
       <button class="calc-btn fn" onclick="calcFn('atan(')">tan⁻¹</button>
       <button class="calc-btn fn" onclick="calcFn('π')">π</button>
       <button class="calc-btn fn" onclick="calcFn('e')">e</button>
-
-      <!-- Row 3 -->
       <button class="calc-btn fn" onclick="calcFn('^')">xʸ</button>
       <button class="calc-btn fn" onclick="calcFn('^3')">x³</button>
       <button class="calc-btn fn" onclick="calcFn('^2')">x²</button>
       <button class="calc-btn fn" onclick="calcFn('e^')">eˣ</button>
       <button class="calc-btn fn" onclick="calcFn('10^')">10ˣ</button>
-
-      <!-- Row 4 -->
       <button class="calc-btn fn" onclick="calcFn('^(1/')">y√x</button>
       <button class="calc-btn fn" onclick="calcFn('cbrt(')">³√x</button>
       <button class="calc-btn fn" onclick="calcFn('sqrt(')">√x</button>
       <button class="calc-btn fn" onclick="calcFn('ln(')">ln</button>
       <button class="calc-btn fn" onclick="calcFn('log(')">log</button>
-
-      <!-- Row 5 -->
       <button class="calc-btn fn" onclick="calcFn('(')">(</button>
       <button class="calc-btn fn" onclick="calcFn(')')">)</button>
       <button class="calc-btn fn" onclick="calcFn('1/')">1/x</button>
       <button class="calc-btn fn" onclick="calcFn('%')">%</button>
       <button class="calc-btn fn" onclick="calcFn('!')">n!</button>
-
-      <!-- Row 6 -->
       <button class="calc-btn num" onclick="calcFn('7')">7</button>
       <button class="calc-btn num" onclick="calcFn('8')">8</button>
       <button class="calc-btn num" onclick="calcFn('9')">9</button>
       <button class="calc-btn op" onclick="calcFn('+')">+</button>
       <button class="calc-btn fn" onclick="calcBack()">Back</button>
-
-      <!-- Row 7 -->
       <button class="calc-btn num" onclick="calcFn('4')">4</button>
       <button class="calc-btn num" onclick="calcFn('5')">5</button>
       <button class="calc-btn num" onclick="calcFn('6')">6</button>
       <button class="calc-btn op" onclick="calcFn('-')">−</button>
       <button class="calc-btn mem" onclick="calcAns()">Ans</button>
-
-      <!-- Row 8 -->
       <button class="calc-btn num" onclick="calcFn('1')">1</button>
       <button class="calc-btn num" onclick="calcFn('2')">2</button>
       <button class="calc-btn num" onclick="calcFn('3')">3</button>
       <button class="calc-btn op" onclick="calcFn('*')">×</button>
       <button class="calc-btn mem" onclick="calcMem('M+')">M+</button>
-
-      <!-- Row 9 -->
       <button class="calc-btn num" onclick="calcFn('0')">0</button>
       <button class="calc-btn num" onclick="calcFn('.')">.</button>
       <button class="calc-btn fn" onclick="calcFn('E')">EXP</button>
       <button class="calc-btn op" onclick="calcFn('/')">÷</button>
       <button class="calc-btn mem" onclick="calcMem('M-')">M-</button>
-
-      <!-- Row 10 -->
       <button class="calc-btn fn" onclick="calcFn('-')">±</button>
       <button class="calc-btn fn" onclick="calcFn('rnd')">RND</button>
       <button class="calc-btn clear" onclick="calcClear()">AC</button>
@@ -288,7 +256,6 @@
       <h2>AI Problem Solver</h2>
       <span class="ai-counter" id="aiCounter">Free Questions Left: 3/3</span>
     </div>
-    <p style="margin-bottom:12px;font-size:.95rem;color:#5C4936">Ask any math, word problem, or calculation question in plain English:</p>
     <div class="ai-box">
       <textarea id="aiPrompt" placeholder="e.g. If I invest $5,000 at 7% compound interest for 10 years, how much will I have?"></textarea>
       <button id="aiSubmitBtn" onclick="askAI()">Ask AI</button>
@@ -299,7 +266,6 @@
 </section>
 
 <main class="wrap">
-  <!-- Finance -->
   <section>
     <div class="sec-head"><h2>Finance &amp; Business</h2></div>
     <div class="grid">
@@ -312,7 +278,6 @@
     </div>
   </section>
 
-  <!-- Health & Fitness -->
   <section>
     <div class="sec-head"><h2>Health &amp; Fitness</h2></div>
     <div class="grid">
@@ -325,7 +290,6 @@
     </div>
   </section>
 
-  <!-- Math & Science -->
   <section>
     <div class="sec-head"><h2>Math &amp; Science</h2></div>
     <div class="grid">
@@ -360,23 +324,19 @@
       <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
       Continue with Google
     </button>
-    
     <div class="divider"><span>OR EMAIL</span></div>
-
     <input type="email" id="authEmail" placeholder="Email address">
     <input type="password" id="authPass" placeholder="Password">
     <button class="btn-primary" onclick="handleEmailAuth()">Continue</button>
-    <br>
-    <button class="modal-close" onclick="closeAuthModal()">Cancel</button>
+    <br><button class="modal-close" onclick="closeAuthModal()">Cancel</button>
   </div>
 </div>
 
-<!-- PRICING / PRO MODAL -->
+<!-- PRICING MODAL -->
 <div class="modal-overlay" id="pricingModal">
   <div class="modal-box" style="max-width:520px">
     <h3>Upgrade to Inquiry PRO</h3>
     <p>Unlock exclusive financial calculators and unlimited AI problem solving.</p>
-    
     <div class="plans-grid">
       <div class="plan-card">
         <h4>Free Plan</h4>
@@ -388,7 +348,6 @@
         </ul>
         <button class="btn-auth btn-login" style="width:100%" onclick="closePricingModal()">Current Plan</button>
       </div>
-
       <div class="plan-card featured">
         <h4>Pro Plan</h4>
         <div class="plan-price">$4.99 <span style="font-size:.8rem;font-weight:400">/mo</span></div>
@@ -398,11 +357,10 @@
           <li>★ Fast Llama 3.1 AI Model</li>
           <li>★ Priority Support</li>
         </ul>
-        <!-- REPLACE WITH YOUR STRIPE CHECKOUT LINK LATER -->
+        <!-- PLACEHOLDER FOR STRIPE LINK -->
         <button class="btn-primary" onclick="subscribePro()">Upgrade to Pro</button>
       </div>
     </div>
-
     <button class="modal-close" onclick="closePricingModal()">Close</button>
   </div>
 </div>
@@ -413,32 +371,12 @@
   let memory = 0;
   let ans = 0;
   const display = document.getElementById("mainCalcDisplay");
-  
-  function calcFn(val) {
-    if(calcStr === "Error") calcStr = "";
-    if(val === "rnd") val = Math.random().toFixed(4);
-    calcStr += val;
-    updateDisplay();
-  }
-  function calcBack() {
-    if(calcStr.length > 0 && calcStr !== "Error") {
-      calcStr = calcStr.slice(0, -1);
-      updateDisplay();
-    }
-  }
+  function calcFn(val) { if(calcStr === "Error") calcStr = ""; if(val === "rnd") val = Math.random().toFixed(4); calcStr += val; updateDisplay(); }
+  function calcBack() { if(calcStr.length > 0 && calcStr !== "Error") { calcStr = calcStr.slice(0, -1); updateDisplay(); } }
   function calcClear() { calcStr = ""; display.textContent = "0"; }
   function calcAns() { calcFn(ans.toString()); }
-  function calcMem(type) {
-    let currentVal = parseFloat(display.textContent);
-    if(isNaN(currentVal)) currentVal = 0;
-    if(type === 'M+') memory += currentVal;
-    if(type === 'M-') memory -= currentVal;
-    if(type === 'MR') calcFn(memory.toString());
-  }
-  function updateDisplay() {
-    let show = calcStr.replace(/\*/g, '×').replace(/\//g, '÷').replace(/sqrt\(/g, '√(').replace(/cbrt\(/g, '³√(').replace(/asin\(/g, 'sin⁻¹(').replace(/acos\(/g, 'cos⁻¹(').replace(/atan\(/g, 'tan⁻¹(');
-    display.textContent = show || "0";
-  }
+  function calcMem(type) { let currentVal = parseFloat(display.textContent); if(isNaN(currentVal)) currentVal = 0; if(type === 'M+') memory += currentVal; if(type === 'M-') memory -= currentVal; if(type === 'MR') calcFn(memory.toString()); }
+  function updateDisplay() { let show = calcStr.replace(/\*/g, '×').replace(/\//g, '÷').replace(/sqrt\(/g, '√(').replace(/cbrt\(/g, '³√(').replace(/asin\(/g, 'sin⁻¹(').replace(/acos\(/g, 'cos⁻¹(').replace(/atan\(/g, 'tan⁻¹('); display.textContent = show || "0"; }
   function fact(n) { return n <= 1 ? 1 : n * fact(n - 1); }
   function calcEval() {
     if(!calcStr) return;
@@ -519,21 +457,13 @@ const cards = document.querySelectorAll('.card');
 
 searchInput.addEventListener('input', function() {
   const q = this.value.trim().toLowerCase();
-  
   cards.forEach(card => {
     const kw = (card.getAttribute('data-keywords') || card.querySelector('h3').textContent).toLowerCase();
     if (!q || kw.includes(q)) card.classList.remove('hidden');
     else card.classList.add('hidden');
   });
-
-  if (!q) {
-    resultsBox.style.display = 'none';
-    resultsBox.innerHTML = '';
-    return;
-  }
-
+  if (!q) { resultsBox.style.display = 'none'; resultsBox.innerHTML = ''; return; }
   const matches = allCalcs.filter(c => c.name.toLowerCase().includes(q) || c.keywords.toLowerCase().includes(q));
-  
   if (matches.length === 0) {
     resultsBox.innerHTML = '<div class="no-match">No matching calculators found</div>';
   } else {
@@ -542,35 +472,43 @@ searchInput.addEventListener('input', function() {
   resultsBox.style.display = 'block';
 });
 
-document.addEventListener('click', e => {
-  if (!e.target.closest('.search-wrap')) resultsBox.style.display = 'none';
-});
-searchInput.addEventListener('focus', function() {
-  if (this.value.trim()) resultsBox.style.display = 'block';
-});
+document.addEventListener('click', e => { if (!e.target.closest('.search-wrap')) resultsBox.style.display = 'none'; });
+searchInput.addEventListener('focus', function() { if (this.value.trim()) resultsBox.style.display = 'block'; });
 </script>
 
-<!-- AI SOLVER & USER SUBSCRIPTION SCRIPT -->
+<!-- REAL FIREBASE AUTH, AI SOLVER & USER SUBSCRIPTION SCRIPT -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
 <script>
-// YOUR CLOUDFLARE WORKER URL
-const WORKER_URL = "https://inquiry-ai.YOURNAME.workers.dev"; // ← Update your subdomain!
+// ⚠️ REPLACE THIS WITH YOUR CLOUDFLARE WORKER URL
+const WORKER_URL = "YOUR_WORKER_URL_HERE";
+
+// 1. Firebase Configuration (Your Real Keys)
+const firebaseConfig = {
+  apiKey: "AIzaSyCvfgVqm4bXuA-5BOG8wLxOPlb-En0WUzI",
+  authDomain: "inquiry-calculator.firebaseapp.com",
+  projectId: "inquiry-calculator",
+  storageBucket: "inquiry-calculator.firebasestorage.app",
+  messagingSenderId: "1043323087388",
+  appId: "1:1043323087388:web:a38be9b1286b4691464dd9",
+  measurementId: "G-WY6V36JXPJ"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
 const MAX_FREE_QUESTIONS = 3;
-let isProUser = false; // Set to true when user is subscribed
+let isProUser = false; // Granted by logging in
 
-function getTodayKey() {
-  const d = new Date();
-  return `ai_q_${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
-}
-
-function getQuestionsUsed() {
-  return parseInt(localStorage.getItem(getTodayKey()) || "0", 10);
-}
+function getTodayKey() { const d = new Date(); return `ai_q_${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`; }
+function getQuestionsUsed() { return parseInt(localStorage.getItem(getTodayKey()) || "0", 10); }
 
 function updateAICounter() {
   const counter = document.getElementById('aiCounter');
   if (isProUser) {
-    counter.textContent = "Inquiry PRO: Unlimited AI Access";
+    counter.textContent = "PRO Access: Unlimited AI";
     counter.style.background = "#8A6D4F";
     counter.style.color = "#fff";
     return;
@@ -578,11 +516,7 @@ function updateAICounter() {
   const used = getQuestionsUsed();
   const left = Math.max(0, MAX_FREE_QUESTIONS - used);
   counter.textContent = `Free Questions Left Today: ${left}/${MAX_FREE_QUESTIONS}`;
-  
-  if (left <= 0) {
-    counter.style.background = "#2E2318";
-    counter.style.color = "#EADFC8";
-  }
+  if (left <= 0) { counter.style.background = "#2E2318"; counter.style.color = "#EADFC8"; }
 }
 
 // PRESS ENTER TO SUBMIT AI PROMPT
@@ -618,9 +552,7 @@ async function askAI() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: prompt })
     });
-
     const data = await response.json();
-
     if (data.answer) {
       resultBox.textContent = data.answer;
       if (!isProUser) {
@@ -631,7 +563,7 @@ async function askAI() {
       resultBox.textContent = data.error || "Unable to solve at this moment. Please try again.";
     }
   } catch (err) {
-    resultBox.textContent = "Connection error. Make sure your Cloudflare Worker is running.";
+    resultBox.textContent = "Connection error. Make sure your Cloudflare Worker URL is configured correctly.";
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Ask AI";
@@ -646,44 +578,67 @@ function checkProAccess(event) {
   }
 }
 
-// Modal Handlers
+// 2. Real Google Sign-In Function
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then((result) => {
+      alert("Welcome back, " + (result.user.displayName || "User") + "!");
+      closeAuthModal();
+    })
+    .catch((error) => { alert("Google Login Error: " + error.message); });
+}
+
+// 3. Real Email & Password Auth Function
+function handleEmailAuth() {
+  const email = document.getElementById('authEmail').value;
+  const pass = document.getElementById('authPass').value;
+  if (!email || !pass) { alert("Please enter both an email address and password."); return; }
+
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(() => { alert("Logged in successfully!"); closeAuthModal(); })
+    .catch((error) => {
+      if (error.code === 'auth/user-not-found') {
+        auth.createUserWithEmailAndPassword(email, pass)
+          .then(() => { alert("Account created and logged in!"); closeAuthModal(); })
+          .catch(err => alert("Signup error: " + err.message));
+      } else {
+        alert("Login error: " + error.message);
+      }
+    });
+}
+
+// 4. Update Navigation & Limits when Logged In
+auth.onAuthStateChanged((user) => {
+  const loginBtn = document.querySelector('.btn-login');
+  const signupBtn = document.querySelector('.btn-signup');
+  if (user) {
+    isProUser = true; // Temporary: Logging in grants pro status
+    if (loginBtn) loginBtn.textContent = user.displayName ? user.displayName.split(' ')[0] : 'Account';
+    if (signupBtn) signupBtn.style.display = 'none';
+  } else {
+    isProUser = false;
+    if (loginBtn) loginBtn.textContent = 'Log In';
+    if (signupBtn) signupBtn.style.display = 'inline-block';
+  }
+  updateAICounter();
+});
+
+// 5. Modal & Payment Functions
 function openAuthModal(title, desc) {
   if (title) document.getElementById('modalTitle').textContent = title;
   if (desc) document.getElementById('modalDesc').textContent = desc;
   document.getElementById('authModal').classList.add('active');
 }
-
-function closeAuthModal() {
-  document.getElementById('authModal').classList.remove('active');
-}
-
-function openPricingModal() {
-  document.getElementById('pricingModal').classList.add('active');
-}
-
-function closePricingModal() {
-  document.getElementById('pricingModal').classList.remove('active');
-}
-
-function loginWithGoogle() {
-  alert("Google Auth Placeholder: To enable real Google Sign-In, link your free Firebase project API key.");
-  closeAuthModal();
-}
-
-function handleEmailAuth() {
-  alert("Email Auth Placeholder: Create a free Firebase account to enable real user database accounts.");
-  closeAuthModal();
-}
+function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); }
+function openPricingModal() { document.getElementById('pricingModal').classList.add('active'); }
+function closePricingModal() { document.getElementById('pricingModal').classList.remove('active'); }
 
 function subscribePro() {
-  // Replace this alert with your Stripe Payment Link URL when ready
+  // Replace with your Stripe payment link when ready
   window.location.href = "https://buy.stripe.com/YOUR_STRIPE_LINK_HERE";
 }
-
-updateAICounter();
 </script>
-
-<script src="script.js"></script>
 
 </body>
 </html>
