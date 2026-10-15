@@ -39,10 +39,23 @@
     @media (prefers-reduced-motion: reduce){.ticker-track{animation:none}}
 
     /* ---------- hero ---------- */
-    .hero{text-align:center;padding:58px 0 42px}
+    .hero{text-align:center;padding:48px 0 32px}
     .eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#8A6D4F;font-weight:600}
     .hero h1{font-family:Georgia,"Times New Roman",serif;font-size:2.4rem;color:#2E2318;margin:10px 0 12px}
     .hero p{max-width:580px;margin:0 auto;color:#5C4936}
+
+    /* ---------- homepage calculator widget ---------- */
+    .calc-container{max-width:380px;margin:0 auto 48px;background:#FCF9F2;border:1px solid #E0D4BE;border-radius:4px;padding:20px;box-shadow:0 8px 24px rgba(46,35,24,.06)}
+    .calc-display{background:#EFE7D6;border:1px solid #DED1B8;border-radius:4px;padding:16px;font-size:2rem;text-align:right;color:#2E2318;margin-bottom:16px;min-height:72px;overflow-x:auto;font-family:monospace;letter-spacing:-1px}
+    .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .calc-btn{background:#fff;border:1px solid #DED1B8;color:#2E2318;padding:14px 0;font-size:1.1rem;border-radius:4px;cursor:pointer;transition:background .1s}
+    .calc-btn:hover{background:#EFE7D6}
+    .calc-btn.fn{background:#F6F1E7;font-size:1rem;color:#5C4936}
+    .calc-btn.op{background:#EADFC8;font-weight:600}
+    .calc-btn.clear{background:#8A6D4F;color:#fff;border-color:#8A6D4F}
+    .calc-btn.clear:hover{background:#755B40}
+    .calc-btn.equal{background:#2E2318;color:#fff;border-color:#2E2318}
+    .calc-btn.equal:hover{background:#1A130C}
 
     /* ---------- sections & cards ---------- */
     section{padding:24px 0}
@@ -66,7 +79,7 @@
     @media (max-width:640px){
       .hero h1{font-size:1.8rem}
       .nav{flex-direction:column;height:auto;padding:12px 0;gap:8px}
-      .hero{padding:40px 0 30px}
+      .hero{padding:30px 0 20px}
     }
     </style>
 </head>
@@ -86,131 +99,87 @@
 
 <div class="ticker" aria-label="Browse calculators">
   <div class="ticker-track">
-    <a href="mortgage-calculator.html">Mortgage Calculator</a>
-    <a href="car-loan-calculator.html">Car Loan Calculator</a>
-    <a href="compound-interest-calculator.html">Compound Interest Calculator</a>
-    <a href="tax-calculator.html">Tax Calculator</a>
-    <a href="salary-calculator.html">Salary Calculator</a>
-    <a href="overtime-calculator.html">Overtime Calculator</a>
-    <a href="tip-calculator.html">Tip Calculator</a>
-    <a href="sales-tax-calculator.html">Sales Tax Calculator</a>
-    <a href="calorie-calculator.html">Calorie Calculator</a>
-    <a href="due-date-calculator.html">Due Date Calculator</a>
-    <a href="gpa-calculator.html">GPA Calculator</a>
-    <a href="grade-calculator.html">Grade Calculator</a>
-    <a href="test-score-calculator.html">Test Score Calculator</a>
-    <a href="word-counter.html">Word Counter</a>
-    <a href="reading-time-calculator.html">Reading Time Calculator</a>
-    <a href="study-time-calculator.html">Study Time Calculator</a>
-    <a href="percentage-calculator.html">Percentage Calculator</a>
-    <a href="scientific-calculator.html">Scientific Calculator</a>
-    <a href="average-calculator.html">Average Calculator</a>
-    <a href="unit-converter.html">Unit Converter</a>
-    <a href="aspect-ratio-calculator.html">Aspect Ratio Calculator</a>
-    <a href="fuel-cost-calculator.html">Fuel Cost Calculator</a>
-    <a href="electricity-calculator.html">Electricity Calculator</a>
-    <a href="download-time-calculator.html">Download Time Calculator</a>
-    <a href="date-calculator.html">Date Calculator</a>
-    <a href="time-calculator.html">Time Calculator</a>
-    <a href="mortgage-calculator.html" aria-hidden="true" tabindex="-1">Mortgage Calculator</a>
-    <a href="car-loan-calculator.html" aria-hidden="true" tabindex="-1">Car Loan Calculator</a>
-    <a href="compound-interest-calculator.html" aria-hidden="true" tabindex="-1">Compound Interest Calculator</a>
-    <a href="tax-calculator.html" aria-hidden="true" tabindex="-1">Tax Calculator</a>
-    <a href="salary-calculator.html" aria-hidden="true" tabindex="-1">Salary Calculator</a>
-    <a href="overtime-calculator.html" aria-hidden="true" tabindex="-1">Overtime Calculator</a>
-    <a href="tip-calculator.html" aria-hidden="true" tabindex="-1">Tip Calculator</a>
-    <a href="sales-tax-calculator.html" aria-hidden="true" tabindex="-1">Sales Tax Calculator</a>
-    <a href="calorie-calculator.html" aria-hidden="true" tabindex="-1">Calorie Calculator</a>
-    <a href="due-date-calculator.html" aria-hidden="true" tabindex="-1">Due Date Calculator</a>
-    <a href="gpa-calculator.html" aria-hidden="true" tabindex="-1">GPA Calculator</a>
-    <a href="grade-calculator.html" aria-hidden="true" tabindex="-1">Grade Calculator</a>
-    <a href="test-score-calculator.html" aria-hidden="true" tabindex="-1">Test Score Calculator</a>
-    <a href="word-counter.html" aria-hidden="true" tabindex="-1">Word Counter</a>
-    <a href="reading-time-calculator.html" aria-hidden="true" tabindex="-1">Reading Time Calculator</a>
-    <a href="study-time-calculator.html" aria-hidden="true" tabindex="-1">Study Time Calculator</a>
-    <a href="percentage-calculator.html" aria-hidden="true" tabindex="-1">Percentage Calculator</a>
-    <a href="scientific-calculator.html" aria-hidden="true" tabindex="-1">Scientific Calculator</a>
-    <a href="average-calculator.html" aria-hidden="true" tabindex="-1">Average Calculator</a>
-    <a href="unit-converter.html" aria-hidden="true" tabindex="-1">Unit Converter</a>
-    <a href="aspect-ratio-calculator.html" aria-hidden="true" tabindex="-1">Aspect Ratio Calculator</a>
-    <a href="fuel-cost-calculator.html" aria-hidden="true" tabindex="-1">Fuel Cost Calculator</a>
-    <a href="electricity-calculator.html" aria-hidden="true" tabindex="-1">Electricity Calculator</a>
-    <a href="download-time-calculator.html" aria-hidden="true" tabindex="-1">Download Time Calculator</a>
-    <a href="date-calculator.html" aria-hidden="true" tabindex="-1">Date Calculator</a>
-    <a href="time-calculator.html" aria-hidden="true" tabindex="-1">Time Calculator</a>
+    <a href="mortgage-calculator.html">Mortgage Calculator</a><a href="car-loan-calculator.html">Car Loan Calculator</a><a href="compound-interest-calculator.html">Compound Interest Calculator</a><a href="tax-calculator.html">Tax Calculator</a><a href="salary-calculator.html">Salary Calculator</a><a href="overtime-calculator.html">Overtime Calculator</a><a href="tip-calculator.html">Tip Calculator</a><a href="sales-tax-calculator.html">Sales Tax Calculator</a><a href="calorie-calculator.html">Calorie Calculator</a><a href="due-date-calculator.html">Due Date Calculator</a><a href="gpa-calculator.html">GPA Calculator</a><a href="grade-calculator.html">Grade Calculator</a><a href="test-score-calculator.html">Test Score Calculator</a><a href="word-counter.html">Word Counter</a><a href="reading-time-calculator.html">Reading Time Calculator</a><a href="study-time-calculator.html">Study Time Calculator</a><a href="percentage-calculator.html">Percentage Calculator</a><a href="scientific-calculator.html">Scientific Calculator</a><a href="average-calculator.html">Average Calculator</a><a href="unit-converter.html">Unit Converter</a><a href="aspect-ratio-calculator.html">Aspect Ratio Calculator</a><a href="fuel-cost-calculator.html">Fuel Cost Calculator</a><a href="electricity-calculator.html">Electricity Calculator</a><a href="download-time-calculator.html">Download Time Calculator</a><a href="date-calculator.html">Date Calculator</a><a href="time-calculator.html">Time Calculator</a>
+    <!-- Ticker duplicate for infinite loop -->
+    <a href="mortgage-calculator.html" aria-hidden="true" tabindex="-1">Mortgage Calculator</a><a href="car-loan-calculator.html" aria-hidden="true" tabindex="-1">Car Loan Calculator</a><a href="compound-interest-calculator.html" aria-hidden="true" tabindex="-1">Compound Interest Calculator</a><a href="tax-calculator.html" aria-hidden="true" tabindex="-1">Tax Calculator</a><a href="salary-calculator.html" aria-hidden="true" tabindex="-1">Salary Calculator</a><a href="overtime-calculator.html" aria-hidden="true" tabindex="-1">Overtime Calculator</a><a href="tip-calculator.html" aria-hidden="true" tabindex="-1">Tip Calculator</a><a href="sales-tax-calculator.html" aria-hidden="true" tabindex="-1">Sales Tax Calculator</a><a href="calorie-calculator.html" aria-hidden="true" tabindex="-1">Calorie Calculator</a><a href="due-date-calculator.html" aria-hidden="true" tabindex="-1">Due Date Calculator</a><a href="gpa-calculator.html" aria-hidden="true" tabindex="-1">GPA Calculator</a><a href="grade-calculator.html" aria-hidden="true" tabindex="-1">Grade Calculator</a><a href="test-score-calculator.html" aria-hidden="true" tabindex="-1">Test Score Calculator</a><a href="word-counter.html" aria-hidden="true" tabindex="-1">Word Counter</a><a href="reading-time-calculator.html" aria-hidden="true" tabindex="-1">Reading Time Calculator</a><a href="study-time-calculator.html" aria-hidden="true" tabindex="-1">Study Time Calculator</a><a href="percentage-calculator.html" aria-hidden="true" tabindex="-1">Percentage Calculator</a><a href="scientific-calculator.html" aria-hidden="true" tabindex="-1">Scientific Calculator</a><a href="average-calculator.html" aria-hidden="true" tabindex="-1">Average Calculator</a><a href="unit-converter.html" aria-hidden="true" tabindex="-1">Unit Converter</a><a href="aspect-ratio-calculator.html" aria-hidden="true" tabindex="-1">Aspect Ratio Calculator</a><a href="fuel-cost-calculator.html" aria-hidden="true" tabindex="-1">Fuel Cost Calculator</a><a href="electricity-calculator.html" aria-hidden="true" tabindex="-1">Electricity Calculator</a><a href="download-time-calculator.html" aria-hidden="true" tabindex="-1">Download Time Calculator</a><a href="date-calculator.html" aria-hidden="true" tabindex="-1">Date Calculator</a><a href="time-calculator.html" aria-hidden="true" tabindex="-1">Time Calculator</a>
   </div>
 </div>
 
 <header class="wrap hero">
   <div class="eyebrow">Inquiry Calculator</div>
   <h1>Free Online Calculators</h1>
-  <p>Quick, accurate tools for money, health, school, and everyday questions. No sign-up, no clutter — just answers.</p>
+  <p>Quick, accurate tools for money, health, school, and everyday questions.</p>
 </header>
 
-<main class="wrap">
+<!-- MAIN HOMEPAGE CALCULATOR -->
+<div class="calc-container">
+  <div class="calc-display" id="mainCalcDisplay">0</div>
+  <div class="calc-grid">
+    <button class="calc-btn fn" onclick="calcAction('sin(')">sin</button>
+    <button class="calc-btn fn" onclick="calcAction('cos(')">cos</button>
+    <button class="calc-btn fn" onclick="calcAction('tan(')">tan</button>
+    <button class="calc-btn fn" onclick="calcAction('sqrt(')">√</button>
+    
+    <button class="calc-btn op" onclick="calcAction('(')">(</button>
+    <button class="calc-btn op" onclick="calcAction(')')">)</button>
+    <button class="calc-btn op" onclick="calcAction('^')">^</button>
+    <button class="calc-btn clear" onclick="calcClear()">AC</button>
+    
+    <button class="calc-btn" onclick="calcAction('7')">7</button>
+    <button class="calc-btn" onclick="calcAction('8')">8</button>
+    <button class="calc-btn" onclick="calcAction('9')">9</button>
+    <button class="calc-btn op" onclick="calcAction('/')">÷</button>
+    
+    <button class="calc-btn" onclick="calcAction('4')">4</button>
+    <button class="calc-btn" onclick="calcAction('5')">5</button>
+    <button class="calc-btn" onclick="calcAction('6')">6</button>
+    <button class="calc-btn op" onclick="calcAction('*')">×</button>
+    
+    <button class="calc-btn" onclick="calcAction('1')">1</button>
+    <button class="calc-btn" onclick="calcAction('2')">2</button>
+    <button class="calc-btn" onclick="calcAction('3')">3</button>
+    <button class="calc-btn op" onclick="calcAction('-')">−</button>
+    
+    <button class="calc-btn" onclick="calcAction('0')">0</button>
+    <button class="calc-btn" onclick="calcAction('.')">.</button>
+    <button class="calc-btn equal" onclick="calcEval()">=</button>
+    <button class="calc-btn op" onclick="calcAction('+')">+</button>
+  </div>
+</div>
 
+<main class="wrap">
+  <!-- Finance -->
   <section>
     <div class="sec-head"><h2>Finance</h2></div>
     <div class="grid">
-      <a class="card" href="mortgage-calculator.html"><h3>Mortgage Calculator</h3><p>Estimate monthly repayments, interest, and the total cost of a home loan.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="car-loan-calculator.html"><h3>Car Loan Calculator</h3><p>Work out monthly car payments and total interest before you visit the dealer.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="compound-interest-calculator.html"><h3>Compound Interest Calculator</h3><p>See how savings and investments grow with compound interest over time.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="tax-calculator.html"><h3>Tax Calculator</h3><p>Get a quick estimate of income tax on your annual earnings.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="salary-calculator.html"><h3>Salary Calculator</h3><p>Convert between hourly pay, monthly pay, and annual salary in seconds.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="overtime-calculator.html"><h3>Overtime Calculator</h3><p>Calculate overtime pay at time-and-a-half, double time, or custom rates.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="tip-calculator.html"><h3>Tip Calculator</h3><p>Work out the tip and split the bill evenly between any number of people.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="sales-tax-calculator.html"><h3>Sales Tax Calculator</h3><p>Add or remove sales tax from any price at any rate.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="mortgage-calculator.html"><h3>Mortgage Calculator</h3><p>Estimate monthly repayments, interest, and total cost.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="car-loan-calculator.html"><h3>Car Loan Calculator</h3><p>Work out monthly payments and interest for vehicles.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="compound-interest-calculator.html"><h3>Compound Interest</h3><p>See how savings and investments grow over time.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="salary-calculator.html"><h3>Salary Calculator</h3><p>Convert between hourly pay, monthly, and annual salary.</p><div class="card-meta"><span class="tag">Finance</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
 
+  <!-- Health & Education -->
   <section>
-    <div class="sec-head"><h2>Health &amp; Fitness</h2></div>
+    <div class="sec-head"><h2>Health &amp; Education</h2></div>
     <div class="grid">
-      <a class="card" href="calorie-calculator.html"><h3>Calorie Calculator</h3><p>Find your daily calorie needs based on your body, goals, and activity level.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="due-date-calculator.html"><h3>Due Date Calculator</h3><p>Estimate a pregnancy due date from the last period or conception date.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="calorie-calculator.html"><h3>Calorie Calculator</h3><p>Find daily calorie needs based on goals and activity.</p><div class="card-meta"><span class="tag">Health</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="gpa-calculator.html"><h3>GPA Calculator</h3><p>Calculate your grade point average from courses.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="grade-calculator.html"><h3>Grade Calculator</h3><p>Find out what score you need on a final exam.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="reading-time-calculator.html"><h3>Reading Time</h3><p>Estimate how many minutes a text takes to read.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
 
+  <!-- Math & Everyday -->
   <section>
-    <div class="sec-head"><h2>Education</h2></div>
+    <div class="sec-head"><h2>Math &amp; Utilities</h2></div>
     <div class="grid">
-      <a class="card" href="gpa-calculator.html"><h3>GPA Calculator</h3><p>Calculate your grade point average from your courses and credits.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="grade-calculator.html"><h3>Grade Calculator</h3><p>Find out what score you need on a final exam to hit your target grade.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="test-score-calculator.html"><h3>Test Score Calculator</h3><p>Convert raw scores into percentages and letter grades.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="word-counter.html"><h3>Word Counter</h3><p>Count words, characters, sentences, and paragraphs in any text.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="reading-time-calculator.html"><h3>Reading Time Calculator</h3><p>Estimate how many minutes a text takes to read at an average pace.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="study-time-calculator.html"><h3>Study Time Calculator</h3><p>Plan revision sessions and track total study hours per subject.</p><div class="card-meta"><span class="tag">Education</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="percentage-calculator.html"><h3>Percentage Calculator</h3><p>Calculate percentages, changes, and differences.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="unit-converter.html"><h3>Unit Converter</h3><p>Convert length, weight, temperature, and volume.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="date-calculator.html"><h3>Date Calculator</h3><p>Add/subtract days, or find the time between dates.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
+      <a class="card" href="calculators.html"><h3>View All Calculators</h3><p>Browse our full directory of 25+ calculators.</p><div class="card-meta"><span class="tag">Directory</span><span class="arrow">&rarr;</span></div></a>
     </div>
   </section>
-
-  <section>
-    <div class="sec-head"><h2>Math &amp; Conversion</h2></div>
-    <div class="grid">
-      <a class="card" href="percentage-calculator.html"><h3>Percentage Calculator</h3><p>Calculate percentages of numbers, percentage change, and differences.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="scientific-calculator.html"><h3>Scientific Calculator</h3><p>A full scientific calculator with trig, powers, roots, and logarithms.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="average-calculator.html"><h3>Average Calculator</h3><p>Find the mean, median, mode, and range of any set of numbers.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="unit-converter.html"><h3>Unit Converter</h3><p>Convert length, weight, temperature, volume, and more.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="aspect-ratio-calculator.html"><h3>Aspect Ratio Calculator</h3><p>Resize widths and heights while keeping the exact aspect ratio.</p><div class="card-meta"><span class="tag">Math</span><span class="arrow">&rarr;</span></div></a>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><h2>Date &amp; Time</h2></div>
-    <div class="grid">
-      <a class="card" href="date-calculator.html"><h3>Date Calculator</h3><p>Add or subtract days from a date, or find the days between two dates.</p><div class="card-meta"><span class="tag">Date</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="time-calculator.html"><h3>Time Calculator</h3><p>Add and subtract hours and minutes for timesheets and schedules.</p><div class="card-meta"><span class="tag">Time</span><span class="arrow">&rarr;</span></div></a>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><h2>Everyday Utilities</h2></div>
-    <div class="grid">
-      <a class="card" href="fuel-cost-calculator.html"><h3>Fuel Cost Calculator</h3><p>Estimate the fuel cost of a trip based on distance and consumption.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="electricity-calculator.html"><h3>Electricity Calculator</h3><p>Work out what each appliance costs to run per day, month, and year.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
-      <a class="card" href="download-time-calculator.html"><h3>Download Time Calculator</h3><p>Estimate how long a file takes to download at any connection speed.</p><div class="card-meta"><span class="tag">Utilities</span><span class="arrow">&rarr;</span></div></a>
-    </div>
-  </section>
-
 </main>
 
 <footer>
@@ -224,6 +193,53 @@
     </div>
   </div>
 </footer>
+
+<!-- Homepage Calculator Logic -->
+<script>
+  let calcStr = "";
+  const display = document.getElementById("mainCalcDisplay");
+  
+  function calcAction(val) {
+    if(calcStr === "Error") calcStr = "";
+    calcStr += val;
+    updateDisplay();
+  }
+  
+  function calcClear() {
+    calcStr = "";
+    display.textContent = "0";
+  }
+  
+  function updateDisplay() {
+    let show = calcStr.replace(/\*/g, '×').replace(/\//g, '÷').replace(/sqrt\(/g, '√(');
+    display.textContent = show || "0";
+  }
+  
+  function calcEval() {
+    if(!calcStr) return;
+    try {
+      // safely replace math functions so JS can evaluate them
+      let evalStr = calcStr
+        .replace(/sin\(/g, 'Math.sin(')
+        .replace(/cos\(/g, 'Math.cos(')
+        .replace(/tan\(/g, 'Math.tan(')
+        .replace(/sqrt\(/g, 'Math.sqrt(')
+        .replace(/\^/g, '**');
+      
+      let res = eval(evalStr);
+      // format long decimals
+      res = Math.round(res * 100000000) / 100000000;
+      calcStr = res.toString();
+      updateDisplay();
+    } catch(e) {
+      calcStr = "Error";
+      display.textContent = "Error";
+    }
+  }
+</script>
+
+<!-- Link to your existing JS file so any site-wide scripts still run -->
+<script src="script.js"></script>
 
 </body>
 </html>
