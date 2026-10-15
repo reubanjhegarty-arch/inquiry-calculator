@@ -1,63 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://inquirycalculator.com/</loc>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://inquirycalculator.com/calculators.html</loc>
-        <changefreq>weekly</changefreq>
-        <priority>0.9</priority>
-    </url>
-
-    <!-- Finance -->
-    <url><loc>https://inquirycalculator.com/mortgage-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/car-loan-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/loan-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/tax-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/salary-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/overtime-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/compound-interest-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/discount-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/tip-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/sales-tax-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-    <!-- Health & Fitness -->
-    <url><loc>https://inquirycalculator.com/calorie-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/bmi-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/due-date-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-    <!-- Education -->
-    <url><loc>https://inquirycalculator.com/gpa-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/cgpa-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/grade-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/test-score-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/word-counter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/reading-time-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/study-time-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-    <!-- Math & Science -->
-    <url><loc>https://inquirycalculator.com/percentage-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/scientific-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/average-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/fraction-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/unit-converter.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-    <!-- Travel & Tech -->
-    <url><loc>https://inquirycalculator.com/fuel-cost-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/electricity-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/download-time-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/aspect-ratio-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-    <!-- Date & Time -->
-    <url><loc>https://inquirycalculator.com/age-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/date-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-    <url><loc>https://inquirycalculator.com/time-calculator.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-
-    <!-- Static pages -->
-    <url><loc>https://inquirycalculator.com/about.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-    <url><loc>https://inquirycalculator.com/contact.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-    <url><loc>https://inquirycalculator.com/privacy.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-    <url><loc>https://inquirycalculator.com/terms.html</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+<url><loc>https://inquirycalculator.com/</loc></url>
+<url><loc>https://inquirycalculator.com/calculators.html</loc></url>
+<url><loc>https://inquirycalculator.com/mortgage-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/car-loan-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/loan-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/tax-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/salary-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/overtime-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/compound-interest-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/discount-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/tip-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/sales-tax-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/calorie-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/bmi-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/due-date-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/gpa-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/cgpa-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/grade-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/test-score-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/word-counter.html</loc></url>
+<url><loc>https://inquirycalculator.com/reading-time-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/study-time-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/percentage-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/scientific-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/average-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/fraction-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/unit-converter.html</loc></url>
+<url><loc>https://inquirycalculator.com/aspect-ratio-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/fuel-cost-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/electricity-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/download-time-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/age-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/date-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/time-calculator.html</loc></url>
+<url><loc>https://inquirycalculator.com/about.html</loc></url>
+<url><loc>https://inquirycalculator.com/contact.html</loc></url>
+<url><loc>https://inquirycalculator.com/privacy.html</loc></url>
+<url><loc>https://inquirycalculator.com/terms.html</loc></url>
 </urlset>
