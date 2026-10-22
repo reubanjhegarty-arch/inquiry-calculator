@@ -1,1 +1,57 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Estimate income tax and net income."><title>Tax Calculator - Inquiry Calculator</title><link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2"/><link rel="shortcut icon" href="/favicon.ico?v=2"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2"/><link rel="canonical" href="https://inquirycalculator.com/tax-calculator.html"><link rel="stylesheet" href="style.css"></head><body><nav><div class="wrap nav"><a class="brand" href="index.html">Inquiry<span>Calculator</span></a><div class="nav-links"><a href="index.html">Home</a><a href="calculators.html">All Calculators</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div></nav><main class="wrap"><h1>Tax Calculator</h1><p>Estimate income tax and net income.</p><form id="f"><label>Annual Income ($)</label><input type="number" id="inc" required><label>Tax Rate (%)</label><input type="number" id="tr" value="20" required><button type="submit">Calculate</button></form><div id="result" class="result"></div></main><footer><div class="wrap foot"><div>&copy; 2025 InquiryCalculator</div><div class="foot-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer><script>f.onsubmit=e=>{e.preventDefault();let tax=+inc.value*(+tr.value/100);result.innerHTML='Tax: $'+tax.toFixed(2)+'<br>Net: $'+(+inc.value-tax).toFixed(2);result.style.display='block'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Tax Calculator — Inquiry Calculator</title>
+    <meta name="description" content="Add tax to a price.">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a>
+            <div class="nav-links">
+                <a href="/">All Calculators</a>
+                <a href="/chat.html">AI Solver</a>
+            </div>
+        </div>
+    </nav>
+    <main class="wrap">
+        <h1>Sales Tax Calculator</h1>
+        <p>Add tax to a price.</p>
+        <form onsubmit="event.preventDefault(); calculate();">
+            <div class="form-group"><label>Price ($)</label><input type="number" id="p" placeholder="Enter price ($)" required></div>
+            <div class="form-group"><label>Tax Rate (%)</label><input type="number" id="t" placeholder="Enter tax rate (%)" required></div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result" style="display:none;">
+            Result: <strong id="output-val">0</strong>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Inquiry Calculator. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+    </footer>
+    <script>
+        function calculate() {
+            try {
+                const v = {};
+                document.querySelectorAll('input, select').forEach(el => { v[el.id] = el.value; });
+                let result = (function(v) { let p=parseFloat(v.p), t=parseFloat(v.t)/100; return 'Total: $'+(p+p*t).toFixed(2); })(v);
+                if (result !== undefined && !isNaN(result) && result !== 'NaN' && result !== 'NaN%') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                } else if (typeof result === 'string') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

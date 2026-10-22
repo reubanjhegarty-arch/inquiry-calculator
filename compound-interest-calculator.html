@@ -1,1 +1,59 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="See how your savings grow with compound interest."><title>Compound Interest Calculator - Inquiry Calculator</title><link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2"/><link rel="shortcut icon" href="/favicon.ico?v=2"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2"/><link rel="canonical" href="https://inquirycalculator.com/compound-interest-calculator.html"><link rel="stylesheet" href="style.css"></head><body><nav><div class="wrap nav"><a class="brand" href="index.html">Inquiry<span>Calculator</span></a><div class="nav-links"><a href="index.html">Home</a><a href="calculators.html">All Calculators</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div></nav><main class="wrap"><h1>Compound Interest Calculator</h1><p>See how your savings grow with compound interest.</p><form id="f"><label>Principal ($)</label><input type="number" id="p" required><label>Annual Rate (%)</label><input type="number" id="r" step="0.01" required><label>Years</label><input type="number" id="y" required><label>Compounds Per Year</label><input type="number" id="n" value="12"><button type="submit">Calculate</button></form><div id="result" class="result"></div></main><footer><div class="wrap foot"><div>&copy; 2025 InquiryCalculator</div><div class="foot-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer><script>f.onsubmit=e=>{e.preventDefault();let A=+p.value*Math.pow(1+(+r.value/100)/+n.value,+n.value*+y.value);result.innerHTML='Future Value: $'+A.toFixed(2)+'<br>Interest Earned: $'+(A-+p.value).toFixed(2);result.style.display='block'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest — Inquiry Calculator</title>
+    <meta name="description" content="Future value of investment.">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a>
+            <div class="nav-links">
+                <a href="/">All Calculators</a>
+                <a href="/chat.html">AI Solver</a>
+            </div>
+        </div>
+    </nav>
+    <main class="wrap">
+        <h1>Compound Interest</h1>
+        <p>Future value of investment.</p>
+        <form onsubmit="event.preventDefault(); calculate();">
+            <div class="form-group"><label>Principal ($)</label><input type="number" id="p" placeholder="Enter principal ($)" required></div>
+            <div class="form-group"><label>Rate (%)</label><input type="number" id="r" placeholder="Enter rate (%)" required></div>
+            <div class="form-group"><label>Years</label><input type="number" id="t" placeholder="Enter years" required></div>
+            <div class="form-group"><label>Times compounded/yr</label><input type="number" id="n" placeholder="Enter times compounded/yr" required></div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result" style="display:none;">
+            Result: <strong id="output-val">0</strong>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Inquiry Calculator. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+    </footer>
+    <script>
+        function calculate() {
+            try {
+                const v = {};
+                document.querySelectorAll('input, select').forEach(el => { v[el.id] = el.value; });
+                let result = (function(v) { return '$'+(parseFloat(v.p)*Math.pow(1+(parseFloat(v.r)/100)/parseFloat(v.n), parseFloat(v.n)*parseFloat(v.t))).toFixed(2); })(v);
+                if (result !== undefined && !isNaN(result) && result !== 'NaN' && result !== 'NaN%') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                } else if (typeof result === 'string') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

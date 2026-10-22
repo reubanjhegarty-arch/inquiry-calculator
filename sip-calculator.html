@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIP Calculator — Inquiry Calculator</title>
+    <meta name="description" content="Systematic Investment Plan.">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a>
+            <div class="nav-links">
+                <a href="/">All Calculators</a>
+                <a href="/chat.html">AI Solver</a>
+            </div>
+        </div>
+    </nav>
+    <main class="wrap">
+        <h1>SIP Calculator</h1>
+        <p>Systematic Investment Plan.</p>
+        <form onsubmit="event.preventDefault(); calculate();">
+            <div class="form-group"><label>Monthly Inv ($)</label><input type="number" id="p" placeholder="Enter monthly inv ($)" required></div>
+            <div class="form-group"><label>Annual Return (%)</label><input type="number" id="r" placeholder="Enter annual return (%)" required></div>
+            <div class="form-group"><label>Years</label><input type="number" id="t" placeholder="Enter years" required></div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result" style="display:none;">
+            Result: <strong id="output-val">0</strong>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Inquiry Calculator. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+    </footer>
+    <script>
+        function calculate() {
+            try {
+                const v = {};
+                document.querySelectorAll('input, select').forEach(el => { v[el.id] = el.value; });
+                let result = (function(v) { let p=parseFloat(v.p), r=parseFloat(v.r)/100/12, n=parseFloat(v.t)*12; return 'FV: $'+(p*((Math.pow(1+r,n)-1)/r)*(1+r)).toFixed(2); })(v);
+                if (result !== undefined && !isNaN(result) && result !== 'NaN' && result !== 'NaN%') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                } else if (typeof result === 'string') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

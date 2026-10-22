@@ -1,1 +1,57 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Calculate Body Mass Index with metric and imperial units."><title>BMI Calculator - Inquiry Calculator</title><link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2"/><link rel="shortcut icon" href="/favicon.ico?v=2"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2"/><link rel="canonical" href="https://inquirycalculator.com/bmi-calculator.html"><link rel="stylesheet" href="style.css"></head><body><nav><div class="wrap nav"><a class="brand" href="index.html">Inquiry<span>Calculator</span></a><div class="nav-links"><a href="index.html">Home</a><a href="calculators.html">All Calculators</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div></nav><main class="wrap"><h1>BMI Calculator</h1><p>Calculate Body Mass Index with metric and imperial units.</p><form id="f"><div style="display:flex;gap:8px"><button type="button" id="mb" style="flex:1;margin:0;background:#2E2318">Metric</button><button type="button" id="ib" style="flex:1;margin:0;background:#EFE7D6;color:#2E2318;border:1px solid #DED1B8">Imperial</button></div><label id="wl">Weight (kg)</label><input type="number" id="w" required><label id="hl">Height (cm)</label><input type="number" id="h"><div id="ih" style="display:none"><label>Height ft/in</label><div style="display:flex;gap:8px"><input type="number" id="ft" placeholder="ft"><input type="number" id="in" placeholder="in"></div></div><button type="submit">Calculate BMI</button></form><div id="result" class="result"></div></main><footer><div class="wrap foot"><div>&copy; 2025 InquiryCalculator</div><div class="foot-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer><script>let met=true;mb.onclick=()=>{met=true;mb.style.background='#2E2318';mb.style.color='#fff';ib.style.background='#EFE7D6';ib.style.color='#2E2318';wl.textContent='Weight (kg)';hl.textContent='Height (cm)';h.style.display='block';ih.style.display='none'};ib.onclick=()=>{met=false;ib.style.background='#2E2318';ib.style.color='#fff';mb.style.background='#EFE7D6';mb.style.color='#2E2318';wl.textContent='Weight (lb)';hl.textContent='Height';h.style.display='none';ih.style.display='block'};f.onsubmit=e=>{e.preventDefault();let kg=+w.value,m;if(met)m=+h.value/100;else{m=((+ft.value||0)*12+(+in.value||0))*0.0254;kg=kg/2.20462}let bmi=kg/(m*m),cat=bmi<18.5?'Underweight':bmi<25?'Normal':bmi<30?'Overweight':'Obese';result.innerHTML='BMI: '+bmi.toFixed(1)+' - '+cat;result.style.display='block'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator — Inquiry Calculator</title>
+    <meta name="description" content="Body Mass Index.">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a>
+            <div class="nav-links">
+                <a href="/">All Calculators</a>
+                <a href="/chat.html">AI Solver</a>
+            </div>
+        </div>
+    </nav>
+    <main class="wrap">
+        <h1>BMI Calculator</h1>
+        <p>Body Mass Index.</p>
+        <form onsubmit="event.preventDefault(); calculate();">
+            <div class="form-group"><label>Weight (kg)</label><input type="number" id="w" placeholder="Enter weight (kg)" required></div>
+            <div class="form-group"><label>Height (cm)</label><input type="number" id="h" placeholder="Enter height (cm)" required></div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result" style="display:none;">
+            Result: <strong id="output-val">0</strong>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Inquiry Calculator. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+    </footer>
+    <script>
+        function calculate() {
+            try {
+                const v = {};
+                document.querySelectorAll('input, select').forEach(el => { v[el.id] = el.value; });
+                let result = (function(v) { let h=parseFloat(v.h)/100; return (parseFloat(v.w)/(h*h)).toFixed(1); })(v);
+                if (result !== undefined && !isNaN(result) && result !== 'NaN' && result !== 'NaN%') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                } else if (typeof result === 'string') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

@@ -1,1 +1,56 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Count working days (excluding weekends) between two dates."><title>Business Days Calculator - Inquiry Calculator</title><link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2"/><link rel="shortcut icon" href="/favicon.ico?v=2"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2"/><link rel="canonical" href="https://inquirycalculator.com/business-days-calculator.html"><link rel="stylesheet" href="style.css"></head><body><nav><div class="wrap nav"><a class="brand" href="index.html">Inquiry<span>Calculator</span></a><div class="nav-links"><a href="index.html">Home</a><a href="calculators.html">All Calculators</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div></nav><main class="wrap"><h1>Business Days Calculator</h1><p>Count working days (excluding weekends) between two dates.</p><form id="f"><label>Start Date</label><input type="date" id="s" required><label>End Date</label><input type="date" id="e" required><button type="submit">Calculate Working Days</button></form><div id="result" class="result"></div></main><footer><div class="wrap foot"><div>&copy; 2025 InquiryCalculator</div><div class="foot-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer><script>f.onsubmit=ev=>{ev.preventDefault();let d1=new Date(s.value),d2=new Date(e.value),count=0;if(d1>d2){let t=d1;d1=d2;d2=t}let cur=new Date(d1);while(cur<=d2){let day=cur.getDay();if(day!=0&&day!=6)count++;cur.setDate(cur.getDate()+1)}result.innerHTML='Business Days: '+count;result.style.display='block'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Days — Inquiry Calculator</title>
+    <meta name="description" content="Days minus weekends.">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a>
+            <div class="nav-links">
+                <a href="/">All Calculators</a>
+                <a href="/chat.html">AI Solver</a>
+            </div>
+        </div>
+    </nav>
+    <main class="wrap">
+        <h1>Business Days</h1>
+        <p>Days minus weekends.</p>
+        <form onsubmit="event.preventDefault(); calculate();">
+            <div class="form-group"><label>Total Days</label><input type="number" id="d" placeholder="Enter total days" required></div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result" style="display:none;">
+            Result: <strong id="output-val">0</strong>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Inquiry Calculator. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+    </footer>
+    <script>
+        function calculate() {
+            try {
+                const v = {};
+                document.querySelectorAll('input, select').forEach(el => { v[el.id] = el.value; });
+                let result = (function(v) { return (parseFloat(v.d)*5/7).toFixed(0)+' days'; })(v);
+                if (result !== undefined && !isNaN(result) && result !== 'NaN' && result !== 'NaN%') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                } else if (typeof result === 'string') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>

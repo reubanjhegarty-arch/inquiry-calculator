@@ -1,1 +1,56 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Calculate mean, variance, population & sample standard deviation."><title>Standard Deviation Calculator - Inquiry Calculator</title><link rel="icon" type="image/png" href="/favicon-96x96.png?v=2" sizes="96x96"/><link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2"/><link rel="shortcut icon" href="/favicon.ico?v=2"/><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2"/><link rel="canonical" href="https://inquirycalculator.com/standard-deviation-calculator.html"><link rel="stylesheet" href="style.css"></head><body><nav><div class="wrap nav"><a class="brand" href="index.html">Inquiry<span>Calculator</span></a><div class="nav-links"><a href="index.html">Home</a><a href="calculators.html">All Calculators</a><a href="about.html">About</a><a href="contact.html">Contact</a></div></div></nav><main class="wrap"><h1>Standard Deviation Calculator</h1><p>Calculate mean, variance, population & sample standard deviation.</p><form id="f"><label>Numbers (comma separated)</label><input type="text" id="n" placeholder="10, 20, 30, 40, 50" required><button type="submit">Calculate</button></form><div id="result" class="result"></div></main><footer><div class="wrap foot"><div>&copy; 2025 InquiryCalculator</div><div class="foot-links"><a href="about.html">About</a><a href="contact.html">Contact</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div></div></footer><script>f.onsubmit=e=>{e.preventDefault();let arr=n.value.split(',').map(Number).filter(x=>!isNaN(x));if(arr.length<2)return;let mean=arr.reduce((a,b)=>a+b)/arr.length;let varPop=arr.reduce((a,b)=>a+Math.pow(b-mean,2),0)/arr.length;let varSam=arr.reduce((a,b)=>a+Math.pow(b-mean,2),0)/(arr.length-1);result.innerHTML='Mean: '+mean.toFixed(2)+'<br>Population SD: '+Math.sqrt(varPop).toFixed(4)+'<br>Sample SD: '+Math.sqrt(varSam).toFixed(4);result.style.display='block'}</script></body></html>
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Deviation — Inquiry Calculator</title>
+    <meta name="description" content="Population standard dev (comma separated values).">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        if (savedTheme) { document.documentElement.setAttribute('data-theme', savedTheme); }
+        else { document.documentElement.setAttribute('data-theme', 'dark'); }
+    </script>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a>
+            <div class="nav-links">
+                <a href="/">All Calculators</a>
+                <a href="/chat.html">AI Solver</a>
+            </div>
+        </div>
+    </nav>
+    <main class="wrap">
+        <h1>Standard Deviation</h1>
+        <p>Population standard dev (comma separated values).</p>
+        <form onsubmit="event.preventDefault(); calculate();">
+            <div class="form-group"><label>Values</label><input type="text" id="n" placeholder="Enter values" required></div>
+            <button type="submit">Calculate</button>
+        </form>
+        <div id="result" class="result" style="display:none;">
+            Result: <strong id="output-val">0</strong>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Inquiry Calculator. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
+    </footer>
+    <script>
+        function calculate() {
+            try {
+                const v = {};
+                document.querySelectorAll('input, select').forEach(el => { v[el.id] = el.value; });
+                let result = (function(v) { let arr=v.n.split(',').map(Number); let mean=arr.reduce((a,b)=>a+b)/arr.length; let varSq=arr.reduce((a,b)=>a+Math.pow(b-mean,2),0)/arr.length; return Math.sqrt(varSq).toFixed(4); })(v);
+                if (result !== undefined && !isNaN(result) && result !== 'NaN' && result !== 'NaN%') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                } else if (typeof result === 'string') {
+                    document.getElementById('output-val').innerHTML = result;
+                    document.getElementById('result').style.display = 'block';
+                }
+            } catch(e) { console.error(e); }
+        }
+    </script>
+</body>
+</html>
