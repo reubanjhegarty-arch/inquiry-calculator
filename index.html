@@ -6,397 +6,18 @@
     <title>Inquiry Calculator — 100+ Precision Tools & AI Solver</title>
     <meta name="description" content="Free online calculators for math, finance, health, science, fitness, conversions, and date calculations, powered by step-by-step AI problem solving.">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Hero Section - Linear.app Aesthetic */
-        .hero {
-            position: relative;
-            padding: 7rem 1.5rem 5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        /* Vercel/Linear Ambient Glow */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -40%;
-            left: 50%;
-            width: 900px;
-            height: 600px;
-            transform: translateX(-50%);
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 40%, transparent 70%);
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 820px;
-            width: 100%;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.4rem 0.9rem;
-            border: 1px solid var(--border-color);
-            background: var(--card-bg);
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .hero-badge .dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--text-color);
-            border-radius: 1px;
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-        }
-
-        .hero-title {
-            font-size: clamp(2.5rem, 5.5vw, 4.25rem);
-            letter-spacing: -0.04em;
-            line-height: 1.08;
-            margin-bottom: 1.25rem;
-            font-weight: 700;
-            background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        [data-theme="light"] .hero-title {
-            background: linear-gradient(180deg, #09090B 0%, #71717A 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: 1.125rem;
-            color: var(--text-muted);
-            margin-bottom: 2.75rem;
-            max-width: 620px;
-            margin-inline: auto;
-            line-height: 1.6;
-        }
-
-        /* AI Command Bar (Linear Command Palette) */
-        .ai-command-bar {
-            max-width: 660px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .command-input-wrapper {
-            position: relative;
-            display: flex;
-            align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 12px 32px rgba(0,0,0,0.4);
-        }
-
-        .command-input-wrapper:focus-within {
-            border-color: var(--text-color);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px var(--text-color);
-        }
-
-        .command-icon {
-            position: absolute;
-            left: 1.25rem;
-            color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            pointer-events: none;
-        }
-
-        .command-input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            padding: 1.15rem 4rem 1.15rem 3.5rem;
-            color: var(--text-color);
-            font-size: 1.05rem;
-            outline: none;
-            font-family: inherit;
-        }
-
-        .command-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        .btn-command-submit {
-            position: absolute;
-            right: 0.5rem;
-            width: 2.35rem;
-            height: 2.35rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--text-color);
-            color: var(--bg-color);
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: opacity 0.2s ease, transform 0.1s ease;
-        }
-
-        .btn-command-submit:hover {
-            opacity: 0.85;
-            transform: scale(0.97);
-        }
-
-        .command-hint {
-            margin-top: 0.85rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            letter-spacing: 0.02em;
-        }
-
-        .command-hint kbd {
-            color: var(--text-color);
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 0.15rem 0.4rem;
-            font-size: 0.7rem;
-            font-family: inherit;
-        }
-
-        /* Main Container: Sticky Nav + Content Grid */
-        .main-layout {
-            display: flex;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 3rem 1.5rem 6rem;
-            gap: 3.5rem;
-        }
-
-        .sidebar-nav {
-            width: 220px;
-            flex-shrink: 0;
-            position: sticky;
-            top: 90px;
-            align-self: start;
-        }
-
-        .sidebar-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.6rem 0.85rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            font-weight: 500;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            border: 1px solid transparent;
-        }
-
-        .sidebar-nav a:hover {
-            color: var(--text-color);
-            background: var(--card-bg);
-            border-color: var(--border-color);
-        }
-
-        .sidebar-nav a.active {
-            color: var(--text-color);
-            background: var(--card-bg);
-            border-color: var(--border-color);
-            font-weight: 600;
-        }
-
-        .category-count {
-            font-size: 0.75rem;
-            opacity: 0.6;
-        }
-
-        .content-area {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .category-section {
-            margin-bottom: 4rem;
-            scroll-margin-top: 90px;
-        }
-
-        .category-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .category-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-        }
-
-        .calc-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1rem;
-        }
-
-        .calc-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 1.25rem;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            text-decoration: none;
-            color: inherit;
-            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-            min-height: 100px;
-        }
-
-        .calc-card:hover {
-            border-color: var(--text-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-        }
-
-        .calc-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 0.35rem;
-            letter-spacing: -0.01em;
-        }
-
-        .calc-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            line-height: 1.45;
-        }
-
-        /* Search Overlay */
-        .search-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(9, 9, 11, 0.95);
-            backdrop-filter: blur(12px);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-            padding: 4rem 1.5rem;
-        }
-
-        [data-theme="light"] .search-overlay {
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .search-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .search-container {
-            max-width: 800px;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .search-header {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .search-input-large {
-            width: 100%;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            padding: 1.25rem 3.5rem 1.25rem 1.5rem;
-            color: var(--text-color);
-            font-size: 1.25rem;
-            outline: none;
-            font-family: inherit;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        }
-
-        .close-search {
-            position: absolute;
-            right: 1.25rem;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            padding: 0.25rem;
-            border-radius: 4px;
-        }
-
-        .close-search:hover {
-            color: var(--text-color);
-        }
-
-        .search-results-grid {
-            flex: 1;
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1rem;
-            align-content: start;
-            padding-right: 0.5rem;
-        }
-
-        @media (max-width: 868px) {
-            .main-layout { flex-direction: column; }
-            .sidebar-nav { width: 100%; position: static; margin-bottom: 2rem; }
-            .sidebar-nav ul { flex-direction: row; flex-wrap: wrap; gap: 0.5rem; }
-            .sidebar-nav a { padding: 0.4rem 0.75rem; font-size: 0.8rem; }
-            .hero-title { font-size: 2.25rem; }
-            .calc-grid { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Global Navigation -->
+    <!-- Navigation Bar -->
     <header class="glass-header">
         <div class="nav-container">
             <a href="index.html" class="logo">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"></path><path d="M4 10h16"></path><path d="M10 4v16"></path></svg>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"></path><path d="M4 10h16"></path><path d="M10 4v16"></path></svg>
                 Inquiry Calculator
             </a>
             <div class="nav-actions">
-                <button id="searchBtn" class="icon-btn" aria-label="Search Calculators">
+                <button id="searchBtn" class="icon-btn" aria-label="Search">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 </button>
                 <button id="themeToggle" class="icon-btn" aria-label="Toggle Theme">
@@ -407,7 +28,7 @@
     </header>
 
     <!-- Linear Hero Section -->
-    <section class="hero fade-up">
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="dot"></span> 100 Calculators & AI Solver
@@ -416,16 +37,16 @@
             <h1 class="hero-title">Compute at the speed of thought.</h1>
             <p class="hero-subtitle">Instantly calculate complex equations, financial models, and conversions — or ask our AI solver to walk you through the math step-by-step.</p>
 
-            <!-- Linear Command Bar Input -->
+            <!-- Sleek AI Command Bar -->
             <div class="ai-command-bar">
                 <form id="heroAiForm">
-                    <div class="command-input-wrapper">
+                    <div class="command-input-container">
                         <div class="command-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         </div>
                         <input type="text" id="heroAiInput" class="command-input" placeholder="Ask AI any math, science, or finance problem..." autocomplete="off" required>
-                        <button type="submit" class="btn-command-submit" aria-label="Solve Problem">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        <button type="submit" class="btn-command-submit" aria-label="Solve">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                         </button>
                     </div>
                 </form>
@@ -435,9 +56,9 @@
     </section>
 
     <!-- Main Content Layout -->
-    <main class="main-layout fade-up">
+    <main class="main-layout">
         
-        <!-- Sticky Sidebar Navigation -->
+        <!-- Sidebar Navigation -->
         <aside class="sidebar-nav">
             <ul>
                 <li><a href="#math" class="active">Math <span class="category-count">15</span></a></li>
@@ -451,14 +72,12 @@
             </ul>
         </aside>
 
-        <!-- Calculators Grid Container -->
+        <!-- Calculators Container -->
         <div class="content-area">
 
-            <!-- 1. MATH (15) -->
+            <!-- 1. MATH -->
             <section id="math" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Math</h2>
-                </div>
+                <h2 class="category-title">Math</h2>
                 <div class="calc-grid">
                     <a href="standard-calculator.html" class="calc-card" data-keywords="math standard arithmetic basic add subtract multiply divide">
                         <div class="calc-name">Standard Calculator</div>
@@ -523,11 +142,9 @@
                 </div>
             </section>
 
-            <!-- 2. FINANCE (20) -->
+            <!-- 2. FINANCE -->
             <section id="finance" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Finance</h2>
-                </div>
+                <h2 class="category-title">Finance</h2>
                 <div class="calc-grid">
                     <a href="mortgage-calculator.html" class="calc-card" data-keywords="finance mortgage home loan monthly payment interest rate principal real estate">
                         <div class="calc-name">Mortgage Calculator</div>
@@ -612,11 +229,9 @@
                 </div>
             </section>
 
-            <!-- 3. HEALTH (15) -->
+            <!-- 3. HEALTH -->
             <section id="health" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Health</h2>
-                </div>
+                <h2 class="category-title">Health</h2>
                 <div class="calc-grid">
                     <a href="bmi-calculator.html" class="calc-card" data-keywords="health bmi body mass index weight height health fitness category overweight obesity underweight">
                         <div class="calc-name">BMI Calculator</div>
@@ -681,11 +296,9 @@
                 </div>
             </section>
 
-            <!-- 4. CONVERSION (15) -->
+            <!-- 4. CONVERSION -->
             <section id="conversion" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Conversion</h2>
-                </div>
+                <h2 class="category-title">Conversion</h2>
                 <div class="calc-grid">
                     <a href="length-converter.html" class="calc-card" data-keywords="conversion length distance meter feet inches kilometer miles yard cm mm speed scale">
                         <div class="calc-name">Length Converter</div>
@@ -750,11 +363,9 @@
                 </div>
             </section>
 
-            <!-- 5. SCIENCE (10) -->
+            <!-- 5. SCIENCE -->
             <section id="science" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Science</h2>
-                </div>
+                <h2 class="category-title">Science</h2>
                 <div class="calc-grid">
                     <a href="physics-calculator.html" class="calc-card" data-keywords="science physics force mass acceleration newtons law kinematics motion work power">
                         <div class="calc-name">Physics Calculator</div>
@@ -799,11 +410,9 @@
                 </div>
             </section>
 
-            <!-- 6. DATE & TIME (10) -->
+            <!-- 6. DATE & TIME -->
             <section id="date-time" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Date & Time</h2>
-                </div>
+                <h2 class="category-title">Date & Time</h2>
                 <div class="calc-grid">
                     <a href="date-calculator.html" class="calc-card" data-keywords="date time date calculator add subtract days weeks months years duration difference">
                         <div class="calc-name">Date Calculator</div>
@@ -848,11 +457,9 @@
                 </div>
             </section>
 
-            <!-- 7. FITNESS (8) -->
+            <!-- 7. FITNESS -->
             <section id="fitness" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Fitness</h2>
-                </div>
+                <h2 class="category-title">Fitness</h2>
                 <div class="calc-grid">
                     <a href="pace-calculator.html" class="calc-card" data-keywords="fitness pace running speed finish time distance marathon 5k 10k splits minute per mile km">
                         <div class="calc-name">Running Pace Calculator</div>
@@ -889,11 +496,9 @@
                 </div>
             </section>
 
-            <!-- 8. EDUCATION & MISC (7) -->
+            <!-- 8. EDUCATION & MISC -->
             <section id="education" class="category-section">
-                <div class="category-header">
-                    <h2 class="category-title">Education & Misc</h2>
-                </div>
+                <h2 class="category-title">Education & Misc</h2>
                 <div class="calc-grid">
                     <a href="gpa-calculator.html" class="calc-card" data-keywords="education gpa grade point average college high school cumulative semester credit hours unweighted weighted">
                         <div class="calc-name">GPA Calculator</div>
@@ -929,12 +534,12 @@
         </div>
     </main>
 
-    <!-- Global Footer -->
+    <!-- Footer -->
     <footer style="border-top: 1px solid var(--border-color); padding: 4rem 1.5rem; background: var(--bg-color);">
         <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
             <div>
                 <div class="logo" style="margin-bottom: 0.75rem;">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"></path><path d="M4 10h16"></path><path d="M10 4v16"></path></svg>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"></path><path d="M4 10h16"></path><path d="M10 4v16"></path></svg>
                     Inquiry Calculator
                 </div>
                 <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; line-height: 1.5;">High-precision calculation tools and step-by-step AI problem solver designed with zero clutter.</p>
@@ -956,7 +561,7 @@
         </div>
         <div style="max-width: 1280px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between;">
             <span>&copy; 2023 Inquiry Calculator. All rights reserved.</span>
-            <span>https://inquirycalculator.com/</span>
+            <span>inquirycalculator.com</span>
         </div>
     </footer>
 
@@ -964,81 +569,63 @@
     <div id="searchOverlay" class="search-overlay">
         <div class="search-container">
             <div class="search-header">
-                <input type="text" id="searchInput" class="search-input-large" placeholder="Search 100 calculators (e.g. mortgage, bmi, quadratic)..." autocomplete="off">
+                <input type="text" id="searchInput" class="search-input-large" placeholder="Search 100 calculators..." autocomplete="off">
                 <button id="closeSearchBtn" class="close-search" aria-label="Close search">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                 </button>
             </div>
             <div id="searchResults" class="search-results-grid"></div>
         </div>
     </div>
 
-    <!-- Interactive Scripts -->
+    <!-- Scripts -->
     <script>
-        // 1. AI Form Submission (Redirects question to chat.html)
+        // AI Form Redirect
         document.getElementById('heroAiForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const question = document.getElementById('heroAiInput').value.trim();
-            if (question) {
-                sessionStorage.setItem('pending_question', question);
+            const q = document.getElementById('heroAiInput').value.trim();
+            if (q) {
+                sessionStorage.setItem('pending_question', q);
                 window.location.href = 'chat.html';
             }
         });
 
-        // 2. Theme Toggle (Light / Pitch Dark)
+        // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const root = document.documentElement;
-
-        function setTheme(theme) {
-            root.setAttribute('data-theme', theme);
-            localStorage.setItem('inquiry_theme', theme);
+        function setTheme(t) {
+            root.setAttribute('data-theme', t);
+            localStorage.setItem('inquiry_theme', t);
         }
+        setTheme(localStorage.getItem('inquiry_theme') || 'dark');
+        themeToggle.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
-        const savedTheme = localStorage.getItem('inquiry_theme') || 'dark';
-        setTheme(savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const current = root.getAttribute('data-theme');
-            setTheme(current === 'dark' ? 'light' : 'dark');
-        });
-
-        // 3. Search Engine Overlay
+        // Search Overlay
         const searchBtn = document.getElementById('searchBtn');
         const closeSearchBtn = document.getElementById('closeSearchBtn');
         const searchOverlay = document.getElementById('searchOverlay');
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
 
-        // Extract all 100 calculators dynamically from DOM for searching
-        const allCards = Array.from(document.querySelectorAll('.calc-card')).map(card => {
-            return {
-                title: card.querySelector('.calc-name').innerText,
-                desc: card.querySelector('.calc-desc').innerText,
-                href: card.getAttribute('href'),
-                keywords: (card.getAttribute('data-keywords') || '').toLowerCase()
-            };
-        });
+        const cards = Array.from(document.querySelectorAll('.calc-card')).map(c => ({
+            title: c.querySelector('.calc-name').innerText,
+            desc: c.querySelector('.calc-desc').innerText,
+            href: c.getAttribute('href'),
+            keywords: (c.getAttribute('data-keywords') || '').toLowerCase()
+        }));
 
-        function renderResults(query) {
-            const q = query.toLowerCase().trim();
+        function renderResults(q) {
+            q = q.toLowerCase().trim();
             searchResults.innerHTML = '';
-
             if (!q) {
                 searchResults.innerHTML = '<div style="color:var(--text-muted); grid-column:1/-1; padding:2rem 0; text-align:center;">Type to search all 100 calculators...</div>';
                 return;
             }
-
-            const matches = allCards.filter(c => 
-                c.title.toLowerCase().includes(q) || 
-                c.desc.toLowerCase().includes(q) || 
-                c.keywords.includes(q)
-            );
-
-            if (matches.length === 0) {
+            const matches = cards.filter(c => c.title.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.keywords.includes(q));
+            if (!matches.length) {
                 searchResults.innerHTML = '<div style="color:var(--text-muted); grid-column:1/-1; padding:2rem 0; text-align:center;">No matching calculators found.</div>';
                 return;
             }
-
             matches.forEach(item => {
                 const a = document.createElement('a');
                 a.className = 'calc-card';
@@ -1048,45 +635,20 @@
             });
         }
 
-        searchBtn.addEventListener('click', () => {
-            searchOverlay.classList.add('active');
-            renderResults('');
-            setTimeout(() => searchInput.focus(), 50);
-        });
+        searchBtn.addEventListener('click', () => { searchOverlay.classList.add('active'); renderResults(''); setTimeout(() => searchInput.focus(), 50); });
+        closeSearchBtn.addEventListener('click', () => { searchOverlay.classList.remove('active'); searchInput.value = ''; });
+        searchInput.addEventListener('input', (e) => renderResults(e.target.value));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchOverlay.classList.contains('active')) searchOverlay.classList.remove('active'); });
 
-        closeSearchBtn.addEventListener('click', () => {
-            searchOverlay.classList.remove('active');
-            searchInput.value = '';
-        });
-
-        searchInput.addEventListener('input', (e) => {
-            renderResults(e.target.value);
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
-                searchOverlay.classList.remove('active');
-            }
-        });
-
-        // 4. Sidebar Active Scroll Highlighting
+        // Active Sidebar Link
         const sections = document.querySelectorAll('.category-section');
         const navLinks = document.querySelectorAll('.sidebar-nav a');
-
         window.addEventListener('scroll', () => {
             let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 120;
-                if (pageYOffset >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                }
+            sections.forEach(s => { if (pageYOffset >= s.offsetTop - 120) current = s.getAttribute('id'); });
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                if (l.getAttribute('href') === '#' + current) l.classList.add('active');
             });
         });
     </script>
