@@ -3,651 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inquiry Calculator — Compute Anything. Solve Everything.</title>
-    <meta name="description" content="47 precision calculators and an AI problem solver.">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Inquiry Calculator — Compute Anything. Solve Everything.">
-    <meta property="og:description" content="47 free calculators and an AI-powered step-by-step problem solver.">
-    <meta property="og:type" content="website">
-
-    <!-- Favicon -->
+    <title>Inquiry Calculator — 101 Precision Calculators & AI Solver</title>
+    <meta name="description" content="101 free calculators for math, finance, health, science, conversions, date/time, fitness, and education, plus an instant AI problem solver.">
+    <meta property="og:title" content="Inquiry Calculator — 101 Calculators & AI Solver">
+    <meta property="og:description" content="101 free online calculators and an AI-powered step-by-step solver.">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
-
-    <!-- Theme persistence -->
+    <link rel="manifest" href="/site.webmanifest">
     <script>
         const savedTheme = localStorage.getItem('inquiry_theme');
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-        } else {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
+        document.documentElement.setAttribute('data-theme', savedTheme ? savedTheme : 'dark');
     </script>
-
     <style>
-        /* ===== SYSTEM & MONOCHROME PALETTE ===== */
-        :root {
-            /* Dark Mode Default (Vercel/Linear Pitch Dark) */
-            --bg: #09090B;
-            --bg-elevated: #121215;
-            --bg-card: #18181B;
-            --fg: #FAFAFA;
-            --fg-muted: #A1A1AA;
-            --fg-subtle: #71717A;
-            --border: #27272A;
-            --border-hover: #52525B;
-            --accent: #FFFFFF;
-            --accent-inverse: #000000;
-            --glow: rgba(255, 255, 255, 0.05);
-            --focus-ring: 0 0 0 2px #FFFFFF;
-        }
-
-        [data-theme="light"] {
-            /* Light Mode (High Contrast Crisp White) */
-            --bg: #FFFFFF;
-            --bg-elevated: #F4F4F5;
-            --bg-card: #FAFAFA;
-            --fg: #09090B;
-            --fg-muted: #71717A;
-            --fg-subtle: #A1A1AA;
-            --border: #E4E4E7;
-            --border-hover: #A1A1AA;
-            --accent: #09090B;
-            --accent-inverse: #FFFFFF;
-            --glow: rgba(0, 0, 0, 0.03);
-            --focus-ring: 0 0 0 2px #09090B;
-        }
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg);
-            color: var(--fg);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            transition: background-color 0.25s ease, color 0.25s ease;
-            min-height: 100vh;
-        }
-
-        a { color: inherit; text-decoration: none; }
-        ul { list-style: none; }
-
-        /* ===== BACKGROUND GLOW EFFECT ===== */
-        .ambient-glow {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 1000px;
-            height: 400px;
-            background: radial-gradient(circle at 50% 0%, var(--glow), transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* ===== ANIMATIONS (Linear Motion) ===== */
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(14px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .reveal {
-            opacity: 0; 
-            animation: none;
-        }
-        .reveal.visible {
-            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        .delay-1 { animation-delay: 0.08s; }
-        .delay-2 { animation-delay: 0.16s; }
-        .delay-3 { animation-delay: 0.24s; }
-
-        /* ===== NAV ===== */
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(var(--bg), 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
-            padding: 14px 24px;
-        }
-        .nav-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.05rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .logo-badge {
-            background: var(--fg);
-            color: var(--bg);
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 2px 6px;
-            border-radius: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 0.88rem;
-            font-weight: 500;
-        }
-        .nav-right a { color: var(--fg-muted); transition: color 0.15s; }
-        .nav-right a:hover { color: var(--fg); }
-        
-        .btn-theme {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            color: var(--fg);
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 0.82rem;
-            font-family: inherit;
-            font-weight: 500;
-            transition: all 0.15s;
-        }
-        .btn-theme:hover { border-color: var(--fg-muted); }
-        
-        .auth-btn {
-            background: var(--fg);
-            color: var(--accent-inverse) !important;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: opacity 0.15s;
-        }
-        .auth-btn:hover { opacity: 0.88; }
-
-        /* ===== HERO SECTION ===== */
-        .hero {
-            position: relative;
-            z-index: 1;
-            padding: 90px 24px 50px;
-            text-align: center;
-            max-width: 780px;
-            margin: 0 auto;
-        }
-        .hero h1 {
-            font-size: 3.2rem;
-            font-weight: 800;
-            letter-spacing: -1.8px;
-            line-height: 1.1;
-            margin-bottom: 16px;
-            color: var(--fg);
-        }
-        .hero p {
-            font-size: 1.1rem;
-            color: var(--fg-muted);
-            margin-bottom: 36px;
-            font-weight: 400;
-        }
-
-        /* ===== UNIFIED COMMAND BAR ===== */
-        .unified-bar {
-            position: relative;
-            text-align: left;
-        }
-        .unified-input {
-            width: 100%;
-            padding: 18px 130px 18px 20px;
-            font-size: 1.05rem;
-            font-family: inherit;
-            background: var(--bg-elevated);
-            color: var(--fg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease;
-        }
-        .unified-input:focus {
-            outline: none;
-            border-color: var(--fg);
-            box-shadow: var(--focus-ring);
-        }
-        .btn-ask {
-            position: absolute;
-            right: 6px;
-            top: 6px;
-            bottom: 6px;
-            background: var(--fg);
-            color: var(--accent-inverse);
-            border: none;
-            border-radius: 4px;
-            padding: 0 20px;
-            font-weight: 600;
-            font-size: 0.88rem;
-            font-family: inherit;
-            cursor: pointer;
-            transition: opacity 0.15s;
-        }
-        .btn-ask:hover { opacity: 0.9; }
-
-        /* Dropdown */
-        .search-dropdown {
-            position: absolute;
-            top: calc(100% + 6px);
-            left: 0;
-            right: 0;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            box-shadow: 0 12px 36px rgba(0,0,0,0.4);
-            max-height: 320px;
-            overflow-y: auto;
-            z-index: 50;
-            display: none;
-        }
-        .search-dropdown a {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 20px;
-            border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
-            color: var(--fg);
-            transition: background 0.1s;
-        }
-        .search-dropdown a:hover { background: var(--bg-card); }
-        .search-dropdown a:last-child { border-bottom: none; }
-        .search-dropdown span.tag {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            color: var(--fg-subtle);
-            letter-spacing: 0.5px;
-            font-weight: 600;
-        }
-
-        /* Query Chips */
-        .chips {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
-        .chip {
-            font-size: 0.78rem;
-            color: var(--fg-muted);
-            border: 1px solid var(--border);
-            padding: 5px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.15s;
-            background: var(--bg-elevated);
-        }
-        .chip:hover { border-color: var(--fg-muted); color: var(--fg); }
-
-        /* ===== MAIN GRID & SIDEBAR ===== */
-        .layout {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 24px 100px;
-            display: grid;
-            grid-template-columns: 180px 1fr;
-            gap: 50px;
-            position: relative;
-            z-index: 1;
-        }
-        @media (max-width: 850px) {
-            .layout { grid-template-columns: 1fr; gap: 30px; }
-            .sidebar { display: none; }
-            .hero h1 { font-size: 2.3rem; }
-        }
-
-        /* Sticky Sidebar Nav */
-        .sidebar {
-            position: sticky;
-            top: 90px;
-            height: fit-content;
-        }
-        .sidebar-title {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: var(--fg-subtle);
-            font-weight: 700;
-            margin-bottom: 14px;
-        }
-        .sidebar ul { display: flex; flex-direction: column; gap: 10px; }
-        .sidebar a {
-            font-size: 0.88rem;
-            color: var(--fg-muted);
-            font-weight: 500;
-            transition: color 0.15s;
-        }
-        .sidebar a:hover { color: var(--fg); }
-
-        /* Grid Cards */
-        .category-section { margin-bottom: 50px; }
-        .category-section h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-            color: var(--fg);
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 14px;
-        }
-        
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 5px;
-            padding: 18px 20px;
-            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        }
-        .card h3 {
-            font-size: 0.98rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--fg);
-            letter-spacing: -0.2px;
-        }
-        .card p {
-            font-size: 0.82rem;
-            color: var(--fg-muted);
-            line-height: 1.45;
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 36px 24px;
-            text-align: center;
-            color: var(--fg-muted);
-            font-size: 0.82rem;
-            position: relative;
-            z-index: 1;
-        }
-        footer a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+        :root { --bg:#09090B; --bg-elevated:#121215; --bg-card:#18181B; --fg:#FAFAFA; --fg-muted:#A1A1AA; --fg-subtle:#71717A; --border:#27272A; --border-hover:#52525B; --accent:#FFF; --accent-inverse:#000; --glow:rgba(255,255,255,0.05); --focus-ring:0 0 0 2px #FFF; }
+        [data-theme="light"] { --bg:#FFF; --bg-elevated:#F4F4F5; --bg-card:#FAFAFA; --fg:#09090B; --fg-muted:#71717A; --fg-subtle:#A1A1AA; --border:#E4E4E7; --border-hover:#A1A1AA; --accent:#09090B; --accent-inverse:#FFF; --glow:rgba(0,0,0,0.03); --focus-ring:0 0 0 2px #09090B; }
+        *{box-sizing:border-box;margin:0;padding:0} body{font-family:-apple-system,BlinkMacSystemFont,Inter,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg);line-height:1.5;-webkit-font-smoothing:antialiased;transition:0.25s}
+        a{color:inherit;text-decoration:none} ul{list-style:none}
+        .ambient-glow{position:absolute;top:0;left:50%;transform:translateX(-50%);width:100%;max-width:1000px;height:400px;background:radial-gradient(circle at 50% 0%,var(--glow),transparent 70%);pointer-events:none;z-index:0}
+        @keyframes fadeSlideUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
+        .reveal{opacity:0}.reveal.visible{animation:fadeSlideUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards}
+        nav{position:sticky;top:0;z-index:100;background:rgba(9,9,11,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 24px}
+        [data-theme="light"] nav{background:rgba(255,255,255,0.85)}
+        .nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:1.05rem;font-weight:700;letter-spacing:-0.5px;display:flex;gap:8px;align-items:center}
+        .logo-badge{background:var(--fg);color:var(--bg);font-size:0.65rem;font-weight:800;padding:2px 6px;border-radius:3px;text-transform:uppercase}
+        .nav-right{display:flex;align-items:center;gap:20px;font-size:0.88rem;font-weight:500}
+        .nav-right a{color:var(--fg-muted)}.nav-right a:hover{color:var(--fg)}
+        .btn-theme{background:var(--bg-elevated);border:1px solid var(--border);color:var(--fg);cursor:pointer;padding:6px 12px;border-radius:4px;font-size:0.82rem}
+        .auth-btn{background:var(--fg);color:var(--accent-inverse)!important;padding:6px 14px;border-radius:4px;font-weight:600}
+        .hero{position:relative;z-index:1;padding:70px 24px 30px;text-align:center;max-width:850px;margin:0 auto}
+        .hero-pill{display:inline-flex;align-items:center;gap:8px;background:var(--bg-elevated);border:1px solid var(--border);padding:6px 14px;border-radius:999px;font-size:0.78rem;font-weight:600;color:var(--fg-muted);margin-bottom:20px}
+        .hero-pill b{width:8px;height:8px;background:#22c55e;border-radius:50%;display:inline-block;box-shadow:0 0 8px #22c55e}
+        .hero h1{font-size:3.2rem;font-weight:800;letter-spacing:-1.8px;line-height:1.1;margin-bottom:14px}
+        .hero p{font-size:1.1rem;color:var(--fg-muted);margin-bottom:30px}
+        .unified-bar{position:relative;text-align:left}
+        .unified-input{width:100%;padding:18px 130px 18px 20px;font-size:1.05rem;font-family:inherit;background:var(--bg-elevated);color:var(--fg);border:1px solid var(--border);border-radius:6px;box-shadow:0 8px 32px rgba(0,0,0,0.2)}
+        .unified-input:focus{outline:none;border-color:var(--fg);box-shadow:var(--focus-ring)}
+        .btn-ask{position:absolute;right:6px;top:6px;bottom:6px;background:var(--fg);color:var(--accent-inverse);border:none;border-radius:4px;padding:0 20px;font-weight:600;font-size:0.88rem;cursor:pointer}
+        .search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;box-shadow:0 12px 36px rgba(0,0,0,0.4);max-height:320px;overflow-y:auto;z-index:50;display:none}
+        .search-dropdown a{display:flex;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);font-size:0.9rem}
+        .search-dropdown a:hover{background:var(--bg-card)} .tag{font-size:0.72rem;color:var(--fg-subtle);text-transform:uppercase;font-weight:600}
+        .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:20px}
+        .chip{font-size:0.78rem;color:var(--fg-muted);border:1px solid var(--border);padding:5px 12px;border-radius:4px;cursor:pointer;background:var(--bg-elevated)}
+        .chip:hover{color:var(--fg);border-color:var(--fg-muted)}
+        .layout{max-width:1200px;margin:0 auto;padding:30px 24px 100px;display:grid;grid-template-columns:180px 1fr;gap:50px;position:relative;z-index:1}
+        @media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{display:none}.hero h1{font-size:2.3rem}}
+        .sidebar{position:sticky;top:90px;height:fit-content}
+        .sidebar-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--fg-subtle);font-weight:700;margin-bottom:14px}
+        .sidebar ul{display:flex;flex-direction:column;gap:10px}.sidebar a{font-size:0.88rem;color:var(--fg-muted)}.sidebar a:hover{color:var(--fg)}
+        .category-section{margin-bottom:50px}.category-section h2{font-size:1.3rem;font-weight:700;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:20px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+        .card{background:var(--bg-card);border:1px solid var(--border);border-radius:5px;padding:16px 18px;transition:0.18s}
+        .card:hover{border-color:var(--border-hover);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.25)}
+        .card h3{font-size:0.95rem;font-weight:600;margin-bottom:4px}.card p{font-size:0.8rem;color:var(--fg-muted);line-height:1.4}
+        footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center;color:var(--fg-muted);font-size:0.82rem}
+        footer a{color:var(--fg);text-decoration:underline;text-underline-offset:3px}
     </style>
 </head>
 <body>
+<div class="ambient-glow"></div>
+<nav><div class="nav-inner"><a href="/" class="logo">Inquiry <span class="logo-badge">PRO</span></a><div class="nav-right"><button class="btn-theme" id="theme-toggle">Light Mode</button><div id="auth-buttons"><a href="/login.html">Log In</a> <a href="/signup.html" class="auth-btn">Sign Up</a></div><div id="user-info" style="display:none;gap:16px;align-items:center"><span id="user-name" style="font-weight:600"></span><button onclick="logOut()" style="background:none;border:none;color:var(--fg-muted);cursor:pointer;font-size:0.85rem">Log Out</button></div></div></div></nav>
+<header class="hero">
+    <div class="hero-pill reveal visible"><b></b> 99+ calculators live — 101 tools and counting</div>
+    <h1 class="reveal visible">Compute anything.<br>Solve everything.</h1>
+    <p class="reveal visible">101 precision calculators and an instant AI problem solver. All free, no ads in the tools.</p>
+    <div class="unified-bar reveal visible"><input type="text" id="unified-input" class="unified-input" placeholder="Search 101 calculators or ask a math question..." autocomplete="off"><button class="btn-ask" onclick="submitToAI()">Ask AI</button><div class="search-dropdown" id="search-dropdown"></div></div>
+    <div class="chips reveal visible"><div class="chip" onclick="setQuery('Mortgage')">Mortgage</div><div class="chip" onclick="setQuery('BMI')">BMI</div><div class="chip" onclick="setQuery('Compound Interest')">Compound</div><div class="chip" onclick="setQuery('Derivative')">Derivative 3x²</div><div class="chip" onclick="setQuery('GPA')">GPA</div></div>
+</header>
+<div class="layout">
+<aside class="sidebar reveal"><div class="sidebar-title">Categories</div><ul><li><a href="#math">Math (15)</a></li><li><a href="#finance">Finance (23)</a></li><li><a href="#health">Health (15)</a></li><li><a href="#conversion">Conversion (15)</a></li><li><a href="#science">Science (10)</a></li><li><a href="#time">Date & Time (10)</a></li><li><a href="#fitness">Fitness (8)</a></li><li><a href="#education">Education (5)</a></li></ul></aside>
+<main>
+<section id="math" class="category-section reveal"><h2>Math (15)</h2><div class="grid">
+<a href="standard-calculator.html" class="card" data-keywords="standard basic arithmetic"><h3>Standard Calculator</h3><p>Basic arithmetic operations.</p></a>
+<a href="percentage-calculator.html" class="card" data-keywords="percentage percent"><h3>Percentage Calculator</h3><p>Calculate X% of Y.</p></a>
+<a href="fraction-calculator.html" class="card" data-keywords="fraction decimal"><h3>Fraction Calculator</h3><p>Decimal to simplified fraction.</p></a>
+<a href="square-root-calculator.html" class="card" data-keywords="square root"><h3>Square Root Calculator</h3><p>Find square roots.</p></a>
+<a href="exponent-calculator.html" class="card" data-keywords="exponent power"><h3>Exponent Calculator</h3><p>Base raised to power.</p></a>
+<a href="logarithm-calculator.html" class="card" data-keywords="logarithm log"><h3>Logarithm Calculator</h3><p>Base-10 logarithm.</p></a>
+<a href="ratio-calculator.html" class="card" data-keywords="ratio proportion"><h3>Ratio Calculator</h3><p>Simplify A:B ratio.</p></a>
+<a href="random-number-generator.html" class="card" data-keywords="random number generator"><h3>Random Number Generator</h3><p>Generate random number.</p></a>
+<a href="probability-calculator.html" class="card" data-keywords="probability odds"><h3>Probability Calculator</h3><p>Probability percentage.</p></a>
+<a href="standard-deviation-calculator.html" class="card" data-keywords="standard deviation variance"><h3>Standard Deviation</h3><p>Population SD & variance.</p></a>
+<a href="lcm-calculator.html" class="card" data-keywords="lcm least common multiple"><h3>LCM Calculator</h3><p>Least Common Multiple.</p></a>
+<a href="gcf-calculator.html" class="card" data-keywords="gcf greatest common factor"><h3>GCF Calculator</h3><p>Greatest Common Factor.</p></a>
+<a href="quadratic-calculator.html" class="card" data-keywords="quadratic equation roots"><h3>Quadratic Calculator</h3><p>Solve ax²+bx+c=0.</p></a>
+<a href="area-calculator.html" class="card" data-keywords="area rectangle length width"><h3>Area Calculator</h3><p>Rectangle surface area.</p></a>
+<a href="perimeter-calculator.html" class="card" data-keywords="perimeter rectangle"><h3>Perimeter Calculator</h3><p>Rectangle perimeter.</p></a>
+</div></section>
 
-    <div class="ambient-glow"></div>
+<section id="finance" class="category-section reveal"><h2>Finance (23)</h2><div class="grid">
+<a href="amortization-calculator.html" class="card" data-keywords="amortization schedule loan"><h3>Amortization Calculator</h3><p>Loan amortization schedule.</p></a>
+<a href="mortgage-calculator.html" class="card" data-keywords="mortgage home house"><h3>Mortgage Calculator</h3><p>Monthly home payment.</p></a>
+<a href="loan-calculator.html" class="card" data-keywords="loan payment interest"><h3>Loan Calculator</h3><p>Monthly loan payment.</p></a>
+<a href="auto-loan-calculator.html" class="card" data-keywords="auto car loan"><h3>Auto Loan Calculator</h3><p>Car payment estimator.</p></a>
+<a href="compound-interest-calculator.html" class="card" data-keywords="compound interest investment"><h3>Compound Interest</h3><p>Future value of investment.</p></a>
+<a href="present-value-calculator.html" class="card" data-keywords="present value future"><h3>Present Value</h3><p>Current worth of future sum.</p></a>
+<a href="roi-calculator.html" class="card" data-keywords="roi return investment"><h3>ROI Calculator</h3><p>Return on Investment %.</p></a>
+<a href="rule-of-72-calculator.html" class="card" data-keywords="rule 72 double"><h3>Rule of 72</h3><p>Years to double investment.</p></a>
+<a href="inflation-calculator.html" class="card" data-keywords="inflation purchasing power"><h3>Inflation Calculator</h3><p>Future buying power.</p></a>
+<a href="discount-calculator.html" class="card" data-keywords="discount sale price"><h3>Discount Calculator</h3><p>Price after discount.</p></a>
+<a href="margin-calculator.html" class="card" data-keywords="margin profit revenue"><h3>Margin Calculator</h3><p>Gross profit margin.</p></a>
+<a href="markup-calculator.html" class="card" data-keywords="markup cost price"><h3>Markup Calculator</h3><p>Price from cost + markup.</p></a>
+<a href="tax-calculator.html" class="card" data-keywords="tax sales tax"><h3>Tax Calculator</h3><p>Sales tax total.</p></a>
+<a href="tip-calculator.html" class="card" data-keywords="tip gratuity bill"><h3>Tip Calculator</h3><p>Tip and total bill.</p></a>
+<a href="tip-split-calculator.html" class="card" data-keywords="tip split per person"><h3>Tip Splitter</h3><p>Split bill per person.</p></a>
+<a href="price-per-unit-calculator.html" class="card" data-keywords="price per unit grocery"><h3>Price Per Unit</h3><p>Cost per ounce/item.</p></a>
+<a href="salary-calculator.html" class="card" data-keywords="salary hourly annual"><h3>Salary Calculator</h3><p>Hourly to annual pay.</p></a>
+<a href="dti-calculator.html" class="card" data-keywords="dti debt income ratio"><h3>Debt-to-Income</h3><p>DTI ratio for mortgage.</p></a>
+<a href="net-worth-calculator.html" class="card" data-keywords="net worth assets liabilities"><h3>Net Worth Calculator</h3><p>Assets minus liabilities.</p></a>
+<a href="cc-payoff-calculator.html" class="card" data-keywords="credit card payoff debt"><h3>Credit Card Payoff</h3><p>Months to payoff debt.</p></a>
+<a href="sip-calculator.html" class="card" data-keywords="sip investment mutual fund"><h3>SIP Calculator</h3><p>Systematic investment plan.</p></a>
+<a href="crypto-profit-calculator.html" class="card" data-keywords="crypto bitcoin profit"><h3>Crypto Profit</h3><p>Profit on crypto trade.</p></a>
+<a href="currency-converter.html" class="card" data-keywords="currency usd eur exchange"><h3>Currency Converter</h3><p>Convert USD to EUR.</p></a>
+</div></section>
 
-    <!-- NAV -->
-    <nav>
-        <div class="nav-inner">
-            <a href="/" class="logo">
-                Inquiry <span class="logo-badge">PRO</span>
-            </a>
-            <div class="nav-right">
-                <button class="btn-theme" id="theme-toggle">Light Mode</button>
-                <div id="auth-buttons">
-                    <a href="/login.html">Log In</a>
-                    <a href="/signup.html" class="auth-btn">Sign Up</a>
-                </div>
-                <div id="user-info" style="display:none; align-items:center; gap:16px;">
-                    <span id="user-name" style="color:var(--fg); font-weight:600;"></span>
-                    <button onclick="logOut()" style="background:none; border:none; cursor:pointer; font-size:0.85rem; font-family:inherit; color:var(--fg-muted);">Log Out</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+<section id="health" class="category-section reveal"><h2>Health (15)</h2><div class="grid">
+<a href="bmi-calculator.html" class="card" data-keywords="bmi body mass index"><h3>BMI Calculator</h3><p>Body Mass Index.</p></a>
+<a href="bmr-calculator.html" class="card" data-keywords="bmr basal metabolic rate"><h3>BMR Calculator</h3><p>Basal Metabolic Rate.</p></a>
+<a href="calorie-calculator.html" class="card" data-keywords="calorie tdee maintenance"><h3>Calorie Calculator</h3><p>Daily TDEE calories.</p></a>
+<a href="body-fat-calculator.html" class="card" data-keywords="body fat navy"><h3>Body Fat Calculator</h3><p>U.S. Navy body fat %.</p></a>
+<a href="macro-calculator.html" class="card" data-keywords="macro protein carbs fat"><h3>Macro Calculator</h3><p>40/30/30 macro split.</p></a>
+<a href="protein-calculator.html" class="card" data-keywords="protein daily intake"><h3>Protein Calculator</h3><p>Daily protein grams.</p></a>
+<a href="ideal-weight-calculator.html" class="card" data-keywords="ideal weight devine"><h3>Ideal Weight</h3><p>Healthy target weight.</p></a>
+<a href="water-intake-calculator.html" class="card" data-keywords="water intake hydration"><h3>Water Intake</h3><p>Daily hydration target.</p></a>
+<a href="lbm-calculator.html" class="card" data-keywords="lean body mass lbm"><h3>Lean Body Mass</h3><p>LBM without fat.</p></a>
+<a href="blood-volume-calculator.html" class="card" data-keywords="blood volume nadler"><h3>Blood Volume</h3><p>Estimated blood volume.</p></a>
+<a href="bac-calculator.html" class="card" data-keywords="bac alcohol blood"><h3>BAC Calculator</h3><p>Blood Alcohol Content.</p></a>
+<a href="target-hr-calculator.html" class="card" data-keywords="target heart rate pulse"><h3>Target Heart Rate</h3><p>Exercise HR zone.</p></a>
+<a href="ovulation-calculator.html" class="card" data-keywords="ovulation fertile period"><h3>Ovulation Calculator</h3><p>Fertile window estimate.</p></a>
+<a href="due-date-calculator.html" class="card" data-keywords="due date pregnancy"><h3>Due Date Calculator</h3><p>Pregnancy due date.</p></a>
+<a href="sleep-calculator.html" class="card" data-keywords="sleep cycle 90 minutes"><h3>Sleep Calculator</h3><p>90-min sleep cycles.</p></a>
+</div></section>
 
-    <!-- HERO -->
-    <header class="hero">
-        <h1 class="reveal visible">Compute anything.<br>Solve everything.</h1>
-        <p class="reveal visible delay-1">47 precision calculators and an instant AI problem solver.</p>
-        
-        <div class="unified-bar reveal visible delay-2">
-            <input type="text" id="unified-input" class="unified-input" placeholder="Search calculators or ask a complex math question..." autocomplete="off">
-            <button class="btn-ask" id="btn-ask" onclick="submitToAI()">Ask AI</button>
-            <div class="search-dropdown" id="search-dropdown"></div>
-        </div>
+<section id="conversion" class="category-section reveal"><h2>Conversion (15)</h2><div class="grid">
+<a href="length-converter.html" class="card" data-keywords="length meters feet"><h3>Length Converter</h3><p>Meters to feet.</p></a>
+<a href="weight-converter.html" class="card" data-keywords="weight kg lbs"><h3>Weight Converter</h3><p>KG to pounds.</p></a>
+<a href="temperature-converter.html" class="card" data-keywords="temperature celsius fahrenheit"><h3>Temperature Converter</h3><p>Celsius to Fahrenheit.</p></a>
+<a href="volume-converter.html" class="card" data-keywords="volume liters gallons"><h3>Volume Converter</h3><p>Liters to gallons.</p></a>
+<a href="speed-converter.html" class="card" data-keywords="speed mph kmh"><h3>Speed Converter</h3><p>KM/H to MPH.</p></a>
+<a href="area-converter.html" class="card" data-keywords="area sq meters feet"><h3>Area Converter</h3><p>Sq meters to sq feet.</p></a>
+<a href="time-converter.html" class="card" data-keywords="time minutes seconds"><h3>Time Converter</h3><p>Minutes to seconds.</p></a>
+<a href="data-storage-converter.html" class="card" data-keywords="data storage gb mb"><h3>Data Storage Converter</h3><p>GB to MB.</p></a>
+<a href="energy-converter.html" class="card" data-keywords="energy joules calories"><h3>Energy Converter</h3><p>Joules to calories.</p></a>
+<a href="pressure-converter.html" class="card" data-keywords="pressure bar psi"><h3>Pressure Converter</h3><p>Bar to PSI.</p></a>
+<a href="power-converter.html" class="card" data-keywords="power watts hp"><h3>Power Converter</h3><p>Watts to HP.</p></a>
+<a href="angle-converter.html" class="card" data-keywords="angle degrees radians"><h3>Angle Converter</h3><p>Degrees to radians.</p></a>
+<a href="frequency-converter.html" class="card" data-keywords="frequency hz khz"><h3>Frequency Converter</h3><p>Hz to kHz.</p></a>
+<a href="fuel-economy-converter.html" class="card" data-keywords="fuel economy mpg"><h3>Fuel Economy</h3><p>MPG to L/100km.</p></a>
+<a href="force-converter.html" class="card" data-keywords="force newtons lbf"><h3>Force Converter</h3><p>Newtons to lbf.</p></a>
+</div></section>
 
-        <div class="chips reveal visible delay-3">
-            <div class="chip" onclick="setQuery('Mortgage payment for $300k at 6.5%')">Mortgage $300k @ 6.5%</div>
-            <div class="chip" onclick="setQuery('Derivative of 3x^2 + 5x')">Derivative 3x² + 5x</div>
-            <div class="chip" onclick="setQuery('BMI')">Search: BMI</div>
-            <div class="chip" onclick="setQuery('Compound Interest')">Search: Compound Interest</div>
-        </div>
-    </header>
+<section id="science" class="category-section reveal"><h2>Science (10)</h2><div class="grid">
+<a href="physics-calculator.html" class="card" data-keywords="physics force mass acceleration"><h3>Force Calculator</h3><p>F = m*a.</p></a>
+<a href="density-calculator.html" class="card" data-keywords="density mass volume"><h3>Density Calculator</h3><p>d = m/v.</p></a>
+<a href="velocity-calculator.html" class="card" data-keywords="velocity distance time"><h3>Velocity Calculator</h3><p>v = d/t.</p></a>
+<a href="acceleration-calculator.html" class="card" data-keywords="acceleration velocity time"><h3>Acceleration Calculator</h3><p>a = Δv/t.</p></a>
+<a href="kinetic-energy-calculator.html" class="card" data-keywords="kinetic energy mv2"><h3>Kinetic Energy</h3><p>KE = 1/2 mv².</p></a>
+<a href="potential-energy-calculator.html" class="card" data-keywords="potential energy mgh"><h3>Potential Energy</h3><p>PE = mgh.</p></a>
+<a href="wavelength-calculator.html" class="card" data-keywords="wavelength frequency velocity"><h3>Wavelength Calculator</h3><p>λ = v/f.</p></a>
+<a href="ohms-law-calculator.html" class="card" data-keywords="ohms law voltage current"><h3>Ohm's Law Calculator</h3><p>V = I*R.</p></a>
+<a href="molar-mass-calculator.html" class="card" data-keywords="molarity moles chemistry"><h3>Molarity Calculator</h3><p>Moles per liter.</p></a>
+<a href="gravity-calculator.html" class="card" data-keywords="gravity acceleration mass"><h3>Gravity Calculator</h3><p>Gravitational acceleration.</p></a>
+</div></section>
 
-    <!-- MAIN LAYOUT -->
-    <div class="layout">
-        <!-- Sidebar -->
-        <aside class="sidebar reveal">
-            <div class="sidebar-title">Categories</div>
-            <ul>
-                <li><a href="#math">Math</a></li>
-                <li><a href="#finance">Finance</a></li>
-                <li><a href="#health">Health</a></li>
-                <li><a href="#conversion">Conversion</a></li>
-                <li><a href="#science">Science</a></li>
-                <li><a href="#time">Date & Time</a></li>
-            </ul>
-        </aside>
+<section id="time" class="category-section reveal"><h2>Date & Time (10)</h2><div class="grid">
+<a href="date-calculator.html" class="card" data-keywords="date difference days between"><h3>Date Difference</h3><p>Days between two dates.</p></a>
+<a href="age-calculator.html" class="card" data-keywords="age birthday years"><h3>Age Calculator</h3><p>Exact age in years.</p></a>
+<a href="timezone-converter.html" class="card" data-keywords="time zone utc gmt offset"><h3>Time Zone Offset</h3><p>Convert with UTC offset.</p></a>
+<a href="hours-calculator.html" class="card" data-keywords="hours work time elapsed"><h3>Hours Calculator</h3><p>Work hours elapsed.</p></a>
+<a href="business-days-calculator.html" class="card" data-keywords="business days weekdays"><h3>Business Days</h3><p>Working days between dates.</p></a>
+<a href="days-from-today-calculator.html" class="card" data-keywords="days from today future date"><h3>Days From Today</h3><p>Future date calculator.</p></a>
+<a href="duration-calculator.html" class="card" data-keywords="duration minutes hours"><h3>Duration Calculator</h3><p>Minutes to hours.</p></a>
+<a href="leap-year-calculator.html" class="card" data-keywords="leap year 366"><h3>Leap Year Calculator</h3><p>Is it a leap year?</p></a>
+<a href="unix-timestamp-calculator.html" class="card" data-keywords="unix timestamp epoch"><h3>Unix Timestamp</h3><p>Current epoch time.</p></a>
+<a href="day-of-week-calculator.html" class="card" data-keywords="day of week weekday"><h3>Day of Week</h3><p>Weekday for any date.</p></a>
+</div></section>
 
-        <!-- Grids -->
-        <main>
-            <!-- MATH -->
-            <section id="math" class="category-section reveal">
-                <h2>Math</h2>
-                <div class="grid">
-                    <a href="standard-calculator.html" class="card" data-keywords="standard basic arithmetic add subtract multiply divide">
-                        <h3>Standard Calculator</h3><p>Basic arithmetic operations including addition, subtraction, and division.</p></a>
-                    <a href="scientific-calculator.html" class="card" data-keywords="scientific sin cos tan log exponent trigonometry">
-                        <h3>Scientific Calculator</h3><p>Trigonometry, logarithms, powers, and complex roots.</p></a>
-                    <a href="percentage-calculator.html" class="card" data-keywords="percentage percent discount increase decrease">
-                        <h3>Percentage Calculator</h3><p>Percentage changes, relative values, and differences.</p></a>
-                    <a href="fraction-calculator.html" class="card" data-keywords="fraction add subtract multiply divide simplify">
-                        <h3>Fraction Calculator</h3><p>Add, subtract, multiply, divide, and simplify fractions.</p></a>
-                    <a href="probability-calculator.html" class="card" data-keywords="probability odds chance event">
-                        <h3>Probability Calculator</h3><p>Single event, multiple event, and conditional probabilities.</p></a>
-                    <a href="standard-deviation-calculator.html" class="card" data-keywords="standard deviation variance mean statistics">
-                        <h3>Standard Deviation</h3><p>Sample and population standard deviation, variance, and mean.</p></a>
-                </div>
-            </section>
+<section id="fitness" class="category-section reveal"><h2>Fitness (8)</h2><div class="grid">
+<a href="pace-calculator.html" class="card" data-keywords="pace running min km mile"><h3>Pace Calculator</h3><p>Min per km/mile.</p></a>
+<a href="1rm-calculator.html" class="card" data-keywords="1rm one rep max bench"><h3>1RM Calculator</h3><p>One Rep Max estimate.</p></a>
+<a href="vo2max-calculator.html" class="card" data-keywords="vo2 max cardio"><h3>VO2 Max Calculator</h3><p>Cardio fitness estimate.</p></a>
+<a href="cycling-watt-calculator.html" class="card" data-keywords="cycling watts w kg"><h3>Cycling Wattage</h3><p>Watts per kg.</p></a>
+<a href="step-count-calculator.html" class="card" data-keywords="steps miles walking"><h3>Step Calculator</h3><p>Steps to miles.</p></a>
+<a href="wilks-calculator.html" class="card" data-keywords="wilks powerlifting score"><h3>Wilks Calculator</h3><p>Powerlifting Wilks score.</p></a>
+<a href="marathon-predictor.html" class="card" data-keywords="marathon predictor 10k"><h3>Marathon Predictor</h3><p>Predict marathon time.</p></a>
+<a href="calorie-burn-calculator.html" class="card" data-keywords="calorie burn running exercise"><h3>Calorie Burn</h3><p>Calories burned running.</p></a>
+</div></section>
 
-            <!-- FINANCE -->
-            <section id="finance" class="category-section reveal">
-                <h2>Finance</h2>
-                <div class="grid">
-                    <a href="mortgage-calculator.html" class="card" data-keywords="mortgage home house payment rate">
-                        <h3>Mortgage Calculator</h3><p>Estimate home mortgage payments including taxes and insurance.</p></a>
-                    <a href="loan-calculator.html" class="card" data-keywords="loan payment interest principal mortgage">
-                        <h3>Loan Calculator</h3><p>Determine monthly payments and total interest paid over time.</p></a>
-                    <a href="compound-interest-calculator.html" class="card" data-keywords="compound interest savings growth investment">
-                        <h3>Compound Interest</h3><p>Project long-term investment growth with compound frequency.</p></a>
-                    <a href="roi-calculator.html" class="card" data-keywords="roi return investment gain loss">
-                        <h3>ROI Calculator</h3><p>Measure Return on Investment percentages and net gains.</p></a>
-                    <a href="margin-calculator.html" class="card" data-keywords="margin profit cost markup business">
-                        <h3>Margin Calculator</h3><p>Compute gross profit margins, net margins, and markups.</p></a>
-                </div>
-            </section>
+<section id="education" class="category-section reveal"><h2>Education & Misc (5)</h2><div class="grid">
+<a href="gpa-calculator.html" class="card" data-keywords="gpa grade point average"><h3>GPA Calculator</h3><p>Points / credits GPA.</p></a>
+<a href="final-grade-calculator.html" class="card" data-keywords="final grade exam needed"><h3>Final Grade Calculator</h3><p>Grade needed on final.</p></a>
+<a href="reading-time-calculator.html" class="card" data-keywords="reading time words wpm"><h3>Reading Time</h3><p>Minutes to read text.</p></a>
+<a href="word-count.html" class="card" data-keywords="word count text length"><h3>Word Count</h3><p>Count words in text.</p></a>
+<a href="test-score-calculator.html" class="card" data-keywords="test score percentage grade"><h3>Test Score Calculator</h3><p>Correct answers to %.</p></a>
+</div></section>
 
-            <!-- HEALTH -->
-            <section id="health" class="category-section reveal">
-                <h2>Health</h2>
-                <div class="grid">
-                    <a href="bmi-calculator.html" class="card" data-keywords="bmi body mass index weight height">
-                        <h3>BMI Calculator</h3><p>Body Mass Index using metric or imperial standards.</p></a>
-                    <a href="calorie-calculator.html" class="card" data-keywords="calorie calories daily intake tdee bmr">
-                        <h3>Calorie Calculator</h3><p>Daily caloric intake requirements for maintenance or deficit.</p></a>
-                    <a href="macro-calculator.html" class="card" data-keywords="macros macronutrients protein carbs fat diet">
-                        <h3>Macro Calculator</h3><p>Optimal daily protein, carbohydrate, and fat targets.</p></a>
-                </div>
-            </section>
+</main></div>
+<footer><p>© 2025 Inquiry Calculator — 101 calculators and counting. · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a> · <a href="/sitemap.xml">Sitemap</a></p></footer>
 
-            <!-- CONVERSION -->
-            <section id="conversion" class="category-section reveal">
-                <h2>Conversion</h2>
-                <div class="grid">
-                    <a href="length-converter.html" class="card" data-keywords="length distance meter feet inch cm mile km convert">
-                        <h3>Length Converter</h3><p>Convert between meters, feet, inches, miles, and kilometers.</p></a>
-                    <a href="weight-converter.html" class="card" data-keywords="weight mass kg lb pound ounce gram convert">
-                        <h3>Weight Converter</h3><p>Convert between kilograms, pounds, ounces, and grams.</p></a>
-                    <a href="temperature-converter.html" class="card" data-keywords="temperature celsius fahrenheit kelvin convert">
-                        <h3>Temperature Converter</h3><p>Convert between Celsius, Fahrenheit, and Kelvin scales.</p></a>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2025 Inquiry Calculator. All rights reserved. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
-    </footer>
-
-    <!-- FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyCvfgVqm4bXuA-5BOG8wLxOPlb-En0WUzI",
-            authDomain: "inquiry-calculator.firebaseapp.com",
-            projectId: "inquiry-calculator"
-        };
-        if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
-        
-        let isLoggedIn = false;
-        firebase.auth().onAuthStateChanged(user => {
-            if (user) {
-                isLoggedIn = true;
-                document.getElementById('auth-buttons').style.display = 'none';
-                document.getElementById('user-info').style.display = 'flex';
-                document.getElementById('user-name').textContent = user.displayName || user.email;
-            } else {
-                isLoggedIn = false;
-                document.getElementById('auth-buttons').style.display = 'flex';
-                document.getElementById('user-info').style.display = 'none';
-            }
-        });
-        function logOut() { firebase.auth().signOut(); }
-    </script>
-
-    <!-- SCRIPTS -->
-    <script>
-        // --- Theme Toggle ---
-        const themeToggle = document.getElementById('theme-toggle');
-        
-        function updateToggleText() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            themeToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
-        }
-        updateToggleText();
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('inquiry_theme', newTheme);
-            updateToggleText();
-        });
-
-        // --- Intersection Observer for Motion ---
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-
-        document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
-
-        // --- Unified Input & Search Filter ---
-        const input = document.getElementById('unified-input');
-        const dropdown = document.getElementById('search-dropdown');
-        const cards = document.querySelectorAll('.card');
-
-        function setQuery(text) {
-            input.value = text;
-            input.focus();
-            handleInput();
-        }
-
-        function handleInput() {
-            const query = input.value.toLowerCase().trim();
-            dropdown.innerHTML = '';
-            if (!query) {
-                dropdown.style.display = 'none';
-                return;
-            }
-
-            let matches = 0;
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent;
-                const keywords = card.getAttribute('data-keywords') || '';
-                
-                if ((title.toLowerCase() + " " + keywords).includes(query)) {
-                    matches++;
-                    const a = document.createElement('a');
-                    a.href = card.getAttribute('href');
-                    a.innerHTML = `<span><strong>${title}</strong></span> <span class="tag">Calculator</span>`;
-                    dropdown.appendChild(a);
-                }
-            });
-
-            dropdown.style.display = matches > 0 ? 'block' : 'none';
-        }
-
-        input.addEventListener('input', handleInput);
-
-        document.addEventListener('click', (e) => {
-            if(!e.target.closest('.unified-bar')) dropdown.style.display = 'none';
-        });
-
-        // --- AI Redirection ---
-        function submitToAI() {
-            const question = input.value.trim();
-            if (!question) return;
-
-            if (!isLoggedIn) {
-                let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
-                const today = new Date().toDateString();
-                const used = usage.filter(d => d === today).length;
-                if (used >= 3) {
-                    input.value = "";
-                    input.placeholder = "Daily limit reached. Log in to continue.";
-                    return;
-                }
-            }
-
-            sessionStorage.setItem('pending_question', question);
-            window.location.href = '/chat.html';
-        }
-
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                submitToAI();
-            }
-        });
-    </script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script>
+const firebaseConfig={apiKey:"AIzaSyCvfgVqm4bXuA-5BOG8wLxOPlb-En0WUzI",authDomain:"inquiry-calculator.firebaseapp.com",projectId:"inquiry-calculator"};
+if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+let isLoggedIn=false;
+firebase.auth().onAuthStateChanged(user=>{if(user){isLoggedIn=true;document.getElementById('auth-buttons').style.display='none';document.getElementById('user-info').style.display='flex';document.getElementById('user-name').textContent=user.displayName||user.email;}else{isLoggedIn=false;document.getElementById('auth-buttons').style.display='flex';document.getElementById('user-info').style.display='none';}});
+function logOut(){firebase.auth().signOut();}
+const themeToggle=document.getElementById('theme-toggle');
+function updateToggleText(){const isDark=document.documentElement.getAttribute('data-theme')==='dark';themeToggle.textContent=isDark?'Light Mode':'Dark Mode';}
+updateToggleText();
+themeToggle.addEventListener('click',()=>{const cur=document.documentElement.getAttribute('data-theme');const next=cur==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('inquiry_theme',next);updateToggleText();});
+const observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const input=document.getElementById('unified-input');const dropdown=document.getElementById('search-dropdown');const cards=document.querySelectorAll('.card');
+function setQuery(t){input.value=t;input.focus();handleInput();}
+function handleInput(){const q=input.value.toLowerCase().trim();dropdown.innerHTML='';if(!q){dropdown.style.display='none';return;}let m=0;cards.forEach(card=>{const title=card.querySelector('h3').textContent;const kw=card.getAttribute('data-keywords')||'';if((title.toLowerCase()+' '+kw).includes(q)){m++;const a=document.createElement('a');a.href=card.getAttribute('href');a.innerHTML=`<span><strong>${title}</strong></span> <span class="tag">Calculator</span>`;dropdown.appendChild(a);}});dropdown.style.display=m>0?'block':'none';}
+input.addEventListener('input',handleInput);
+document.addEventListener('click',e=>{if(!e.target.closest('.unified-bar')) dropdown.style.display='none';});
+function submitToAI(){const q=input.value.trim();if(!q) return;if(!isLoggedIn){let usage=JSON.parse(localStorage.getItem('ai_usage')||'[]');const today=new Date().toDateString();const used=usage.filter(d=>d===today).length;if(used>=3){input.value="";input.placeholder="Daily limit reached. Log in to continue.";return;}}sessionStorage.setItem('pending_question',q);window.location.href='/chat.html';}
+input.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();submitToAI();}});
+</script>
 </body>
 </html>
