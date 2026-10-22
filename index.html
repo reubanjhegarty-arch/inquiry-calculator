@@ -1,67 +1,97 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inquiry Calculator — Compute Anything. Solve Everything.</title>
     <meta name="description" content="47 precision calculators and an AI problem solver.">
 
-    <!-- Pre-load theme to prevent flash -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="Inquiry Calculator — Compute Anything. Solve Everything.">
+    <meta property="og:description" content="47 free calculators and an AI-powered step-by-step problem solver.">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+
+    <!-- Theme persistence -->
     <script>
         const savedTheme = localStorage.getItem('inquiry_theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
     </script>
 
     <style>
-        /* ===== SYSTEM & VARIABLES ===== */
+        /* ===== SYSTEM & MONOCHROME PALETTE ===== */
         :root {
-            /* Light Theme (Cream/Brown) */
-            --bg: #F6F1E7;
-            --bg-elevated: #FFFFFF;
-            --fg: #2E2318;
-            --fg-muted: #7A6A5A;
-            --accent: #8A6D4F;
-            --accent-hover: #6E553D;
-            --border: #E4DACD;
-            --border-hover: #C5B5A1;
-            --shadow-subtle: 0 4px 12px rgba(46, 35, 24, 0.06);
-            --focus-ring: 0 0 0 3px rgba(138, 109, 79, 0.2);
+            /* Dark Mode Default (Vercel/Linear Pitch Dark) */
+            --bg: #09090B;
+            --bg-elevated: #121215;
+            --bg-card: #18181B;
+            --fg: #FAFAFA;
+            --fg-muted: #A1A1AA;
+            --fg-subtle: #71717A;
+            --border: #27272A;
+            --border-hover: #52525B;
+            --accent: #FFFFFF;
+            --accent-inverse: #000000;
+            --glow: rgba(255, 255, 255, 0.05);
+            --focus-ring: 0 0 0 2px #FFFFFF;
         }
 
-        [data-theme="dark"] {
-            /* Dark Theme (Deep Espresso/Cream) */
-            --bg: #15100B;
-            --bg-elevated: #1E1711;
-            --fg: #F6F1E7;
-            --fg-muted: #A0907F;
-            --accent: #A58461;
-            --accent-hover: #C5A17A;
-            --border: #33271C;
-            --border-hover: #5A4634;
-            --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.3);
-            --focus-ring: 0 0 0 3px rgba(165, 132, 97, 0.2);
+        [data-theme="light"] {
+            /* Light Mode (High Contrast Crisp White) */
+            --bg: #FFFFFF;
+            --bg-elevated: #F4F4F5;
+            --bg-card: #FAFAFA;
+            --fg: #09090B;
+            --fg-muted: #71717A;
+            --fg-subtle: #A1A1AA;
+            --border: #E4E4E7;
+            --border-hover: #A1A1AA;
+            --accent: #09090B;
+            --accent-inverse: #FFFFFF;
+            --glow: rgba(0, 0, 0, 0.03);
+            --focus-ring: 0 0 0 2px #09090B;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg);
             color: var(--fg);
             line-height: 1.5;
             -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.25s ease, color 0.25s ease;
+            min-height: 100vh;
         }
 
         a { color: inherit; text-decoration: none; }
         ul { list-style: none; }
 
-        /* ===== ANIMATIONS (Linear Style) ===== */
+        /* ===== BACKGROUND GLOW EFFECT ===== */
+        .ambient-glow {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 1000px;
+            height: 400px;
+            background: radial-gradient(circle at 50% 0%, var(--glow), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== ANIMATIONS (Linear Motion) ===== */
         @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(16px); }
+            0% { opacity: 0; transform: translateY(14px); }
             100% { opacity: 1; transform: translateY(0); }
         }
         
@@ -70,22 +100,22 @@
             animation: none;
         }
         .reveal.visible {
-            animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: fadeSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
+        .delay-1 { animation-delay: 0.08s; }
+        .delay-2 { animation-delay: 0.16s; }
+        .delay-3 { animation-delay: 0.24s; }
 
-        /* ===== NAVBAR ===== */
+        /* ===== NAV ===== */
         nav {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(var(--bg), 0.8);
+            background: rgba(var(--bg), 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
+            padding: 14px 24px;
         }
         .nav-inner {
             max-width: 1200px;
@@ -95,246 +125,293 @@
             align-items: center;
         }
         .logo {
-            font-size: 1.15rem;
+            font-size: 1.05rem;
             font-weight: 700;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .logo span { color: var(--accent); }
+        .logo-badge {
+            background: var(--fg);
+            color: var(--bg);
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
         .nav-right {
             display: flex;
             align-items: center;
             gap: 20px;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
         }
-        .nav-right a:hover { color: var(--accent); }
+        .nav-right a { color: var(--fg-muted); transition: color 0.15s; }
+        .nav-right a:hover { color: var(--fg); }
+        
         .btn-theme {
-            background: none;
+            background: var(--bg-elevated);
             border: 1px solid var(--border);
             color: var(--fg);
             cursor: pointer;
-            padding: 6px 10px;
+            padding: 6px 12px;
             border-radius: 4px;
-            font-size: 0.85rem;
-            transition: 0.2s;
+            font-size: 0.82rem;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.15s;
         }
-        .btn-theme:hover { border-color: var(--fg); }
+        .btn-theme:hover { border-color: var(--fg-muted); }
         
         .auth-btn {
             background: var(--fg);
-            color: var(--bg);
-            padding: 7px 16px;
+            color: var(--accent-inverse) !important;
+            padding: 6px 14px;
             border-radius: 4px;
-            transition: 0.2s;
+            font-weight: 600;
+            transition: opacity 0.15s;
         }
-        .auth-btn:hover { opacity: 0.85; }
+        .auth-btn:hover { opacity: 0.88; }
 
-        /* ===== HERO (Wolfram Style Input) ===== */
+        /* ===== HERO SECTION ===== */
         .hero {
-            padding: 100px 24px 60px;
+            position: relative;
+            z-index: 1;
+            padding: 90px 24px 50px;
             text-align: center;
-            max-width: 760px;
+            max-width: 780px;
             margin: 0 auto;
         }
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            letter-spacing: -1.5px;
+            letter-spacing: -1.8px;
             line-height: 1.1;
             margin-bottom: 16px;
+            color: var(--fg);
         }
         .hero p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: var(--fg-muted);
-            margin-bottom: 40px;
+            margin-bottom: 36px;
+            font-weight: 400;
         }
 
+        /* ===== UNIFIED COMMAND BAR ===== */
         .unified-bar {
             position: relative;
             text-align: left;
         }
         .unified-input {
             width: 100%;
-            padding: 20px 140px 20px 24px;
-            font-size: 1.1rem;
+            padding: 18px 130px 18px 20px;
+            font-size: 1.05rem;
             font-family: inherit;
             background: var(--bg-elevated);
             color: var(--fg);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            box-shadow: var(--shadow-subtle);
+            border-radius: 6px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             transition: all 0.2s ease;
         }
         .unified-input:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: var(--fg);
             box-shadow: var(--focus-ring);
         }
         .btn-ask {
             position: absolute;
-            right: 8px;
-            top: 8px;
-            bottom: 8px;
-            background: var(--accent);
-            color: #fff;
+            right: 6px;
+            top: 6px;
+            bottom: 6px;
+            background: var(--fg);
+            color: var(--accent-inverse);
             border: none;
             border-radius: 4px;
             padding: 0 20px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
+            font-family: inherit;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: opacity 0.15s;
         }
-        .btn-ask:hover { background: var(--accent-hover); }
+        .btn-ask:hover { opacity: 0.9; }
 
         /* Dropdown */
         .search-dropdown {
             position: absolute;
-            top: calc(100% + 8px);
+            top: calc(100% + 6px);
             left: 0;
             right: 0;
             background: var(--bg-elevated);
             border: 1px solid var(--border);
-            border-radius: 8px;
-            box-shadow: var(--shadow-subtle);
-            max-height: 300px;
+            border-radius: 6px;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.4);
+            max-height: 320px;
             overflow-y: auto;
             z-index: 50;
             display: none;
         }
         .search-dropdown a {
-            display: block;
-            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
             border-bottom: 1px solid var(--border);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--fg);
             transition: background 0.1s;
         }
-        .search-dropdown a:hover { background: var(--bg); color: var(--accent); }
+        .search-dropdown a:hover { background: var(--bg-card); }
         .search-dropdown a:last-child { border-bottom: none; }
+        .search-dropdown span.tag {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--fg-subtle);
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
 
-        /* Chips */
+        /* Query Chips */
         .chips {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 10px;
-            margin-top: 24px;
+            gap: 8px;
+            margin-top: 20px;
         }
         .chip {
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             color: var(--fg-muted);
             border: 1px solid var(--border);
-            padding: 6px 12px;
+            padding: 5px 12px;
             border-radius: 4px;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.15s;
             background: var(--bg-elevated);
         }
-        .chip:hover { border-color: var(--accent); color: var(--accent); }
+        .chip:hover { border-color: var(--fg-muted); color: var(--fg); }
 
-        /* ===== MAIN LAYOUT (Linear Style Grid) ===== */
+        /* ===== MAIN GRID & SIDEBAR ===== */
         .layout {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 24px 100px;
             display: grid;
-            grid-template-columns: 200px 1fr;
-            gap: 60px;
+            grid-template-columns: 180px 1fr;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
         }
         @media (max-width: 850px) {
-            .layout { grid-template-columns: 1fr; gap: 40px; }
+            .layout { grid-template-columns: 1fr; gap: 30px; }
             .sidebar { display: none; }
+            .hero h1 { font-size: 2.3rem; }
         }
 
-        /* Sidebar Nav */
+        /* Sticky Sidebar Nav */
         .sidebar {
             position: sticky;
-            top: 100px;
+            top: 90px;
             height: fit-content;
         }
         .sidebar-title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--fg-muted);
+            letter-spacing: 1.2px;
+            color: var(--fg-subtle);
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
-        .sidebar ul { display: flex; flex-direction: column; gap: 12px; }
+        .sidebar ul { display: flex; flex-direction: column; gap: 10px; }
         .sidebar a {
-            font-size: 0.9rem;
-            color: var(--fg);
+            font-size: 0.88rem;
+            color: var(--fg-muted);
             font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.15s;
         }
-        .sidebar a:hover, .sidebar a.active { color: var(--accent); }
+        .sidebar a:hover { color: var(--fg); }
 
-        /* Grid */
-        .category-section { margin-bottom: 60px; }
+        /* Grid Cards */
+        .category-section { margin-bottom: 50px; }
         .category-section h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
+            letter-spacing: -0.3px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
-            margin-bottom: 24px;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: var(--fg);
         }
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 14px;
         }
         
         .card {
-            background: var(--bg-elevated);
+            background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 20px;
-            transition: all 0.2s ease;
-            position: relative;
+            border-radius: 5px;
+            padding: 18px 20px;
+            transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .card:hover {
             border-color: var(--border-hover);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-subtle);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
         .card h3 {
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             font-weight: 600;
             margin-bottom: 6px;
             color: var(--fg);
+            letter-spacing: -0.2px;
         }
         .card p {
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             color: var(--fg-muted);
-            line-height: 1.5;
+            line-height: 1.45;
         }
 
-        /* Footer */
+        /* ===== FOOTER ===== */
         footer {
             border-top: 1px solid var(--border);
-            padding: 40px 24px;
+            padding: 36px 24px;
             text-align: center;
             color: var(--fg-muted);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            position: relative;
+            z-index: 1;
         }
+        footer a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
     </style>
 </head>
 <body>
 
+    <div class="ambient-glow"></div>
+
     <!-- NAV -->
     <nav>
         <div class="nav-inner">
-            <a href="/" class="logo">Inquiry<span>Calculator</span></a>
+            <a href="/" class="logo">
+                Inquiry <span class="logo-badge">PRO</span>
+            </a>
             <div class="nav-right">
-                <button class="btn-theme" id="theme-toggle">Dark</button>
+                <button class="btn-theme" id="theme-toggle">Light Mode</button>
                 <div id="auth-buttons">
                     <a href="/login.html">Log In</a>
                     <a href="/signup.html" class="auth-btn">Sign Up</a>
                 </div>
                 <div id="user-info" style="display:none; align-items:center; gap:16px;">
-                    <span id="user-name" style="color:var(--accent);"></span>
-                    <button onclick="logOut()" style="background:none; border:none; cursor:pointer; font-weight:600; font-family:inherit; color:var(--fg);">Log Out</button>
+                    <span id="user-name" style="color:var(--fg); font-weight:600;"></span>
+                    <button onclick="logOut()" style="background:none; border:none; cursor:pointer; font-size:0.85rem; font-family:inherit; color:var(--fg-muted);">Log Out</button>
                 </div>
             </div>
         </div>
@@ -343,19 +420,19 @@
     <!-- HERO -->
     <header class="hero">
         <h1 class="reveal visible">Compute anything.<br>Solve everything.</h1>
-        <p class="reveal visible delay-1">47 precision calculators and an AI problem solver.</p>
+        <p class="reveal visible delay-1">47 precision calculators and an instant AI problem solver.</p>
         
         <div class="unified-bar reveal visible delay-2">
-            <input type="text" id="unified-input" class="unified-input" placeholder="Search calculators or ask a math question..." autocomplete="off">
+            <input type="text" id="unified-input" class="unified-input" placeholder="Search calculators or ask a complex math question..." autocomplete="off">
             <button class="btn-ask" id="btn-ask" onclick="submitToAI()">Ask AI</button>
             <div class="search-dropdown" id="search-dropdown"></div>
         </div>
 
         <div class="chips reveal visible delay-3">
-            <div class="chip" onclick="setQuery('Mortgage payment for $300k at 6.5%')">Mortgage for $300k at 6.5%</div>
-            <div class="chip" onclick="setQuery('Derivative of 3x^2 + 5x')">Derivative of 3x² + 5x</div>
+            <div class="chip" onclick="setQuery('Mortgage payment for $300k at 6.5%')">Mortgage $300k @ 6.5%</div>
+            <div class="chip" onclick="setQuery('Derivative of 3x^2 + 5x')">Derivative 3x² + 5x</div>
             <div class="chip" onclick="setQuery('BMI')">Search: BMI</div>
-            <div class="chip" onclick="setQuery('Probability')">Search: Probability</div>
+            <div class="chip" onclick="setQuery('Compound Interest')">Search: Compound Interest</div>
         </div>
     </header>
 
@@ -381,17 +458,17 @@
                 <h2>Math</h2>
                 <div class="grid">
                     <a href="standard-calculator.html" class="card" data-keywords="standard basic arithmetic add subtract multiply divide">
-                        <h3>Standard Calculator</h3><p>Basic arithmetic operations including addition, subtraction, multiplication, and division.</p></a>
+                        <h3>Standard Calculator</h3><p>Basic arithmetic operations including addition, subtraction, and division.</p></a>
                     <a href="scientific-calculator.html" class="card" data-keywords="scientific sin cos tan log exponent trigonometry">
-                        <h3>Scientific Calculator</h3><p>Advanced functions including trigonometry, logarithms, powers, and roots.</p></a>
+                        <h3>Scientific Calculator</h3><p>Trigonometry, logarithms, powers, and complex roots.</p></a>
                     <a href="percentage-calculator.html" class="card" data-keywords="percentage percent discount increase decrease">
-                        <h3>Percentage Calculator</h3><p>Calculate percentage changes, differences, and relative values instantly.</p></a>
+                        <h3>Percentage Calculator</h3><p>Percentage changes, relative values, and differences.</p></a>
                     <a href="fraction-calculator.html" class="card" data-keywords="fraction add subtract multiply divide simplify">
                         <h3>Fraction Calculator</h3><p>Add, subtract, multiply, divide, and simplify fractions.</p></a>
                     <a href="probability-calculator.html" class="card" data-keywords="probability odds chance event">
-                        <h3>Probability Calculator</h3><p>Calculate single event, multiple event, and conditional probabilities.</p></a>
+                        <h3>Probability Calculator</h3><p>Single event, multiple event, and conditional probabilities.</p></a>
                     <a href="standard-deviation-calculator.html" class="card" data-keywords="standard deviation variance mean statistics">
-                        <h3>Standard Deviation</h3><p>Find sample and population standard deviation, variance, and mean.</p></a>
+                        <h3>Standard Deviation</h3><p>Sample and population standard deviation, variance, and mean.</p></a>
                 </div>
             </section>
 
@@ -402,13 +479,13 @@
                     <a href="mortgage-calculator.html" class="card" data-keywords="mortgage home house payment rate">
                         <h3>Mortgage Calculator</h3><p>Estimate home mortgage payments including taxes and insurance.</p></a>
                     <a href="loan-calculator.html" class="card" data-keywords="loan payment interest principal mortgage">
-                        <h3>Loan Calculator</h3><p>Determine monthly payments, total interest paid, and full payoff timelines.</p></a>
+                        <h3>Loan Calculator</h3><p>Determine monthly payments and total interest paid over time.</p></a>
                     <a href="compound-interest-calculator.html" class="card" data-keywords="compound interest savings growth investment">
-                        <h3>Compound Interest</h3><p>Project investment growth over time with annual or monthly compounding.</p></a>
+                        <h3>Compound Interest</h3><p>Project long-term investment growth with compound frequency.</p></a>
                     <a href="roi-calculator.html" class="card" data-keywords="roi return investment gain loss">
-                        <h3>ROI Calculator</h3><p>Calculate Return on Investment percentage and total gain on assets.</p></a>
+                        <h3>ROI Calculator</h3><p>Measure Return on Investment percentages and net gains.</p></a>
                     <a href="margin-calculator.html" class="card" data-keywords="margin profit cost markup business">
-                        <h3>Margin Calculator</h3><p>Compute gross profit margin, net profit margin, and product markups.</p></a>
+                        <h3>Margin Calculator</h3><p>Compute gross profit margins, net margins, and markups.</p></a>
                 </div>
             </section>
 
@@ -417,11 +494,11 @@
                 <h2>Health</h2>
                 <div class="grid">
                     <a href="bmi-calculator.html" class="card" data-keywords="bmi body mass index weight height">
-                        <h3>BMI Calculator</h3><p>Calculate Body Mass Index using metric or imperial measurements.</p></a>
+                        <h3>BMI Calculator</h3><p>Body Mass Index using metric or imperial standards.</p></a>
                     <a href="calorie-calculator.html" class="card" data-keywords="calorie calories daily intake tdee bmr">
-                        <h3>Calorie Calculator</h3><p>Estimate daily caloric requirements for maintenance or weight loss.</p></a>
+                        <h3>Calorie Calculator</h3><p>Daily caloric intake requirements for maintenance or deficit.</p></a>
                     <a href="macro-calculator.html" class="card" data-keywords="macros macronutrients protein carbs fat diet">
-                        <h3>Macro Calculator</h3><p>Determine optimal daily protein, carbohydrate, and fat intake distribution.</p></a>
+                        <h3>Macro Calculator</h3><p>Optimal daily protein, carbohydrate, and fat targets.</p></a>
                 </div>
             </section>
 
@@ -430,9 +507,9 @@
                 <h2>Conversion</h2>
                 <div class="grid">
                     <a href="length-converter.html" class="card" data-keywords="length distance meter feet inch cm mile km convert">
-                        <h3>Length Converter</h3><p>Convert between meters, feet, inches, yards, miles, and kilometers.</p></a>
+                        <h3>Length Converter</h3><p>Convert between meters, feet, inches, miles, and kilometers.</p></a>
                     <a href="weight-converter.html" class="card" data-keywords="weight mass kg lb pound ounce gram convert">
-                        <h3>Weight Converter</h3><p>Convert between kilograms, pounds, ounces, grams, and stone.</p></a>
+                        <h3>Weight Converter</h3><p>Convert between kilograms, pounds, ounces, and grams.</p></a>
                     <a href="temperature-converter.html" class="card" data-keywords="temperature celsius fahrenheit kelvin convert">
                         <h3>Temperature Converter</h3><p>Convert between Celsius, Fahrenheit, and Kelvin scales.</p></a>
                 </div>
@@ -442,7 +519,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2025 Inquiry Calculator. All rights reserved. <a href="/privacy.html" style="margin-left:10px; color:var(--fg);">Privacy</a> &middot; <a href="/terms.html" style="color:var(--fg);">Terms</a></p>
+        <p>&copy; 2025 Inquiry Calculator. All rights reserved. &middot; <a href="/privacy.html">Privacy</a> &middot; <a href="/terms.html">Terms</a></p>
     </footer>
 
     <!-- FIREBASE -->
@@ -474,12 +551,12 @@
 
     <!-- SCRIPTS -->
     <script>
-        // --- Dark Mode Toggle ---
+        // --- Theme Toggle ---
         const themeToggle = document.getElementById('theme-toggle');
         
         function updateToggleText() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            themeToggle.textContent = isDark ? 'Light' : 'Dark';
+            themeToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
         }
         updateToggleText();
 
@@ -491,19 +568,19 @@
             updateToggleText();
         });
 
-        // --- Scroll Animations (Intersection Observer) ---
+        // --- Intersection Observer for Motion ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Only animate once
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
 
         document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
 
-        // --- Unified Command Bar ---
+        // --- Unified Input & Search Filter ---
         const input = document.getElementById('unified-input');
         const dropdown = document.getElementById('search-dropdown');
         const cards = document.querySelectorAll('.card');
@@ -531,7 +608,7 @@
                     matches++;
                     const a = document.createElement('a');
                     a.href = card.getAttribute('href');
-                    a.innerHTML = `<strong>${title}</strong> — <em>Calculator</em>`;
+                    a.innerHTML = `<span><strong>${title}</strong></span> <span class="tag">Calculator</span>`;
                     dropdown.appendChild(a);
                 }
             });
@@ -541,17 +618,15 @@
 
         input.addEventListener('input', handleInput);
 
-        // Click outside closes dropdown
         document.addEventListener('click', (e) => {
             if(!e.target.closest('.unified-bar')) dropdown.style.display = 'none';
         });
 
-        // --- Submit to AI Logic ---
+        // --- AI Redirection ---
         function submitToAI() {
             const question = input.value.trim();
             if (!question) return;
 
-            // Limit Check (Guests only)
             if (!isLoggedIn) {
                 let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
                 const today = new Date().toDateString();
@@ -563,12 +638,10 @@
                 }
             }
 
-            // Redirect to Chat
             sessionStorage.setItem('pending_question', question);
             window.location.href = '/chat.html';
         }
 
-        // Enter key handles both (If dropdown empty -> ask AI, else follow link if we want, but simple for now: always ask AI)
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
