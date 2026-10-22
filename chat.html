@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Problem Solver — Inquiry Calculator</title>
+    <meta name="description" content="Chat with the Inquiry Calculator AI. Solve math, science, and finance problems step by step.">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F6F1E7;
+            color: #2E2318;
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 280px;
+            background: #2E2318;
+            color: #F6F1E7;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #4a3a2a;
+        }
+        .sidebar-header a {
+            color: #F6F1E7;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .sidebar-header a span {
+            color: #8A6D4F;
+        }
+        .new-chat-btn {
+            display: block;
+            margin: 16px 20px;
+            padding: 12px;
+            background: #8A6D4F;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .new-chat-btn:hover {
+            background: #a07d5f;
+        }
+        .chat-history-label {
+            padding: 12px 20px 8px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #8A6D4F;
+            font-weight: 700;
+        }
+        .chat-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 10px;
+        }
+        .chat-list-item {
+            display: block;
+            padding: 10px 12px;
+            margin-bottom: 2px;
+            color: #d4c8b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .chat-list-item:hover {
+            background: #4a3a2a;
+            color: #fff;
+        }
+        .chat-list-item.active {
+            background: #8A6D4F;
+            color: #fff;
+        }
+        .sidebar-footer {
+            padding: 16px 20px;
+            border-top: 1px solid #4a3a2a;
+            font-size: 0.8rem;
+        }
+        .sidebar-footer a {
+            color: #8A6D4F;
+            text-decoration: none;
+        }
+
+        /* ===== MAIN CHAT AREA ===== */
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        /* Top bar */
+        .chat-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            background: #fff;
+            border-bottom: 1px solid #e0d5c7;
+            flex-shrink: 0;
+        }
+        .chat-topbar h1 {
+            font-size: 1.05rem;
+            color: #2E2318;
+            font-weight: 600;
+        }
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .topbar-right span {
+            font-size: 0.85rem;
+            color: #8A6D4F;
+            font-weight: 600;
+        }
+        .topbar-right button {
+            padding: 6px 16px;
+            background: #2E2318;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #2E2318;
+            cursor: pointer;
+        }
+
+        /* Messages area */
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .message {
+            max-width: 720px;
+            display: flex;
+            gap: 14px;
+            line-height: 1.65;
+            font-size: 0.95rem;
+        }
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        .message.ai {
+            align-self: flex-start;
+        }
+
+        .message-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .message.user .message-avatar {
+            background: #8A6D4F;
+            color: #fff;
+        }
+        .message.ai .message-avatar {
+            background: #2E2318;
+            color: #F6F1E7;
+        }
+
+        .message-bubble {
+            padding: 14px 18px;
+            border-radius: 4px;
+        }
+        .message.user .message-bubble {
+            background: #8A6D4F;
+            color: #fff;
+        }
+        .message.ai .message-bubble {
+            background: #fff;
+            color: #2E2318;
+            border: 1px solid #e0d5c7;
+        }
+
+        /* Bouncing dots */
+        .typing-dots {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            padding: 14px 18px;
+        }
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #8A6D4F;
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite;
+        }
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        /* Welcome state */
+        .welcome-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #7a6a5a;
+            padding: 40px;
+        }
+        .welcome-state h2 {
+            font-size: 1.6rem;
+            color: #2E2318;
+            margin-bottom: 10px;
+        }
+        .welcome-state p {
+            font-size: 1rem;
+            max-width: 500px;
+        }
+
+        /* Input bar */
+        .chat-input-bar {
+            padding: 16px 24px;
+            background: #fff;
+            border-top: 1px solid #e0d5c7;
+            flex-shrink: 0;
+        }
+        .chat-input-wrap {
+            display: flex;
+            gap: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .chat-input-wrap textarea {
+            flex: 1;
+            padding: 14px 16px;
+            border: 2px solid #e0d5c7;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            resize: none;
+            min-height: 48px;
+            max-height: 140px;
+            background: #FDFBF7;
+            color: #2E2318;
+        }
+        .chat-input-wrap textarea:focus {
+            outline: none;
+            border-color: #8A6D4F;
+        }
+        .chat-input-wrap button {
+            padding: 0 24px;
+            background: #8A6D4F;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .chat-input-wrap button:hover {
+            background: #2E2318;
+        }
+        .chat-input-wrap button:disabled {
+            background: #c0b09a;
+            cursor: not-allowed;
+        }
+        .chat-limit-note {
+            text-align: center;
+            font-size: 0.78rem;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* ===== MOBILE ===== */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: 0; top: 0; bottom: 0;
+                z-index: 1000;
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.4);
+                z-index: 999;
+            }
+            .sidebar-overlay.open {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="/">Inquiry<span>Calculator</span></a>
+        </div>
+        <button class="new-chat-btn" onclick="newChat()">+ New Chat</button>
+        <div class="chat-history-label">Previous Chats</div>
+        <div class="chat-list" id="chat-list"></div>
+        <div class="sidebar-footer">
+            <a href="/">Back to Calculators</a>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN ===== -->
+    <div class="chat-main">
+        <!-- Top bar -->
+        <div class="chat-topbar">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <button class="mobile-menu-btn" onclick="toggleSidebar()">&#9776;</button>
+                <h1>AI Problem Solver</h1>
+            </div>
+            <div class="topbar-right" id="topbar-auth">
+                <a href="/login.html" style="color:#8A6D4F; text-decoration:none; font-weight:600; font-size:0.9rem;">Log In</a>
+                <a href="/signup.html" style="padding:6px 16px; background:#8A6D4F; color:#fff; text-decoration:none; border-radius:4px; font-size:0.85rem;">Sign Up</a>
+            </div>
+            <div class="topbar-right" id="topbar-user" style="display:none;">
+                <span id="chat-user-name"></span>
+                <button onclick="logOut()">Log Out</button>
+            </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="chat-messages" id="chat-messages">
+            <div class="welcome-state" id="welcome-state">
+                <h2>What do you need to solve?</h2>
+                <p>Ask any math, science, or finance question. The AI will work through it step by step.</p>
+            </div>
+        </div>
+
+        <!-- Input -->
+        <div class="chat-input-bar">
+            <div class="chat-input-wrap">
+                <textarea id="chat-input" placeholder="Ask a question..." rows="1"></textarea>
+                <button id="send-btn" onclick="sendMessage()">Send</button>
+            </div>
+            <div class="chat-limit-note" id="chat-limit-note"></div>
+        </div>
+    </div>
+
+    <!-- ===== FIREBASE ===== -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+    <script>
+        // ===== CONFIG =====
+        const WORKER_URL = 'https://inquiry-ai.ep10.workers.dev';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCvfgVqm4bXuA-5BOG8wLxOPlb-En0WUzI",
+            authDomain: "inquiry-calculator.firebaseapp.com",
+            projectId: "inquiry-calculator",
+            storageBucket: "inquiry-calculator.appspot.com",
+            messagingSenderId: "169894862498",
+            appId: "1:169894862498:web:YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        let isLoggedIn = false;
+
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                isLoggedIn = true;
+                document.getElementById('topbar-auth').style.display = 'none';
+                document.getElementById('topbar-user').style.display = 'flex';
+                document.getElementById('chat-user-name').textContent = user.displayName || user.email;
+                document.getElementById('chat-limit-note').textContent = 'Unlimited questions — you are logged in.';
+            } else {
+                isLoggedIn = false;
+                document.getElementById('topbar-auth').style.display = 'flex';
+                document.getElementById('topbar-user').style.display = 'none';
+                updateLimitNote();
+            }
+        });
+
+        function logOut() { firebase.auth().signOut(); }
+
+        function updateLimitNote() {
+            let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
+            const today = new Date().toDateString();
+            const used = usage.filter(d => d === today).length;
+            const remaining = Math.max(0, 3 - used);
+            document.getElementById('chat-limit-note').textContent = remaining + ' of 3 free questions remaining today. Log in for unlimited.';
+        }
+
+        // ===== CHAT STATE =====
+        let allChats = JSON.parse(localStorage.getItem('inquiry_chats') || '[]');
+        let currentChatId = null;
+
+        function generateId() {
+            return 'chat_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+        }
+
+        function saveChats() {
+            localStorage.setItem('inquiry_chats', JSON.stringify(allChats));
+        }
+
+        function getChat(id) {
+            return allChats.find(c => c.id === id);
+        }
+
+        // ===== SIDEBAR RENDERING =====
+        function renderChatList() {
+            const list = document.getElementById('chat-list');
+            list.innerHTML = '';
+
+            // Sort newest first
+            const sorted = [...allChats].sort((a, b) => b.updated - a.updated);
+
+            sorted.forEach(chat => {
+                const item = document.createElement('div');
+                item.className = 'chat-list-item' + (chat.id === currentChatId ? ' active' : '');
+                item.textContent = chat.title || 'New Chat';
+                item.onclick = () => loadChat(chat.id);
+                list.appendChild(item);
+            });
+        }
+
+        // ===== NEW CHAT =====
+        function newChat() {
+            const chat = {
+                id: generateId(),
+                title: 'New Chat',
+                messages: [],
+                created: Date.now(),
+                updated: Date.now()
+            };
+            allChats.unshift(chat);
+            saveChats();
+            loadChat(chat.id);
+        }
+
+        // ===== LOAD CHAT =====
+        function loadChat(id) {
+            currentChatId = id;
+            const chat = getChat(id);
+            const container = document.getElementById('chat-messages');
+            const welcome = document.getElementById('welcome-state');
+
+            container.innerHTML = '';
+
+            if (!chat || chat.messages.length === 0) {
+                container.appendChild(welcome);
+                welcome.style.display = 'flex';
+            } else {
+                welcome.style.display = 'none';
+                chat.messages.forEach(msg => {
+                    appendBubble(msg.role, msg.content, false);
+                });
+            }
+
+            renderChatList();
+            scrollToBottom();
+        }
+
+        // ===== APPEND BUBBLE =====
+        function appendBubble(role, content, animate) {
+            const welcome = document.getElementById('welcome-state');
+            welcome.style.display = 'none';
+
+            const container = document.getElementById('chat-messages');
+            const msg = document.createElement('div');
+            msg.className = 'message ' + role;
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = role === 'user' ? 'You' : 'AI';
+
+            const bubble = document.createElement('div');
+            bubble.className = 'message-bubble';
+            bubble.innerHTML = formatText(content);
+
+            msg.appendChild(avatar);
+            msg.appendChild(bubble);
+            container.appendChild(msg);
+
+            if (animate) scrollToBottom();
+            return msg;
+        }
+
+        // ===== TYPING INDICATOR =====
+        function showTyping() {
+            const welcome = document.getElementById('welcome-state');
+            welcome.style.display = 'none';
+
+            const container = document.getElementById('chat-messages');
+            const msg = document.createElement('div');
+            msg.className = 'message ai';
+            msg.id = 'typing-indicator';
+
+            const avatar = document.createElement('div');
+            avatar.className = 'message-avatar';
+            avatar.textContent = 'AI';
+
+            const dots = document.createElement('div');
+            dots.className = 'typing-dots';
+            dots.innerHTML = '<span></span><span></span><span></span>';
+
+            msg.appendChild(avatar);
+            msg.appendChild(dots);
+            container.appendChild(msg);
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            const el = document.getElementById('typing-indicator');
+            if (el) el.remove();
+        }
+
+        // ===== FORMAT TEXT =====
+        function formatText(text) {
+            if (!text) return '';
+            // Basic formatting: newlines, bold, code
+            let html = text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/`(.*?)`/g, '<code style="background:#f0ebe3; padding:2px 6px; border-radius:3px;">$1</code>')
+                .replace(/\n/g, '<br>');
+            return html;
+        }
+
+        // ===== SEND MESSAGE =====
+        async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('send-btn');
+            const question = input.value.trim();
+            if (!question) return;
+
+            // Check guest limit
+            if (!isLoggedIn) {
+                let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
+                const today = new Date().toDateString();
+                const used = usage.filter(d => d === today).length;
+                if (used >= 3) {
+                    document.getElementById('chat-limit-note').innerHTML = '<span style="color:#c0392b;">Daily limit reached. <a href="/login.html" style="color:#8A6D4F;">Log in</a> for unlimited access.</span>';
+                    return;
+                }
+                usage.push(today);
+                localStorage.setItem('ai_usage', JSON.stringify(usage));
+                updateLimitNote();
+            }
+
+            // Create chat if needed
+            if (!currentChatId) {
+                newChat();
+            }
+
+            const chat = getChat(currentChatId);
+
+            // Add user message
+            chat.messages.push({ role: 'user', content: question });
+            if (chat.messages.length === 1) {
+                chat.title = question.length > 40 ? question.substring(0, 40) + '...' : question;
+            }
+            chat.updated = Date.now();
+            saveChats();
+            renderChatList();
+
+            appendBubble('user', question, true);
+            input.value = '';
+            input.style.height = 'auto';
+            sendBtn.disabled = true;
+
+            // Show typing dots
+            showTyping();
+
+            try {
+                const response = await fetch(WORKER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: question })
+                });
+
+                const data = await response.json();
+                hideTyping();
+
+                if (data.answer) {
+                    chat.messages.push({ role: 'ai', content: data.answer });
+                    chat.updated = Date.now();
+                    saveChats();
+                    appendBubble('ai', data.answer, true);
+                } else {
+                    throw new Error(data.error || 'No response received');
+                }
+            } catch (error) {
+                hideTyping();
+                const errMsg = 'Sorry, I could not process that request. Please try again. (' + error.message + ')';
+                appendBubble('ai', errMsg, true);
+            }
+
+            sendBtn.disabled = false;
+            input.focus();
+        }
+
+        // ===== SCROLL =====
+        function scrollToBottom() {
+            const container = document.getElementById('chat-messages');
+            setTimeout(() => {
+                container.scrollTop = container.scrollHeight;
+            }, 50);
+        }
+
+        // ===== MOBILE SIDEBAR =====
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+            document.getElementById('sidebar-overlay').classList.toggle('open');
+        }
+
+        // ===== AUTO-RESIZE TEXTAREA =====
+        const chatInput = document.getElementById('chat-input');
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 140) + 'px';
+        });
+
+        // Enter to send, Shift+Enter for newline
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // ===== DELETE CHAT (optional right-click or long press later) =====
+
+        // ===== INIT =====
+        renderChatList();
+
+        // Check for pending question from homepage
+        const pending = sessionStorage.getItem('pending_question');
+        if (pending) {
+            sessionStorage.removeItem('pending_question');
+            // Create a new chat and send the question
+            newChat();
+            // Small delay to let the UI render
+            setTimeout(() => {
+                document.getElementById('chat-input').value = pending;
+                sendMessage();
+            }, 200);
+        } else if (allChats.length > 0) {
+            // Load the most recent chat
+            const sorted = [...allChats].sort((a, b) => b.updated - a.updated);
+            loadChat(sorted[0].id);
+        }
+    </script>
+</body>
+</html>
