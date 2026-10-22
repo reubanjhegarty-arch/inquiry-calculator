@@ -1,6 +1,6 @@
 /* ==========================================================================
-   INQUIRY CALCULATOR - MASTER STYLESHEET
-   Linear / Vercel Monochrome Dark Theme (#09090B)
+   INQUIRY CALCULATOR - MASTER DESIGN SYSTEM
+   Vercel / Linear High-Contrast Theme (Dark Mode: #09090B | Light Mode: #FFFFFF)
    ========================================================================== */
 
 :root {
@@ -11,10 +11,24 @@
   --border-hover: #3f3f46;
   --text: #fafafa;
   --muted: #a1a1aa;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --muted-dark: #71717a;
+  --shadow: rgba(0, 0, 0, 0.6);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* --- Global Reset --- */
+[data-theme="light"] {
+  --bg: #ffffff;
+  --card-bg: #f4f4f5;
+  --input-bg: #ffffff;
+  --border: #e4e4e7;
+  --border-hover: #d4d4d8;
+  --text: #09090b;
+  --muted: #71717a;
+  --muted-dark: #a1a1aa;
+  --shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* --- Core Reset --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -28,17 +42,15 @@ html, body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* ==========================================================================
-   1. HOMEPAGE HEADER & NAVIGATION (.glass-header)
-   ========================================================================== */
+/* --- Top Navigation Header --- */
 .glass-header {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background: rgba(9, 9, 11, 0.85);
-  backdrop-filter: blur(12px);
+  z-index: 1000;
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
   width: 100%;
 }
@@ -73,9 +85,9 @@ html, body {
   background: transparent;
   border: 1px solid var(--border);
   color: var(--muted);
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -86,57 +98,80 @@ html, body {
 .icon-btn:hover {
   color: var(--text);
   border-color: var(--border-hover);
-  background: var(--input-bg);
+  background: var(--card-bg);
 }
 
-/* Standalone Header for pages without .nav-container */
-header:not(.glass-header), nav:not(.nav-container) {
+/* Fallback header for individual calculator pages with raw top links */
+body > header:not(.glass-header),
+body > nav:not(.glass-header),
+body > div:first-child:has(a[href*="index.html"]) {
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
   background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
 }
 
-header:not(.glass-header) a, nav:not(.nav-container) a {
+body > header:not(.glass-header) a,
+body > nav:not(.glass-header) a,
+body > div:first-child:has(a[href*="index.html"]) a {
   color: var(--muted);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-header:not(.glass-header) a:hover, nav:not(.nav-container) a:hover {
+body > header:not(.glass-header) a:hover,
+body > nav:not(.glass-header) a:hover,
+body > div:first-child:has(a[href*="index.html"]) a:hover {
   color: var(--text);
 }
 
-header:not(.glass-header) a:first-child {
+body > header:not(.glass-header) a:first-child,
+body > nav:not(.glass-header) a:first-child,
+body > div:first-child:has(a[href*="index.html"]) a:first-child {
   font-weight: 700;
   color: var(--text);
+  margin-right: 8px;
 }
 
-/* ==========================================================================
-   2. HOMEPAGE HERO & GRID LAYOUT
-   ========================================================================== */
+/* --- Hero & AI Command Bar --- */
 .hero {
-  padding: 70px 24px 50px;
+  padding: 80px 24px 40px;
   text-align: center;
   max-width: 800px;
   margin: 0 auto;
 }
 
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
 .hero-title {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: 12px;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
   color: var(--text);
+  line-height: 1.15;
 }
 
 .hero-subtitle {
   color: var(--muted);
-  font-size: 1.05rem;
-  margin-bottom: 32px;
+  font-size: 1.1rem;
+  margin-bottom: 36px;
 }
 
 .ai-command-bar {
@@ -148,21 +183,113 @@ header:not(.glass-header) a:first-child {
   display: flex;
   align-items: center;
   background: var(--card-bg);
-  border: 
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 8px 6px 16px;
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: border-color 0.15s ease;
+}
 
-   /* ==========================================================================
-   4. FULL-SCREEN SEARCH OVERLAY
-   ========================================================================== */
+.command-input-container:focus-within {
+  border-color: var(--border-hover);
+}
+
+.command-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  padding: 10px 0;
+}
+
+.btn-command-submit {
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  border-radius: 6px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.btn-command-submit:hover {
+  opacity: 0.9;
+}
+
+/* --- Homepage Calculator Grid --- */
+.main-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px 100px;
+}
+
+.category-section {
+  margin-bottom: 48px;
+}
+
+.category-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  color: var(--text);
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.calc-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.calc-card-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  height: 100%;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.calc-card-item:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.calc-card-item h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.calc-card-item p {
+  font-size: 0.825rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+/* --- Full-Screen Search Overlay --- */
 #search-overlay {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100vh;
-  background: rgba(9, 9, 11, 0.95);
-  backdrop-filter: blur(12px);
+  background: var(--bg);
   z-index: 9999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15vh;
+  padding-top: 12vh;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;
@@ -175,31 +302,30 @@ header:not(.glass-header) a:first-child {
 
 .search-wrapper {
   width: 90%;
-  max-width: 700px;
+  max-width: 680px;
   position: relative;
 }
 
-#search-overlay input {
+#searchInput {
   width: 100%;
   background: transparent;
   border: none;
   border-bottom: 2px solid var(--border);
   color: var(--text);
-  font-size: 2rem;
-  padding: 10px 0;
+  font-size: 1.75rem;
+  padding: 12px 0;
   outline: none;
   font-weight: 600;
-  transition: border-color 0.2s ease;
 }
 
-#search-overlay input:focus {
+#searchInput:focus {
   border-color: var(--muted);
 }
 
 .close-search {
   position: absolute;
-  top: 30px;
-  right: 40px;
+  top: 24px;
+  right: 32px;
   background: transparent;
   border: none;
   color: var(--muted);
@@ -210,6 +336,96 @@ header:not(.glass-header) a:first-child {
   color: var(--text);
 }
 
+.search-results-container {
+  width: 90%;
+  max-width: 680px;
+  margin-top: 24px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
 .hidden-card {
   display: none !important;
+}
+
+/* --- Individual Calculator Pages --- */
+main:not(.main-layout):not(.chat-layout) {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 0 20px 80px;
+}
+
+main:not(.main-layout):not(.chat-layout) form,
+.calculator-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 16px 0 6px 0;
+}
+
+label:first-child {
+  margin-top: 0;
+}
+
+input[type="number"],
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-hover);
+}
+
+button:not(.icon-btn):not(.btn-command-submit),
+input[type="submit"] {
+  width: 100%;
+  background: var(--text);
+  color: var(--bg);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+button:not(.icon-btn):not(.btn-command-submit):hover,
+input[type="submit"]:hover {
+  opacity: 0.9;
+}
+
+#result, .result-box {
+  margin-top: 24px;
+  padding: 16px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
 }
