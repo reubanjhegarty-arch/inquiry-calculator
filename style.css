@@ -1,5 +1,6 @@
 /* ==========================================================================
-   INQUIRY CALCULATOR - MASTER DESIGN SYSTEM (LINEAR / VERCEL MONOCHROME)
+   INQUIRY CALCULATOR - MASTER STYLESHEET
+   Linear / Vercel Monochrome Dark Theme (#09090B)
    ========================================================================== */
 
 :root {
@@ -10,11 +11,10 @@
   --border-hover: #3f3f46;
   --text: #fafafa;
   --muted: #a1a1aa;
-  --muted-dark: #71717a;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* --- Global Reset & Core Body --- */
+/* --- Global Reset --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -28,190 +28,124 @@ html, body {
   min-height: 100vh;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- 1. TOP NAVIGATION HEADER (Fixes top links on ALL 100 pages) --- */
-header, nav, .header, .top-nav, .navbar {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: 24px !important;
-  padding: 16px 32px !important;
-  background-color: rgba(9, 9, 11, 0.95) !important;
-  border-bottom: 1px solid var(--border) !important;
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 1000 !important;
-  width: 100% !important;
-  backdrop-filter: blur(8px);
+/* ==========================================================================
+   1. HOMEPAGE HEADER & NAVIGATION (.glass-header)
+   ========================================================================== */
+.glass-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  width: 100%;
 }
 
-/* Styling all header links */
-header a, nav a, .header a, .top-nav a, .navbar a, body > a[href] {
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  border-color: var(--border-hover);
+  background: var(--input-bg);
+}
+
+/* Standalone Header for pages without .nav-container */
+header:not(.glass-header), nav:not(.nav-container) {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+header:not(.glass-header) a, nav:not(.nav-container) a {
   color: var(--muted);
   text-decoration: none;
   font-size: 0.875rem;
   font-weight: 500;
-  transition: color 0.15s ease, text-shadow 0.15s ease;
-  display: inline-flex;
-  align-items: center;
 }
 
-header a:hover, nav a:hover, .header a:hover, .top-nav a:hover, .navbar a:hover, body > a[href]:hover {
+header:not(.glass-header) a:hover, nav:not(.nav-container) a:hover {
   color: var(--text);
-  text-shadow: 0 0 10px rgba(250, 250, 250, 0.25);
 }
 
-/* Brand Link (Inquiry PRO) */
-header a:first-child, nav a:first-child, .header a:first-child, .top-nav a:first-child {
-  font-weight: 700 !important;
-  color: var(--text) !important;
-  font-size: 0.95rem !important;
-  letter-spacing: -0.01em;
-  margin-right: 8px;
-}
-
-/* --- 2. INDIVIDUAL CALCULATOR CARDS --- */
-/* Center the main calculator block safely */
-main:not(.homepage-main):not(.chat-layout) {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 40px 20px 80px 20px;
-  min-height: calc(100vh - 65px);
-}
-
-/* Calculator Container Form */
-main:not(.homepage-main):not(.chat-layout) form,
-.calculator-card,
-.calc-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 32px;
-  width: 100%;
-  max-width: 480px;
-  margin-top: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-  transition: border-color 0.2s ease;
-}
-
-main:not(.homepage-main):not(.chat-layout) form:hover,
-.calculator-card:hover {
-  border-color: var(--border-hover);
-}
-
-/* Headings inside Calculators */
-h1 {
-  font-size: 1.5rem;
+header:not(.glass-header) a:first-child {
   font-weight: 700;
-  letter-spacing: -0.025em;
   color: var(--text);
-  margin-bottom: 6px;
 }
 
-main p, .calc-desc, p.description {
-  color: var(--muted);
-  font-size: 0.875rem;
-  margin-bottom: 24px;
-}
-
-/* Input Fields & Labels */
-label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted);
-  margin: 16px 0 6px 0;
-}
-
-input[type="number"],
-input[type="text"],
-select,
-textarea {
-  width: 100%;
-  background: var(--input-bg);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 12px 14px;
-  color: var(--text);
-  font-size: 0.95rem;
-  font-family: inherit;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: var(--border-hover);
-  box-shadow: 0 0 0 1px var(--border-hover);
-}
-
-select {
-  cursor: pointer;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 40px;
-}
-
-/* Action Button */
-button:not(.chat-btn):not(.icon-btn),
-input[type="submit"] {
-  width: 100%;
-  background: var(--text);
-  color: var(--bg);
-  font-weight: 600;
-  font-size: 0.9rem;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  margin-top: 24px;
-  cursor: pointer;
-  transition: opacity 0.15s ease, transform 0.05s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-button:not(.chat-btn):not(.icon-btn):hover,
-input[type="submit"]:hover {
-  opacity: 0.92;
-}
-
-button:not(.chat-btn):not(.icon-btn):active,
-input[type="submit"]:active {
-  transform: scale(0.99);
-}
-
-/* Calculator Output Display Box */
-#result, .result-box {
-  margin-top: 24px;
-  padding: 16px;
-  background: var(--input-bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text);
+/* ==========================================================================
+   2. HOMEPAGE HERO & GRID LAYOUT
+   ========================================================================== */
+.hero {
+  padding: 70px 24px 50px;
   text-align: center;
-  letter-spacing: -0.01em;
-  word-break: break-word;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* --- 3. HOMEPAGE & CHAT SAFEGUARDS --- */
-/* Protects command hero, search overlays, and chat inputs */
-.hero-input-container form,
-.chat-input-wrapper form,
-#search-overlay form {
-  max-width: 100% !important;
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  box-shadow: none !important;
+.hero-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+  color: var(--text);
 }
+
+.hero-subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+}
+
+.ai-command-bar {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.command-input-container {
+  display: flex;
+  align-items: center;
+  background: var(--card-bg);
+  border: 
