@@ -1,41 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inquiry Calculator — Free Online Calculators & AI Problem Solver</title>
-    <meta name="description" content="Free online calculators for math, finance, health, science, and more. Powered by an AI problem solver that works through any question step by step.">
+    <title>Inquiry Calculator — Compute Anything. Solve Everything.</title>
+    <meta name="description" content="47 precision calculators and an AI problem solver.">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Inquiry Calculator — Free Online Calculators & AI Problem Solver">
-    <meta property="og:description" content="47+ free calculators and an AI-powered problem solver. Math, finance, health, science, conversions, and more.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://inquirycalculator.com/">
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Base Reset & Palette */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: #F6F1E7;
-            color: #2E2318;
-            line-height: 1.5;
+    <!-- Pre-load theme to prevent flash -->
+    <script>
+        const savedTheme = localStorage.getItem('inquiry_theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
         }
-        a { color: inherit; text-decoration: none; }
+    </script>
 
-        /* Navigation */
+    <style>
+        /* ===== SYSTEM & VARIABLES ===== */
+        :root {
+            /* Light Theme (Cream/Brown) */
+            --bg: #F6F1E7;
+            --bg-elevated: #FFFFFF;
+            --fg: #2E2318;
+            --fg-muted: #7A6A5A;
+            --accent: #8A6D4F;
+            --accent-hover: #6E553D;
+            --border: #E4DACD;
+            --border-hover: #C5B5A1;
+            --shadow-subtle: 0 4px 12px rgba(46, 35, 24, 0.06);
+            --focus-ring: 0 0 0 3px rgba(138, 109, 79, 0.2);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme (Deep Espresso/Cream) */
+            --bg: #15100B;
+            --bg-elevated: #1E1711;
+            --fg: #F6F1E7;
+            --fg-muted: #A0907F;
+            --accent: #A58461;
+            --accent-hover: #C5A17A;
+            --border: #33271C;
+            --border-hover: #5A4634;
+            --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.3);
+            --focus-ring: 0 0 0 3px rgba(165, 132, 97, 0.2);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--fg);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a { color: inherit; text-decoration: none; }
+        ul { list-style: none; }
+
+        /* ===== ANIMATIONS (Linear Style) ===== */
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(16px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .reveal {
+            opacity: 0; 
+            animation: none;
+        }
+        .reveal.visible {
+            animation: fadeSlideUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* ===== NAVBAR ===== */
         nav {
-            background-color: #2E2318;
-            color: #F6F1E7;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(var(--bg), 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
             padding: 16px 24px;
-            border-bottom: 2px solid #8A6D4F;
         }
         .nav-inner {
             max-width: 1200px;
@@ -45,232 +95,229 @@
             align-items: center;
         }
         .logo {
-            font-size: 1.35rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            color: #F6F1E7;
             letter-spacing: -0.5px;
         }
-        .logo span { color: #8A6D4F; }
-        .nav-links {
+        .logo span { color: var(--accent); }
+        .nav-right {
             display: flex;
             align-items: center;
             gap: 20px;
-            font-size: 0.95rem;
-        }
-        .nav-links a:hover { color: #8A6D4F; }
-        .btn-login {
-            color: #F6F1E7;
-            padding: 8px 16px;
-            border-radius: 4px;
-        }
-        .btn-signup {
-            background-color: #8A6D4F;
-            color: #FFFFFF !important;
-            padding: 8px 18px;
-            border-radius: 4px;
-            font-weight: 600;
-            transition: background 0.2s;
-        }
-        .btn-signup:hover { background-color: #6e553d; }
-
-        /* Hero Section */
-        .hero-wrap {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 24px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-        @media (max-width: 850px) {
-            .hero-wrap { grid-template-columns: 1fr; padding: 40px 20px; }
-        }
-        .hero-text h1 {
-            font-size: 2.6rem;
-            color: #2E2318;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            font-weight: 800;
-        }
-        .hero-text p {
-            font-size: 1.1rem;
-            color: #5A4A3A;
-            margin-bottom: 24px;
-        }
-        .hero-stats {
-            display: flex;
-            gap: 24px;
             font-size: 0.9rem;
-            color: #8A6D4F;
-            font-weight: 600;
-        }
-
-        /* AI Problem Solver Box */
-        .ai-box {
-            background-color: #FFFFFF;
-            border: 2px solid #8A6D4F;
-            border-radius: 4px;
-            padding: 28px;
-            box-shadow: 0 4px 12px rgba(46, 35, 24, 0.05);
-        }
-        .ai-box h2 {
-            font-size: 1.25rem;
-            color: #2E2318;
-            margin-bottom: 6px;
-        }
-        .ai-box p.subtitle {
-            font-size: 0.88rem;
-            color: #7A6A5A;
-            margin-bottom: 16px;
-        }
-        .ai-input-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .ai-input-wrap textarea {
-            width: 100%;
-            padding: 14px;
-            border: 1.5px solid #D5C9BC;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            background-color: #FDFBF7;
-            color: #2E2318;
-            resize: vertical;
-            min-height: 90px;
-        }
-        .ai-input-wrap textarea:focus {
-            outline: none;
-            border-color: #8A6D4F;
-        }
-        .ai-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .ai-limit {
-            font-size: 0.8rem;
-            color: #8A6D4F;
             font-weight: 500;
         }
-        .btn-ai-submit {
-            background-color: #8A6D4F;
-            color: #FFFFFF;
-            border: none;
-            padding: 10px 24px;
+        .nav-right a:hover { color: var(--accent); }
+        .btn-theme {
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--fg);
+            cursor: pointer;
+            padding: 6px 10px;
             border-radius: 4px;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .btn-theme:hover { border-color: var(--fg); }
+        
+        .auth-btn {
+            background: var(--fg);
+            color: var(--bg);
+            padding: 7px 16px;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .auth-btn:hover { opacity: 0.85; }
+
+        /* ===== HERO (Wolfram Style Input) ===== */
+        .hero {
+            padding: 100px 24px 60px;
+            text-align: center;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--fg-muted);
+            margin-bottom: 40px;
+        }
+
+        .unified-bar {
+            position: relative;
+            text-align: left;
+        }
+        .unified-input {
+            width: 100%;
+            padding: 20px 140px 20px 24px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            background: var(--bg-elevated);
+            color: var(--fg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.2s ease;
+        }
+        .unified-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--focus-ring);
+        }
+        .btn-ask {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            bottom: 8px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 0 20px;
             font-weight: 600;
             font-size: 0.95rem;
             cursor: pointer;
             transition: background 0.2s;
         }
-        .btn-ai-submit:hover { background-color: #2E2318; }
+        .btn-ask:hover { background: var(--accent-hover); }
 
-        /* Search Bar */
-        .search-container {
-            max-width: 800px;
-            margin: 0 auto 40px;
-            padding: 0 24px;
-            position: relative;
-        }
-        .search-input {
-            width: 100%;
-            padding: 16px 20px;
-            font-size: 1rem;
-            border: 2px solid #8A6D4F;
-            border-radius: 4px;
-            background-color: #FFFFFF;
-            color: #2E2318;
-        }
-        .search-input:focus { outline: none; border-color: #2E2318; }
+        /* Dropdown */
         .search-dropdown {
             position: absolute;
-            top: 100%;
-            left: 24px;
-            right: 24px;
-            background: #FFFFFF;
-            border: 1.5px solid #8A6D4F;
-            border-top: none;
-            border-radius: 0 0 4px 4px;
-            max-height: 280px;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            box-shadow: var(--shadow-subtle);
+            max-height: 300px;
             overflow-y: auto;
-            display: none;
             z-index: 50;
+            display: none;
         }
         .search-dropdown a {
             display: block;
-            padding: 12px 18px;
-            border-bottom: 1px solid #F6F1E7;
-            color: #2E2318;
+            padding: 14px 24px;
+            border-bottom: 1px solid var(--border);
             font-size: 0.95rem;
+            color: var(--fg);
+            transition: background 0.1s;
         }
-        .search-dropdown a:hover { background-color: #F6F1E7; color: #8A6D4F; }
+        .search-dropdown a:hover { background: var(--bg); color: var(--accent); }
+        .search-dropdown a:last-child { border-bottom: none; }
 
-        /* Calculators Grid */
-        .main-content {
+        /* Chips */
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 24px;
+        }
+        .chip {
+            font-size: 0.8rem;
+            color: var(--fg-muted);
+            border: 1px solid var(--border);
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: var(--bg-elevated);
+        }
+        .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+        /* ===== MAIN LAYOUT (Linear Style Grid) ===== */
+        .layout {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px 80px;
-        }
-        .section-heading {
-            font-size: 1.5rem;
-            color: #2E2318;
-            margin-bottom: 24px;
-            text-align: center;
-            font-weight: 700;
-        }
-        .calc-grid {
+            padding: 40px 24px 100px;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 20px;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
         }
-        .calc-card {
-            background-color: #FFFFFF;
-            border: 1.5px solid #E4DACD;
-            border-radius: 4px;
-            padding: 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: border-color 0.2s, box-shadow 0.2s;
+        @media (max-width: 850px) {
+            .layout { grid-template-columns: 1fr; gap: 40px; }
+            .sidebar { display: none; }
         }
-        .calc-card:hover {
-            border-color: #8A6D4F;
-            box-shadow: 0 4px 12px rgba(138, 109, 79, 0.12);
+
+        /* Sidebar Nav */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
         }
-        .calc-category {
-            font-size: 0.72rem;
+        .sidebar-title {
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            color: var(--fg-muted);
             font-weight: 700;
-            color: #8A6D4F;
-            margin-bottom: 8px;
+            margin-bottom: 16px;
         }
-        .calc-title {
-            font-size: 1.1rem;
+        .sidebar ul { display: flex; flex-direction: column; gap: 12px; }
+        .sidebar a {
+            font-size: 0.9rem;
+            color: var(--fg);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .sidebar a:hover, .sidebar a.active { color: var(--accent); }
+
+        /* Grid */
+        .category-section { margin-bottom: 60px; }
+        .category-section h2 {
+            font-size: 1.5rem;
             font-weight: 700;
-            color: #2E2318;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+        
+        .card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 20px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .card:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-subtle);
+        }
+        .card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
             margin-bottom: 6px;
+            color: var(--fg);
         }
-        .calc-desc {
-            font-size: 0.88rem;
-            color: #6A5A4A;
-            line-height: 1.45;
+        .card p {
+            font-size: 0.85rem;
+            color: var(--fg-muted);
+            line-height: 1.5;
         }
 
         /* Footer */
         footer {
-            background-color: #2E2318;
-            color: #D5C9BC;
+            border-top: 1px solid var(--border);
             padding: 40px 24px;
             text-align: center;
-            font-size: 0.88rem;
-            border-top: 2px solid #8A6D4F;
+            color: var(--fg-muted);
+            font-size: 0.85rem;
         }
-        footer a { color: #8A6D4F; }
-        footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -279,334 +326,255 @@
     <nav>
         <div class="nav-inner">
             <a href="/" class="logo">Inquiry<span>Calculator</span></a>
-            <div class="nav-links">
-                <a href="/about.html">About</a>
-                <a href="/contact.html">Contact</a>
+            <div class="nav-right">
+                <button class="btn-theme" id="theme-toggle">Dark</button>
                 <div id="auth-buttons">
-                    <a href="/login.html" class="btn-login">Log In</a>
-                    <a href="/signup.html" class="btn-signup">Sign Up</a>
+                    <a href="/login.html">Log In</a>
+                    <a href="/signup.html" class="auth-btn">Sign Up</a>
                 </div>
-                <div id="user-info" style="display:none; align-items:center; gap:12px;">
-                    <span id="user-name" style="color:#8A6D4F; font-weight:600;"></span>
-                    <button onclick="logOut()" style="background:#8A6D4F; color:#fff; border:none; padding:6px 14px; border-radius:4px; cursor:pointer;">Log Out</button>
+                <div id="user-info" style="display:none; align-items:center; gap:16px;">
+                    <span id="user-name" style="color:var(--accent);"></span>
+                    <button onclick="logOut()" style="background:none; border:none; cursor:pointer; font-weight:600; font-family:inherit; color:var(--fg);">Log Out</button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <div class="hero-wrap">
-        <div class="hero-text">
-            <h1>Calculate Anything.<br>Solve Any Problem.</h1>
-            <p>47 specialized calculators for finance, math, health, and science — plus an AI problem solver that breaks down complex questions step by step.</p>
-            <div class="hero-stats">
-                <span>47 Calculators</span>
-                <span>•</span>
-                <span>AI Problem Solver</span>
-                <span>•</span>
-                <span>100% Free</span>
-            </div>
+    <!-- HERO -->
+    <header class="hero">
+        <h1 class="reveal visible">Compute anything.<br>Solve everything.</h1>
+        <p class="reveal visible delay-1">47 precision calculators and an AI problem solver.</p>
+        
+        <div class="unified-bar reveal visible delay-2">
+            <input type="text" id="unified-input" class="unified-input" placeholder="Search calculators or ask a math question..." autocomplete="off">
+            <button class="btn-ask" id="btn-ask" onclick="submitToAI()">Ask AI</button>
+            <div class="search-dropdown" id="search-dropdown"></div>
         </div>
-        <div class="ai-box">
-            <h2>AI Problem Solver</h2>
-            <p class="subtitle">Ask any math, science, or finance question.</p>
-            <div class="ai-input-wrap">
-                <textarea id="ai-input" placeholder="e.g. Calculate the monthly payment for a $300,000 mortgage at 6.5% interest over 30 years."></textarea>
-                <div class="ai-actions">
-                    <span class="ai-limit" id="ai-limit-note">3 free daily questions</span>
-                    <button class="btn-ai-submit" onclick="submitToChat()">Solve It</button>
-                </div>
-            </div>
+
+        <div class="chips reveal visible delay-3">
+            <div class="chip" onclick="setQuery('Mortgage payment for $300k at 6.5%')">Mortgage for $300k at 6.5%</div>
+            <div class="chip" onclick="setQuery('Derivative of 3x^2 + 5x')">Derivative of 3x² + 5x</div>
+            <div class="chip" onclick="setQuery('BMI')">Search: BMI</div>
+            <div class="chip" onclick="setQuery('Probability')">Search: Probability</div>
         </div>
-    </div>
+    </header>
 
-    <!-- SEARCH BAR -->
-    <div class="search-container">
-        <input type="text" id="search-input" class="search-input" placeholder="Search 47 calculators (e.g., mortgage, BMI, integral, ROI)..." oninput="filterCalculators()">
-        <div class="search-dropdown" id="search-dropdown"></div>
-    </div>
+    <!-- MAIN LAYOUT -->
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar reveal">
+            <div class="sidebar-title">Categories</div>
+            <ul>
+                <li><a href="#math">Math</a></li>
+                <li><a href="#finance">Finance</a></li>
+                <li><a href="#health">Health</a></li>
+                <li><a href="#conversion">Conversion</a></li>
+                <li><a href="#science">Science</a></li>
+                <li><a href="#time">Date & Time</a></li>
+            </ul>
+        </aside>
 
-    <!-- MAIN CALCULATOR GRID -->
-    <main class="main-content">
-        <h2 class="section-heading">All Calculators</h2>
-        <div class="calc-grid" id="calc-grid">
-
+        <!-- Grids -->
+        <main>
             <!-- MATH -->
-            <a href="standard-calculator.html" class="calc-card" data-keywords="standard basic arithmetic add subtract multiply divide">
-                <div><div class="calc-category">Math</div><div class="calc-title">Standard Calculator</div><div class="calc-desc">Basic arithmetic operations including addition, subtraction, multiplication, and division.</div></div>
-            </a>
-            <a href="scientific-calculator.html" class="calc-card" data-keywords="scientific sin cos tan log exponent trigonometry">
-                <div><div class="calc-category">Math</div><div class="calc-title">Scientific Calculator</div><div class="calc-desc">Advanced functions including trigonometry, logarithms, powers, and roots.</div></div>
-            </a>
-            <a href="percentage-calculator.html" class="calc-card" data-keywords="percentage percent discount increase decrease">
-                <div><div class="calc-category">Math</div><div class="calc-title">Percentage Calculator</div><div class="calc-desc">Calculate percentage changes, differences, and relative values instantly.</div></div>
-            </a>
-            <a href="fraction-calculator.html" class="calc-card" data-keywords="fraction add subtract multiply divide simplify">
-                <div><div class="calc-category">Math</div><div class="calc-title">Fraction Calculator</div><div class="calc-desc">Add, subtract, multiply, divide, and simplify proper and improper fractions.</div></div>
-            </a>
-            <a href="square-root-calculator.html" class="calc-card" data-keywords="square root radical nth root">
-                <div><div class="calc-category">Math</div><div class="calc-title">Square Root Calculator</div><div class="calc-desc">Compute square roots, cube roots, and custom nth roots of any number.</div></div>
-            </a>
-            <a href="exponent-calculator.html" class="calc-card" data-keywords="exponent power base raised">
-                <div><div class="calc-category">Math</div><div class="calc-title">Exponent Calculator</div><div class="calc-desc">Solve exponential expressions and powers with integer or decimal bases.</div></div>
-            </a>
-            <a href="logarithm-calculator.html" class="calc-card" data-keywords="logarithm log natural ln base">
-                <div><div class="calc-category">Math</div><div class="calc-title">Logarithm Calculator</div><div class="calc-desc">Compute natural logs (ln), common logs (log10), and arbitrary base logs.</div></div>
-            </a>
-            <a href="ratio-calculator.html" class="calc-card" data-keywords="ratio proportion scale">
-                <div><div class="calc-category">Math</div><div class="calc-title">Ratio Calculator</div><div class="calc-desc">Simplify ratios, compare proportions, and solve missing ratio values.</div></div>
-            </a>
-            <a href="random-number-generator.html" class="calc-card" data-keywords="random number generator rng dice">
-                <div><div class="calc-category">Math</div><div class="calc-title">Random Number Generator</div><div class="calc-desc">Generate random integers or decimals within a specified numeric range.</div></div>
-            </a>
-            <a href="probability-calculator.html" class="calc-card" data-keywords="probability odds chance event">
-                <div><div class="calc-category">Math</div><div class="calc-title">Probability Calculator</div><div class="calc-desc">Calculate single event, multiple event, and conditional probabilities.</div></div>
-            </a>
-            <a href="standard-deviation-calculator.html" class="calc-card" data-keywords="standard deviation variance mean statistics">
-                <div><div class="calc-category">Math</div><div class="calc-title">Standard Deviation Calculator</div><div class="calc-desc">Find sample and population standard deviation, variance, and mean.</div></div>
-            </a>
+            <section id="math" class="category-section reveal">
+                <h2>Math</h2>
+                <div class="grid">
+                    <a href="standard-calculator.html" class="card" data-keywords="standard basic arithmetic add subtract multiply divide">
+                        <h3>Standard Calculator</h3><p>Basic arithmetic operations including addition, subtraction, multiplication, and division.</p></a>
+                    <a href="scientific-calculator.html" class="card" data-keywords="scientific sin cos tan log exponent trigonometry">
+                        <h3>Scientific Calculator</h3><p>Advanced functions including trigonometry, logarithms, powers, and roots.</p></a>
+                    <a href="percentage-calculator.html" class="card" data-keywords="percentage percent discount increase decrease">
+                        <h3>Percentage Calculator</h3><p>Calculate percentage changes, differences, and relative values instantly.</p></a>
+                    <a href="fraction-calculator.html" class="card" data-keywords="fraction add subtract multiply divide simplify">
+                        <h3>Fraction Calculator</h3><p>Add, subtract, multiply, divide, and simplify fractions.</p></a>
+                    <a href="probability-calculator.html" class="card" data-keywords="probability odds chance event">
+                        <h3>Probability Calculator</h3><p>Calculate single event, multiple event, and conditional probabilities.</p></a>
+                    <a href="standard-deviation-calculator.html" class="card" data-keywords="standard deviation variance mean statistics">
+                        <h3>Standard Deviation</h3><p>Find sample and population standard deviation, variance, and mean.</p></a>
+                </div>
+            </section>
 
             <!-- FINANCE -->
-            <a href="loan-calculator.html" class="calc-card" data-keywords="loan payment interest principal mortgage">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Loan Calculator</div><div class="calc-desc">Determine monthly payments, total interest paid, and full payoff timelines.</div></div>
-            </a>
-            <a href="mortgage-calculator.html" class="calc-card" data-keywords="mortgage home house payment rate">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Mortgage Calculator</div><div class="calc-desc">Estimate home mortgage payments including principal, interest, taxes, and insurance.</div></div>
-            </a>
-            <a href="compound-interest-calculator.html" class="calc-card" data-keywords="compound interest savings growth investment">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Compound Interest Calculator</div><div class="calc-desc">Project investment growth over time with annual or monthly compounding.</div></div>
-            </a>
-            <a href="tip-calculator.html" class="calc-card" data-keywords="tip gratuity restaurant bill split">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Tip Calculator</div><div class="calc-desc">Calculate tip percentages and split restaurant bills evenly among groups.</div></div>
-            </a>
-            <a href="tax-calculator.html" class="calc-card" data-keywords="tax income sales rate bracket">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Tax Calculator</div><div class="calc-desc">Calculate sales tax, gross income tax estimates, and effective tax rates.</div></div>
-            </a>
-            <a href="currency-converter.html" class="calc-card" data-keywords="currency converter exchange rate usd eur gbp">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Currency Converter</div><div class="calc-desc">Convert values between major international currencies.</div></div>
-            </a>
-            <a href="discount-calculator.html" class="calc-card" data-keywords="discount sale price off savings">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Discount Calculator</div><div class="calc-desc">Calculate final prices after promotional discounts and savings percentage.</div></div>
-            </a>
-            <a href="margin-calculator.html" class="calc-card" data-keywords="margin profit cost markup business">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Margin Calculator</div><div class="calc-desc">Compute gross profit margin, net profit margin, and product markups.</div></div>
-            </a>
-            <a href="roi-calculator.html" class="calc-card" data-keywords="roi return investment gain loss">
-                <div><div class="calc-category">Finance</div><div class="calc-title">ROI Calculator</div><div class="calc-desc">Calculate Return on Investment percentage and total gain on financial assets.</div></div>
-            </a>
-            <a href="amortization-calculator.html" class="calc-card" data-keywords="amortization schedule loan payment breakdown">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Amortization Calculator</div><div class="calc-desc">Generate monthly principal and interest payment breakdown tables for loans.</div></div>
-            </a>
-            <a href="inflation-calculator.html" class="calc-card" data-keywords="inflation purchasing power cpi money value">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Inflation Calculator</div><div class="calc-desc">See how historic and future inflation impacts currency purchasing power.</div></div>
-            </a>
-            <a href="rule-of-72-calculator.html" class="calc-card" data-keywords="rule 72 doubling time investment rate">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Rule of 72 Calculator</div><div class="calc-desc">Estimate the number of years required to double an investment at a fixed rate.</div></div>
-            </a>
-            <a href="present-value-calculator.html" class="calc-card" data-keywords="present value future discount rate time money">
-                <div><div class="calc-category">Finance</div><div class="calc-title">Present Value Calculator</div><div class="calc-desc">Determine current worth of a future sum of money based on discount rates.</div></div>
-            </a>
+            <section id="finance" class="category-section reveal">
+                <h2>Finance</h2>
+                <div class="grid">
+                    <a href="mortgage-calculator.html" class="card" data-keywords="mortgage home house payment rate">
+                        <h3>Mortgage Calculator</h3><p>Estimate home mortgage payments including taxes and insurance.</p></a>
+                    <a href="loan-calculator.html" class="card" data-keywords="loan payment interest principal mortgage">
+                        <h3>Loan Calculator</h3><p>Determine monthly payments, total interest paid, and full payoff timelines.</p></a>
+                    <a href="compound-interest-calculator.html" class="card" data-keywords="compound interest savings growth investment">
+                        <h3>Compound Interest</h3><p>Project investment growth over time with annual or monthly compounding.</p></a>
+                    <a href="roi-calculator.html" class="card" data-keywords="roi return investment gain loss">
+                        <h3>ROI Calculator</h3><p>Calculate Return on Investment percentage and total gain on assets.</p></a>
+                    <a href="margin-calculator.html" class="card" data-keywords="margin profit cost markup business">
+                        <h3>Margin Calculator</h3><p>Compute gross profit margin, net profit margin, and product markups.</p></a>
+                </div>
+            </section>
 
             <!-- HEALTH -->
-            <a href="bmi-calculator.html" class="calc-card" data-keywords="bmi body mass index weight height">
-                <div><div class="calc-category">Health</div><div class="calc-title">BMI Calculator</div><div class="calc-desc">Calculate Body Mass Index using metric or imperial measurements.</div></div>
-            </a>
-            <a href="calorie-calculator.html" class="calc-card" data-keywords="calorie calories daily intake tdee bmr">
-                <div><div class="calc-category">Health</div><div class="calc-title">Calorie Calculator</div><div class="calc-desc">Estimate daily caloric requirements for maintenance, weight loss, or muscle gain.</div></div>
-            </a>
-            <a href="body-fat-calculator.html" class="calc-card" data-keywords="body fat percentage navy method">
-                <div><div class="calc-category">Health</div><div class="calc-title">Body Fat Calculator</div><div class="calc-desc">Estimate total body fat percentage using body circumference measurements.</div></div>
-            </a>
-            <a href="bmr-calculator.html" class="calc-card" data-keywords="bmr basal metabolic rate resting calories">
-                <div><div class="calc-category">Health</div><div class="calc-title">BMR Calculator</div><div class="calc-desc">Calculate Basal Metabolic Rate—the calories burned while completely at rest.</div></div>
-            </a>
-            <a href="macro-calculator.html" class="calc-card" data-keywords="macros macronutrients protein carbs fat diet">
-                <div><div class="calc-category">Health</div><div class="calc-title">Macro Calculator</div><div class="calc-desc">Determine optimal daily protein, carbohydrate, and fat intake distribution.</div></div>
-            </a>
-            <a href="ideal-weight-calculator.html" class="calc-card" data-keywords="ideal weight healthy bmi height">
-                <div><div class="calc-category">Health</div><div class="calc-title">Ideal Weight Calculator</div><div class="calc-desc">Find healthy body weight targets based on gender, height, and frame size.</div></div>
-            </a>
-            <a href="ovulation-calculator.html" class="calc-card" data-keywords="ovulation fertility cycle period conception">
-                <div><div class="calc-category">Health</div><div class="calc-title">Ovulation Calculator</div><div class="calc-desc">Estimate fertile windows and projected ovulation dates based on menstrual cycles.</div></div>
-            </a>
+            <section id="health" class="category-section reveal">
+                <h2>Health</h2>
+                <div class="grid">
+                    <a href="bmi-calculator.html" class="card" data-keywords="bmi body mass index weight height">
+                        <h3>BMI Calculator</h3><p>Calculate Body Mass Index using metric or imperial measurements.</p></a>
+                    <a href="calorie-calculator.html" class="card" data-keywords="calorie calories daily intake tdee bmr">
+                        <h3>Calorie Calculator</h3><p>Estimate daily caloric requirements for maintenance or weight loss.</p></a>
+                    <a href="macro-calculator.html" class="card" data-keywords="macros macronutrients protein carbs fat diet">
+                        <h3>Macro Calculator</h3><p>Determine optimal daily protein, carbohydrate, and fat intake distribution.</p></a>
+                </div>
+            </section>
 
-            <!-- CONVERSIONS -->
-            <a href="length-converter.html" class="calc-card" data-keywords="length distance meter feet inch cm mile km convert">
-                <div><div class="calc-category">Conversion</div><div class="calc-title">Length Converter</div><div class="calc-desc">Convert between meters, feet, inches, yards, miles, and kilometers.</div></div>
-            </a>
-            <a href="weight-converter.html" class="calc-card" data-keywords="weight mass kg lb pound ounce gram convert">
-                <div><div class="calc-category">Conversion</div><div class="calc-title">Weight Converter</div><div class="calc-desc">Convert between kilograms, pounds, ounces, grams, and stone.</div></div>
-            </a>
-            <a href="temperature-converter.html" class="calc-card" data-keywords="temperature celsius fahrenheit kelvin convert">
-                <div><div class="calc-category">Conversion</div><div class="calc-title">Temperature Converter</div><div class="calc-desc">Convert between Celsius, Fahrenheit, and Kelvin scales.</div></div>
-            </a>
-            <a href="volume-converter.html" class="calc-card" data-keywords="volume liter gallon cup ml fluid ounce convert">
-                <div><div class="calc-category">Conversion</div><div class="calc-title">Volume Converter</div><div class="calc-desc">Convert between liters, gallons, fluid ounces, cups, and milliliters.</div></div>
-            </a>
-            <a href="speed-converter.html" class="calc-card" data-keywords="speed velocity mph kph knots convert">
-                <div><div class="calc-category">Conversion</div><div class="calc-title">Speed Converter</div><div class="calc-desc">Convert between miles per hour, kilometers per hour, knots, and m/s.</div></div>
-            </a>
-
-            <!-- SCIENCE -->
-            <a href="physics-calculator.html" class="calc-card" data-keywords="physics force mass acceleration velocity momentum">
-                <div><div class="calc-category">Science</div><div class="calc-title">Physics Calculator</div><div class="calc-desc">Calculate force, acceleration, velocity, momentum, and kinetic energy.</div></div>
-            </a>
-            <a href="chemistry-calculator.html" class="calc-card" data-keywords="chemistry molar mass molarity dilution solution">
-                <div><div class="calc-category">Science</div><div class="calc-title">Chemistry Calculator</div><div class="calc-desc">Solve for molar mass, molarity, solution dilutions, and gas law values.</div></div>
-            </a>
-            <a href="electricity-calculator.html" class="calc-card" data-keywords="electricity ohm volt amp watt resistance power">
-                <div><div class="calc-category">Science</div><div class="calc-title">Electricity Calculator</div><div class="calc-desc">Calculate voltage, current, resistance, and electrical power with Ohm's Law.</div></div>
-            </a>
-
-            <!-- DATE & TIME -->
-            <a href="date-calculator.html" class="calc-card" data-keywords="date difference days between duration">
-                <div><div class="calc-category">Date & Time</div><div class="calc-title">Date Calculator</div><div class="calc-desc">Find exact number of days, weeks, or months between two specified dates.</div></div>
-            </a>
-            <a href="age-calculator.html" class="calc-card" data-keywords="age birthday years old born">
-                <div><div class="calc-category">Date & Time</div><div class="calc-title">Age Calculator</div><div class="calc-desc">Calculate precise age down to years, months, days, and total hours lived.</div></div>
-            </a>
-            <a href="time-zone-converter.html" class="calc-card" data-keywords="time zone convert gmt utc est pst">
-                <div><div class="calc-category">Date & Time</div><div class="calc-title">Time Zone Converter</div><div class="calc-desc">Convert standard local times across global time zones seamlessly.</div></div>
-            </a>
-            <a href="hours-calculator.html" class="calc-card" data-keywords="hours minutes time add subtract duration work">
-                <div><div class="calc-category">Date & Time</div><div class="calc-title">Hours Calculator</div><div class="calc-desc">Add or subtract working hours and minutes for timesheets and scheduling.</div></div>
-            </a>
-            <a href="business-days-calculator.html" class="calc-card" data-keywords="business days working weekdays deadline">
-                <div><div class="calc-category">Date & Time</div><div class="calc-title">Business Days Calculator</div><div class="calc-desc">Calculate total weekdays between dates excluding weekend days.</div></div>
-            </a>
-
-            <!-- FITNESS & EDUCATION -->
-            <a href="pace-calculator.html" class="calc-card" data-keywords="pace running speed distance time marathon">
-                <div><div class="calc-category">Fitness</div><div class="calc-title">Pace Calculator</div><div class="calc-desc">Calculate running pace per mile/km, target finish times, or required speed.</div></div>
-            </a>
-            <a href="gpa-calculator.html" class="calc-card" data-keywords="gpa grade point average college school">
-                <div><div class="calc-category">Education</div><div class="calc-title">GPA Calculator</div><div class="calc-desc">Calculate cumulative and term Grade Point Average based on course credits.</div></div>
-            </a>
-
-        </div>
-    </main>
+            <!-- CONVERSION -->
+            <section id="conversion" class="category-section reveal">
+                <h2>Conversion</h2>
+                <div class="grid">
+                    <a href="length-converter.html" class="card" data-keywords="length distance meter feet inch cm mile km convert">
+                        <h3>Length Converter</h3><p>Convert between meters, feet, inches, yards, miles, and kilometers.</p></a>
+                    <a href="weight-converter.html" class="card" data-keywords="weight mass kg lb pound ounce gram convert">
+                        <h3>Weight Converter</h3><p>Convert between kilograms, pounds, ounces, grams, and stone.</p></a>
+                    <a href="temperature-converter.html" class="card" data-keywords="temperature celsius fahrenheit kelvin convert">
+                        <h3>Temperature Converter</h3><p>Convert between Celsius, Fahrenheit, and Kelvin scales.</p></a>
+                </div>
+            </section>
+        </main>
+    </div>
 
     <!-- FOOTER -->
     <footer>
-        <p>&copy; 2025 Inquiry Calculator. All rights reserved.</p>
-        <p style="margin-top: 10px;">
-            <a href="/about.html">About</a> &middot; 
-            <a href="/contact.html">Contact</a> &middot; 
-            <a href="/privacy.html">Privacy Policy</a> &middot; 
-            <a href="/terms.html">Terms of Service</a>
-        </p>
+        <p>&copy; 2025 Inquiry Calculator. All rights reserved. <a href="/privacy.html" style="margin-left:10px; color:var(--fg);">Privacy</a> &middot; <a href="/terms.html" style="color:var(--fg);">Terms</a></p>
     </footer>
 
-    <!-- FIREBASE AUTHENTICATION -->
+    <!-- FIREBASE -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyCvfgVqm4bXuA-5BOG8wLxOPlb-En0WUzI",
             authDomain: "inquiry-calculator.firebaseapp.com",
-            projectId: "inquiry-calculator",
-            storageBucket: "inquiry-calculator.appspot.com",
-            messagingSenderId: "169894862498",
-            appId: "1:169894862498:web:YOUR_APP_ID"
+            projectId: "inquiry-calculator"
         };
-        firebase.initializeApp(firebaseConfig);
+        if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+        
         let isLoggedIn = false;
-
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
                 isLoggedIn = true;
                 document.getElementById('auth-buttons').style.display = 'none';
                 document.getElementById('user-info').style.display = 'flex';
                 document.getElementById('user-name').textContent = user.displayName || user.email;
-                document.getElementById('ai-limit-note').textContent = 'Unlimited access unlocked';
             } else {
                 isLoggedIn = false;
                 document.getElementById('auth-buttons').style.display = 'flex';
                 document.getElementById('user-info').style.display = 'none';
-                updateLimitNote();
             }
         });
-
-        function logOut() {
-            firebase.auth().signOut();
-        }
-
-        function updateLimitNote() {
-            let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
-            const today = new Date().toDateString();
-            const used = usage.filter(d => d === today).length;
-            const remaining = Math.max(0, 3 - used);
-            document.getElementById('ai-limit-note').textContent = `${remaining} of 3 free questions left today`;
-        }
+        function logOut() { firebase.auth().signOut(); }
     </script>
 
-    <!-- FUNCTIONALITY: AI SUBMIT & SEARCH FILTER -->
+    <!-- SCRIPTS -->
     <script>
-        function submitToChat() {
-            const input = document.getElementById('ai-input');
-            const question = input.value.trim();
-            if (!question) return;
-
-            if (!isLoggedIn) {
-                let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
-                const today = new Date().toDateString();
-                const used = usage.filter(d => d === today).length;
-                if (used >= 3) {
-                    document.getElementById('ai-limit-note').innerHTML = '<span style="color:#c0392b;">Limit reached. Log in for unlimited.</span>';
-                    return;
-                }
-            }
-
-            sessionStorage.setItem('pending_question', question);
-            window.location.href = '/chat.html';
+        // --- Dark Mode Toggle ---
+        const themeToggle = document.getElementById('theme-toggle');
+        
+        function updateToggleText() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeToggle.textContent = isDark ? 'Light' : 'Dark';
         }
+        updateToggleText();
 
-        document.getElementById('ai-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                submitToChat();
-            }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('inquiry_theme', newTheme);
+            updateToggleText();
         });
 
-        const cards = document.querySelectorAll('.calc-card');
-        function filterCalculators() {
-            const query = document.getElementById('search-input').value.toLowerCase().trim();
-            const dropdown = document.getElementById('search-dropdown');
-            dropdown.innerHTML = '';
+        // --- Scroll Animations (Intersection Observer) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
 
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
+
+        // --- Unified Command Bar ---
+        const input = document.getElementById('unified-input');
+        const dropdown = document.getElementById('search-dropdown');
+        const cards = document.querySelectorAll('.card');
+
+        function setQuery(text) {
+            input.value = text;
+            input.focus();
+            handleInput();
+        }
+
+        function handleInput() {
+            const query = input.value.toLowerCase().trim();
+            dropdown.innerHTML = '';
             if (!query) {
                 dropdown.style.display = 'none';
-                cards.forEach(c => c.style.display = 'flex');
                 return;
             }
 
             let matches = 0;
             cards.forEach(card => {
+                const title = card.querySelector('h3').textContent;
                 const keywords = card.getAttribute('data-keywords') || '';
-                const title = card.querySelector('.calc-title').textContent.toLowerCase();
-                const combined = title + ' ' + keywords;
-
-                if (combined.includes(query)) {
-                    card.style.display = 'flex';
+                
+                if ((title.toLowerCase() + " " + keywords).includes(query)) {
                     matches++;
-                    const item = document.createElement('a');
-                    item.href = card.getAttribute('href');
-                    item.innerHTML = '<strong>' + card.querySelector('.calc-title').textContent + '</strong>';
-                    dropdown.appendChild(item);
-                } else {
-                    card.style.display = 'none';
+                    const a = document.createElement('a');
+                    a.href = card.getAttribute('href');
+                    a.innerHTML = `<strong>${title}</strong> — <em>Calculator</em>`;
+                    dropdown.appendChild(a);
                 }
             });
 
             dropdown.style.display = matches > 0 ? 'block' : 'none';
         }
 
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-container')) {
-                document.getElementById('search-dropdown').style.display = 'none';
+        input.addEventListener('input', handleInput);
+
+        // Click outside closes dropdown
+        document.addEventListener('click', (e) => {
+            if(!e.target.closest('.unified-bar')) dropdown.style.display = 'none';
+        });
+
+        // --- Submit to AI Logic ---
+        function submitToAI() {
+            const question = input.value.trim();
+            if (!question) return;
+
+            // Limit Check (Guests only)
+            if (!isLoggedIn) {
+                let usage = JSON.parse(localStorage.getItem('ai_usage') || '[]');
+                const today = new Date().toDateString();
+                const used = usage.filter(d => d === today).length;
+                if (used >= 3) {
+                    input.value = "";
+                    input.placeholder = "Daily limit reached. Log in to continue.";
+                    return;
+                }
+            }
+
+            // Redirect to Chat
+            sessionStorage.setItem('pending_question', question);
+            window.location.href = '/chat.html';
+        }
+
+        // Enter key handles both (If dropdown empty -> ask AI, else follow link if we want, but simple for now: always ask AI)
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                submitToAI();
             }
         });
     </script>
-
 </body>
 </html>
