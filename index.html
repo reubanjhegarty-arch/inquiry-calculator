@@ -3,24 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inquiry Calculator – 100+ Precision Tools & AI Solver</title>
+    <title>Inquiry Calculator — 100+ Precision Tools & AI Solver</title>
     <meta name="description" content="Free online calculators for math, finance, health, science, fitness, conversions, and date calculations, powered by step-by-step AI problem solving.">
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="/favicon.ico" sizes="48x48">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Inquiry Calculator",
-      "url": "https://inquirycalculator.com/",
-      "logo": "https://inquirycalculator.com/favicon.svg"
-    }
-    </script>
 </head>
 <body>
 
-    <!-- Header / Nav -->
+    <!-- Navigation Bar -->
     <header class="glass-header">
         <div class="nav-container">
             <a href="index.html" class="logo">
@@ -38,465 +27,630 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Linear Hero Section -->
     <section class="hero">
-        <div class="hero-badge">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
-            100+ Precision Tools + AI Workspace
-        </div>
-        <h1 class="hero-title">Compute at the speed of thought.</h1>
-        <p class="hero-subtitle">High-precision tools for finance, health, math, and science, backed by an advanced AI Problem Solver.</p>
-        
-        <div class="ai-command-bar">
-            <form id="heroAiForm">
-                <div class="command-input-container">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 12px; color: var(--muted);"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                    <input type="text" id="heroAiInput" class="command-input" placeholder="Ask AI any math, physics, or finance problem..." autocomplete="off" required>
-                    <button type="submit" class="btn-command-submit">Solve with AI</button>
-                </div>
-            </form>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span> 100 Calculators & AI Solver
+            </div>
+
+            <h1 class="hero-title">Compute at the speed of thought.</h1>
+            <p class="hero-subtitle">Instantly calculate complex equations, financial models, and conversions — or ask our AI solver to walk you through the math step-by-step.</p>
+
+            <!-- Sleek AI Command Bar -->
+            <div class="ai-command-bar">
+                <form id="heroAiForm">
+                    <div class="command-input-container">
+                        <div class="command-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                        <input type="text" id="heroAiInput" class="command-input" placeholder="Ask AI any math, science, or finance problem..." autocomplete="off" required>
+                        <button type="submit" class="btn-command-submit" aria-label="Solve">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+                </form>
+                <div class="command-hint">Press <kbd>Enter</kbd> to solve • Step-by-step logic powered by Cloudflare AI</div>
+            </div>
         </div>
     </section>
 
-    <!-- Categories & Calculators Grid -->
-    <main class="main-layout" id="mainGrid">
+    <!-- Main Content Layout -->
+    <main class="main-layout">
         
-        <!-- 1. Finance -->
-        <section class="category-section">
-            <h2 class="category-title">Finance & Investments</h2>
-            <div class="calculator-grid">
-                <a href="amortization-calculator.html" class="calc-card-link" data-keywords="loan mortgage repayment bank debt interest">
-                    <div class="calc-card-item"><h3>Amortization</h3><p>Schedule loan principal and interest payments.</p></div>
-                </a>
-                <a href="auto-loan-calculator.html" class="calc-card-link" data-keywords="car vehicle auto financing lease">
-                    <div class="calc-card-item"><h3>Auto Loan</h3><p>Estimate monthly vehicle financing costs.</p></div>
-                </a>
-                <a href="cc-payoff-calculator.html" class="calc-card-link" data-keywords="credit card debt payoff interest balance">
-                    <div class="calc-card-item"><h3>Credit Card Payoff</h3><p>Calculate exact time to become debt free.</p></div>
-                </a>
-                <a href="compound-interest-calculator.html" class="calc-card-link" data-keywords="investment interest wealth compounding return">
-                    <div class="calc-card-item"><h3>Compound Interest</h3><p>Project long-term investment growth.</p></div>
-                </a>
-                <a href="crypto-profit-calculator.html" class="calc-card-link" data-keywords="bitcoin ethereum crypto profit loss roi">
-                    <div class="calc-card-item"><h3>Crypto Profit</h3><p>Compute net crypto trade gains and fees.</p></div>
-                </a>
-                <a href="discount-calculator.html" class="calc-card-link" data-keywords="sale discount percentage price savings shop">
-                    <div class="calc-card-item"><h3>Discount</h3><p>Calculate final price after retail discounts.</p></div>
-                </a>
-                <a href="dti-calculator.html" class="calc-card-link" data-keywords="debt to income dti mortgage approval loan">
-                    <div class="calc-card-item"><h3>Debt-to-Income (DTI)</h3><p>Evaluate lender borrowing eligibility.</p></div>
-                </a>
-                <a href="inflation-calculator.html" class="calc-card-link" data-keywords="inflation money purchasing power cpi value">
-                    <div class="calc-card-item"><h3>Inflation</h3><p>Compare historical purchasing power.</p></div>
-                </a>
-                <a href="margin-calculator.html" class="calc-card-link" data-keywords="margin profit gross business sales revenue">
-                    <div class="calc-card-item"><h3>Margin</h3><p>Determine gross profit margin percentage.</p></div>
-                </a>
-                <a href="markup-calculator.html" class="calc-card-link" data-keywords="markup price cost retail profit business">
-                    <div class="calc-card-item"><h3>Markup</h3><p>Set selling price based on unit cost.</p></div>
-                </a>
-                <a href="mortgage-calculator.html" class="calc-card-link" data-keywords="home house mortgage property estate rate">
-                    <div class="calc-card-item"><h3>Mortgage</h3><p>Calculate principal, interest, taxes, and fees.</p></div>
-                </a>
-                <a href="net-worth-calculator.html" class="calc-card-link" data-keywords="net worth assets liabilities wealth total">
-                    <div class="calc-card-item"><h3>Net Worth</h3><p>Track balance sheet total asset value.</p></div>
-                </a>
-                <a href="present-value-calculator.html" class="calc-card-link" data-keywords="pv present value discount cash flow future">
-                    <div class="calc-card-item"><h3>Present Value</h3><p>Determine current worth of future cash.</p></div>
-                </a>
-                <a href="roi-calculator.html" class="calc-card-link" data-keywords="return on investment roi profit percent yield">
-                    <div class="calc-card-item"><h3>ROI</h3><p>Measure net return on investment capital.</p></div>
-                </a>
-                <a href="rule-of-72-calculator.html" class="calc-card-link" data-keywords="rule of 72 double money interest rate time">
-                    <div class="calc-card-item"><h3>Rule of 72</h3><p>Estimate years required to double money.</p></div>
-                </a>
-                <a href="salary-calculator.html" class="calc-card-link" data-keywords="salary hourly wage annual paycheck income">
-                    <div class="calc-card-item"><h3>Salary</h3><p>Convert hourly rate to annual income.</p></div>
-                </a>
-                <a href="sip-calculator.html" class="calc-card-link" data-keywords="sip mutual fund investment recurring monthly">
-                    <div class="calc-card-item"><h3>SIP Calculator</h3><p>Project systematic investment plan yields.</p></div>
-                </a>
-                <a href="tax-calculator.html" class="calc-card-link" data-keywords="income tax federal sales tax bracket owe">
-                    <div class="calc-card-item"><h3>Tax</h3><p>Estimate gross income tax obligations.</p></div>
-                </a>
-            </div>
-        </section>
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar-nav">
+            <ul>
+                <li><a href="#math" class="active">Math <span class="category-count">15</span></a></li>
+                <li><a href="#finance">Finance <span class="category-count">20</span></a></li>
+                <li><a href="#health">Health <span class="category-count">15</span></a></li>
+                <li><a href="#conversion">Conversion <span class="category-count">15</span></a></li>
+                <li><a href="#science">Science <span class="category-count">10</span></a></li>
+                <li><a href="#date-time">Date & Time <span class="category-count">10</span></a></li>
+                <li><a href="#fitness">Fitness <span class="category-count">8</span></a></li>
+                <li><a href="#education">Education & Misc <span class="category-count">7</span></a></li>
+            </ul>
+        </aside>
 
-        <!-- 2. Health & Fitness -->
-        <section class="category-section">
-            <h2 class="category-title">Fitness & Health</h2>
-            <div class="calculator-grid">
-                <a href="1rm-calculator.html" class="calc-card-link" data-keywords="one rep max lift bench squat deadlift gym strength">
-                    <div class="calc-card-item"><h3>1 Rep Max</h3><p>Estimate maximum single-repetition lift capacity.</p></div>
-                </a>
-                <a href="bac-calculator.html" class="calc-card-link" data-keywords="blood alcohol content bac drink sober limit drive">
-                    <div class="calc-card-item"><h3>BAC</h3><p>Estimate blood alcohol concentration level.</p></div>
-                </a>
-                <a href="blood-volume-calculator.html" class="calc-card-link" data-keywords="blood volume liters circulation body health">
-                    <div class="calc-card-item"><h3>Blood Volume</h3><p>Calculate total circulating blood volume.</p></div>
-                </a>
-                <a href="bmi-calculator.html" class="calc-card-link" data-keywords="bmi body mass index weight height health fitness">
-                    <div class="calc-card-item"><h3>BMI</h3><p>Evaluate height to weight ratio status.</p></div>
-                </a>
-                <a href="bmr-calculator.html" class="calc-card-link" data-keywords="bmr basal metabolic rate calories burn rest daily">
-                    <div class="calc-card-item"><h3>BMR</h3><p>Determine baseline resting calorie burn.</p></div>
-                </a>
-                <a href="body-fat-calculator.html" class="calc-card-link" data-keywords="body fat navy method lean mass weight percent">
-                    <div class="calc-card-item"><h3>Body Fat</h3><p>Estimate body composition percentage.</p></div>
-                </a>
-                <a href="calorie-burn-calculator.html" class="calc-card-link" data-keywords="calorie burn exercise workout run walk activity">
-                    <div class="calc-card-item"><h3>Calorie Burn</h3><p>Estimate energy burned per physical activity.</p></div>
-                </a>
-                <a href="calorie-calculator.html" class="calc-card-link" data-keywords="calories maintenance tdee lose weight gain bulk deficit">
-                    <div class="calc-card-item"><h3>Calorie Maintenance</h3><p>Find total daily energy expenditure (TDEE).</p></div>
-                </a>
-                <a href="cycling-watt-calculator.html" class="calc-card-link" data-keywords="cycling wattage power bike speed watts ftp">
-                    <div class="calc-card-item"><h3>Cycling Wattage</h3><p>Estimate power output during cycling.</p></div>
-                </a>
-                <a href="ideal-weight-calculator.html" class="calc-card-link" data-keywords="ideal weight devine robinson miller hamwi height">
-                    <div class="calc-card-item"><h3>Ideal Weight</h3><p>Find healthy body weight range based on height.</p></div>
-                </a>
-                <a href="lbm-calculator.html" class="calc-card-link" data-keywords="lean body mass lbm muscle fat free weight">
-                    <div class="calc-card-item"><h3>Lean Body Mass</h3><p>Calculate mass minus adipose body fat.</p></div>
-                </a>
-                <a href="macro-calculator.html" class="calc-card-link" data-keywords="macros protein fat carbs nutrition diet keto">
-                    <div class="calc-card-item"><h3>Macro</h3><p>Split daily calories into protein, carbs, and fats.</p></div>
-                </a>
-                <a href="marathon-predictor.html" class="calc-card-link" data-keywords="marathon predictor run 5k 10k half race time speed">
-                    <div class="calc-card-item"><h3>Marathon Predictor</h3><p>Predict race finish times from short distances.</p></div>
-                </a>
-                <a href="pace-calculator.html" class="calc-card-link" data-keywords="pace run speed time distance mile km lap">
-                    <div class="calc-card-item"><h3>Running Pace</h3><p>Calculate target speed per mile or kilometer.</p></div>
-                </a>
-                <a href="protein-calculator.html" class="calc-card-link" data-keywords="protein intake grams body weight muscle diet hypertrophy">
-                    <div class="calc-card-item"><h3>Protein Intake</h3><p>Determine daily protein grams for muscle targets.</p></div>
-                </a>
-                <a href="sleep-calculator.html" class="calc-card-link" data-keywords="sleep cycle REM wake bedtime fatigue rest">
-                    <div class="calc-card-item"><h3>Sleep Cycles</h3><p>Calculate ideal wake-up times by REM cycles.</p></div>
-                </a>
-                <a href="target-hr-calculator.html" class="calc-card-link" data-keywords="heart rate target zone cardio pulse max hr bpm">
-                    <div class="calc-card-item"><h3>Target Heart Rate</h3><p>Find optimal training heart rate zones.</p></div>
-                </a>
-                <a href="vo2max-calculator.html" class="calc-card-link" data-keywords="vo2 max aerobic fitness oxygen endurance test">
-                    <div class="calc-card-item"><h3>VO2 Max</h3><p>Estimate maximum oxygen intake volume.</p></div>
-                </a>
-                <a href="water-intake-calculator.html" class="calc-card-link" data-keywords="water intake hydration ounces liters daily drink">
-                    <div class="calc-card-item"><h3>Water Intake</h3><p>Calculate daily fluid consumption goals.</p></div>
-                </a>
-                <a href="wilks-calculator.html" class="calc-card-link" data-keywords="wilks score powerlifting strength coefficient squat bench deadlift">
-                    <div class="calc-card-item"><h3>Wilks Score</h3><p>Compare powerlifting strength across weights.</p></div>
-                </a>
-            </div>
-        </section>
+        <!-- Calculators Container -->
+        <div class="content-area">
 
-        <!-- 3. Math & Algebra -->
-        <section class="category-section">
-            <h2 class="category-title">Math & Algebra</h2>
-            <div class="calculator-grid">
-                <a href="standard-calculator.html" class="calc-card-link" data-keywords="standard calculator add subtract multiply divide math basic">
-                    <div class="calc-card-item"><h3>Standard Calculator</h3><p>Perform basic arithmetic calculations.</p></div>
-                </a>
-                <a href="exponent-calculator.html" class="calc-card-link" data-keywords="exponent power base power of squared cubed math">
-                    <div class="calc-card-item"><h3>Exponent</h3><p>Raise base numbers to exponential powers.</p></div>
-                </a>
-                <a href="fraction-calculator.html" class="calc-card-link" data-keywords="fraction add subtract multiply divide numerator denominator">
-                    <div class="calc-card-item"><h3>Fraction</h3><p>Add, subtract, multiply, and reduce fractions.</p></div>
-                </a>
-                <a href="gcf-calculator.html" class="calc-card-link" data-keywords="gcf greatest common factor divisor math integer">
-                    <div class="calc-card-item"><h3>GCF</h3><p>Find greatest common factor between numbers.</p></div>
-                </a>
-                <a href="lcm-calculator.html" class="calc-card-link" data-keywords="lcm least common multiple math integer factor">
-                    <div class="calc-card-item"><h3>LCM</h3><p>Find least common multiple of integers.</p></div>
-                </a>
-                <a href="logarithm-calculator.html" class="calc-card-link" data-keywords="logarithm log ln natural log base 10 algebra">
-                    <div class="calc-card-item"><h3>Logarithm</h3><p>Calculate log base 10 and natural log (ln).</p></div>
-                </a>
-                <a href="percentage-calculator.html" class="calc-card-link" data-keywords="percentage percent portion fraction change ratio">
-                    <div class="calc-card-item"><h3>Percentage</h3><p>Calculate percent of, percent change, and totals.</p></div>
-                </a>
-                <a href="perimeter-calculator.html" class="calc-card-link" data-keywords="perimeter boundary geometry square rectangle circle triangle">
-                    <div class="calc-card-item"><h3>Perimeter</h3><p>Find outer boundaries of 2D shapes.</p></div>
-                </a>
-                <a href="probability-calculator.html" class="calc-card-link" data-keywords="probability odds chance event stats math">
-                    <div class="calc-card-item"><h3>Probability</h3><p>Compute single and compound event odds.</p></div>
-                </a>
-                <a href="quadratic-calculator.html" class="calc-card-link" data-keywords="quadratic equation solver roots ax2 bx c formula algebra">
-                    <div class="calc-card-item"><h3>Quadratic Solver</h3><p>Solve quadratic equations for x-roots.</p></div>
-                </a>
-                <a href="random-number-generator.html" class="calc-card-link" data-keywords="random number generator rng pick integer dice draw">
-                    <div class="calc-card-item"><h3>Random Generator</h3><p>Generate random integers within a custom range.</p></div>
-                </a>
-                <a href="ratio-calculator.html" class="calc-card-link" data-keywords="ratio proportion scale simplify ratio a b c d">
-                    <div class="calc-card-item"><h3>Ratio</h3><p>Simplify ratios and solve proportion values.</p></div>
-                </a>
-                <a href="square-root-calculator.html" class="calc-card-link" data-keywords="square root radical radical solver radical radical math">
-                    <div class="calc-card-item"><h3>Square Root</h3><p>Find square roots and higher radical roots.</p></div>
-                </a>
-                <a href="standard-deviation-calculator.html" class="calc-card-link" data-keywords="standard deviation variance mean median statistics sample population">
-                    <div class="calc-card-item"><h3>Standard Deviation</h3><p>Calculate variance and mean statistics.</p></div>
-                </a>
-            </div>
-        </section>
+            <!-- 1. MATH -->
+            <section id="math" class="category-section">
+                <h2 class="category-title">Math</h2>
+                <div class="calc-grid">
+                    <a href="standard-calculator.html" class="calc-card" data-keywords="math standard arithmetic basic add subtract multiply divide">
+                        <div class="calc-name">Standard Calculator</div>
+                        <div class="calc-desc">Basic arithmetic operations and quick calculations.</div>
+                    </a>
+                    <a href="percentage-calculator.html" class="calc-card" data-keywords="math percentage percent discount ratio change increase decrease">
+                        <div class="calc-name">Percentage Calculator</div>
+                        <div class="calc-desc">Calculate percentage increases, decreases, and differences.</div>
+                    </a>
+                    <a href="fraction-calculator.html" class="calc-card" data-keywords="math fraction simplify add subtract multiply divide numerator denominator">
+                        <div class="calc-name">Fraction Calculator</div>
+                        <div class="calc-desc">Add, subtract, multiply, divide, and simplify fractions.</div>
+                    </a>
+                    <a href="square-root-calculator.html" class="calc-card" data-keywords="math square root radical exponent sqrt power">
+                        <div class="calc-name">Square Root Calculator</div>
+                        <div class="calc-desc">Calculate square roots, cube roots, and radicals.</div>
+                    </a>
+                    <a href="exponent-calculator.html" class="calc-card" data-keywords="math exponent power base scientific notation exponential">
+                        <div class="calc-name">Exponent Calculator</div>
+                        <div class="calc-desc">Solve numbers raised to any positive or negative power.</div>
+                    </a>
+                    <a href="logarithm-calculator.html" class="calc-card" data-keywords="math logarithm log ln natural log base 10 e">
+                        <div class="calc-name">Logarithm Calculator</div>
+                        <div class="calc-desc">Calculate natural logs (ln) and base-n logarithms.</div>
+                    </a>
+                    <a href="ratio-calculator.html" class="calc-card" data-keywords="math ratio proportion scale aspect ratio solve">
+                        <div class="calc-name">Ratio Calculator</div>
+                        <div class="calc-desc">Solve proportions and scale ratios up or down.</div>
+                    </a>
+                    <a href="random-number-generator.html" class="calc-card" data-keywords="math random number generator rng dice pick range min max">
+                        <div class="calc-name">Random Number Generator</div>
+                        <div class="calc-desc">Generate random integers within a specified range.</div>
+                    </a>
+                    <a href="probability-calculator.html" class="calc-card" data-keywords="math probability odds chance statistics outcome event">
+                        <div class="calc-name">Probability Calculator</div>
+                        <div class="calc-desc">Calculate odds and probabilities of single and multiple events.</div>
+                    </a>
+                    <a href="standard-deviation-calculator.html" class="calc-card" data-keywords="math standard deviation variance mean stats statistics data set">
+                        <div class="calc-name">Standard Deviation Calculator</div>
+                        <div class="calc-desc">Compute mean, variance, and standard deviation for dataset.</div>
+                    </a>
+                    <a href="lcm-calculator.html" class="calc-card" data-keywords="math lcm least common multiple factors numbers">
+                        <div class="calc-name">LCM Calculator</div>
+                        <div class="calc-desc">Find the least common multiple of two or more numbers.</div>
+                    </a>
+                    <a href="gcf-calculator.html" class="calc-card" data-keywords="math gcf greatest common factor gcd divisor">
+                        <div class="calc-name">GCF Calculator</div>
+                        <div class="calc-desc">Calculate the greatest common factor (divisor) of numbers.</div>
+                    </a>
+                    <a href="quadratic-calculator.html" class="calc-card" data-keywords="math quadratic formula equation solver roots discriminant ax2 bx c">
+                        <div class="calc-name">Quadratic Formula Calculator</div>
+                        <div class="calc-desc">Solve quadratic equations ax² + bx + c = 0 for real and complex roots.</div>
+                    </a>
+                    <a href="area-calculator.html" class="calc-card" data-keywords="math area circle triangle rectangle square geometry surface">
+                        <div class="calc-name">Area Calculator</div>
+                        <div class="calc-desc">Calculate the surface area of circles, triangles, and rectangles.</div>
+                    </a>
+                    <a href="perimeter-calculator.html" class="calc-card" data-keywords="math perimeter circumference geometry edge border length distance">
+                        <div class="calc-name">Perimeter Calculator</div>
+                        <div class="calc-desc">Find the perimeter and circumference for geometric shapes.</div>
+                    </a>
+                </div>
+            </section>
 
-        <!-- 4. Science & Engineering -->
-        <section class="category-section">
-            <h2 class="category-title">Physics & Science</h2>
-            <div class="calculator-grid">
-                <a href="acceleration-calculator.html" class="calc-card-link" data-keywords="acceleration velocity physics force speed gravity">
-                    <div class="calc-card-item"><h3>Acceleration</h3><p>Determine velocity change over time duration.</p></div>
-                </a>
-                <a href="density-calculator.html" class="calc-card-link" data-keywords="density mass volume physics chemistry cubic">
-                    <div class="calc-card-item"><h3>Density</h3><p>Calculate mass per unit of volume space.</p></div>
-                </a>
-                <a href="gravity-calculator.html" class="calc-card-link" data-keywords="gravity gravitational force newton mass distance physics">
-                    <div class="calc-card-item"><h3>Gravity Force</h3><p>Compute attraction force between two masses.</p></div>
-                </a>
-                <a href="kinetic-energy-calculator.html" class="calc-card-link" data-keywords="kinetic energy ke mass velocity joules physics">
-                    <div class="calc-card-item"><h3>Kinetic Energy</h3><p>Determine energy possessed by moving objects.</p></div>
-                </a>
-                <a href="molar-mass-calculator.html" class="calc-card-link" data-keywords="molar mass chemistry molecular weight periodic element grams mole">
-                    <div class="calc-card-item"><h3>Molar Mass</h3><p>Calculate molecular weights of chemical compounds.</p></div>
-                </a>
-                <a href="ohms-law-calculator.html" class="calc-card-link" data-keywords="ohms law voltage current resistance v ir amps watts circuit">
-                    <div class="calc-card-item"><h3>Ohm's Law</h3><p>Calculate voltage, current, and electrical resistance.</p></div>
-                </a>
-                <a href="physics-calculator.html" class="calc-card-link" data-keywords="physics work power energy force motion mass">
-                    <div class="calc-card-item"><h3>Physics Master</h3><p>Solve mechanics, motion, and energy problems.</p></div>
-                </a>
-                <a href="potential-energy-calculator.html" class="calc-card-link" data-keywords="potential energy pe mgh height gravity mass joules">
-                    <div class="calc-card-item"><h3>Potential Energy</h3><p>Compute stored gravitational energy.</p></div>
-                </a>
-                <a href="velocity-calculator.html" class="calc-card-link" data-keywords="velocity speed distance time displacement rate">
-                    <div class="calc-card-item"><h3>Velocity</h3><p>Calculate directional speed over distance.</p></div>
-                </a>
-                <a href="wavelength-calculator.html" class="calc-card-link" data-keywords="wavelength frequency wave speed hertz meters wave light sound">
-                    <div class="calc-card-item"><h3>Wavelength</h3><p>Determine wave frequency and spatial wavelength.</p></div>
-                </a>
-            </div>
-        </section>
+            <!-- 2. FINANCE -->
+            <section id="finance" class="category-section">
+                <h2 class="category-title">Finance</h2>
+                <div class="calc-grid">
+                    <a href="mortgage-calculator.html" class="calc-card" data-keywords="finance mortgage home loan monthly payment interest rate principal real estate">
+                        <div class="calc-name">Mortgage Calculator</div>
+                        <div class="calc-desc">Estimate monthly home mortgage payments and amortization.</div>
+                    </a>
+                    <a href="loan-calculator.html" class="calc-card" data-keywords="finance loan payment interest rate term personal auto business simple">
+                        <div class="calc-name">Loan Calculator</div>
+                        <div class="calc-desc">Calculate loan repayments, total interest, and schedules.</div>
+                    </a>
+                    <a href="compound-interest-calculator.html" class="calc-card" data-keywords="finance compound interest savings investment growth annual monthly return">
+                        <div class="calc-name">Compound Interest Calculator</div>
+                        <div class="calc-desc">Project investment growth with compounding interest over time.</div>
+                    </a>
+                    <a href="tip-calculator.html" class="calc-card" data-keywords="finance tip gratuity bill split restaurant service share">
+                        <div class="calc-name">Tip Calculator</div>
+                        <div class="calc-desc">Calculate server tip percentages and split restaurant bills.</div>
+                    </a>
+                    <a href="tax-calculator.html" class="calc-card" data-keywords="finance tax income state federal bracket rate net gross take home">
+                        <div class="calc-name">Income Tax Calculator</div>
+                        <div class="calc-desc">Estimate income tax brackets and net take-home pay.</div>
+                    </a>
+                    <a href="discount-calculator.html" class="calc-card" data-keywords="finance discount sale price off percentage savings shopping deal">
+                        <div class="calc-name">Discount Calculator</div>
+                        <div class="calc-desc">Calculate final sale prices and total savings on purchases.</div>
+                    </a>
+                    <a href="margin-calculator.html" class="calc-card" data-keywords="finance margin profit gross net revenue cost price markup percentage">
+                        <div class="calc-name">Profit Margin Calculator</div>
+                        <div class="calc-desc">Calculate gross and net profit margin percentages for sales.</div>
+                    </a>
+                    <a href="roi-calculator.html" class="calc-card" data-keywords="finance roi return on investment profit percentage gain loss yield">
+                        <div class="calc-name">ROI Calculator</div>
+                        <div class="calc-desc">Measure the percentage return on your financial investments.</div>
+                    </a>
+                    <a href="rule-of-72-calculator.html" class="calc-card" data-keywords="finance rule of 72 double money investment interest rate growth timeline">
+                        <div class="calc-name">Rule of 72 Calculator</div>
+                        <div class="calc-desc">Estimate how long it takes to double your money at a fixed return.</div>
+                    </a>
+                    <a href="present-value-calculator.html" class="calc-card" data-keywords="finance present value pv future value fv discount rate cash flow time value money">
+                        <div class="calc-name">Present Value Calculator</div>
+                        <div class="calc-desc">Calculate current value of future cash flows based on discount rate.</div>
+                    </a>
+                    <a href="salary-calculator.html" class="calc-card" data-keywords="finance salary hourly wage income annual monthly biweekly pay rate earnings">
+                        <div class="calc-name">Salary Calculator</div>
+                        <div class="calc-desc">Convert between hourly wages, weekly, monthly, and annual salaries.</div>
+                    </a>
+                    <a href="auto-loan-calculator.html" class="calc-card" data-keywords="finance auto loan car vehicle payment trade in down payment interest financing">
+                        <div class="calc-name">Auto Loan Calculator</div>
+                        <div class="calc-desc">Calculate car loan monthly payments, trade-in values, and interest.</div>
+                    </a>
+                    <a href="cc-payoff-calculator.html" class="calc-card" data-keywords="finance credit card payoff debt balance interest minimum payment schedule time">
+                        <div class="calc-name">Credit Card Payoff Calculator</div>
+                        <div class="calc-desc">Determine the time and interest needed to clear credit card debt.</div>
+                    </a>
+                    <a href="net-worth-calculator.html" class="calc-card" data-keywords="finance net worth assets liabilities wealth total valuation balance sheet">
+                        <div class="calc-name">Net Worth Calculator</div>
+                        <div class="calc-desc">Tally your assets against liabilities to figure total net worth.</div>
+                    </a>
+                    <a href="dti-calculator.html" class="calc-card" data-keywords="finance dti debt to income ratio mortgage approval qualification lender monthly obligation">
+                        <div class="calc-name">DTI Ratio Calculator</div>
+                        <div class="calc-desc">Calculate debt-to-income ratio for mortgage qualification.</div>
+                    </a>
+                    <a href="sip-calculator.html" class="calc-card" data-keywords="finance sip systematic investment plan mutual fund compound wealth monthly deposit">
+                        <div class="calc-name">SIP Calculator</div>
+                        <div class="calc-desc">Calculate wealth accumulated from systematic investment plans.</div>
+                    </a>
+                    <a href="crypto-profit-calculator.html" class="calc-card" data-keywords="finance crypto profit bitcoin ethereum altcoin buy sell trade return investment gain">
+                        <div class="calc-name">Crypto Profit Calculator</div>
+                        <div class="calc-desc">Calculate gains, losses, and fees on cryptocurrency trades.</div>
+                    </a>
+                    <a href="markup-calculator.html" class="calc-card" data-keywords="finance markup retail cost selling price profit margin percentage difference">
+                        <div class="calc-name">Markup Calculator</div>
+                        <div class="calc-desc">Determine retail selling prices based on wholesale cost markup.</div>
+                    </a>
+                    <a href="inflation-calculator.html" class="calc-card" data-keywords="finance inflation purchasing power cpi value money historical rate price increase">
+                        <div class="calc-name">Inflation Calculator</div>
+                        <div class="calc-desc">Evaluate the changing purchasing power of money over time.</div>
+                    </a>
+                    <a href="currency-converter.html" class="calc-card" data-keywords="finance currency converter exchange rate usd eur gbp jpy cad aud money foreign">
+                        <div class="calc-name">Currency Converter</div>
+                        <div class="calc-desc">Convert global currencies with real-time exchange rates.</div>
+                    </a>
+                </div>
+            </section>
 
-        <!-- 5. Unit Converters -->
-        <section class="category-section">
-            <h2 class="category-title">Unit Converters</h2>
-            <div class="calculator-grid">
-                <a href="angle-converter.html" class="calc-card-link" data-keywords="angle degree radian arcsec arcmin unit convert">
-                    <div class="calc-card-item"><h3>Angle Converter</h3><p>Convert degrees, radians, and arcseconds.</p></div>
-                </a>
-                <a href="area-converter.html" class="calc-card-link" data-keywords="area square feet meters acre hectare miles sq">
-                    <div class="calc-card-item"><h3>Area Converter</h3><p>Convert acres, hectares, sq feet, and sq meters.</p></div>
-                </a>
-                <a href="currency-converter.html" class="calc-card-link" data-keywords="currency usd eur gbp jpy forex exchange convert rate">
-                    <div class="calc-card-item"><h3>Currency Converter</h3><p>Convert foreign exchange currency rates.</p></div>
-                </a>
-                <a href="data-storage-converter.html" class="calc-card-link" data-keywords="data storage megabyte gigabyte terabyte bit byte convert">
-                    <div class="calc-card-item"><h3>Data Converter</h3><p>Convert megabytes, gigabytes, and terabytes.</p></div>
-                </a>
-                <a href="energy-converter.html" class="calc-card-link" data-keywords="energy joule calorie btu kwh watt hour convert">
-                    <div class="calc-card-item"><h3>Energy Converter</h3><p>Convert joules, calories, BTUs, and kilowatt-hours.</p></div>
-                </a>
-                <a href="force-converter.html" class="calc-card-link" data-keywords="force newton dyne pound force lbf convert">
-                    <div class="calc-card-item"><h3>Force Converter</h3><p>Convert newtons, dynes, and pound-force.</p></div>
-                </a>
-                <a href="frequency-converter.html" class="calc-card-link" data-keywords="frequency hertz khz mhz ghz convert wave">
-                    <div class="calc-card-item"><h3>Frequency Converter</h3><p>Convert hertz, kilohertz, and gigahertz.</p></div>
-                </a>
-                <a href="fuel-economy-converter.html" class="calc-card-link" data-keywords="fuel mpg kml km per liter gallon gas consumption">
-                    <div class="calc-card-item"><h3>Fuel Economy</h3><p>Convert MPG to liters per 100 kilometers.</p></div>
-                </a>
-                <a href="length-converter.html" class="calc-card-link" data-keywords="length inches feet meters miles kilometers cm mm yard">
-                    <div class="calc-card-item"><h3>Length Converter</h3><p>Convert meters, feet, inches, and miles.</p></div>
-                </a>
-                <a href="power-converter.html" class="calc-card-link" data-keywords="power horsepower hp watt kw kilowatt convert">
-                    <div class="calc-card-item"><h3>Power Converter</h3><p>Convert horsepower, watts, and kilowatts.</p></div>
-                </a>
-                <a href="pressure-converter.html" class="calc-card-link" data-keywords="pressure psi bar pascal atmosphere torr convert">
-                    <div class="calc-card-item"><h3>Pressure Converter</h3><p>Convert PSI, bar, pascals, and atmospheres.</p></div>
-                </a>
-                <a href="speed-converter.html" class="calc-card-link" data-keywords="speed mph kph knot meters per second convert velocity">
-                    <div class="calc-card-item"><h3>Speed Converter</h3><p>Convert MPH, KPH, knots, and meters per second.</p></div>
-                </a>
-                <a href="temperature-converter.html" class="calc-card-link" data-keywords="temperature celsius fahrenheit kelvin convert heat">
-                    <div class="calc-card-item"><h3>Temperature</h3><p>Convert Celsius, Fahrenheit, and Kelvin.</p></div>
-                </a>
-                <a href="time-converter.html" class="calc-card-link" data-keywords="time seconds minutes hours days weeks years convert">
-                    <div class="calc-card-item"><h3>Time Converter</h3><p>Convert seconds, hours, days, and weeks.</p></div>
-                </a>
-                <a href="volume-converter.html" class="calc-card-link" data-keywords="volume liters gallons cups fluid ounces cubic meters milliliter">
-                    <div class="calc-card-item"><h3>Volume Converter</h3><p>Convert liters, gallons, fluid ounces, and cups.</p></div>
-                </a>
-                <a href="weight-converter.html" class="calc-card-link" data-keywords="weight pounds kilograms grams ounces tons convert mass">
-                    <div class="calc-card-item"><h3>Weight Converter</h3><p>Convert pounds, kilograms, grams, and ounces.</p></div>
-                </a>
-            </div>
-        </section>
+            <!-- 3. HEALTH -->
+            <section id="health" class="category-section">
+                <h2 class="category-title">Health</h2>
+                <div class="calc-grid">
+                    <a href="bmi-calculator.html" class="calc-card" data-keywords="health bmi body mass index weight height health fitness category overweight obesity underweight">
+                        <div class="calc-name">BMI Calculator</div>
+                        <div class="calc-desc">Calculate body mass index and healthy weight range.</div>
+                    </a>
+                    <a href="bmr-calculator.html" class="calc-card" data-keywords="health bmr basal metabolic rate calories burn resting metabolism harris benedict mifflin">
+                        <div class="calc-name">BMR Calculator</div>
+                        <div class="calc-desc">Calculate basal metabolic rate and daily resting calorie needs.</div>
+                    </a>
+                    <a href="water-intake-calculator.html" class="calc-card" data-keywords="health water intake hydration daily recommendation ounces liters fluid weight activity">
+                        <div class="calc-name">Daily Water Intake Calculator</div>
+                        <div class="calc-desc">Determine your recommended daily fluid intake based on activity.</div>
+                    </a>
+                    <a href="ideal-weight-calculator.html" class="calc-card" data-keywords="health ideal weight ibw devine robinson miller hamwi target body mass">
+                        <div class="calc-name">Ideal Weight Calculator</div>
+                        <div class="calc-desc">Estimate target healthy weight based on medical formulas.</div>
+                    </a>
+                    <a href="bac-calculator.html" class="calc-card" data-keywords="health bac blood alcohol concentration limit driving legal intoxication drinks weight time">
+                        <div class="calc-name">BAC Calculator</div>
+                        <div class="calc-desc">Estimate blood alcohol concentration based on drinks consumed.</div>
+                    </a>
+                    <a href="target-hr-calculator.html" class="calc-card" data-keywords="health heart rate target cardio pulse zone bpm exercise training workout max hr">
+                        <div class="calc-name">Target Heart Rate Calculator</div>
+                        <div class="calc-desc">Find optimal heart rate zones for cardio and exercise.</div>
+                    </a>
+                    <a href="protein-calculator.html" class="calc-card" data-keywords="health protein intake daily grams muscle fitness diet weight nutrition macro">
+                        <div class="calc-name">Protein Intake Calculator</div>
+                        <div class="calc-desc">Determine daily protein requirement for muscle growth or weight loss.</div>
+                    </a>
+                    <a href="calorie-calculator.html" class="calc-card" data-keywords="health calorie intake tdee burn weight loss gain maintenance daily energy maintenance">
+                        <div class="calc-name">Calorie Calculator</div>
+                        <div class="calc-desc">Compute daily caloric target for maintenance, weight loss, or gain.</div>
+                    </a>
+                    <a href="body-fat-calculator.html" class="calc-card" data-keywords="health body fat percentage navy method waist neck hip lean mass composition">
+                        <div class="calc-name">Body Fat Calculator</div>
+                        <div class="calc-desc">Estimate total body fat percentage using US Navy formulas.</div>
+                    </a>
+                    <a href="macro-calculator.html" class="calc-card" data-keywords="health macro nutrients carbs protein fat breakdown diet keto flexible dieting tdee">
+                        <div class="calc-name">Macro Calculator</div>
+                        <div class="calc-desc">Calculate macronutrient ratio split (carbs, protein, fats).</div>
+                    </a>
+                    <a href="ovulation-calculator.html" class="calc-card" data-keywords="health ovulation fertility window period cycle pregnancy conceiving fertile days">
+                        <div class="calc-name">Ovulation Calculator</div>
+                        <div class="calc-desc">Predict fertile windows and peak ovulation days.</div>
+                    </a>
+                    <a href="due-date-calculator.html" class="calc-card" data-keywords="health due date pregnancy gestational age trimester lmp conception baby estimated delivery">
+                        <div class="calc-name">Due Date Calculator</div>
+                        <div class="calc-desc">Calculate estimated pregnancy due date and trimester timeline.</div>
+                    </a>
+                    <a href="lbm-calculator.html" class="calc-card" data-keywords="health lean body mass lbm fat free mass weight composition boer james hume formula">
+                        <div class="calc-name">Lean Body Mass Calculator</div>
+                        <div class="calc-desc">Calculate fat-free body weight using Boer and James formulas.</div>
+                    </a>
+                    <a href="sleep-calculator.html" class="calc-card" data-keywords="health sleep cycle wake up time bed sleep REM 90 minute cycles rest optimal bedtime">
+                        <div class="calc-name">Sleep Calculator</div>
+                        <div class="calc-desc">Optimize bedtime and wake-up times based on 90-minute sleep cycles.</div>
+                    </a>
+                    <a href="blood-volume-calculator.html" class="calc-card" data-keywords="health blood volume total liters nadler gilcher body weight height circulatory">
+                        <div class="calc-name">Blood Volume Calculator</div>
+                        <div class="calc-desc">Estimate total blood volume in liters based on height and weight.</div>
+                    </a>
+                </div>
+            </section>
 
-        <!-- 6. Date & Time -->
-        <section class="category-section">
-            <h2 class="category-title">Date & Time</h2>
-            <div class="calculator-grid">
-                <a href="age-calculator.html" class="calc-card-link" data-keywords="age birthday exact years months days old born date">
-                    <div class="calc-card-item"><h3>Age Calculator</h3><p>Determine exact age in years, months, and days.</p></div>
-                </a>
-                <a href="business-days-calculator.html" class="calc-card-link" data-keywords="business days workdays weekdays holidays span date">
-                    <div class="calc-card-item"><h3>Business Days</h3><p>Count working business days between dates.</p></div>
-                </a>
-                <a href="date-calculator.html" class="calc-card-link" data-keywords="date span days between calendar count start end">
-                    <div class="calc-card-item"><h3>Date Span</h3><p>Calculate exact total days between two dates.</p></div>
-                </a>
-                <a href="day-of-week-calculator.html" class="calc-card-link" data-keywords="day of week monday tuesday born birthday historical calendar">
-                    <div class="calc-card-item"><h3>Day of Week</h3><p>Find weekday name for any calendar date.</p></div>
-                </a>
-                <a href="days-from-today-calculator.html" class="calc-card-link" data-keywords="days from today add subtract future past date">
-                    <div class="calc-card-item"><h3>Days From Today</h3><p>Calculate future or past date relative to today.</p></div>
-                </a>
-                <a href="due-date-calculator.html" class="calc-card-link" data-keywords="due date pregnancy baby delivery period lmp cycle">
-                    <div class="calc-card-item"><h3>Due Date</h3><p>Estimate pregnancy birth delivery date.</p></div>
-                </a>
-                <a href="duration-calculator.html" class="calc-card-link" data-keywords="duration elapsed time hours minutes start end timestamp">
-                    <div class="calc-card-item"><h3>Duration</h3><p>Calculate total elapsed time between clock hours.</p></div>
-                </a>
-                <a href="hours-calculator.html" class="calc-card-link" data-keywords="hours timesheet work worklogs pay total shift">
-                    <div class="calc-card-item"><h3>Work Hours</h3><p>Sum work shift timesheet hours for payroll.</p></div>
-                </a>
-                <a href="leap-year-calculator.html" class="calc-card-link" data-keywords="leap year 366 days february 29 calendar math">
-                    <div class="calc-card-item"><h3>Leap Year</h3><p>Check if any calendar year is a leap year.</p></div>
-                </a>
-                <a href="ovulation-calculator.html" class="calc-card-link" data-keywords="ovulation fertility period cycle conception pregnant">
-                    <div class="calc-card-item"><h3>Ovulation</h3><p>Track fertile window dates based on menstrual cycle.</p></div>
-                </a>
-                <a href="timezone-converter.html" class="calc-card-link" data-keywords="timezone converter utc est pst gmt clock world time">
-                    <div class="calc-card-item"><h3>Time Zone</h3><p>Convert times across global world timezones.</p></div>
-                </a>
-                <a href="unix-timestamp-calculator.html" class="calc-card-link" data-keywords="unix timestamp epoch converter UTC seconds code developer">
-                    <div class="calc-card-item"><h3>Unix Timestamp</h3><p>Convert epoch seconds to human readable date.</p></div>
-                </a>
-            </div>
-        </section>
+            <!-- 4. CONVERSION -->
+            <section id="conversion" class="category-section">
+                <h2 class="category-title">Conversion</h2>
+                <div class="calc-grid">
+                    <a href="length-converter.html" class="calc-card" data-keywords="conversion length distance meter feet inches kilometer miles yard cm mm speed scale">
+                        <div class="calc-name">Length Converter</div>
+                        <div class="calc-desc">Convert meters, feet, inches, kilometers, miles, and yards.</div>
+                    </a>
+                    <a href="weight-converter.html" class="calc-card" data-keywords="conversion weight mass kilogram pound ounce gram stone ton unit measure">
+                        <div class="calc-name">Weight Converter</div>
+                        <div class="calc-desc">Convert mass units between kilograms, pounds, ounces, and grams.</div>
+                    </a>
+                    <a href="temperature-converter.html" class="calc-card" data-keywords="conversion temperature celsius fahrenheit kelvin scale heat weather climate">
+                        <div class="calc-name">Temperature Converter</div>
+                        <div class="calc-desc">Convert degrees Celsius, Fahrenheit, and Kelvin.</div>
+                    </a>
+                    <a href="volume-converter.html" class="calc-card" data-keywords="conversion volume liter milliliter gallon quart pint fluid ounce cup cubic meter">
+                        <div class="calc-name">Volume Converter</div>
+                        <div class="calc-desc">Convert liters, gallons, milliliters, fluid ounces, and cups.</div>
+                    </a>
+                    <a href="speed-converter.html" class="calc-card" data-keywords="conversion speed velocity mph kmh mps knot mach pace distance time">
+                        <div class="calc-name">Speed Converter</div>
+                        <div class="calc-desc">Convert speeds between mph, km/h, knots, and m/s.</div>
+                    </a>
+                    <a href="time-converter.html" class="calc-card" data-keywords="conversion time seconds minutes hours days weeks months years milliseconds duration">
+                        <div class="calc-name">Time Converter</div>
+                        <div class="calc-desc">Convert time units from seconds to years and milliseconds.</div>
+                    </a>
+                    <a href="data-storage-converter.html" class="calc-card" data-keywords="conversion data storage byte kilobyte megabyte gigabyte terabyte petabyte bit binary size">
+                        <div class="calc-name">Data Storage Converter</div>
+                        <div class="calc-desc">Convert digital storage size across Bytes, KB, MB, GB, and TB.</div>
+                    </a>
+                    <a href="area-converter.html" class="calc-card" data-keywords="conversion area square meter square feet acre hectare square kilometer square mile land">
+                        <div class="calc-name">Area Converter</div>
+                        <div class="calc-desc">Convert land area between acres, hectares, sq meters, and sq feet.</div>
+                    </a>
+                    <a href="energy-converter.html" class="calc-card" data-keywords="conversion energy joule kilojoule calorie kilocalorie watt hour electronvolt btu foot pound">
+                        <div class="calc-name">Energy Converter</div>
+                        <div class="calc-desc">Convert energy values across Joules, Calories, and Watt-hours.</div>
+                    </a>
+                    <a href="pressure-converter.html" class="calc-card" data-keywords="conversion pressure pascal bar psi atmosphere torr mmHg kilopascal stress force">
+                        <div class="calc-name">Pressure Converter</div>
+                        <div class="calc-desc">Convert Pascal, Bar, PSI, Atmospheres, and Torr.</div>
+                    </a>
+                    <a href="power-converter.html" class="calc-card" data-keywords="conversion power watt kilowatt horsepower megawatt BTU per hour joule per second rate">
+                        <div class="calc-name">Power Converter</div>
+                        <div class="calc-desc">Convert power output between Watts, Kilowatts, and Horsepower.</div>
+                    </a>
+                    <a href="angle-converter.html" class="calc-card" data-keywords="conversion angle degree radian gradian arcminute arcsecond turn circle trigonometry">
+                        <div class="calc-name">Angle Converter</div>
+                        <div class="calc-desc">Convert angular measurements between Degrees, Radians, and Gradians.</div>
+                    </a>
+                    <a href="frequency-converter.html" class="calc-card" data-keywords="conversion frequency hertz kilohertz megahertz gigahertz rpm period cycle per second wavelength">
+                        <div class="calc-name">Frequency Converter</div>
+                        <div class="calc-desc">Convert frequency values across Hertz (Hz), kHz, MHz, and GHz.</div>
+                    </a>
+                    <a href="fuel-economy-converter.html" class="calc-card" data-keywords="conversion fuel economy mpg miles per gallon liters per 100km km per liter consumption gas mileage">
+                        <div class="calc-name">Fuel Economy Converter</div>
+                        <div class="calc-desc">Convert MPG (US/UK), L/100km, and km/L fuel efficiency.</div>
+                    </a>
+                    <a href="force-converter.html" class="calc-card" data-keywords="conversion force newton dyne pound-force kilopond kilonewton gravity mass acceleration">
+                        <div class="calc-name">Force Converter</div>
+                        <div class="calc-desc">Convert forces between Newtons, Dyne, and Pound-force (lbf).</div>
+                    </a>
+                </div>
+            </section>
 
-        <!-- 7. Academic & School -->
-        <section class="category-section">
-            <h2 class="category-title">Academics & Utility</h2>
-            <div class="calculator-grid">
-                <a href="area-calculator.html" class="calc-card-link" data-keywords="area square circle triangle rectangle trapezoid geometry shape">
-                    <div class="calc-card-item"><h3>Area Calculator</h3><p>Calculate surface area for geometric 2D shapes.</p></div>
-                </a>
-                <a href="final-grade-calculator.html" class="calc-card-link" data-keywords="final grade exam score syllabus pass class test needed">
-                    <div class="calc-card-item"><h3>Final Grade</h3><p>Find score required on final exam to pass class.</p></div>
-                </a>
-                <a href="gpa-calculator.html" class="calc-card-link" data-keywords="gpa grade point average college high school semester credits">
-                    <div class="calc-card-item"><h3>GPA Calculator</h3><p>Calculate cumulative grade point averages.</p></div>
-                </a>
-                <a href="price-per-unit-calculator.html" class="calc-card-link" data-keywords="price per unit unit cost grocery shop comparison buy value">
-                    <div class="calc-card-item"><h3>Price Per Unit</h3><p>Compare grocery cost value per ounce or gram.</p></div>
-                </a>
-                <a href="reading-time-calculator.html" class="calc-card-link" data-keywords="reading time words wpm article book read duration">
-                    <div class="calc-card-item"><h3>Reading Time</h3><p>Estimate reading duration based on word count.</p></div>
-                </a>
-                <a href="step-count-calculator.html" class="calc-card-link" data-keywords="step count miles distance pedometer walk stride length">
-                    <div class="calc-card-item"><h3>Step Count</h3><p>Convert pedometer steps into miles and kilometers.</p></div>
-                </a>
-                <a href="test-score-calculator.html" class="calc-card-link" data-keywords="test score grade percentage wrong correct teacher grading">
-                    <div class="calc-card-item"><h3>Test Score</h3><p>Calculate test letter grade from wrong answers.</p></div>
-                </a>
-                <a href="tip-calculator.html" class="calc-card-link" data-keywords="tip bill gratuity restaurant percent cost">
-                    <div class="calc-card-item"><h3>Tip Calculator</h3><p>Calculate restaurant gratuity percentages.</p></div>
-                </a>
-                <a href="tip-split-calculator.html" class="calc-card-link" data-keywords="tip split bill dinner group share divide friends per person">
-                    <div class="calc-card-item"><h3>Tip Splitter</h3><p>Divide restaurant bills evenly per person.</p></div>
-                </a>
-                <a href="word-count.html" class="calc-card-link" data-keywords="word count characters sentences paragraph counter text utility">
-                    <div class="calc-card-item"><h3>Word Counter</h3><p>Count words, characters, and sentence totals.</p></div>
-                </a>
-            </div>
-        </section>
+            <!-- 5. SCIENCE -->
+            <section id="science" class="category-section">
+                <h2 class="category-title">Science</h2>
+                <div class="calc-grid">
+                    <a href="physics-calculator.html" class="calc-card" data-keywords="science physics force mass acceleration newtons law kinematics motion work power">
+                        <div class="calc-name">Physics Calculator</div>
+                        <div class="calc-desc">Calculate force, mass, and acceleration (F = ma).</div>
+                    </a>
+                    <a href="density-calculator.html" class="calc-card" data-keywords="science density mass volume formula specific gravity material fluid physics">
+                        <div class="calc-name">Density Calculator</div>
+                        <div class="calc-desc">Compute mass, volume, and density (ρ = m/V).</div>
+                    </a>
+                    <a href="velocity-calculator.html" class="calc-card" data-keywords="science velocity speed distance time acceleration vector displacement physics">
+                        <div class="calc-name">Velocity Calculator</div>
+                        <div class="calc-desc">Calculate velocity, displacement, and travel time.</div>
+                    </a>
+                    <a href="kinetic-energy-calculator.html" class="calc-card" data-keywords="science kinetic energy mass velocity speed joules motion mechanics physics">
+                        <div class="calc-name">Kinetic Energy Calculator</div>
+                        <div class="calc-desc">Calculate kinetic energy of moving objects (KE = ½mv²).</div>
+                    </a>
+                    <a href="potential-energy-calculator.html" class="calc-card" data-keywords="science potential energy gravitational mass height gravity joules position physics">
+                        <div class="calc-name">Potential Energy Calculator</div>
+                        <div class="calc-desc">Compute gravitational potential energy (PE = mgh).</div>
+                    </a>
+                    <a href="wavelength-calculator.html" class="calc-card" data-keywords="science wavelength frequency wave speed light sound spectrum hertz meters electromagnetic">
+                        <div class="calc-name">Wavelength Calculator</div>
+                        <div class="calc-desc">Calculate wavelength based on wave speed and frequency.</div>
+                    </a>
+                    <a href="acceleration-calculator.html" class="calc-card" data-keywords="science acceleration velocity initial final time force newton motion physics">
+                        <div class="calc-name">Acceleration Calculator</div>
+                        <div class="calc-desc">Compute change in velocity over elapsed time.</div>
+                    </a>
+                    <a href="ohms-law-calculator.html" class="calc-card" data-keywords="science ohms law voltage current resistance power v ir watt ampere ohm circuit electronics">
+                        <div class="calc-name">Ohm's Law Calculator</div>
+                        <div class="calc-desc">Calculate Voltage, Current, Resistance, and Power (V=IR).</div>
+                    </a>
+                    <a href="molar-mass-calculator.html" class="calc-card" data-keywords="science molar mass molecular weight chemistry moles grams elements periodic table compound">
+                        <div class="calc-name">Molar Mass Calculator</div>
+                        <div class="calc-desc">Calculate molecular weight of chemical compounds.</div>
+                    </a>
+                    <a href="gravity-calculator.html" class="calc-card" data-keywords="science gravity gravitational force universal attraction mass distance newton physics celestial">
+                        <div class="calc-name">Gravity Calculator</div>
+                        <div class="calc-desc">Calculate gravitational force between two masses.</div>
+                    </a>
+                </div>
+            </section>
 
+            <!-- 6. DATE & TIME -->
+            <section id="date-time" class="category-section">
+                <h2 class="category-title">Date & Time</h2>
+                <div class="calc-grid">
+                    <a href="date-calculator.html" class="calc-card" data-keywords="date time date calculator add subtract days weeks months years duration difference">
+                        <div class="calc-name">Date Calculator</div>
+                        <div class="calc-desc">Add or subtract days, weeks, months, and years from dates.</div>
+                    </a>
+                    <a href="age-calculator.html" class="calc-card" data-keywords="date time age calculator birth date years months days exact age birthday counter">
+                        <div class="calc-name">Age Calculator</div>
+                        <div class="calc-desc">Calculate exact age in years, months, days, and hours.</div>
+                    </a>
+                    <a href="timezone-converter.html" class="calc-card" data-keywords="date time time zone converter utc est pst gmt clock difference international world time">
+                        <div class="calc-name">Time Zone Converter</div>
+                        <div class="calc-desc">Convert time across global timezones (UTC, EST, PST, GMT).</div>
+                    </a>
+                    <a href="hours-calculator.html" class="calc-card" data-keywords="date time hours worked calculator timesheet work pay log duration start end time card">
+                        <div class="calc-name">Hours Worked Calculator</div>
+                        <div class="calc-desc">Calculate timesheet hours, break times, and total work hours.</div>
+                    </a>
+                    <a href="business-days-calculator.html" class="calc-card" data-keywords="date time business days working days exclude weekends holidays add subtract target date project">
+                        <div class="calc-name">Business Days Calculator</div>
+                        <div class="calc-desc">Count working days between dates excluding weekends.</div>
+                    </a>
+                    <a href="days-from-today-calculator.html" class="calc-card" data-keywords="date time days from today future date past date count add subtract calendar timeline">
+                        <div class="calc-name">Days From Today Calculator</div>
+                        <div class="calc-desc">Find what date falls X days before or after today.</div>
+                    </a>
+                    <a href="duration-calculator.html" class="calc-card" data-keywords="date time duration elapsed time hours minutes seconds start time end time timer interval">
+                        <div class="calc-name">Time Duration Calculator</div>
+                        <div class="calc-desc">Calculate precise elapsed time between two specific clock times.</div>
+                    </a>
+                    <a href="leap-year-calculator.html" class="calc-card" data-keywords="date time leap year checker February 29 calendar 366 days year check rule">
+                        <div class="calc-name">Leap Year Calculator</div>
+                        <div class="calc-desc">Check if any given year is a leap year.</div>
+                    </a>
+                    <a href="unix-timestamp-calculator.html" class="calc-card" data-keywords="date time unix timestamp epoch converter seconds milliseconds utc date time developer tool">
+                        <div class="calc-name">Unix Timestamp Converter</div>
+                        <div class="calc-desc">Convert Unix Epoch timestamps to human-readable dates.</div>
+                    </a>
+                    <a href="day-of-week-calculator.html" class="calc-card" data-keywords="date time day of week born day Monday Tuesday Wednesday calendar history date lookup">
+                        <div class="calc-name">Day of the Week Calculator</div>
+                        <div class="calc-desc">Find the day of the week for any historical or future date.</div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 7. FITNESS -->
+            <section id="fitness" class="category-section">
+                <h2 class="category-title">Fitness</h2>
+                <div class="calc-grid">
+                    <a href="pace-calculator.html" class="calc-card" data-keywords="fitness pace running speed finish time distance marathon 5k 10k splits minute per mile km">
+                        <div class="calc-name">Running Pace Calculator</div>
+                        <div class="calc-desc">Calculate pace per mile/km for 5k, 10k, and marathons.</div>
+                    </a>
+                    <a href="1rm-calculator.html" class="calc-card" data-keywords="fitness 1rm one rep max bench press squat deadlift strength weightlifting epley brzycki formula">
+                        <div class="calc-name">1RM Max Calculator</div>
+                        <div class="calc-desc">Estimate one-rep max weightlifting capacity.</div>
+                    </a>
+                    <a href="vo2max-calculator.html" class="calc-card" data-keywords="fitness vo2 max aerobic capacity endurance fitness level cooper test rockport running cardio">
+                        <div class="calc-name">VO2 Max Calculator</div>
+                        <div class="calc-desc">Estimate maximal oxygen consumption and cardio capacity.</div>
+                    </a>
+                    <a href="cycling-watt-calculator.html" class="calc-card" data-keywords="fitness cycling watts power output ftp w/kg speed cadence resistance bike FTP fitness">
+                        <div class="calc-name">Cycling Power (Watt) Calculator</div>
+                        <div class="calc-desc">Estimate power output in watts based on speed and gradient.</div>
+                    </a>
+                    <a href="step-count-calculator.html" class="calc-card" data-keywords="fitness step count distance miles kilometers walking steps stride length calories fitness tracker">
+                        <div class="calc-name">Step Count Converter</div>
+                        <div class="calc-desc">Convert daily walking steps into miles and kilometers.</div>
+                    </a>
+                    <a href="wilks-calculator.html" class="calc-card" data-keywords="fitness wilks score powerlifting total bodyweight strength ratio coefficient IPF bench squat deadlift">
+                        <div class="calc-name">Wilks Score Calculator</div>
+                        <div class="calc-desc">Calculate powerlifting strength score relative to bodyweight.</div>
+                    </a>
+                    <a href="marathon-predictor.html" class="calc-card" data-keywords="fitness marathon predictor finish time race 5k 10k half marathon riegel formula pace running target">
+                        <div class="calc-name">Marathon Predictor</div>
+                        <div class="calc-desc">Predict marathon race time based on recent shorter race times.</div>
+                    </a>
+                    <a href="calorie-burn-calculator.html" class="calc-card" data-keywords="fitness calories burned activity workout exercise duration weight MET energy expenditure running walking">
+                        <div class="calc-name">Calories Burned Calculator</div>
+                        <div class="calc-desc">Calculate calories burned during workouts using MET values.</div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 8. EDUCATION & MISC -->
+            <section id="education" class="category-section">
+                <h2 class="category-title">Education & Misc</h2>
+                <div class="calc-grid">
+                    <a href="gpa-calculator.html" class="calc-card" data-keywords="education gpa grade point average college high school cumulative semester credit hours unweighted weighted">
+                        <div class="calc-name">GPA Calculator</div>
+                        <div class="calc-desc">Calculate high school or college grade point average.</div>
+                    </a>
+                    <a href="final-grade-calculator.html" class="calc-card" data-keywords="education final grade need exam target score course percentage weight syllabus required score">
+                        <div class="calc-name">Final Grade Calculator</div>
+                        <div class="calc-desc">Calculate the score required on your final exam to pass.</div>
+                    </a>
+                    <a href="reading-time-calculator.html" class="calc-card" data-keywords="education reading time words per minute wpm duration estimate article book speech length text">
+                        <div class="calc-name">Reading Time Calculator</div>
+                        <div class="calc-desc">Estimate reading time based on total word count and WPM.</div>
+                    </a>
+                    <a href="word-count.html" class="calc-card" data-keywords="education word count character count paragraph count sentences reading time text stats editor length">
+                        <div class="calc-name">Word Counter</div>
+                        <div class="calc-desc">Count words, characters, sentences, and paragraphs in text.</div>
+                    </a>
+                    <a href="test-score-calculator.html" class="calc-card" data-keywords="education test score grade percentage letter grade wrong correct points percentage curve teacher">
+                        <div class="calc-name">Test Score Calculator</div>
+                        <div class="calc-desc">Grade test scores based on total questions and wrong answers.</div>
+                    </a>
+                    <a href="tip-split-calculator.html" class="calc-card" data-keywords="misc tip split bill payment equal share friends group dinner restaurant total per person">
+                        <div class="calc-name">Tip Split Calculator</div>
+                        <div class="calc-desc">Split total bills and tips evenly among group members.</div>
+                    </a>
+                    <a href="price-per-unit-calculator.html" class="calc-card" data-keywords="misc price per unit grocery comparison best deal unit cost value shopping bulk measure store">
+                        <div class="calc-name">Price Per Unit Calculator</div>
+                        <div class="calc-desc">Compare unit pricing to find the best grocery values.</div>
+                    </a>
+                </div>
+            </section>
+
+        </div>
     </main>
 
+    <!-- Footer -->
+    <footer style="border-top: 1px solid var(--border-color); padding: 4rem 1.5rem; background: var(--bg-color);">
+        <div style="max-width: 1280px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
+            <div>
+                <div class="logo" style="margin-bottom: 0.75rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"></path><path d="M4 10h16"></path><path d="M10 4v16"></path></svg>
+                    Inquiry Calculator
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted); max-width: 300px; line-height: 1.5;">High-precision calculation tools and step-by-step AI problem solver designed with zero clutter.</p>
+            </div>
+            <div style="display: flex; gap: 3rem; font-size: 0.875rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <div style="font-weight: 600; color: var(--text-color);">Pages</div>
+                    <a href="index.html" style="color: var(--text-muted); text-decoration: none;">Calculators</a>
+                    <a href="chat.html" style="color: var(--text-muted); text-decoration: none;">AI Solver</a>
+                    <a href="about.html" style="color: var(--text-muted); text-decoration: none;">About</a>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+                    <div style="font-weight: 600; color: var(--text-color);">Legal & Contact</div>
+                    <a href="contact.html" style="color: var(--text-muted); text-decoration: none;">Contact</a>
+                    <a href="privacy.html" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                    <a href="terms.html" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div style="max-width: 1280px; margin: 3rem auto 0; padding-top: 1.5rem; border-top: 1px solid var(--border-color); font-size: 0.75rem; color: var(--text-muted); display: flex; justify-content: space-between;">
+            <span>&copy; 2023 Inquiry Calculator. All rights reserved.</span>
+            <span>inquirycalculator.com</span>
+        </div>
+    </footer>
+
     <!-- Full-Screen Search Overlay -->
-    <div id="search-overlay">
-        <button class="close-search" id="closeSearchBtn" aria-label="Close search">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-        <div class="search-wrapper">
-            <input type="text" id="searchInput" placeholder="Type to search 100+ calculators..." autocomplete="off">
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-container">
+            <div class="search-header">
+                <input type="text" id="searchInput" class="search-input-large" placeholder="Search 100 calculators..." autocomplete="off">
+                <button id="closeSearchBtn" class="close-search" aria-label="Close search">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div id="searchResults" class="search-results-grid"></div>
         </div>
     </div>
 
-    <!-- Master Scripts -->
+    <!-- Scripts -->
     <script>
-        // 1. Theme Toggle (Persisted in localStorage)
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('inquiry_theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', savedTheme);
-
-        themeToggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const target = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', target);
-            localStorage.setItem('inquiry_theme', target);
-        });
-
-        // 2. AI Command Bar Handoff to chat.html
+        // AI Form Redirect
         document.getElementById('heroAiForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const prompt = document.getElementById('heroAiInput').value.trim();
-            if (prompt) {
-                sessionStorage.setItem('inquiry_initial_prompt', prompt);
+            const q = document.getElementById('heroAiInput').value.trim();
+            if (q) {
+                sessionStorage.setItem('pending_question', q);
                 window.location.href = 'chat.html';
             }
         });
 
-        // 3. Search Modal Overlay + Instant Keyword Filtering
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const root = document.documentElement;
+        function setTheme(t) {
+            root.setAttribute('data-theme', t);
+            localStorage.setItem('inquiry_theme', t);
+        }
+        setTheme(localStorage.getItem('inquiry_theme') || 'dark');
+        themeToggle.addEventListener('click', () => setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+        // Search Overlay
         const searchBtn = document.getElementById('searchBtn');
-        const searchOverlay = document.getElementById('search-overlay');
         const closeSearchBtn = document.getElementById('closeSearchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
         const searchInput = document.getElementById('searchInput');
-        const calcCards = document.querySelectorAll('.calc-card-link');
-        const categorySections = document.querySelectorAll('.category-section');
+        const searchResults = document.getElementById('searchResults');
 
-        function openSearch() {
-            searchOverlay.classList.add('active');
-            setTimeout(() => searchInput.focus(), 50);
-        }
+        const cards = Array.from(document.querySelectorAll('.calc-card')).map(c => ({
+            title: c.querySelector('.calc-name').innerText,
+            desc: c.querySelector('.calc-desc').innerText,
+            href: c.getAttribute('href'),
+            keywords: (c.getAttribute('data-keywords') || '').toLowerCase()
+        }));
 
-        function closeSearch() {
-            searchOverlay.classList.remove('active');
-            searchInput.value = '';
-            filterCalculators('');
-        }
-
-        searchBtn.addEventListener('click', openSearch);
-        closeSearchBtn.addEventListener('click', closeSearch);
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
-                closeSearch();
+        function renderResults(q) {
+            q = q.toLowerCase().trim();
+            searchResults.innerHTML = '';
+            if (!q) {
+                searchResults.innerHTML = '<div style="color:var(--text-muted); grid-column:1/-1; padding:2rem 0; text-align:center;">Type to search all 100 calculators...</div>';
+                return;
             }
-        });
-
-        searchInput.addEventListener('input', (e) => {
-            filterCalculators(e.target.value.toLowerCase().trim());
-        });
-
-        function filterCalculators(query) {
-            calcCards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
-
-                if (!query || title.includes(query) || desc.includes(query) || keywords.includes(query)) {
-                    card.classList.remove('hidden-card');
-                } else {
-                    card.classList.add('hidden-card');
-                }
-            });
-
-            // Hide empty category sections
-            categorySections.forEach(section => {
-                const visible = section.querySelectorAll('.calc-card-link:not(.hidden-card)');
-                section.style.display = visible.length > 0 ? 'block' : 'none';
+            const matches = cards.filter(c => c.title.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.keywords.includes(q));
+            if (!matches.length) {
+                searchResults.innerHTML = '<div style="color:var(--text-muted); grid-column:1/-1; padding:2rem 0; text-align:center;">No matching calculators found.</div>';
+                return;
+            }
+            matches.forEach(item => {
+                const a = document.createElement('a');
+                a.className = 'calc-card';
+                a.href = item.href;
+                a.innerHTML = `<div class="calc-name">${item.title}</div><div class="calc-desc">${item.desc}</div>`;
+                searchResults.appendChild(a);
             });
         }
+
+        searchBtn.addEventListener('click', () => { searchOverlay.classList.add('active'); renderResults(''); setTimeout(() => searchInput.focus(), 50); });
+        closeSearchBtn.addEventListener('click', () => { searchOverlay.classList.remove('active'); searchInput.value = ''; });
+        searchInput.addEventListener('input', (e) => renderResults(e.target.value));
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && searchOverlay.classList.contains('active')) searchOverlay.classList.remove('active'); });
+
+        // Active Sidebar Link
+        const sections = document.querySelectorAll('.category-section');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => { if (pageYOffset >= s.offsetTop - 120) current = s.getAttribute('id'); });
+            navLinks.forEach(l => {
+                l.classList.remove('active');
+                if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+            });
+        });
     </script>
 </body>
 </html>
