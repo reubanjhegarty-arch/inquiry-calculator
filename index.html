@@ -219,6 +219,14 @@ document.getElementById('content').innerHTML = html;
 document.getElementById('sideNav').innerHTML = nav;
 document.getElementById('yr').textContent = new Date().getFullYear();
 
+// Split the headline into words for the load animation
+(function () {
+  const t = document.querySelector('.hero-title');
+  t.setAttribute('aria-label', t.textContent);
+  t.innerHTML = t.textContent.trim().split(' ').map((w, i) => `<span class="w" style="--i:${i}" aria-hidden="true">${w}</span>`).join(' ');
+  t.classList.add('split');
+})();
+
 // Hero AI form
 document.getElementById('heroAiForm').addEventListener('submit', e => {
   e.preventDefault();
