@@ -128,6 +128,25 @@ body { overflow: hidden; display: flex; flex-direction: column; height: 100vh; h
 .chat-container > .message:first-child { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.35s both; }
 .chat-input-wrapper { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.55s both; }
 @media (prefers-reduced-motion: reduce) { .chat-sidebar, .chat-container > .message:first-child, .chat-input-wrapper { animation: none !important; } }
+
+/* Tab capture */
+.share-bar { display: none; max-width: 760px; margin: 0 auto 10px; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--muted); }
+.share-bar.active { display: flex; }
+.share-bar span:nth-child(2) { margin-right: auto; }
+.share-bar button, .snip-actions button {
+  width: auto; margin: 0; padding: 5px 12px; font: inherit; font-size: 0.8rem; font-weight: 500; cursor: pointer;
+  background: var(--card-bg); color: var(--text); border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.15s;
+}
+.share-bar button:hover, .snip-actions button:hover { border-color: var(--border-hover); }
+.snip { position: fixed; inset: 0; z-index: 1000; display: none; flex-direction: column; background: rgba(0,0,0,0.94); }
+.snip.open { display: flex; }
+.snip-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 0.85rem; color: var(--muted); }
+.snip-actions { display: flex; gap: 8px; }
+.snip-actions .primary { background: #fff; color: #000; border-color: #fff; }
+.snip-wrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 16px; }
+.snip-stage { position: relative; line-height: 0; cursor: crosshair; touch-action: none; user-select: none; }
+.snip-stage canvas { max-width: calc(100vw - 32px); max-height: calc(100vh - 110px); border: 1px solid var(--border); border-radius: 6px; }
+.snip-box { position: absolute; display: none; border: 1.5px solid #fff; box-shadow: 0 0 0 9999px rgba(0,0,0,0.6); pointer-events: none; }
 </style>
 </head>
 <body>
@@ -176,6 +195,12 @@ body { overflow: hidden; display: flex; flex-direction: column; height: 100vh; h
     </div>
 
     <div class="chat-input-wrapper">
+      <div class="share-bar" id="shareBar">
+        <span class="live-dot"></span><span>Sharing a tab</span>
+        <button id="shareCapture">Capture area</button>
+        <button id="shareFloat">Floating button</button>
+        <button id="shareStop">Stop</button>
+      </div>
       <div class="chat-input-container">
         <div class="file-preview-bar" id="filePreviewBar">
           <span>Attached</span>
@@ -190,6 +215,9 @@ body { overflow: hidden; display: flex; flex-direction: column; height: 100vh; h
           <button class="btn-attach" onclick="document.getElementById('fileInput').click()" title="Attach image or text file" aria-label="Attach file">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
           </button>
+          <button class="btn-attach" id="snipBtn" title="Select an area from another tab" aria-label="Select from another tab">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
+          </button>
           <input type="file" id="fileInput" style="display:none" accept="image/*,.txt,.csv,.md" onchange="handleFileSelect(event)">
           <textarea class="chat-input" id="chatInput" rows="1" placeholder="Type a problem, or attach a photo or document"></textarea>
           <button class="btn-send" id="sendBtn" onclick="sendMessage()" aria-label="Send">
@@ -200,6 +228,14 @@ body { overflow: hidden; display: flex; flex-direction: column; height: 100vh; h
       <div class="chat-note">Upload math screenshots, CSVs or text. Step-by-step answers powered by Cloudflare AI.</div>
     </div>
   </div>
+</div>
+
+<div class="snip" id="snip">
+  <div class="snip-bar">
+    <span>Drag to select the area to ask about. With no selection, the whole tab is sent.</span>
+    <span class="snip-actions"><button id="snipCancel">Cancel</button><button id="snipAsk" class="primary">Ask AI</button></span>
+  </div>
+  <div class="snip-wrap"><div class="snip-stage" id="snipStage"><canvas id="snipCanvas"></canvas><div class="snip-box" id="snipBox"></div></div></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
@@ -402,6 +438,102 @@ function appendMessage(role, content, isRawHtml = false) {
     <div class="message ${role}"><div class="avatar">${role === 'ai' ? 'AI' : 'You'}</div><div class="message-content">${parsed}</div></div>`);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+
+// --- Select an area from another tab ---
+const shareBar = document.getElementById('shareBar');
+const snipEl = document.getElementById('snip');
+const snipCanvas = document.getElementById('snipCanvas');
+const snipStage = document.getElementById('snipStage');
+const snipBox = document.getElementById('snipBox');
+const shareVideo = document.createElement('video');
+shareVideo.muted = true; shareVideo.playsInline = true;
+let shareStream = null, pipWin = null, sel = null, dragStart = null;
+const baseTitle = document.title;
+const canPip = 'documentPictureInPicture' in window;
+
+if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) document.getElementById('snipBtn').style.display = 'none';
+if (!canPip) document.getElementById('shareFloat').style.display = 'none';
+
+async function startShare() {
+  if (shareStream) { captureFrame(); return; }
+  try {
+    shareStream = await navigator.mediaDevices.getDisplayMedia({ video: { frameRate: 5 }, audio: false, selfBrowserSurface: 'exclude', surfaceSwitching: 'include' });
+  } catch (e) { shareStream = null; return; }
+  shareVideo.srcObject = shareStream;
+  await shareVideo.play().catch(() => {});
+  shareStream.getVideoTracks()[0].addEventListener('ended', stopShare);
+  shareBar.classList.add('active');
+  openPip();
+}
+
+async function openPip() {
+  if (!canPip || pipWin) return;
+  try { pipWin = await documentPictureInPicture.requestWindow({ width: 240, height: 110 }); } catch (e) { pipWin = null; return; }
+  const d = pipWin.document, btn = 'padding:10px;font:600 13px Inter,system-ui,sans-serif;border-radius:8px;cursor:pointer;border:1px solid #333;';
+  d.body.style.cssText = 'margin:0;padding:12px;height:100vh;box-sizing:border-box;background:#000;display:flex;flex-direction:column;gap:8px;';
+  d.body.innerHTML = `<button id="c" style="${btn}background:#fff;color:#000">Capture area</button><button id="s" style="${btn}background:#111;color:#fff">Stop sharing</button>`;
+  d.getElementById('c').onclick = captureFrame;
+  d.getElementById('s').onclick = stopShare;
+  pipWin.addEventListener('pagehide', () => { pipWin = null; });
+}
+
+function stopShare() {
+  if (shareStream) shareStream.getTracks().forEach(t => t.stop());
+  shareStream = null; shareVideo.srcObject = null;
+  if (pipWin) { try { pipWin.close(); } catch (e) {} pipWin = null; }
+  shareBar.classList.remove('active');
+}
+
+function captureFrame() {
+  if (!shareStream || !shareVideo.videoWidth) return;
+  snipCanvas.width = shareVideo.videoWidth; snipCanvas.height = shareVideo.videoHeight;
+  snipCanvas.getContext('2d').drawImage(shareVideo, 0, 0);
+  sel = null; snipBox.style.display = 'none';
+  snipEl.classList.add('open');
+  try { window.focus(); } catch (e) {}
+  document.title = 'Select an area | Inquiry Calculator';
+}
+
+function closeSnip() { snipEl.classList.remove('open'); document.title = baseTitle; }
+
+function pointIn(e) {
+  const r = snipCanvas.getBoundingClientRect();
+  return { x: Math.min(Math.max(e.clientX - r.left, 0), r.width), y: Math.min(Math.max(e.clientY - r.top, 0), r.height), w: r.width, h: r.height };
+}
+snipStage.addEventListener('pointerdown', e => { snipStage.setPointerCapture(e.pointerId); dragStart = pointIn(e); sel = null; snipBox.style.display = 'none'; });
+snipStage.addEventListener('pointermove', e => {
+  if (!dragStart) return;
+  const p = pointIn(e);
+  sel = { x: Math.min(dragStart.x, p.x), y: Math.min(dragStart.y, p.y), w: Math.abs(p.x - dragStart.x), h: Math.abs(p.y - dragStart.y), dw: p.w, dh: p.h };
+  Object.assign(snipBox.style, { display: 'block', left: sel.x + 'px', top: sel.y + 'px', width: sel.w + 'px', height: sel.h + 'px' });
+});
+snipStage.addEventListener('pointerup', () => { dragStart = null; if (sel && (sel.w < 12 || sel.h < 12)) { sel = null; snipBox.style.display = 'none'; } });
+
+async function askAboutSelection() {
+  const sx = sel ? sel.x / sel.dw * snipCanvas.width : 0, sy = sel ? sel.y / sel.dh * snipCanvas.height : 0;
+  const sw = sel ? sel.w / sel.dw * snipCanvas.width : snipCanvas.width, sh = sel ? sel.h / sel.dh * snipCanvas.height : snipCanvas.height;
+  const scale = Math.min(1, 1600 / Math.max(sw, sh));
+  const out = document.createElement('canvas');
+  out.width = Math.round(sw * scale); out.height = Math.round(sh * scale);
+  out.getContext('2d').drawImage(snipCanvas, sx, sy, sw, sh, 0, 0, out.width, out.height);
+  const blob = await new Promise(r => out.toBlob(r, 'image/jpeg', 0.9));
+  const bytes = new Uint8Array(await blob.arrayBuffer());
+  const pv = document.createElement('canvas'), ps = Math.min(1, 600 / out.width);
+  pv.width = Math.round(out.width * ps); pv.height = Math.round(out.height * ps);
+  pv.getContext('2d').drawImage(out, 0, 0, pv.width, pv.height);
+  activeFile = { name: 'selection.jpg', type: 'image', byteArray: Array.from(bytes), dataUrl: pv.toDataURL('image/jpeg', 0.7) };
+  closeSnip();
+  sendMessage();
+}
+
+document.getElementById('snipBtn').addEventListener('click', startShare);
+document.getElementById('shareCapture').addEventListener('click', captureFrame);
+document.getElementById('shareFloat').addEventListener('click', openPip);
+document.getElementById('shareStop').addEventListener('click', stopShare);
+document.getElementById('snipCancel').addEventListener('click', closeSnip);
+document.getElementById('snipAsk').addEventListener('click', askAboutSelection);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && snipEl.classList.contains('open')) closeSnip(); });
+window.addEventListener('beforeunload', stopShare);
 
 window.addEventListener('DOMContentLoaded', () => {
   renderHistoryUI();
