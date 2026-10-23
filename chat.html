@@ -122,6 +122,12 @@ body { overflow: hidden; display: flex; flex-direction: column; height: 100vh; h
   .chat-input-wrapper { padding: 8px 12px 14px; }
   .message-content { max-width: 92%; }
 }
+
+/* Load animation, matching the homepage */
+.chat-sidebar { animation: fade 0.9s ease 0.2s both; }
+.chat-container > .message:first-child { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.35s both; }
+.chat-input-wrapper { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.55s both; }
+@media (prefers-reduced-motion: reduce) { .chat-sidebar, .chat-container > .message:first-child, .chat-input-wrapper { animation: none !important; } }
 </style>
 </head>
 <body>
