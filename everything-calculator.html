@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Everything Calculator — Free Scientific Calculator | Inquiry Calculator</title>
+<meta name="description" content="A free online scientific calculator with trigonometry, logarithms, powers, factorials, combinations, physical constants, memory and history.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('inquiry_theme')||'dark')}catch(e){}</script>
+<style>
+:root{--bg:#0b0d12;--panel:#12151c;--panel2:#181c25;--line:#262b37;--text:#e8eaf0;--muted:#8b93a5;--accent:#7c8cff;--key:#1b202b;--keyh:#242b3a;--op:#222a46;--oph:#2c3558;--eq:#7c8cff;--eqtext:#0b0d12;--err:#ff6b6b}
+[data-theme="light"]{--bg:#f4f5f8;--panel:#ffffff;--panel2:#f0f2f6;--line:#dde1ea;--text:#171a22;--muted:#667085;--accent:#4f5df0;--key:#f1f3f8;--keyh:#e5e8f0;--op:#e4e8fb;--oph:#d6dcf8;--eq:#4f5df0;--eqtext:#ffffff;--err:#d92d20}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.top{border-bottom:1px solid var(--line);background:var(--panel)}
+.top-in{max-width:1040px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:600}
+.top-actions{display:flex;align-items:center;gap:6px}
+.pill{font-size:14px;color:var(--muted);padding:6px 10px;border-radius:8px}
+.pill:hover{color:var(--text);background:var(--panel2)}
+.icon-btn{background:none;border:1px solid var(--line);color:var(--text);width:34px;height:34px;border-radius:8px;cursor:pointer;display:grid;place-items:center}
+.icon-btn:hover{background:var(--panel2)}
+.wrap{max-width:1040px;margin:0 auto;padding:28px 16px 48px}
+h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
+.intro{color:var(--muted);margin:0 0 22px;max-width:720px}
+.layout{display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:20px;align-items:start}
+@media(max-width:840px){.layout{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.display{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
+#last{min-height:20px;font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow-x:auto;white-space:nowrap}
+#expr{width:100%;background:none;border:0;outline:0;color:var(--text);font:500 20px 'JetBrains Mono',monospace;padding:4px 0}
+#res{min-height:46px;font:500 34px 'JetBrains Mono',monospace;text-align:right;overflow-x:auto;white-space:nowrap;color:var(--text)}
+#res.err{color:var(--err);font-size:18px;padding-top:12px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg button{background:none;border:0;color:var(--muted);padding:6px 12px;font:500 12px Inter,sans-serif;cursor:pointer}
+.seg button.on{background:var(--accent);color:var(--eqtext)}
+.mem{display:flex;gap:6px;align-items:center}
+.mem button,.small-btn{background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 9px;font:500 12px Inter,sans-serif;cursor:pointer}
+.mem button:hover,.small-btn:hover{background:var(--keyh)}
+#memFlag{font-size:12px;color:var(--accent);min-width:14px}
+.pad{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.k{background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:10px;height:50px;font:500 17px Inter,sans-serif;cursor:pointer;transition:background .12s,transform .06s}
+.k:hover{background:var(--keyh)}
+.k:active{transform:scale(.96)}
+.k.op{background:var(--op)}
+.k.op:hover{background:var(--oph)}
+.k.eq{background:var(--eq);color:var(--eqtext);border-color:transparent}
+.k.eq:hover{filter:brightness(1.08)}
+.k.fn{font-size:14px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.tab{background:none;border:1px solid transparent;color:var(--muted);padding:6px 12px;border-radius:8px;font:500 13px Inter,sans-serif;cursor:pointer}
+.tab:hover{color:var(--text)}
+.tab.on{background:var(--panel2);border-color:var(--line);color:var(--text)}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:8px}
+.fgrid .k{height:48px;font-size:14px;padding:0 4px;line-height:1.15}
+.fgrid .k small{display:block;font-size:10px;color:var(--muted);font-weight:400}
+.sec-title{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px;font-size:13px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.hist{max-height:260px;overflow-y:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}
+.hist button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--text);padding:9px 12px;cursor:pointer;font:400 13px 'JetBrains Mono',monospace}
+.hist button:last-child{border-bottom:0}
+.hist button:hover{background:var(--keyh)}
+.hist .r{color:var(--accent);display:block;text-align:right;font-weight:500}
+.hist .empty{padding:14px;color:var(--muted);font-size:13px}
+.notes{margin-top:16px;font-size:13px;color:var(--muted)}
+.notes code{font-family:'JetBrains Mono',monospace;background:var(--panel2);padding:1px 5px;border-radius:5px;color:var(--text)}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center;padding:18px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-in">
+    <a href="index.html" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"/><path d="M4 10h16"/><path d="M10 4v16"/></svg>
+      Inquiry Calculator
+    </a>
+    <div class="top-actions">
+      <a href="index.html" class="pill">All calculators</a>
+      <a href="chat.html" class="pill">AI Solver</a>
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Everything Calculator</h1>
+  <p class="intro">A full scientific calculator: trigonometry, logarithms, powers and roots, factorials, combinations, physical constants, memory and history. Tap the keys or type with your keyboard.</p>
+
+  <div class="layout">
+    <section class="card" aria-label="Calculator">
+      <div class="bar">
+        <div class="seg" id="angleSeg" role="group" aria-label="Angle unit">
+          <button data-a="deg" class="on">DEG</button><button data-a="rad">RAD</button><button data-a="grad">GRAD</button>
+        </div>
+        <div class="mem">
+          <span id="memFlag" title="Memory in use"></span>
+          <button data-act="MC" title="Memory clear">MC</button>
+          <button data-act="MR" title="Memory recall">MR</button>
+          <button data-act="M+" title="Add to memory">M+</button>
+          <button data-act="M-" title="Subtract from memory">M&minus;</button>
+        </div>
+      </div>
+
+      <div class="display">
+        <div id="last"></div>
+        <input id="expr" type="text" inputmode="none" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="0" aria-label="Expression">
+        <div id="res" aria-live="polite">0</div>
+      </div>
+
+      <div class="pad" id="pad"></div>
+      <div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="small-btn" id="copyBtn">Copy result</button></div>
+    </section>
+
+    <section class="card" aria-label="Functions">
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="fgrid" id="fgrid"></div>
+
+      <div class="sec-title"><span>History</span><button class="small-btn" id="clearHist">Clear</button></div>
+      <div class="hist" id="hist"></div>
+
+      <p class="notes">Tips: <code>ans</code> is the last result and <code>M</code> is the memory value. Brackets close automatically at the end. Implicit multiplication works (<code>2pi</code>, <code>3(4+1)</code>). Use <code>E</code> for powers of ten, for example <code>6.02E23</code>.</p>
+    </section>
+  </div>
+</main>
+
+<footer>&copy; <span id="yr">2026</span> Inquiry Calculator</footer>
+
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+
+/* ---------- state ---------- */
+let angle = 'deg', ans = 0, mem = 0, justEval = false, history = [];
+try { history = JSON.parse(localStorage.getItem('inquiry_sci_history') || '[]'); if (!Array.isArray(history)) history = []; } catch (e) { history = []; }
+
+/* ---------- math helpers ---------- */
+const toRad = x => angle === 'deg' ? x * Math.PI / 180 : angle === 'grad' ? x * Math.PI / 200 : x;
+const fromRad = x => angle === 'deg' ? x * 180 / Math.PI : angle === 'grad' ? x * 200 / Math.PI : x;
+const snap = x => Math.abs(x) < 1e-15 ? 0 : x;
+const err = m => { throw new Error(m); };
+const isInt = n => Number.isInteger(n);
+
+function gamma(z){
+  if (z < 0.5) return Math.PI / (Math.sin(Math.PI * z) * gamma(1 - z));
+  z -= 1;
+  const g = 7, c = [0.99999999999980993, 676.5203681218851, -1259.1392167224028, 771.32342877765313, -176.61502916214059, 12.507343278686905, -0.13857109526572012, 9.9843695780195716e-6, 1.5056327351493116e-7];
+  let x = c[0];
+  for (let i = 1; i < g + 2; i++) x += c[i] / (z + i);
+  const t = z + g + 0.5;
+  return Math.sqrt(2 * Math.PI) * Math.pow(t, z + 0.5) * Math.exp(-t) * x;
+}
+function fact(n){
+  if (isInt(n)) {
+    if (n < 0) err('Math error');
+    if (n > 170) err('Overflow');
+    let r = 1; for (let i = 2; i <= n; i++) r *= i; return r;
+  }
+  return gamma(n + 1);
+}
+function nCr(n, r){
+  if (!isInt(n) || !isInt(r) || r < 0 || n < 0 || r > n) err('nCr needs 0 ≤ r ≤ n (integers)');
+  r = Math.min(r, n - r);
+  let res = 1;
+  for (let i = 1; i <= r; i++) res = res * (n - r + i) / i;
+  return Math.round(res);
+}
+function nPr(n, r){
+  if (!isInt(n) || !isInt(r) || r < 0 || n < 0 || r > n) err('nPr needs 0 ≤ r ≤ n (integers)');
+  let res = 1;
+  for (let i = 0; i < r; i++) res *= (n - i);
+  return res;
+}
+function gcd(a, b){
+  if (!isInt(a) || !isInt(b)) err('gcd needs integers');
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { [a, b] = [b, a % b]; }
+  return a;
+}
+const lcm = (a, b) => (a === 0 || b === 0) ? 0 : Math.abs(a * b) / gcd(a, b);
+function root(x, n){
+  if (n === 0) err('Math error');
+  if (x < 0 && isInt(n) && Math.abs(n) % 2 === 1) return -Math.pow(-x, 1 / n);
+  return Math.pow(x, 1 / n);
+}
+function dom(v){ if (Number.isNaN(v)) err('Math error'); return v; }
+
+/* name -> [arity, fn]; arity -1 = one or more */
+const FUNCS = {
+  sin: [1, x => snap(Math.sin(toRad(x)))],
+  cos: [1, x => snap(Math.cos(toRad(x)))],
+  tan: [1, x => { const r = toRad(x); if (Math.abs(Math.cos(r)) < 1e-15) err('Undefined'); return snap(Math.tan(r)); }],
+  asin: [1, x => { if (Math.abs(x) > 1) err('Math error'); return snap(fromRad(Math.asin(x))); }],
+  acos: [1, x => { if (Math.abs(x) > 1) err('Math error'); return snap(fromRad(Math.acos(x))); }],
+  atan: [1, x => snap(fromRad(Math.atan(x)))],
+  atan2: [2, (y, x) => snap(fromRad(Math.atan2(y, x)))],
+  sinh: [1, Math.sinh], cosh: [1, Math.cosh], tanh: [1, Math.tanh],
+  asinh: [1, Math.asinh],
+  acosh: [1, x => dom(Math.acosh(x))],
+  atanh: [1, x => dom(Math.atanh(x))],
+  ln: [1, x => { if (x <= 0) err('Math error'); return Math.log(x); }],
+  log: [1, x => { if (x <= 0) err('Math error'); return Math.log10(x); }],
+  log2: [1, x => { if (x <= 0) err('Math error'); return Math.log2(x); }],
+  logb: [2, (x, b) => { if (x <= 0 || b <= 0 || b === 1) err('Math error'); return Math.log(x) / Math.log(b); }],
+  exp: [1, Math.exp],
+  sqrt: [1, x => { if (x < 0) err('Math error'); return Math.sqrt(x); }],
+  cbrt: [1, Math.cbrt],
+  root: [2, root],
+  pow: [2, (x, y) => dom(Math.pow(x, y))],
+  abs: [1, Math.abs], floor: [1, Math.floor], ceil: [1, Math.ceil], round: [1, Math.round], sign: [1, Math.sign],
+  fact: [1, fact], nCr: [2, nCr], nPr: [2, nPr], gcd: [2, gcd], lcm: [2, lcm],
+  max: [-1, (...a) => Math.max(...a)], min: [-1, (...a) => Math.min(...a)],
+  rand: [0, () => Math.random()],
+  rad: [1, x => x * Math.PI / 180], deg: [1, x => x * 180 / Math.PI]
+};
+const CONSTS = {
+  pi: Math.PI, e: Math.E, phi: (1 + Math.sqrt(5)) / 2,
+  c: 299792458, g: 9.80665, G: 6.6743e-11, h: 6.62607015e-34, NA: 6.02214076e23, kB: 1.380649e-23,
+  R: 8.314462618, qe: 1.602176634e-19, me: 9.1093837015e-31, mp: 1.67262192369e-27,
+  eps0: 8.8541878128e-12, mu0: 1.25663706212e-6, sigma: 5.670374419e-8, atm: 101325, amu: 1.6605390666e-27
+};
+const NAMES = Object.keys(FUNCS).concat(Object.keys(CONSTS), ['ans', 'M', 'mod']).sort((a, b) => b.length - a.length);
+
+/* ---------- tokenizer ---------- */
+function tokenize(src){
+  let s = src.replace(/\s+/g, '').replace(/[−–]/g, '-').replace(/[×·]/g, '*').replace(/÷/g, '/')
+             .replace(/π/g, 'pi').replace(/φ/g, 'phi').replace(/√/g, 'sqrt').replace(/∛/g, 'cbrt');
+  let open = 0;
+  for (const ch of s) { if (ch === '(') open++; else if (ch === ')') { open--; if (open < 0) err('Unmatched )'); } }
+  s += ')'.repeat(open);
+  const out = []; let i = 0;
+  while (i < s.length) {
+    const rest = s.slice(i); let m;
+    if ((m = /^(\d+\.?\d*|\.\d+)(E[+-]?\d+)?/.exec(rest))) { out.push({ k: 'n', v: parseFloat(m[0]) }); i += m[0].length; continue; }
+    const name = NAMES.find(n => rest.startsWith(n));
+    if (name) { out.push({ k: 'i', v: name }); i += name.length; continue; }
+    if ('+-*/^()!%,'.includes(rest[0])) { out.push({ k: 's', v: rest[0] }); i++; continue; }
+    err('Unexpected "' + rest[0] + '"');
+  }
+  return out;
+}
+
+/* ---------- parser ---------- */
+class Parser {
+  constructor(t){ this.t = t; this.i = 0; }
+  peek(){ return this.t[this.i]; }
+  next(){ return this.t[this.i++]; }
+  sym(c){ const k = this.peek(); return !!k && k.k === 's' && k.v === c; }
+  parse(){ const v = this.expr(); if (this.i < this.t.length) err('Syntax error'); return v; }
+  expr(){
+    let v = this.term();
+    while (this.sym('+') || this.sym('-')) { const o = this.next().v; const r = this.term(); v = o === '+' ? v + r : v - r; }
+    return v;
+  }
+  term(){
+    let v = this.unary();
+    for (;;) {
+      const k = this.peek(); if (!k) break;
+      if (k.k === 's' && (k.v === '*' || k.v === '/')) {
+        this.next(); const r = this.unary();
+        if (k.v === '/') { if (r === 0) err('Cannot divide by zero'); v /= r; } else v *= r;
+      } else if (k.k === 'i' && k.v === 'mod') {
+        this.next(); const r = this.unary();
+        if (r === 0) err('Cannot divide by zero');
+        v = ((v % r) + r) % r;
+      } else if (k.k === 'n' || k.k === 'i' || (k.k === 's' && k.v === '(')) {
+        v *= this.power();
+      } else break;
+    }
+    return v;
+  }
+  unary(){
+    if (this.sym('-')) { this.next(); return -this.unary(); }
+    if (this.sym('+')) { this.next(); return this.unary(); }
+    return this.power();
+  }
+  power(){
+    const b = this.postfix();
+    if (this.sym('^')) { this.next(); const e = this.unary(); return dom(Math.pow(b, e)); }
+    return b;
+  }
+  postfix(){
+    let v = this.primary();
+    for (;;) {
+      if (this.sym('!')) { this.next(); v = fact(v); }
+      else if (this.sym('%')) { this.next(); v = v / 100; }
+      else break;
+    }
+    return v;
+  }
+  primary(){
+    const k = this.next();
+    if (!k) err('Syntax error');
+    if (k.k === 'n') return k.v;
+    if (k.k === 's' && k.v === '(') { const v = this.expr(); if (!this.sym(')')) err('Missing )'); this.next(); return v; }
+    if (k.k === 'i') {
+      if (k.v === 'ans') return ans;
+      if (k.v === 'M') return mem;
+      if (k.v in CONSTS) return CONSTS[k.v];
+      const f = FUNCS[k.v];
+      if (!f) err('Syntax error');
+      const [ar, fn] = f; let args = [];
+      if (this.sym('(')) {
+        this.next();
+        if (!this.sym(')')) { args.push(this.expr()); while (this.sym(',')) { this.next(); args.push(this.expr()); } }
+        if (!this.sym(')')) err('Missing )');
+        this.next();
+      } else if (ar === 1) { args = [this.unary()]; }
+      else if (ar !== 0) err(k.v + ' needs brackets');
+      if (ar >= 0 && args.length !== ar) err(k.v + ' takes ' + ar + ' value' + (ar === 1 ? '' : 's'));
+      if (ar === -1 && args.length < 1) err(k.v + ' needs a value');
+      return fn(...args);
+    }
+    err('Syntax error');
+  }
+}
+function evalExpr(src){
+  const v = new Parser(tokenize(src)).parse();
+  if (!Number.isFinite(v)) err(Number.isNaN(v) ? 'Math error' : 'Overflow');
+  return v;
+}
+function fmt(x){
+  if (x === 0) return '0';
+  const a = Math.abs(x);
+  if (a >= 1e15 || a < 1e-9) return x.toExponential(10).replace(/\.?0+e/, 'e').replace('e+', 'E').replace('e', 'E');
+  return String(parseFloat(x.toPrecision(12)));
+}
+
+/* ---------- UI ---------- */
+const exprEl = $('expr'), resEl = $('res');
+const OPRE = /^([+\-−×÷^!%*\/]|\s?mod\s?)/;
+
+function setRes(text, bad){ resEl.textContent = text; resEl.classList.toggle('err', !!bad); }
+function update(){
+  const src = exprEl.value.trim();
+  if (!src) { setRes('0'); return; }
+  try { setRes(fmt(evalExpr(src))); } catch (e) { setRes(''); }
+}
+function startFresh(isOp){
+  exprEl.value = isOp ? 'ans' : '';
+  justEval = false; $('last').textContent = '';
+}
+function insert(txt){
+  if (justEval) startFresh(OPRE.test(txt));
+  exprEl.focus({ preventScroll: true });
+  const s = exprEl.selectionStart == null ? exprEl.value.length : exprEl.selectionStart;
+  const e = exprEl.selectionEnd == null ? s : exprEl.selectionEnd;
+  exprEl.value = exprEl.value.slice(0, s) + txt + exprEl.value.slice(e);
+  const p = s + txt.length; exprEl.setSelectionRange(p, p);
+  update();
+}
+function backspace(){
+  if (justEval) { justEval = false; }
+  const s = exprEl.selectionStart, e = exprEl.selectionEnd;
+  if (s !== e) { exprEl.value = exprEl.value.slice(0, s) + exprEl.value.slice(e); exprEl.setSelectionRange(s, s); }
+  else if (s > 0) { exprEl.value = exprEl.value.slice(0, s - 1) + exprEl.value.slice(s); exprEl.setSelectionRange(s - 1, s - 1); }
+  update();
+}
+function clearAll(){ exprEl.value = ''; justEval = false; $('last').textContent = ''; setRes('0'); exprEl.focus({ preventScroll: true }); }
+function equals(){
+  const src = exprEl.value.trim();
+  if (!src) return;
+  try {
+    const v = evalExpr(src), out = fmt(v);
+    ans = v;
+    $('last').textContent = src + ' =';
+    setRes(out);
+    addHistory(src, out);
+    justEval = true;
+  } catch (e) { setRes(e.message, true); }
+}
+function currentValue(){
+  const src = exprEl.value.trim();
+  if (!src) return ans;
+  try { return evalExpr(src); } catch (e) { return null; }
+}
+function memAct(a){
+  if (a === 'MC') mem = 0;
+  else if (a === 'MR') { insert('M'); }
+  else {
+    const v = currentValue();
+    if (v === null) { setRes('Fix the expression first', true); return; }
+    mem += a === 'M+' ? v : -v;
+  }
+  $('memFlag').textContent = mem !== 0 ? 'M' : '';
+}
+function addHistory(expr, out){
+  history.unshift({ e: expr, r: out });
+  history = history.slice(0, 50);
+  try { localStorage.setItem('inquiry_sci_history', JSON.stringify(history)); } catch (e) {}
+  renderHistory();
+}
+function renderHistory(){
+  const box = $('hist');
+  box.innerHTML = '';
+  if (!history.length) { box.innerHTML = '<div class="empty">Your calculations will appear here.</div>'; return; }
+  history.forEach(h => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.appendChild(document.createTextNode(h.e));
+    const r = document.createElement('span'); r.className = 'r'; r.textContent = '= ' + h.r; b.appendChild(r);
+    b.addEventListener('click', () => { exprEl.value = h.e; justEval = false; $('last').textContent = ''; update(); exprEl.focus({ preventScroll: true }); });
+    box.appendChild(b);
+  });
+}
+
+/* main keypad: [label, action/insert, class] */
+const PAD = [
+  ['AC','@AC','op'],['(','(','op'],[')',')','op'],['%','%','op'],['⌫','@BS','op'],
+  ['7','7'],['8','8'],['9','9'],['÷','÷','op'],['√','√(','op fn'],
+  ['4','4'],['5','5'],['6','6'],['×','×','op'],['x²','^2','op fn'],
+  ['1','1'],['2','2'],['3','3'],['−','−','op'],['xʸ','^','op fn'],
+  ['0','0'],['.','.'],['EXP','E','op fn'],['+','+','op'],['=','@EQ','eq']
+];
+const padEl = $('pad');
+PAD.forEach(([label, act, cls]) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'k ' + (cls || ''); b.textContent = label;
+  b.setAttribute('aria-label', label);
+  b.addEventListener('mousedown', e => e.preventDefault());
+  b.addEventListener('click', () => {
+    if (act === '@AC') clearAll(); else if (act === '@BS') backspace(); else if (act === '@EQ') equals(); else insert(act);
+  });
+  padEl.appendChild(b);
+});
+
+/* function tabs: [label, insert, title, sub] */
+const TABS = {
+  'Trig': [['sin','sin('],['cos','cos('],['tan','tan('],['sin⁻¹','asin('],['cos⁻¹','acos('],['tan⁻¹','atan('],['sinh','sinh('],['cosh','cosh('],['tanh','tanh('],['sinh⁻¹','asinh('],['cosh⁻¹','acosh('],['tanh⁻¹','atanh('],['atan2','atan2('],['π','π'],['deg→rad','rad('],['rad→deg','deg(']],
+  'Powers & logs': [['ln','ln('],['log','log('],['log₂','log2('],['logᵦ','logb('],['eˣ','exp('],['10ˣ','10^('],['∛','∛('],['ʸ√x','root('],['|x|','abs('],['1/x','1/('],['x³','^3'],['x!','!'],['mod',' mod '],['e','e'],['pow','pow(']],
+  'Discrete': [['nCr','nCr('],['nPr','nPr('],['gcd','gcd('],['lcm','lcm('],['floor','floor('],['ceil','ceil('],['round','round('],['sign','sign('],['max','max('],['min','min('],['rand','rand()'],['ans','ans'],['M','M'],[',',',']],
+  'Constants': [
+    ['π','π','Pi','3.14159'],['e','e','Euler’s number','2.71828'],['φ','φ','Golden ratio','1.61803'],
+    ['c','c','Speed of light, m/s','299 792 458'],['g','g','Standard gravity, m/s²','9.80665'],['G','G','Gravitational constant','6.6743E-11'],
+    ['h','h','Planck constant, J·s','6.626E-34'],['NA','NA','Avogadro constant, 1/mol','6.022E23'],['kB','kB','Boltzmann constant, J/K','1.381E-23'],
+    ['R','R','Gas constant, J/(mol·K)','8.3145'],['qe','qe','Elementary charge, C','1.602E-19'],['me','me','Electron mass, kg','9.109E-31'],
+    ['mp','mp','Proton mass, kg','1.673E-27'],['ε₀','eps0','Vacuum permittivity, F/m','8.854E-12'],['μ₀','mu0','Vacuum permeability, N/A²','1.257E-6'],
+    ['σ','sigma','Stefan–Boltzmann, W/(m²·K⁴)','5.670E-8'],['atm','atm','Standard atmosphere, Pa','101 325'],['amu','amu','Atomic mass unit, kg','1.661E-27']
+  ]
+};
+const tabsEl = $('tabs'), fgrid = $('fgrid');
+function showTab(name){
+  [...tabsEl.children].forEach(t => { const on = t.dataset.tab === name; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
+  fgrid.innerHTML = '';
+  TABS[name].forEach(([label, txt, title, sub]) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'k fn'; b.title = title || label;
+    b.appendChild(document.createTextNode(label));
+    if (sub) { const s = document.createElement('small'); s.textContent = sub; b.appendChild(s); }
+    b.addEventListener('mousedown', e => e.preventDefault());
+    b.addEventListener('click', () => insert(txt));
+    fgrid.appendChild(b);
+  });
+}
+Object.keys(TABS).forEach(name => {
+  const t = document.createElement('button');
+  t.type = 'button'; t.className = 'tab'; t.dataset.tab = name; t.textContent = name; t.setAttribute('role', 'tab');
+  t.addEventListener('click', () => showTab(name));
+  tabsEl.appendChild(t);
+});
+showTab('Trig');
+
+/* angle + memory + misc */
+$('angleSeg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  angle = b.dataset.a;
+  [...$('angleSeg').children].forEach(x => x.classList.toggle('on', x === b));
+  if (!justEval) update(); else { /* keep shown result */ }
+});
+document.querySelectorAll('.mem button').forEach(b => b.addEventListener('click', () => memAct(b.dataset.act)));
+$('clearHist').addEventListener('click', () => { history = []; try { localStorage.removeItem('inquiry_sci_history'); } catch (e) {} renderHistory(); });
+$('copyBtn').addEventListener('click', () => {
+  const t = resEl.textContent; if (!t || resEl.classList.contains('err')) return;
+  const done = () => { $('copyBtn').textContent = 'Copied'; setTimeout(() => $('copyBtn').textContent = 'Copy result', 1200); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => {});
+});
+
+/* keyboard */
+exprEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter') { e.preventDefault(); equals(); return; }
+  if (e.key === 'Escape') { clearAll(); return; }
+  if (justEval && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+    startFresh(/^[+\-*\/^!%]$/.test(e.key));
+    exprEl.setSelectionRange(exprEl.value.length, exprEl.value.length);
+  } else if (justEval && (e.key === 'Backspace' || e.key === 'Delete')) { justEval = false; }
+});
+exprEl.addEventListener('input', () => { if (justEval) { justEval = false; } update(); });
+document.addEventListener('keydown', e => {
+  if (document.activeElement === document.body && e.key.length === 1 && !e.ctrlKey && !e.metaKey) exprEl.focus({ preventScroll: true });
+});
+
+/* theme */
+$('themeToggle').addEventListener('click', () => {
+  const r = document.documentElement, t = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  r.setAttribute('data-theme', t);
+  try { localStorage.setItem('inquiry_theme', t); } catch (e) {}
+});
+$('yr').textContent = new Date().getFullYear();
+renderHistory();
+exprEl.focus({ preventScroll: true });
+})();
+</script>
+</body>
+</html>
