@@ -200,8 +200,8 @@ kbd {
 .hidden-card { display: none !important; }
 
 /* Individual calculator pages */
-main:not(.main-layout):not(.chat-layout) { max-width: 500px; margin: 40px auto; padding: 0 20px 80px; }
-main:not(.main-layout):not(.chat-layout) form {
+main.wrap { max-width: 500px; margin: 40px auto; padding: 0 20px 80px; }
+main.wrap form {
   background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
   padding: 32px; box-shadow: var(--shadow);
 }
@@ -262,4 +262,60 @@ input[type="submit"] {
 .main-layout { animation: fade 1s ease 1.5s both; }
 @media (prefers-reduced-motion: reduce) {
   .glass-header, .hero-badge, .hero-title .w, .hero-subtitle, .ai-command-bar, .command-hint, .main-layout { animation: none !important; }
+}
+
+/* ==========================================================================
+   Calculator pages: nav, main.wrap, .form-group, .result, footer
+   ========================================================================== */
+nav {
+  position: sticky; top: 0; z-index: 100; width: 100%;
+  background: color-mix(in srgb, var(--bg) 80%, transparent); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border); animation: fade 0.8s ease both;
+}
+.nav-inner, nav > .wrap {
+  max-width: 1200px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+nav .logo::before, .brand::before {
+  content: ""; width: 20px; height: 20px; flex-shrink: 0; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2'><path d='M4 4h16v16H4z'/><path d='M4 10h16'/><path d='M10 4v16'/></svg>") center / contain no-repeat;
+          mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2'><path d='M4 4h16v16H4z'/><path d='M4 10h16'/><path d='M10 4v16'/></svg>") center / contain no-repeat;
+}
+.brand { display: flex; align-items: center; gap: 10px; color: var(--text); font-weight: 600; font-size: 0.92rem; text-decoration: none; letter-spacing: -0.01em; }
+.brand span { margin-left: -4px; }
+.logo-badge {
+  font-size: 0.65rem; font-weight: 600; padding: 1px 7px; margin-left: 2px;
+  border: 1px solid var(--border-hover); border-radius: 999px; color: var(--muted);
+}
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a { color: var(--muted); font-size: 0.85rem; text-decoration: none; padding: 6px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+.nav-links a:hover { color: var(--text); background: var(--card-bg); }
+
+main.wrap { max-width: 520px; margin: 56px auto 0; padding: 0 20px 96px; }
+main.wrap h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1.1; margin-bottom: 10px; }
+main.wrap > p { color: var(--muted); font-size: 1rem; margin-bottom: 28px; }
+.form-group { margin-bottom: 16px; }
+.form-group:last-of-type { margin-bottom: 0; }
+.form-group label { margin-top: 0; }
+main.wrap form label { text-transform: none; letter-spacing: 0; }
+select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%); background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%; background-size: 5px 5px; background-repeat: no-repeat; padding-right: 36px; }
+main.wrap form button { transition: opacity 0.15s; }
+main.wrap form button:hover { opacity: 0.88; }
+#result:empty { display: none; }
+.result strong { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; margin-left: 6px; }
+
+footer:not(.site-footer) { border-top: 1px solid var(--border); padding: 28px 24px; text-align: center; font-size: 0.8rem; color: var(--muted-dark); }
+footer:not(.site-footer) a { color: var(--muted); text-decoration: none; }
+footer:not(.site-footer) a:hover { color: var(--text); }
+footer .foot { max-width: 1200px; margin: 0 auto; padding: 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+footer .foot-links { display: flex; gap: 20px; }
+
+/* Calculator and info page load animation */
+main.wrap > h1, .page-title, .doc-title { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.1s both; }
+main.wrap > p, .page-subtitle, .doc-date { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.25s both; }
+main.wrap > form, .contact-form { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.4s both; }
+.fade-up { animation: fade 0.9s ease 0.2s both; }
+.page-text, .doc-content, .stats-grid { animation: rise 0.9s cubic-bezier(.2,.7,.2,1) 0.35s both; }
+@media (prefers-reduced-motion: reduce) {
+  nav, main.wrap > *, .page-title, .doc-title, .page-subtitle, .doc-date, .contact-form, .fade-up, .page-text, .doc-content, .stats-grid { animation: none !important; }
 }
