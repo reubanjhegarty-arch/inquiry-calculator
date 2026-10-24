@@ -10,27 +10,51 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
-:root{
-  --bg:#06060a;
-  --border:rgba(255,255,255,.1);
-  --accent:#7c8cff;
-  --accent-2:#5eead4;
-  --text-dim:rgba(245,246,248,.65);
+/* ---------- Theme variables: white on black + one accent colour ---------- */
+:root,
+html[data-theme="dark"]{
+  --bg:#050507;
+  --surface:rgba(255,255,255,.045);
+  --surface-strong:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.12);
+  --border-strong:rgba(255,255,255,.22);
+  --text:#ffffff;
+  --text-dim:rgba(255,255,255,.62);
+  --header-bg:rgba(5,5,7,.65);
+  --accent:#6f7bff;
+  --accent-soft:rgba(111,123,255,.14);
+  --accent-border:rgba(111,123,255,.38);
+  --accent-contrast:#ffffff;
 }
 
-html[data-theme="dark"] body{
+html[data-theme="light"]{
+  --bg:#ffffff;
+  --surface:rgba(0,0,0,.035);
+  --surface-strong:rgba(0,0,0,.06);
+  --border:rgba(0,0,0,.12);
+  --border-strong:rgba(0,0,0,.22);
+  --text:#0a0a0c;
+  --text-dim:rgba(10,10,12,.62);
+  --header-bg:rgba(255,255,255,.72);
+  --accent:#4f46e5;
+  --accent-soft:rgba(79,70,229,.1);
+  --accent-border:rgba(79,70,229,.35);
+  --accent-contrast:#ffffff;
+}
+
+body{
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124,140,255,.22), transparent),
-    radial-gradient(ellipse 60% 40% at 90% 5%, rgba(94,234,212,.10), transparent),
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--accent-soft), transparent),
     var(--bg);
   background-attachment:fixed;
   position:relative;
+  color:var(--text);
 }
 
-html[data-theme="dark"] body::before{
+body::before{
   content:"";
   position:fixed; inset:0; pointer-events:none; z-index:0;
-  background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-image:radial-gradient(var(--border) 1px, transparent 1px);
   background-size:28px 28px;
   mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 85%);
   -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 85%);
@@ -40,7 +64,7 @@ html[data-theme="dark"] body::before{
   backdrop-filter:blur(14px) saturate(160%);
   -webkit-backdrop-filter:blur(14px) saturate(160%);
   border-bottom:1px solid var(--border);
-  background:rgba(6,6,10,.6);
+  background:var(--header-bg);
   position:sticky; top:0; z-index:50;
 }
 
@@ -55,13 +79,13 @@ html[data-theme="dark"] body::before{
 .hero-badge{
   display:inline-flex; align-items:center; gap:8px;
   padding:7px 14px; border-radius:999px;
-  background:rgba(124,140,255,.1);
-  border:1px solid rgba(124,140,255,.3);
+  background:var(--accent-soft);
+  border:1px solid var(--accent-border);
   font-size:13px; font-weight:500; color:var(--accent);
   margin-bottom:28px;
   animation:fadeUp .6s ease both;
 }
-.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 3px rgba(94,234,212,.25);animation:pulse 2s infinite}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 
 .hero-title{
@@ -70,7 +94,7 @@ html[data-theme="dark"] body::before{
   letter-spacing:-.03em;
   line-height:1.05;
   margin:0 0 22px;
-  background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.65));
+  background:linear-gradient(180deg,var(--text) 30%,var(--text-dim));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
@@ -98,87 +122,94 @@ html[data-theme="dark"] body::before{
 .ai-command-label{
   display:flex; align-items:center; justify-content:center; gap:7px;
   font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-  color:var(--accent-2); margin-bottom:10px;
+  color:var(--accent); margin-bottom:10px;
 }
 .ai-command-label svg{flex:none}
 
 .command-input-container{
   display:flex; align-items:center; gap:10px;
-  background:rgba(255,255,255,.04);
-  border:1px solid rgba(255,255,255,.14);
+  background:var(--surface);
+  border:1px solid var(--border);
   border-radius:16px;
   padding:6px 6px 6px 18px;
-  box-shadow:0 20px 60px -20px rgba(124,140,255,.25);
+  box-shadow:0 20px 60px -30px var(--accent-border);
   transition:border-color .2s, box-shadow .2s;
 }
 .command-input-container:focus-within{
   border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(124,140,255,.18), 0 20px 60px -20px rgba(124,140,255,.4);
+  box-shadow:0 0 0 3px var(--accent-soft), 0 20px 60px -25px var(--accent-border);
 }
 .command-icon{color:var(--accent); display:flex}
 .command-input{
   flex:1; background:none; border:none; outline:none;
-  color:#fff; font-size:16px; padding:12px 0; font-family:inherit;
+  color:var(--text); font-size:16px; padding:12px 0; font-family:inherit;
 }
-.command-input::placeholder{color:rgba(255,255,255,.35)}
+.command-input::placeholder{color:var(--text-dim)}
 .btn-command-submit{
   flex:none; width:40px; height:40px; border-radius:11px;
-  background:linear-gradient(135deg,var(--accent),var(--accent-2));
-  border:none; color:#0b0d12; display:grid; place-items:center;
+  background:var(--accent);
+  border:none; color:var(--accent-contrast); display:grid; place-items:center;
   cursor:pointer; transition:transform .15s, filter .15s;
 }
 .btn-command-submit:hover{transform:scale(1.05); filter:brightness(1.1)}
 
 .command-hint{font-size:13px; color:var(--text-dim); margin-top:14px}
 .command-hint kbd{
-  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+  background:var(--surface-strong); border:1px solid var(--border);
   border-radius:5px; padding:1px 6px; font-size:12px; font-family:inherit;
+  color:var(--text);
 }
 
 .command-feature-pill{
   display:inline-flex; align-items:center; gap:8px;
   margin-top:16px; padding:8px 16px; border-radius:999px;
-  background:rgba(94,234,212,.08); border:1px solid rgba(94,234,212,.25);
+  background:var(--accent-soft); border:1px solid var(--accent-border);
   font-size:13px; color:var(--text-dim); text-align:left;
 }
-.command-feature-pill svg{flex:none; color:var(--accent-2)}
-.command-feature-pill strong{color:var(--accent-2); font-weight:700}
+.command-feature-pill svg{flex:none; color:var(--accent)}
+.command-feature-pill strong{color:var(--accent); font-weight:700}
 
-/* Everything calculator — featured, high-contrast bar */
+/* Everything calculator — fixed black/white "spotlight" card in both themes */
 .everything-wrap{max-width:1200px;margin:0 auto;padding:8px 24px 8px;position:relative; z-index:1;}
 .everything-eyebrow{
   display:flex; align-items:center; gap:8px; margin:0 0 10px 2px;
   font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-  color:var(--accent-2);
+  color:var(--accent);
 }
-.everything-eyebrow::before{content:"";width:16px;height:2px;background:var(--accent-2);border-radius:2px}
+.everything-eyebrow::before{content:"";width:16px;height:2px;background:var(--accent);border-radius:2px}
 
-.everything-bar{display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;text-decoration:none;transition:border-color .15s,background .15s,transform .15s;
+.everything-bar{
+  display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;
+  text-decoration:none;transition:border-color .15s,transform .15s;
   background:#000;
-  border:1px solid rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.14);
   color:#fff;
   position:relative;
   overflow:hidden;
-  box-shadow:0 20px 50px -25px rgba(0,0,0,.9);
+  box-shadow:0 20px 50px -25px rgba(0,0,0,.8);
 }
 .everything-bar::before{
   content:"";
   position:absolute; inset:0;
-  background:radial-gradient(420px circle at var(--mx,30%) var(--my,50%), rgba(124,140,255,.22), transparent 60%);
+  background:radial-gradient(420px circle at var(--mx,30%) var(--my,50%), var(--accent-soft), transparent 60%);
   opacity:0; transition:opacity .3s;
   pointer-events:none;
 }
 .everything-bar:hover::before{opacity:1}
-.everything-bar:hover{border-color:rgba(124,140,255,.5); background:#000; transform:translateY(-2px)}
-.everything-bar:focus-visible{outline:2px solid #7c8cff;outline-offset:3px}
-.eb-icon{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7c8cff,#5eead4);color:#0b0d12;box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 8px 24px -8px rgba(124,140,255,.7)}
+.everything-bar:hover{border-color:var(--accent-border); transform:translateY(-2px)}
+.everything-bar:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.eb-icon{
+  flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:var(--accent);color:#fff;
+  box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 8px 24px -8px var(--accent-border);
+}
 .eb-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;position:relative;z-index:1}
 .eb-text strong{
   font-size:21px;
   font-weight:700;
   letter-spacing:-.01em;
   color:#fff;
-  text-shadow:0 0 20px rgba(124,140,255,.4);
+  text-shadow:0 0 20px var(--accent-border);
 }
 .eb-text small{font-size:13px;line-height:1.4;color:rgba(255,255,255,.6)}
 .eb-arrow{flex:none;opacity:.8;transition:transform .15s;color:#fff;position:relative;z-index:1}
@@ -187,7 +218,7 @@ html[data-theme="dark"] body::before{
 
 /* Calculator cards polish */
 .calc-card{position:relative; transition:transform .2s ease, border-color .2s ease, background .2s ease;}
-.calc-card:hover{transform:translateY(-3px); border-color:rgba(124,140,255,.4);}
+.calc-card:hover{transform:translateY(-3px); border-color:var(--accent-border);}
 .category-title{position:relative; letter-spacing:-.01em;}
 
 /* scroll reveal */
@@ -298,7 +329,6 @@ html[data-theme="dark"] body::before{
 </div>
 
 <script>
-// Each entry: file name (without .html) | name | description
 const DATA = [
 ['math','Math',[
 'standard-calculator|Standard Calculator|Everyday arithmetic',
@@ -428,10 +458,8 @@ document.getElementById('content').innerHTML = html;
 document.getElementById('sideNav').innerHTML = nav;
 document.getElementById('yr').textContent = new Date().getFullYear();
 
-// Make the Everything Calculator findable in search
 cards.unshift({ name: 'Everything Calculator', desc: 'Full scientific calculator with trig, logs, powers and constants', href: 'everything-calculator.html', label: 'Math' });
 
-// Split the headline into words for the load animation
 (function () {
   const t = document.querySelector('.hero-title');
   t.setAttribute('aria-label', t.textContent);
@@ -439,7 +467,6 @@ cards.unshift({ name: 'Everything Calculator', desc: 'Full scientific calculator
   t.classList.add('split');
 })();
 
-// Hero AI form
 document.getElementById('heroAiForm').addEventListener('submit', e => {
   e.preventDefault();
   const q = document.getElementById('heroAiInput').value.trim();
@@ -448,7 +475,6 @@ document.getElementById('heroAiForm').addEventListener('submit', e => {
   window.location.href = 'chat.html';
 });
 
-// Theme
 const root = document.documentElement;
 function setTheme(t) {
   root.setAttribute('data-theme', t);
@@ -457,7 +483,6 @@ function setTheme(t) {
 document.getElementById('themeToggle').addEventListener('click', () =>
   setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
 
-// Search
 const overlay = document.getElementById('searchOverlay');
 const input = document.getElementById('searchInput');
 const results = document.getElementById('searchResults');
@@ -481,7 +506,6 @@ document.addEventListener('keydown', e => {
   else if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) { e.preventDefault(); openSearch(); }
 });
 
-// Sidebar highlight
 const links = [...document.querySelectorAll('.sidebar-nav a')];
 const io = new IntersectionObserver(entries => {
   entries.forEach(en => {
@@ -491,7 +515,6 @@ const io = new IntersectionObserver(entries => {
 document.querySelectorAll('.category-section').forEach(s => io.observe(s));
 links[0].classList.add('active');
 
-// Everything Calculator bar — cursor-following glow
 const ebar = document.getElementById('everythingBar');
 if (ebar) {
   ebar.addEventListener('mousemove', e => {
@@ -501,7 +524,6 @@ if (ebar) {
   });
 }
 
-// Scroll-reveal for category sections and calculator cards
 document.querySelectorAll('.category-section, .calc-card').forEach(el => el.classList.add('reveal'));
 const revealIO = new IntersectionObserver(entries => {
   entries.forEach(en => {
