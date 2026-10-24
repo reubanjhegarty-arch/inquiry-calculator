@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Everything Calculator — Free Scientific Calculator | Inquiry Calculator</title>
-<meta name="description" content="A free online scientific calculator with trigonometry, logarithms, powers, factorials, combinations, physical constants, memory and history.">
+<title>Everything Calculator — Scientific Calculator with Equation Solver | Inquiry Calculator</title>
+<meta name="description" content="A free online scientific calculator with trigonometry, logarithms, powers, factorials, combinations, an equation solver, numeric calculus, variables, memory and history.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -43,6 +43,8 @@ h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
 .mem button,.small-btn{background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 9px;font:500 12px Inter,sans-serif;cursor:pointer}
 .mem button:hover,.small-btn:hover{background:var(--keyh)}
 #memFlag{font-size:12px;color:var(--accent);min-width:14px}
+.sto{display:flex;gap:6px;align-items:center}
+.sto select{background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:5px 6px;font:500 12px Inter,sans-serif;cursor:pointer}
 .pad{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .k{background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:10px;height:50px;font:500 17px Inter,sans-serif;cursor:pointer;transition:background .12s,transform .06s}
 .k:hover{background:var(--keyh)}
@@ -53,6 +55,7 @@ h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
 .k.eq:hover{filter:brightness(1.08)}
 .k.fn{font-size:14px}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+#modeTabs{padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
 .tab{background:none;border:1px solid transparent;color:var(--muted);padding:6px 12px;border-radius:8px;font:500 13px Inter,sans-serif;cursor:pointer}
 .tab:hover{color:var(--text)}
 .tab.on{background:var(--panel2);border-color:var(--line);color:var(--text)}
@@ -69,6 +72,33 @@ h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
 .notes{margin-top:16px;font-size:13px;color:var(--muted)}
 .notes code{font-family:'JetBrains Mono',monospace;background:var(--panel2);padding:1px 5px;border-radius:5px;color:var(--text)}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center;padding:18px}
+
+/* ---- new: tool panels (Solve / Calculus / Variables) ---- */
+.tool-panel{display:flex;flex-direction:column;gap:10px;margin-bottom:6px}
+.tool-hint{font-size:12px;color:var(--muted);margin:0 0 2px}
+.tool-field{display:flex;flex-direction:column;gap:4px}
+.tool-field label{font-size:12px;color:var(--muted);font-weight:500}
+.tool-field input{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;font:500 14px 'JetBrains Mono',monospace;outline:0;width:100%}
+.tool-field input:focus{border-color:var(--accent)}
+.tool-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tool-row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tool-btn{background:var(--eq);color:var(--eqtext);border:0;border-radius:9px;padding:10px;font:600 13px Inter,sans-serif;cursor:pointer;width:100%}
+.tool-btn:hover{filter:brightness(1.08)}
+.tool-out{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:500 14px 'JetBrains Mono',monospace;min-height:20px;color:var(--text)}
+.tool-out.err{color:var(--err)}
+.root-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.root-item:last-child{border-bottom:0}
+.root-item button{background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer}
+.root-item button:hover{background:var(--keyh)}
+.var-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:10px}
+.var-card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.var-card .vh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px}
+.var-card .vh strong{font:600 14px 'JetBrains Mono',monospace;color:var(--accent)}
+.var-card .vh span{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.var-card input{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:5px 7px;font:500 13px 'JetBrains Mono',monospace;margin-bottom:6px}
+.var-card .vbtns{display:flex;gap:4px}
+.var-card .vbtns button{flex:1;background:var(--key);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:4px 0;font-size:11px;cursor:pointer}
+.var-card .vbtns button:hover{background:var(--keyh)}
 </style>
 </head>
 <body>
@@ -91,7 +121,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
 
 <main class="wrap">
   <h1>Everything Calculator</h1>
-  <p class="intro">A full scientific calculator: trigonometry, logarithms, powers and roots, factorials, combinations, physical constants, memory and history. Tap the keys or type with your keyboard.</p>
+  <p class="intro">A full scientific calculator: trigonometry, logarithms, powers and roots, factorials, combinations, physical constants, memory, variables, an equation solver and numeric calculus. Tap the keys or type with your keyboard.</p>
 
   <div class="layout">
     <section class="card" aria-label="Calculator">
@@ -106,6 +136,14 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
           <button data-act="M+" title="Add to memory">M+</button>
           <button data-act="M-" title="Subtract from memory">M&minus;</button>
         </div>
+        <div class="sto">
+          <select id="stoVar" title="Variable to store into" aria-label="Variable to store into">
+            <option value="x">x</option><option value="y">y</option><option value="z">z</option>
+            <option value="t">t</option><option value="n">n</option><option value="k">k</option>
+            <option value="a">a</option><option value="b">b</option>
+          </select>
+          <button class="small-btn" id="stoBtn" title="Store current result into the selected variable">STO→</button>
+        </div>
       </div>
 
       <div class="display">
@@ -118,14 +156,67 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
       <div style="display:flex;justify-content:flex-end;margin-top:10px"><button class="small-btn" id="copyBtn">Copy result</button></div>
     </section>
 
-    <section class="card" aria-label="Functions">
-      <div class="tabs" id="tabs" role="tablist"></div>
-      <div class="fgrid" id="fgrid"></div>
+    <section class="card" aria-label="Functions and tools">
+      <div class="tabs" id="modeTabs" role="tablist">
+        <button type="button" class="tab on" data-mode="functions" role="tab" aria-selected="true">Functions</button>
+        <button type="button" class="tab" data-mode="solve" role="tab" aria-selected="false">Solve</button>
+        <button type="button" class="tab" data-mode="calculus" role="tab" aria-selected="false">Calculus</button>
+        <button type="button" class="tab" data-mode="vars" role="tab" aria-selected="false">Variables</button>
+      </div>
+
+      <div id="functionsMode">
+        <div class="tabs" id="tabs" role="tablist"></div>
+        <div class="fgrid" id="fgrid"></div>
+      </div>
+
+      <div id="solveMode" class="tool-panel" style="display:none">
+        <p class="tool-hint">Enter an equation in one variable. If you leave out "=", Inquiry Calculator solves for where the expression equals zero. Results are found numerically inside the search range below.</p>
+        <div class="tool-field">
+          <label for="solveEq">Equation</label>
+          <input id="solveEq" type="text" autocomplete="off" spellcheck="false" placeholder="e.g. 2x + 3 = 7   or   x^2 - 4">
+        </div>
+        <div class="tool-row">
+          <div class="tool-field"><label for="solveVar">Variable</label><input id="solveVar" type="text" value="x" maxlength="1" autocomplete="off" spellcheck="false"></div>
+          <div class="tool-field"><label for="solveLo">Search from</label><input id="solveLo" type="text" value="-1000" autocomplete="off" spellcheck="false"></div>
+          <div class="tool-field"><label for="solveHi">Search to</label><input id="solveHi" type="text" value="1000" autocomplete="off" spellcheck="false"></div>
+        </div>
+        <button type="button" class="tool-btn" id="solveBtn">Solve</button>
+        <div class="tool-out" id="solveOut">Solutions will appear here.</div>
+      </div>
+
+      <div id="calculusMode" class="tool-panel" style="display:none">
+        <p class="tool-hint">Type a function of one variable, then find its numeric derivative at a point or its definite integral over a range.</p>
+
+        <div class="sec-title" style="margin:0"><span>Derivative</span></div>
+        <div class="tool-field"><label for="calcExpr">f(variable) =</label><input id="calcExpr" type="text" autocomplete="off" spellcheck="false" placeholder="e.g. x^2 + 3x - 1"></div>
+        <div class="tool-row-2">
+          <div class="tool-field"><label for="calcVar">Variable</label><input id="calcVar" type="text" value="x" maxlength="1" autocomplete="off" spellcheck="false"></div>
+          <div class="tool-field"><label for="calcAt">At value</label><input id="calcAt" type="text" value="2" autocomplete="off" spellcheck="false"></div>
+        </div>
+        <button type="button" class="tool-btn" id="derivBtn">Find derivative value</button>
+        <div class="tool-out" id="derivOut">Derivative result will appear here.</div>
+
+        <div class="sec-title"><span>Definite integral</span></div>
+        <div class="tool-field"><label for="intExpr">f(variable) =</label><input id="intExpr" type="text" autocomplete="off" spellcheck="false" placeholder="e.g. sin(x)"></div>
+        <div class="tool-row">
+          <div class="tool-field"><label for="intVar">Variable</label><input id="intVar" type="text" value="x" maxlength="1" autocomplete="off" spellcheck="false"></div>
+          <div class="tool-field"><label for="intLo">Lower bound</label><input id="intLo" type="text" value="0" autocomplete="off" spellcheck="false"></div>
+          <div class="tool-field"><label for="intHi">Upper bound</label><input id="intHi" type="text" value="1" autocomplete="off" spellcheck="false"></div>
+        </div>
+        <button type="button" class="tool-btn" id="intBtn">Find definite integral</button>
+        <div class="tool-out" id="intOut">Integral result will appear here.</div>
+      </div>
+
+      <div id="varsMode" style="display:none">
+        <p class="tool-hint">Variables can be used anywhere: on the keypad, in Solve and in Calculus. Reserved single letters already used for constants: <code>c</code>, <code>e</code>, <code>g</code>, <code>h</code>.</p>
+        <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="small-btn" id="resetVars">Reset all to 0</button></div>
+        <div class="var-grid" id="varGrid"></div>
+      </div>
 
       <div class="sec-title"><span>History</span><button class="small-btn" id="clearHist">Clear</button></div>
       <div class="hist" id="hist"></div>
 
-      <p class="notes">Tips: <code>ans</code> is the last result and <code>M</code> is the memory value. Brackets close automatically at the end. Implicit multiplication works (<code>2pi</code>, <code>3(4+1)</code>). Use <code>E</code> for powers of ten, for example <code>6.02E23</code>.</p>
+      <p class="notes">Tips: <code>ans</code> is the last result and <code>M</code> is the memory value. Brackets close automatically at the end. Implicit multiplication works (<code>2pi</code>, <code>3(4+1)</code>). Use <code>E</code> for powers of ten, for example <code>6.02E23</code>. Variables like <code>x</code>, <code>y</code> and <code>t</code> default to 0 until you store a value.</p>
     </section>
   </div>
 </main>
@@ -226,7 +317,14 @@ const CONSTS = {
   R: 8.314462618, qe: 1.602176634e-19, me: 9.1093837015e-31, mp: 1.67262192369e-27,
   eps0: 8.8541878128e-12, mu0: 1.25663706212e-6, sigma: 5.670374419e-8, atm: 101325, amu: 1.6605390666e-27
 };
-const NAMES = Object.keys(FUNCS).concat(Object.keys(CONSTS), ['ans', 'M', 'mod']).sort((a, b) => b.length - a.length);
+
+/* ---------- variables (x, y, z, t, ... ) ---------- */
+/* every lowercase letter is a usable variable, except c, e, g, h which are already constants */
+const VARLETTERS = 'abdfijklmnopqrstuvwxyz'.split('');
+let vars = {};
+VARLETTERS.forEach(l => vars[l] = 0);
+
+const NAMES = Object.keys(FUNCS).concat(Object.keys(CONSTS), ['ans', 'M', 'mod'], VARLETTERS).sort((a, b) => b.length - a.length);
 
 /* ---------- tokenizer ---------- */
 function tokenize(src){
@@ -304,19 +402,21 @@ class Parser {
       if (k.v === 'ans') return ans;
       if (k.v === 'M') return mem;
       if (k.v in CONSTS) return CONSTS[k.v];
-      const f = FUNCS[k.v];
-      if (!f) err('Syntax error');
-      const [ar, fn] = f; let args = [];
-      if (this.sym('(')) {
-        this.next();
-        if (!this.sym(')')) { args.push(this.expr()); while (this.sym(',')) { this.next(); args.push(this.expr()); } }
-        if (!this.sym(')')) err('Missing )');
-        this.next();
-      } else if (ar === 1) { args = [this.unary()]; }
-      else if (ar !== 0) err(k.v + ' needs brackets');
-      if (ar >= 0 && args.length !== ar) err(k.v + ' takes ' + ar + ' value' + (ar === 1 ? '' : 's'));
-      if (ar === -1 && args.length < 1) err(k.v + ' needs a value');
-      return fn(...args);
+      if (k.v in FUNCS) {
+        const [ar, fn] = FUNCS[k.v]; let args = [];
+        if (this.sym('(')) {
+          this.next();
+          if (!this.sym(')')) { args.push(this.expr()); while (this.sym(',')) { this.next(); args.push(this.expr()); } }
+          if (!this.sym(')')) err('Missing )');
+          this.next();
+        } else if (ar === 1) { args = [this.unary()]; }
+        else if (ar !== 0) err(k.v + ' needs brackets');
+        if (ar >= 0 && args.length !== ar) err(k.v + ' takes ' + ar + ' value' + (ar === 1 ? '' : 's'));
+        if (ar === -1 && args.length < 1) err(k.v + ' needs a value');
+        return fn(...args);
+      }
+      if (k.v in vars) return vars[k.v];
+      err('Syntax error');
     }
     err('Syntax error');
   }
@@ -333,6 +433,26 @@ function fmt(x){
   return String(parseFloat(x.toPrecision(12)));
 }
 
+/* ---------- variable-aware evaluation (for Solve / Calculus) ---------- */
+function evalWithVarTemp(src, varName, value){
+  const old = vars[varName];
+  vars[varName] = value;
+  try { return evalExpr(src); } finally { vars[varName] = old; }
+}
+function parseVarName(raw, fallback){
+  const name = (raw || fallback || '').trim().toLowerCase();
+  if (!name) return fallback;
+  if (!/^[a-z]$/.test(name)) err('Variable must be a single letter');
+  if (!(name in vars)) err('"' + name + '" is reserved; try x, y, z, t, n, k, a or b');
+  return name;
+}
+function parseEquationSides(str){
+  const idx = str.indexOf('=');
+  if (idx === -1) return { lhs: str, rhs: '' };
+  if (str.indexOf('=', idx + 1) !== -1) err('Use only one "=" sign');
+  return { lhs: str.slice(0, idx), rhs: str.slice(idx + 1) };
+}
+
 /* ---------- UI ---------- */
 const exprEl = $('expr'), resEl = $('res');
 const OPRE = /^([+\-−×÷^!%*\/]|\s?mod\s?)/;
@@ -341,6 +461,7 @@ function setRes(text, bad){ resEl.textContent = text; resEl.classList.toggle('er
 function update(){
   const src = exprEl.value.trim();
   if (!src) { setRes('0'); return; }
+  if (src.includes('=')) { setRes('Press = to open this in Solve'); return; }
   try { setRes(fmt(evalExpr(src))); } catch (e) { setRes(''); }
 }
 function startFresh(isOp){
@@ -367,6 +488,13 @@ function clearAll(){ exprEl.value = ''; justEval = false; $('last').textContent 
 function equals(){
   const src = exprEl.value.trim();
   if (!src) return;
+  if (src.includes('=')) {
+    showMode('solve');
+    $('solveEq').value = src;
+    setRes('Opened in Solve →');
+    $('solveEq').focus({ preventScroll: true });
+    return;
+  }
   try {
     const v = evalExpr(src), out = fmt(v);
     ans = v;
@@ -435,7 +563,7 @@ PAD.forEach(([label, act, cls]) => {
 const TABS = {
   'Trig': [['sin','sin('],['cos','cos('],['tan','tan('],['sin⁻¹','asin('],['cos⁻¹','acos('],['tan⁻¹','atan('],['sinh','sinh('],['cosh','cosh('],['tanh','tanh('],['sinh⁻¹','asinh('],['cosh⁻¹','acosh('],['tanh⁻¹','atanh('],['atan2','atan2('],['π','π'],['deg→rad','rad('],['rad→deg','deg(']],
   'Powers & logs': [['ln','ln('],['log','log('],['log₂','log2('],['logᵦ','logb('],['eˣ','exp('],['10ˣ','10^('],['∛','∛('],['ʸ√x','root('],['|x|','abs('],['1/x','1/('],['x³','^3'],['x!','!'],['mod',' mod '],['e','e'],['pow','pow(']],
-  'Discrete': [['nCr','nCr('],['nPr','nPr('],['gcd','gcd('],['lcm','lcm('],['floor','floor('],['ceil','ceil('],['round','round('],['sign','sign('],['max','max('],['min','min('],['rand','rand()'],['ans','ans'],['M','M'],[',',',']],
+  'Discrete': [['nCr','nCr('],['nPr','nPr('],['gcd','gcd('],['lcm','lcm('],['floor','floor('],['ceil','ceil('],['round','round('],['sign','sign('],['max','max('],['min','min('],['rand','rand()'],['ans','ans'],['M','M'],[',',','],['x','x'],['y','y'],['z','z'],['t','t']],
   'Constants': [
     ['π','π','Pi','3.14159'],['e','e','Euler’s number','2.71828'],['φ','φ','Golden ratio','1.61803'],
     ['c','c','Speed of light, m/s','299 792 458'],['g','g','Standard gravity, m/s²','9.80665'],['G','G','Gravitational constant','6.6743E-11'],
@@ -466,6 +594,170 @@ Object.keys(TABS).forEach(name => {
   tabsEl.appendChild(t);
 });
 showTab('Trig');
+
+/* ---------- mode switching (Functions / Solve / Calculus / Variables) ---------- */
+const MODE_PANELS = { functions: 'functionsMode', solve: 'solveMode', calculus: 'calculusMode', vars: 'varsMode' };
+function showMode(mode){
+  Object.entries(MODE_PANELS).forEach(([m, id]) => { $(id).style.display = (m === mode) ? '' : 'none'; });
+  [...$('modeTabs').children].forEach(b => { const on = b.dataset.mode === mode; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+  if (mode === 'vars') renderVars();
+}
+$('modeTabs').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  showMode(b.dataset.mode);
+});
+
+/* ---------- Solve ---------- */
+function findRoots(lhs, rhs, varName, lo, hi){
+  const f = v => {
+    const l = evalWithVarTemp(lhs, varName, v);
+    const r = rhs.trim() === '' ? 0 : evalWithVarTemp(rhs, varName, v);
+    return l - r;
+  };
+  const safeF = v => { try { const y = f(v); return Number.isFinite(y) ? y : null; } catch (e) { return null; } };
+  const N = 500;
+  const step = (hi - lo) / N;
+  let roots = [];
+  let xPrev = lo, fPrev = safeF(xPrev);
+  if (fPrev === 0) roots.push(xPrev);
+  for (let i = 1; i <= N; i++) {
+    const x = lo + i * step;
+    const fx = safeF(x);
+    if (fPrev !== null && fx !== null) {
+      if (fx === 0) roots.push(x);
+      else if ((fPrev < 0) !== (fx < 0)) roots.push(bisectRoot(safeF, xPrev, x));
+    }
+    xPrev = x; fPrev = fx;
+  }
+  roots = roots.filter(r => r !== null && Number.isFinite(r));
+  roots.sort((a, b) => a - b);
+  const deduped = [];
+  roots.forEach(r => { if (!deduped.length || Math.abs(r - deduped[deduped.length - 1]) > 1e-6 * (Math.abs(r) + 1)) deduped.push(r); });
+  return deduped.slice(0, 8);
+}
+function bisectRoot(f, a, b){
+  let fa = f(a);
+  if (fa === null) return (a + b) / 2;
+  for (let i = 0; i < 80; i++) {
+    const m = (a + b) / 2, fm = f(m);
+    if (fm === null) break;
+    if (fm === 0) return m;
+    if ((fa < 0) !== (fm < 0)) { b = m; } else { a = m; fa = fm; }
+  }
+  return (a + b) / 2;
+}
+$('solveBtn').addEventListener('click', () => {
+  const out = $('solveOut');
+  out.classList.remove('err');
+  try {
+    const eqRaw = $('solveEq').value.trim();
+    if (!eqRaw) err('Enter an equation first');
+    const varName = parseVarName($('solveVar').value, 'x');
+    const lo = evalExpr(($('solveLo').value || '-1000').trim() || '-1000');
+    const hi = evalExpr(($('solveHi').value || '1000').trim() || '1000');
+    if (!Number.isFinite(lo) || !Number.isFinite(hi)) err('Bounds must be numbers');
+    if (lo >= hi) err('Lower bound must be less than upper bound');
+    const { lhs, rhs } = parseEquationSides(eqRaw);
+    const roots = findRoots(lhs, rhs, varName, lo, hi);
+    if (!roots.length) { out.textContent = 'No solution found in that range. Try a wider search range.'; out.classList.add('err'); return; }
+    out.innerHTML = '';
+    roots.forEach(r => {
+      const row = document.createElement('div'); row.className = 'root-item';
+      row.appendChild(document.createTextNode(varName + ' = ' + fmt(r)));
+      const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Use';
+      btn.addEventListener('click', () => { vars[varName] = r; ans = r; });
+      row.appendChild(btn);
+      out.appendChild(row);
+    });
+  } catch (e) {
+    out.textContent = e.message || 'Could not solve that equation';
+    out.classList.add('err');
+  }
+});
+['solveEq', 'solveVar', 'solveLo', 'solveHi'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('solveBtn').click(); } }));
+
+/* ---------- Calculus ---------- */
+$('derivBtn').addEventListener('click', () => {
+  const out = $('derivOut');
+  out.classList.remove('err');
+  try {
+    const expr = $('calcExpr').value.trim();
+    if (!expr) err('Enter a function first');
+    const varName = parseVarName($('calcVar').value, 'x');
+    const at = evalExpr(($('calcAt').value || '0').trim() || '0');
+    const f = v => evalWithVarTemp(expr, varName, v);
+    const h = (Math.abs(at) + 1) * 1e-6;
+    const d = (f(at + h) - f(at - h)) / (2 * h);
+    if (!Number.isFinite(d)) err('Math error at that point');
+    out.textContent = 'd/d' + varName + ' at ' + varName + ' = ' + fmt(at) + '  →  ' + fmt(d);
+  } catch (e) {
+    out.textContent = e.message || 'Could not compute that derivative';
+    out.classList.add('err');
+  }
+});
+$('intBtn').addEventListener('click', () => {
+  const out = $('intOut');
+  out.classList.remove('err');
+  try {
+    const expr = $('intExpr').value.trim();
+    if (!expr) err('Enter a function first');
+    const varName = parseVarName($('intVar').value, 'x');
+    const a = evalExpr(($('intLo').value || '0').trim() || '0');
+    const b = evalExpr(($('intHi').value || '1').trim() || '1');
+    if (a === b) { out.textContent = '0'; return; }
+    const f = v => evalWithVarTemp(expr, varName, v);
+    const n = 1000;
+    const lo = Math.min(a, b), hi = Math.max(a, b);
+    const hstep = (hi - lo) / n;
+    let s = f(lo) + f(hi);
+    for (let i = 1; i < n; i++) { const x = lo + i * hstep; s += f(x) * (i % 2 === 0 ? 2 : 4); }
+    let val = s * hstep / 3;
+    if (a > b) val = -val;
+    if (!Number.isFinite(val)) err('Math error over that range');
+    out.textContent = '∫ from ' + fmt(a) + ' to ' + fmt(b) + ' = ' + fmt(val);
+  } catch (e) {
+    out.textContent = e.message || 'Could not compute that integral';
+    out.classList.add('err');
+  }
+});
+['calcExpr', 'calcVar', 'calcAt'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('derivBtn').click(); } }));
+['intExpr', 'intVar', 'intLo', 'intHi'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('intBtn').click(); } }));
+
+/* ---------- Variables panel ---------- */
+const VAR_UI_LIST = ['x', 'y', 'z', 't', 'n', 'k', 'a', 'b'];
+function renderVars(){
+  const grid = $('varGrid');
+  grid.innerHTML = '';
+  VAR_UI_LIST.forEach(letter => {
+    const card = document.createElement('div'); card.className = 'var-card';
+    const vh = document.createElement('div'); vh.className = 'vh';
+    const strong = document.createElement('strong'); strong.textContent = letter;
+    const span = document.createElement('span'); span.textContent = '= ' + fmt(vars[letter]);
+    vh.append(strong, span);
+    const input = document.createElement('input'); input.type = 'text'; input.placeholder = 'New value'; input.autocomplete = 'off'; input.spellcheck = false;
+    const btns = document.createElement('div'); btns.className = 'vbtns';
+    const setBtn = document.createElement('button'); setBtn.type = 'button'; setBtn.textContent = 'Set';
+    setBtn.addEventListener('click', () => { try { vars[letter] = evalExpr(input.value.trim() || '0'); renderVars(); } catch (e) {} });
+    const ansBtn = document.createElement('button'); ansBtn.type = 'button'; ansBtn.textContent = '= ans';
+    ansBtn.addEventListener('click', () => { vars[letter] = ans; renderVars(); });
+    const insBtn = document.createElement('button'); insBtn.type = 'button'; insBtn.textContent = 'Insert';
+    insBtn.addEventListener('click', () => insert(letter));
+    btns.append(setBtn, ansBtn, insBtn);
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); setBtn.click(); } });
+    card.append(vh, input, btns);
+    grid.appendChild(card);
+  });
+}
+$('resetVars').addEventListener('click', () => { VARLETTERS.forEach(l => vars[l] = 0); renderVars(); });
+
+/* STO quick control */
+$('stoBtn').addEventListener('click', () => {
+  const v = currentValue();
+  if (v === null) { setRes('Fix the expression first', true); return; }
+  vars[$('stoVar').value] = v;
+  $('stoBtn').textContent = 'Stored';
+  setTimeout(() => { $('stoBtn').textContent = 'STO→'; }, 900);
+});
 
 /* angle + memory + misc */
 $('angleSeg').addEventListener('click', e => {
