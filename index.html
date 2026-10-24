@@ -7,20 +7,192 @@
 <meta name="description" content="Free online calculators for math, finance, health, science, fitness, conversions and dates, plus an AI solver that shows its steps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="style.css">
 <style>
-.everything-wrap{max-width:1200px;margin:0 auto;padding:8px 24px 8px}
-.everything-bar{display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;color:inherit;text-decoration:none;background:rgba(127,127,127,.08);border:1px solid rgba(127,127,127,.28);transition:border-color .15s,background .15s,transform .15s}
-.everything-bar:hover{border-color:#7c8cff;background:rgba(124,140,255,.12);transform:translateY(-1px)}
+:root{
+  --bg:#06060a;
+  --border:rgba(255,255,255,.1);
+  --accent:#7c8cff;
+  --accent-2:#5eead4;
+  --text-dim:rgba(245,246,248,.65);
+}
+
+html[data-theme="dark"] body{
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124,140,255,.22), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 5%, rgba(94,234,212,.10), transparent),
+    var(--bg);
+  background-attachment:fixed;
+  position:relative;
+}
+
+html[data-theme="dark"] body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 85%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 85%);
+}
+
+.glass-header{
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid var(--border);
+  background:rgba(6,6,10,.6);
+  position:sticky; top:0; z-index:50;
+}
+
+.hero{
+  position:relative; z-index:1;
+  padding:100px 24px 56px;
+  text-align:center;
+  max-width:880px;
+  margin:0 auto;
+}
+
+.hero-badge{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:7px 14px; border-radius:999px;
+  background:rgba(124,140,255,.1);
+  border:1px solid rgba(124,140,255,.3);
+  font-size:13px; font-weight:500; color:var(--accent);
+  margin-bottom:28px;
+  animation:fadeUp .6s ease both;
+}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 0 3px rgba(94,234,212,.25);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.hero-title{
+  font-size:clamp(40px,6vw,72px);
+  font-weight:700;
+  letter-spacing:-.03em;
+  line-height:1.05;
+  margin:0 0 22px;
+  background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.65));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.hero-title.split .w{
+  display:inline-block;
+  opacity:0; transform:translateY(16px);
+  animation:wordUp .6s cubic-bezier(.2,.8,.2,1) forwards;
+  animation-delay:calc(var(--i) * 0.05s);
+}
+@keyframes wordUp{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.hero-subtitle{
+  font-size:18px;
+  color:var(--text-dim);
+  max-width:620px;
+  margin:0 auto 40px;
+  line-height:1.6;
+  animation:fadeUp .7s .1s ease both;
+}
+
+.ai-command-bar{animation:fadeUp .8s .2s ease both; max-width:640px; margin:0 auto;}
+
+.ai-command-label{
+  display:flex; align-items:center; justify-content:center; gap:7px;
+  font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent-2); margin-bottom:10px;
+}
+.ai-command-label svg{flex:none}
+
+.command-input-container{
+  display:flex; align-items:center; gap:10px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:16px;
+  padding:6px 6px 6px 18px;
+  box-shadow:0 20px 60px -20px rgba(124,140,255,.25);
+  transition:border-color .2s, box-shadow .2s;
+}
+.command-input-container:focus-within{
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(124,140,255,.18), 0 20px 60px -20px rgba(124,140,255,.4);
+}
+.command-icon{color:var(--accent); display:flex}
+.command-input{
+  flex:1; background:none; border:none; outline:none;
+  color:#fff; font-size:16px; padding:12px 0; font-family:inherit;
+}
+.command-input::placeholder{color:rgba(255,255,255,.35)}
+.btn-command-submit{
+  flex:none; width:40px; height:40px; border-radius:11px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  border:none; color:#0b0d12; display:grid; place-items:center;
+  cursor:pointer; transition:transform .15s, filter .15s;
+}
+.btn-command-submit:hover{transform:scale(1.05); filter:brightness(1.1)}
+
+.command-hint{font-size:13px; color:var(--text-dim); margin-top:14px}
+.command-hint kbd{
+  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.15);
+  border-radius:5px; padding:1px 6px; font-size:12px; font-family:inherit;
+}
+
+.command-feature-pill{
+  display:inline-flex; align-items:center; gap:8px;
+  margin-top:16px; padding:8px 16px; border-radius:999px;
+  background:rgba(94,234,212,.08); border:1px solid rgba(94,234,212,.25);
+  font-size:13px; color:var(--text-dim); text-align:left;
+}
+.command-feature-pill svg{flex:none; color:var(--accent-2)}
+.command-feature-pill strong{color:var(--accent-2); font-weight:700}
+
+/* Everything calculator — featured, high-contrast bar */
+.everything-wrap{max-width:1200px;margin:0 auto;padding:8px 24px 8px;position:relative; z-index:1;}
+.everything-eyebrow{
+  display:flex; align-items:center; gap:8px; margin:0 0 10px 2px;
+  font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent-2);
+}
+.everything-eyebrow::before{content:"";width:16px;height:2px;background:var(--accent-2);border-radius:2px}
+
+.everything-bar{display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;text-decoration:none;transition:border-color .15s,background .15s,transform .15s;
+  background:#000;
+  border:1px solid rgba(255,255,255,.12);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 20px 50px -25px rgba(0,0,0,.9);
+}
+.everything-bar::before{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(420px circle at var(--mx,30%) var(--my,50%), rgba(124,140,255,.22), transparent 60%);
+  opacity:0; transition:opacity .3s;
+  pointer-events:none;
+}
+.everything-bar:hover::before{opacity:1}
+.everything-bar:hover{border-color:rgba(124,140,255,.5); background:#000; transform:translateY(-2px)}
 .everything-bar:focus-visible{outline:2px solid #7c8cff;outline-offset:3px}
-.eb-icon{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7c8cff,#5eead4);color:#0b0d12}
-.eb-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.eb-text strong{font-size:18px;font-weight:600;letter-spacing:-.01em}
-.eb-text small{font-size:13px;opacity:.7;line-height:1.4}
-.eb-arrow{flex:none;opacity:.75;transition:transform .15s}
+.eb-icon{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#7c8cff,#5eead4);color:#0b0d12;box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 8px 24px -8px rgba(124,140,255,.7)}
+.eb-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;position:relative;z-index:1}
+.eb-text strong{
+  font-size:21px;
+  font-weight:700;
+  letter-spacing:-.01em;
+  color:#fff;
+  text-shadow:0 0 20px rgba(124,140,255,.4);
+}
+.eb-text small{font-size:13px;line-height:1.4;color:rgba(255,255,255,.6)}
+.eb-arrow{flex:none;opacity:.8;transition:transform .15s;color:#fff;position:relative;z-index:1}
 .everything-bar:hover .eb-arrow{transform:translateX(4px);opacity:1}
 @media(max-width:600px){.everything-wrap{padding:8px 16px}.everything-bar{padding:14px 16px}.eb-text small{display:none}}
+
+/* Calculator cards polish */
+.calc-card{position:relative; transition:transform .2s ease, border-color .2s ease, background .2s ease;}
+.calc-card:hover{transform:translateY(-3px); border-color:rgba(124,140,255,.4);}
+.category-title{position:relative; letter-spacing:-.01em;}
+
+/* scroll reveal */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease}
+.reveal.in{opacity:1; transform:translateY(0)}
 </style>
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('inquiry_theme')||'dark')}catch(e){}</script>
 </head>
@@ -51,24 +223,33 @@
     <h1 class="hero-title">Compute at the speed of thought.</h1>
     <p class="hero-subtitle">Run the numbers on equations, loans and conversions, or ask the AI solver to walk you through the math step by step.</p>
     <div class="ai-command-bar">
+      <div class="ai-command-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>
+        AI Solver — ask anything
+      </div>
       <form id="heroAiForm">
         <div class="command-input-container">
           <div class="command-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/></svg>
           </div>
-          <input type="text" id="heroAiInput" class="command-input" placeholder="Ask about any math, science or finance problem" autocomplete="off" required>
+          <input type="text" id="heroAiInput" class="command-input" placeholder="Ask the AI Solver about any math, science or finance problem" autocomplete="off" required>
           <button type="submit" class="btn-command-submit" aria-label="Solve">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
         </div>
       </form>
       <div class="command-hint">Press <kbd>Enter</kbd> to solve. Press <kbd>/</kbd> to search calculators.</div>
+      <div class="command-feature-pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <span><strong>New:</strong> Snapshot a question from any other tab and drop it right here to ask the AI instantly.</span>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="everything-wrap" aria-label="Everything Calculator">
-  <a href="everything-calculator.html" class="everything-bar">
+  <div class="everything-eyebrow">Featured tool</div>
+  <a href="everything-calculator.html" class="everything-bar" id="everythingBar">
     <span class="eb-icon">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="12" y1="11" x2="12.01" y2="11"/><line x1="16" y1="11" x2="16.01" y2="11"/><line x1="8" y1="15" x2="8.01" y2="15"/><line x1="12" y1="15" x2="12.01" y2="15"/><line x1="16" y1="15" x2="16.01" y2="15"/><line x1="8" y1="19" x2="12" y2="19"/></svg>
     </span>
@@ -309,6 +490,25 @@ const io = new IntersectionObserver(entries => {
 }, { rootMargin: '-20% 0px -70% 0px' });
 document.querySelectorAll('.category-section').forEach(s => io.observe(s));
 links[0].classList.add('active');
+
+// Everything Calculator bar — cursor-following glow
+const ebar = document.getElementById('everythingBar');
+if (ebar) {
+  ebar.addEventListener('mousemove', e => {
+    const r = ebar.getBoundingClientRect();
+    ebar.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    ebar.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+}
+
+// Scroll-reveal for category sections and calculator cards
+document.querySelectorAll('.category-section, .calc-card').forEach(el => el.classList.add('reveal'));
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('in'); revealIO.unobserve(en.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
 </script>
 </body>
 </html>
