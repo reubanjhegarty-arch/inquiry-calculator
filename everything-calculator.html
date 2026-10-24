@@ -7,11 +7,11 @@
 <meta name="description" content="A free online scientific calculator with trigonometry, logarithms, powers, factorials, combinations, an equation solver, numeric calculus, variables, memory and history.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('inquiry_theme')||'dark')}catch(e){}</script>
 <style>
-:root{--bg:#0b0d12;--panel:#12151c;--panel2:#181c25;--line:#262b37;--text:#e8eaf0;--muted:#8b93a5;--accent:#7c8cff;--key:#1b202b;--keyh:#242b3a;--op:#222a46;--oph:#2c3558;--eq:#7c8cff;--eqtext:#0b0d12;--err:#ff6b6b}
-[data-theme="light"]{--bg:#f4f5f8;--panel:#ffffff;--panel2:#f0f2f6;--line:#dde1ea;--text:#171a22;--muted:#667085;--accent:#4f5df0;--key:#f1f3f8;--keyh:#e5e8f0;--op:#e4e8fb;--oph:#d6dcf8;--eq:#4f5df0;--eqtext:#ffffff;--err:#d92d20}
+:root{--bg:#000000;--panel:#0a0a0a;--panel2:#121212;--line:#2c2c2c;--text:#ffffff;--muted:#8a8a8a;--accent:#ffffff;--key:#161616;--keyh:#232323;--op:#1e1e1e;--oph:#2a2a2a;--eq:#ffffff;--eqtext:#000000;--err:#ff5c5c}
+[data-theme="light"]{--bg:#ffffff;--panel:#f7f7f7;--panel2:#eeeeee;--line:#dcdcdc;--text:#000000;--muted:#5f5f5f;--accent:#000000;--key:#f0f0f0;--keyh:#e2e2e2;--op:#e8e8e8;--oph:#dcdcdc;--eq:#000000;--eqtext:#ffffff;--err:#d92d20}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -26,16 +26,28 @@ a{color:inherit;text-decoration:none}
 .icon-btn:hover{background:var(--panel2)}
 .wrap{max-width:1040px;margin:0 auto;padding:28px 16px 48px}
 h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
-.intro{color:var(--muted);margin:0 0 22px;max-width:720px}
+.intro{color:var(--muted);margin:0 0 20px;max-width:720px}
+
+/* quick guide */
+.quickguide{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:0 0 26px}
+.qg-item{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.qg-item strong{display:block;font-size:14px;margin-bottom:4px}
+.qg-item span{font-size:12px;color:var(--muted);line-height:1.4;display:block}
+
 .layout{display:grid;grid-template-columns:minmax(0,430px) minmax(0,1fr);gap:20px;align-items:start}
 @media(max-width:840px){.layout{grid-template-columns:1fr}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px}
+.card-h{font:700 13px Inter,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 12px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.card-h span{display:block;font:400 12px Inter,sans-serif;text-transform:none;letter-spacing:0;color:var(--muted);margin-top:4px;opacity:.85}
+.mode-h{font:700 12px Inter,sans-serif;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 10px}
+
 .display{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px}
 #last{min-height:20px;font-size:13px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow-x:auto;white-space:nowrap}
 #expr{width:100%;background:none;border:0;outline:0;color:var(--text);font:500 20px 'JetBrains Mono',monospace;padding:4px 0}
 #res{min-height:46px;font:500 34px 'JetBrains Mono',monospace;text-align:right;overflow-x:auto;white-space:nowrap;color:var(--text)}
 #res.err{color:var(--err);font-size:18px;padding-top:12px}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.bar-label{width:100%;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden}
 .seg button{background:none;border:0;color:var(--muted);padding:6px 12px;font:500 12px Inter,sans-serif;cursor:pointer}
 .seg button.on{background:var(--accent);color:var(--eqtext)}
@@ -52,7 +64,8 @@ h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
 .k.op{background:var(--op)}
 .k.op:hover{background:var(--oph)}
 .k.eq{background:var(--eq);color:var(--eqtext);border-color:transparent}
-.k.eq:hover{filter:brightness(1.08)}
+.k.eq:hover{filter:brightness(.92)}
+[data-theme="light"] .k.eq:hover{filter:brightness(1.15)}
 .k.fn{font-size:14px}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
 #modeTabs{padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:14px}
@@ -73,17 +86,17 @@ h1{font-size:clamp(26px,4vw,36px);margin:0 0 6px;letter-spacing:-.02em}
 .notes code{font-family:'JetBrains Mono',monospace;background:var(--panel2);padding:1px 5px;border-radius:5px;color:var(--text)}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-align:center;padding:18px}
 
-/* ---- new: tool panels (Solve / Calculus / Variables) ---- */
+/* tool panels (Solve / Calculus / Variables) */
 .tool-panel{display:flex;flex-direction:column;gap:10px;margin-bottom:6px}
 .tool-hint{font-size:12px;color:var(--muted);margin:0 0 2px}
 .tool-field{display:flex;flex-direction:column;gap:4px}
 .tool-field label{font-size:12px;color:var(--muted);font-weight:500}
 .tool-field input{background:var(--panel2);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px 10px;font:500 14px 'JetBrains Mono',monospace;outline:0;width:100%}
-.tool-field input:focus{border-color:var(--accent)}
+.tool-field input:focus{border-color:var(--text)}
 .tool-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .tool-row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tool-btn{background:var(--eq);color:var(--eqtext);border:0;border-radius:9px;padding:10px;font:600 13px Inter,sans-serif;cursor:pointer;width:100%}
-.tool-btn:hover{filter:brightness(1.08)}
+.tool-btn:hover{opacity:.88}
 .tool-out{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:500 14px 'JetBrains Mono',monospace;min-height:20px;color:var(--text)}
 .tool-out.err{color:var(--err)}
 .root-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
@@ -93,7 +106,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
 .var-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:10px}
 .var-card{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
 .var-card .vh{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:6px}
-.var-card .vh strong{font:600 14px 'JetBrains Mono',monospace;color:var(--accent)}
+.var-card .vh strong{font:600 14px 'JetBrains Mono',monospace;color:var(--text)}
 .var-card .vh span{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .var-card input{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:6px;padding:5px 7px;font:500 13px 'JetBrains Mono',monospace;margin-bottom:6px}
 .var-card .vbtns{display:flex;gap:4px}
@@ -121,14 +134,27 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
 
 <main class="wrap">
   <h1>Everything Calculator</h1>
-  <p class="intro">A full scientific calculator: trigonometry, logarithms, powers and roots, factorials, combinations, physical constants, memory, variables, an equation solver and numeric calculus. Tap the keys or type with your keyboard.</p>
+  <p class="intro">A full scientific calculator: trigonometry, logarithms, powers and roots, factorials, combinations, physical constants, memory, variables, an equation solver and numeric calculus.</p>
+
+  <div class="quickguide" aria-label="How to use this calculator">
+    <div class="qg-item"><strong>Functions</strong><span>Browse trig, logs, discrete math and constants</span></div>
+    <div class="qg-item"><strong>Solve</strong><span>Find the roots of an equation, like 2x + 3 = 7</span></div>
+    <div class="qg-item"><strong>Calculus</strong><span>Get a derivative at a point or a definite integral</span></div>
+    <div class="qg-item"><strong>Variables</strong><span>Store values in x, y, z and more for reuse</span></div>
+  </div>
 
   <div class="layout">
     <section class="card" aria-label="Calculator">
+      <h2 class="card-h">Calculator<span>Type an expression, or tap the keys below</span></h2>
+
       <div class="bar">
+        <div class="bar-label">Angle unit</div>
         <div class="seg" id="angleSeg" role="group" aria-label="Angle unit">
           <button data-a="deg" class="on">DEG</button><button data-a="rad">RAD</button><button data-a="grad">GRAD</button>
         </div>
+      </div>
+      <div class="bar">
+        <div class="bar-label">Memory &amp; variable storage</div>
         <div class="mem">
           <span id="memFlag" title="Memory in use"></span>
           <button data-act="MC" title="Memory clear">MC</button>
@@ -157,6 +183,8 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
     </section>
 
     <section class="card" aria-label="Functions and tools">
+      <h2 class="card-h">Tools<span>Switch between function browsing, the equation solver, calculus and your stored variables</span></h2>
+
       <div class="tabs" id="modeTabs" role="tablist">
         <button type="button" class="tab on" data-mode="functions" role="tab" aria-selected="true">Functions</button>
         <button type="button" class="tab" data-mode="solve" role="tab" aria-selected="false">Solve</button>
@@ -165,12 +193,14 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
       </div>
 
       <div id="functionsMode">
+        <h3 class="mode-h">Scientific functions &amp; constants</h3>
         <div class="tabs" id="tabs" role="tablist"></div>
         <div class="fgrid" id="fgrid"></div>
       </div>
 
       <div id="solveMode" class="tool-panel" style="display:none">
-        <p class="tool-hint">Enter an equation in one variable. If you leave out "=", Inquiry Calculator solves for where the expression equals zero. Results are found numerically inside the search range below.</p>
+        <h3 class="mode-h">Equation solver</h3>
+        <p class="tool-hint">1. Type an equation in one variable. 2. Pick the variable. 3. Set a search range. 4. Press Solve. Leave out "=" to solve for where the expression equals zero.</p>
         <div class="tool-field">
           <label for="solveEq">Equation</label>
           <input id="solveEq" type="text" autocomplete="off" spellcheck="false" placeholder="e.g. 2x + 3 = 7   or   x^2 - 4">
@@ -185,6 +215,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
       </div>
 
       <div id="calculusMode" class="tool-panel" style="display:none">
+        <h3 class="mode-h">Calculus tools</h3>
         <p class="tool-hint">Type a function of one variable, then find its numeric derivative at a point or its definite integral over a range.</p>
 
         <div class="sec-title" style="margin:0"><span>Derivative</span></div>
@@ -208,7 +239,8 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
       </div>
 
       <div id="varsMode" style="display:none">
-        <p class="tool-hint">Variables can be used anywhere: on the keypad, in Solve and in Calculus. Reserved single letters already used for constants: <code>c</code>, <code>e</code>, <code>g</code>, <code>h</code>.</p>
+        <h3 class="mode-h">Stored variables</h3>
+        <p class="tool-hint">Variables can be used anywhere: on the keypad, in Solve and in Calculus. Reserved letters already used for constants: <code>c</code>, <code>e</code>, <code>g</code>, <code>h</code>.</p>
         <div style="display:flex;justify-content:flex-end;margin-bottom:8px"><button class="small-btn" id="resetVars">Reset all to 0</button></div>
         <div class="var-grid" id="varGrid"></div>
       </div>
@@ -216,7 +248,7 @@ footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;text-a
       <div class="sec-title"><span>History</span><button class="small-btn" id="clearHist">Clear</button></div>
       <div class="hist" id="hist"></div>
 
-      <p class="notes">Tips: <code>ans</code> is the last result and <code>M</code> is the memory value. Brackets close automatically at the end. Implicit multiplication works (<code>2pi</code>, <code>3(4+1)</code>). Use <code>E</code> for powers of ten, for example <code>6.02E23</code>. Variables like <code>x</code>, <code>y</code> and <code>t</code> default to 0 until you store a value.</p>
+      <p class="notes">Tips: <code>ans</code> is the last result and <code>M</code> is the memory value. Brackets close automatically at the end. Implicit multiplication works (<code>2pi</code>, <code>3(4+1)</code>). Use <code>E</code> for powers of ten, for example <code>6.02E23</code>.</p>
     </section>
   </div>
 </main>
@@ -294,510 +326,4 @@ const FUNCS = {
   atan2: [2, (y, x) => snap(fromRad(Math.atan2(y, x)))],
   sinh: [1, Math.sinh], cosh: [1, Math.cosh], tanh: [1, Math.tanh],
   asinh: [1, Math.asinh],
-  acosh: [1, x => dom(Math.acosh(x))],
-  atanh: [1, x => dom(Math.atanh(x))],
-  ln: [1, x => { if (x <= 0) err('Math error'); return Math.log(x); }],
-  log: [1, x => { if (x <= 0) err('Math error'); return Math.log10(x); }],
-  log2: [1, x => { if (x <= 0) err('Math error'); return Math.log2(x); }],
-  logb: [2, (x, b) => { if (x <= 0 || b <= 0 || b === 1) err('Math error'); return Math.log(x) / Math.log(b); }],
-  exp: [1, Math.exp],
-  sqrt: [1, x => { if (x < 0) err('Math error'); return Math.sqrt(x); }],
-  cbrt: [1, Math.cbrt],
-  root: [2, root],
-  pow: [2, (x, y) => dom(Math.pow(x, y))],
-  abs: [1, Math.abs], floor: [1, Math.floor], ceil: [1, Math.ceil], round: [1, Math.round], sign: [1, Math.sign],
-  fact: [1, fact], nCr: [2, nCr], nPr: [2, nPr], gcd: [2, gcd], lcm: [2, lcm],
-  max: [-1, (...a) => Math.max(...a)], min: [-1, (...a) => Math.min(...a)],
-  rand: [0, () => Math.random()],
-  rad: [1, x => x * Math.PI / 180], deg: [1, x => x * 180 / Math.PI]
-};
-const CONSTS = {
-  pi: Math.PI, e: Math.E, phi: (1 + Math.sqrt(5)) / 2,
-  c: 299792458, g: 9.80665, G: 6.6743e-11, h: 6.62607015e-34, NA: 6.02214076e23, kB: 1.380649e-23,
-  R: 8.314462618, qe: 1.602176634e-19, me: 9.1093837015e-31, mp: 1.67262192369e-27,
-  eps0: 8.8541878128e-12, mu0: 1.25663706212e-6, sigma: 5.670374419e-8, atm: 101325, amu: 1.6605390666e-27
-};
-
-/* ---------- variables (x, y, z, t, ... ) ---------- */
-/* every lowercase letter is a usable variable, except c, e, g, h which are already constants */
-const VARLETTERS = 'abdfijklmnopqrstuvwxyz'.split('');
-let vars = {};
-VARLETTERS.forEach(l => vars[l] = 0);
-
-const NAMES = Object.keys(FUNCS).concat(Object.keys(CONSTS), ['ans', 'M', 'mod'], VARLETTERS).sort((a, b) => b.length - a.length);
-
-/* ---------- tokenizer ---------- */
-function tokenize(src){
-  let s = src.replace(/\s+/g, '').replace(/[−–]/g, '-').replace(/[×·]/g, '*').replace(/÷/g, '/')
-             .replace(/π/g, 'pi').replace(/φ/g, 'phi').replace(/√/g, 'sqrt').replace(/∛/g, 'cbrt');
-  let open = 0;
-  for (const ch of s) { if (ch === '(') open++; else if (ch === ')') { open--; if (open < 0) err('Unmatched )'); } }
-  s += ')'.repeat(open);
-  const out = []; let i = 0;
-  while (i < s.length) {
-    const rest = s.slice(i); let m;
-    if ((m = /^(\d+\.?\d*|\.\d+)(E[+-]?\d+)?/.exec(rest))) { out.push({ k: 'n', v: parseFloat(m[0]) }); i += m[0].length; continue; }
-    const name = NAMES.find(n => rest.startsWith(n));
-    if (name) { out.push({ k: 'i', v: name }); i += name.length; continue; }
-    if ('+-*/^()!%,'.includes(rest[0])) { out.push({ k: 's', v: rest[0] }); i++; continue; }
-    err('Unexpected "' + rest[0] + '"');
-  }
-  return out;
-}
-
-/* ---------- parser ---------- */
-class Parser {
-  constructor(t){ this.t = t; this.i = 0; }
-  peek(){ return this.t[this.i]; }
-  next(){ return this.t[this.i++]; }
-  sym(c){ const k = this.peek(); return !!k && k.k === 's' && k.v === c; }
-  parse(){ const v = this.expr(); if (this.i < this.t.length) err('Syntax error'); return v; }
-  expr(){
-    let v = this.term();
-    while (this.sym('+') || this.sym('-')) { const o = this.next().v; const r = this.term(); v = o === '+' ? v + r : v - r; }
-    return v;
-  }
-  term(){
-    let v = this.unary();
-    for (;;) {
-      const k = this.peek(); if (!k) break;
-      if (k.k === 's' && (k.v === '*' || k.v === '/')) {
-        this.next(); const r = this.unary();
-        if (k.v === '/') { if (r === 0) err('Cannot divide by zero'); v /= r; } else v *= r;
-      } else if (k.k === 'i' && k.v === 'mod') {
-        this.next(); const r = this.unary();
-        if (r === 0) err('Cannot divide by zero');
-        v = ((v % r) + r) % r;
-      } else if (k.k === 'n' || k.k === 'i' || (k.k === 's' && k.v === '(')) {
-        v *= this.power();
-      } else break;
-    }
-    return v;
-  }
-  unary(){
-    if (this.sym('-')) { this.next(); return -this.unary(); }
-    if (this.sym('+')) { this.next(); return this.unary(); }
-    return this.power();
-  }
-  power(){
-    const b = this.postfix();
-    if (this.sym('^')) { this.next(); const e = this.unary(); return dom(Math.pow(b, e)); }
-    return b;
-  }
-  postfix(){
-    let v = this.primary();
-    for (;;) {
-      if (this.sym('!')) { this.next(); v = fact(v); }
-      else if (this.sym('%')) { this.next(); v = v / 100; }
-      else break;
-    }
-    return v;
-  }
-  primary(){
-    const k = this.next();
-    if (!k) err('Syntax error');
-    if (k.k === 'n') return k.v;
-    if (k.k === 's' && k.v === '(') { const v = this.expr(); if (!this.sym(')')) err('Missing )'); this.next(); return v; }
-    if (k.k === 'i') {
-      if (k.v === 'ans') return ans;
-      if (k.v === 'M') return mem;
-      if (k.v in CONSTS) return CONSTS[k.v];
-      if (k.v in FUNCS) {
-        const [ar, fn] = FUNCS[k.v]; let args = [];
-        if (this.sym('(')) {
-          this.next();
-          if (!this.sym(')')) { args.push(this.expr()); while (this.sym(',')) { this.next(); args.push(this.expr()); } }
-          if (!this.sym(')')) err('Missing )');
-          this.next();
-        } else if (ar === 1) { args = [this.unary()]; }
-        else if (ar !== 0) err(k.v + ' needs brackets');
-        if (ar >= 0 && args.length !== ar) err(k.v + ' takes ' + ar + ' value' + (ar === 1 ? '' : 's'));
-        if (ar === -1 && args.length < 1) err(k.v + ' needs a value');
-        return fn(...args);
-      }
-      if (k.v in vars) return vars[k.v];
-      err('Syntax error');
-    }
-    err('Syntax error');
-  }
-}
-function evalExpr(src){
-  const v = new Parser(tokenize(src)).parse();
-  if (!Number.isFinite(v)) err(Number.isNaN(v) ? 'Math error' : 'Overflow');
-  return v;
-}
-function fmt(x){
-  if (x === 0) return '0';
-  const a = Math.abs(x);
-  if (a >= 1e15 || a < 1e-9) return x.toExponential(10).replace(/\.?0+e/, 'e').replace('e+', 'E').replace('e', 'E');
-  return String(parseFloat(x.toPrecision(12)));
-}
-
-/* ---------- variable-aware evaluation (for Solve / Calculus) ---------- */
-function evalWithVarTemp(src, varName, value){
-  const old = vars[varName];
-  vars[varName] = value;
-  try { return evalExpr(src); } finally { vars[varName] = old; }
-}
-function parseVarName(raw, fallback){
-  const name = (raw || fallback || '').trim().toLowerCase();
-  if (!name) return fallback;
-  if (!/^[a-z]$/.test(name)) err('Variable must be a single letter');
-  if (!(name in vars)) err('"' + name + '" is reserved; try x, y, z, t, n, k, a or b');
-  return name;
-}
-function parseEquationSides(str){
-  const idx = str.indexOf('=');
-  if (idx === -1) return { lhs: str, rhs: '' };
-  if (str.indexOf('=', idx + 1) !== -1) err('Use only one "=" sign');
-  return { lhs: str.slice(0, idx), rhs: str.slice(idx + 1) };
-}
-
-/* ---------- UI ---------- */
-const exprEl = $('expr'), resEl = $('res');
-const OPRE = /^([+\-−×÷^!%*\/]|\s?mod\s?)/;
-
-function setRes(text, bad){ resEl.textContent = text; resEl.classList.toggle('err', !!bad); }
-function update(){
-  const src = exprEl.value.trim();
-  if (!src) { setRes('0'); return; }
-  if (src.includes('=')) { setRes('Press = to open this in Solve'); return; }
-  try { setRes(fmt(evalExpr(src))); } catch (e) { setRes(''); }
-}
-function startFresh(isOp){
-  exprEl.value = isOp ? 'ans' : '';
-  justEval = false; $('last').textContent = '';
-}
-function insert(txt){
-  if (justEval) startFresh(OPRE.test(txt));
-  exprEl.focus({ preventScroll: true });
-  const s = exprEl.selectionStart == null ? exprEl.value.length : exprEl.selectionStart;
-  const e = exprEl.selectionEnd == null ? s : exprEl.selectionEnd;
-  exprEl.value = exprEl.value.slice(0, s) + txt + exprEl.value.slice(e);
-  const p = s + txt.length; exprEl.setSelectionRange(p, p);
-  update();
-}
-function backspace(){
-  if (justEval) { justEval = false; }
-  const s = exprEl.selectionStart, e = exprEl.selectionEnd;
-  if (s !== e) { exprEl.value = exprEl.value.slice(0, s) + exprEl.value.slice(e); exprEl.setSelectionRange(s, s); }
-  else if (s > 0) { exprEl.value = exprEl.value.slice(0, s - 1) + exprEl.value.slice(s); exprEl.setSelectionRange(s - 1, s - 1); }
-  update();
-}
-function clearAll(){ exprEl.value = ''; justEval = false; $('last').textContent = ''; setRes('0'); exprEl.focus({ preventScroll: true }); }
-function equals(){
-  const src = exprEl.value.trim();
-  if (!src) return;
-  if (src.includes('=')) {
-    showMode('solve');
-    $('solveEq').value = src;
-    setRes('Opened in Solve →');
-    $('solveEq').focus({ preventScroll: true });
-    return;
-  }
-  try {
-    const v = evalExpr(src), out = fmt(v);
-    ans = v;
-    $('last').textContent = src + ' =';
-    setRes(out);
-    addHistory(src, out);
-    justEval = true;
-  } catch (e) { setRes(e.message, true); }
-}
-function currentValue(){
-  const src = exprEl.value.trim();
-  if (!src) return ans;
-  try { return evalExpr(src); } catch (e) { return null; }
-}
-function memAct(a){
-  if (a === 'MC') mem = 0;
-  else if (a === 'MR') { insert('M'); }
-  else {
-    const v = currentValue();
-    if (v === null) { setRes('Fix the expression first', true); return; }
-    mem += a === 'M+' ? v : -v;
-  }
-  $('memFlag').textContent = mem !== 0 ? 'M' : '';
-}
-function addHistory(expr, out){
-  history.unshift({ e: expr, r: out });
-  history = history.slice(0, 50);
-  try { localStorage.setItem('inquiry_sci_history', JSON.stringify(history)); } catch (e) {}
-  renderHistory();
-}
-function renderHistory(){
-  const box = $('hist');
-  box.innerHTML = '';
-  if (!history.length) { box.innerHTML = '<div class="empty">Your calculations will appear here.</div>'; return; }
-  history.forEach(h => {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.appendChild(document.createTextNode(h.e));
-    const r = document.createElement('span'); r.className = 'r'; r.textContent = '= ' + h.r; b.appendChild(r);
-    b.addEventListener('click', () => { exprEl.value = h.e; justEval = false; $('last').textContent = ''; update(); exprEl.focus({ preventScroll: true }); });
-    box.appendChild(b);
-  });
-}
-
-/* main keypad: [label, action/insert, class] */
-const PAD = [
-  ['AC','@AC','op'],['(','(','op'],[')',')','op'],['%','%','op'],['⌫','@BS','op'],
-  ['7','7'],['8','8'],['9','9'],['÷','÷','op'],['√','√(','op fn'],
-  ['4','4'],['5','5'],['6','6'],['×','×','op'],['x²','^2','op fn'],
-  ['1','1'],['2','2'],['3','3'],['−','−','op'],['xʸ','^','op fn'],
-  ['0','0'],['.','.'],['EXP','E','op fn'],['+','+','op'],['=','@EQ','eq']
-];
-const padEl = $('pad');
-PAD.forEach(([label, act, cls]) => {
-  const b = document.createElement('button');
-  b.type = 'button'; b.className = 'k ' + (cls || ''); b.textContent = label;
-  b.setAttribute('aria-label', label);
-  b.addEventListener('mousedown', e => e.preventDefault());
-  b.addEventListener('click', () => {
-    if (act === '@AC') clearAll(); else if (act === '@BS') backspace(); else if (act === '@EQ') equals(); else insert(act);
-  });
-  padEl.appendChild(b);
-});
-
-/* function tabs: [label, insert, title, sub] */
-const TABS = {
-  'Trig': [['sin','sin('],['cos','cos('],['tan','tan('],['sin⁻¹','asin('],['cos⁻¹','acos('],['tan⁻¹','atan('],['sinh','sinh('],['cosh','cosh('],['tanh','tanh('],['sinh⁻¹','asinh('],['cosh⁻¹','acosh('],['tanh⁻¹','atanh('],['atan2','atan2('],['π','π'],['deg→rad','rad('],['rad→deg','deg(']],
-  'Powers & logs': [['ln','ln('],['log','log('],['log₂','log2('],['logᵦ','logb('],['eˣ','exp('],['10ˣ','10^('],['∛','∛('],['ʸ√x','root('],['|x|','abs('],['1/x','1/('],['x³','^3'],['x!','!'],['mod',' mod '],['e','e'],['pow','pow(']],
-  'Discrete': [['nCr','nCr('],['nPr','nPr('],['gcd','gcd('],['lcm','lcm('],['floor','floor('],['ceil','ceil('],['round','round('],['sign','sign('],['max','max('],['min','min('],['rand','rand()'],['ans','ans'],['M','M'],[',',','],['x','x'],['y','y'],['z','z'],['t','t']],
-  'Constants': [
-    ['π','π','Pi','3.14159'],['e','e','Euler’s number','2.71828'],['φ','φ','Golden ratio','1.61803'],
-    ['c','c','Speed of light, m/s','299 792 458'],['g','g','Standard gravity, m/s²','9.80665'],['G','G','Gravitational constant','6.6743E-11'],
-    ['h','h','Planck constant, J·s','6.626E-34'],['NA','NA','Avogadro constant, 1/mol','6.022E23'],['kB','kB','Boltzmann constant, J/K','1.381E-23'],
-    ['R','R','Gas constant, J/(mol·K)','8.3145'],['qe','qe','Elementary charge, C','1.602E-19'],['me','me','Electron mass, kg','9.109E-31'],
-    ['mp','mp','Proton mass, kg','1.673E-27'],['ε₀','eps0','Vacuum permittivity, F/m','8.854E-12'],['μ₀','mu0','Vacuum permeability, N/A²','1.257E-6'],
-    ['σ','sigma','Stefan–Boltzmann, W/(m²·K⁴)','5.670E-8'],['atm','atm','Standard atmosphere, Pa','101 325'],['amu','amu','Atomic mass unit, kg','1.661E-27']
-  ]
-};
-const tabsEl = $('tabs'), fgrid = $('fgrid');
-function showTab(name){
-  [...tabsEl.children].forEach(t => { const on = t.dataset.tab === name; t.classList.toggle('on', on); t.setAttribute('aria-selected', on); });
-  fgrid.innerHTML = '';
-  TABS[name].forEach(([label, txt, title, sub]) => {
-    const b = document.createElement('button');
-    b.type = 'button'; b.className = 'k fn'; b.title = title || label;
-    b.appendChild(document.createTextNode(label));
-    if (sub) { const s = document.createElement('small'); s.textContent = sub; b.appendChild(s); }
-    b.addEventListener('mousedown', e => e.preventDefault());
-    b.addEventListener('click', () => insert(txt));
-    fgrid.appendChild(b);
-  });
-}
-Object.keys(TABS).forEach(name => {
-  const t = document.createElement('button');
-  t.type = 'button'; t.className = 'tab'; t.dataset.tab = name; t.textContent = name; t.setAttribute('role', 'tab');
-  t.addEventListener('click', () => showTab(name));
-  tabsEl.appendChild(t);
-});
-showTab('Trig');
-
-/* ---------- mode switching (Functions / Solve / Calculus / Variables) ---------- */
-const MODE_PANELS = { functions: 'functionsMode', solve: 'solveMode', calculus: 'calculusMode', vars: 'varsMode' };
-function showMode(mode){
-  Object.entries(MODE_PANELS).forEach(([m, id]) => { $(id).style.display = (m === mode) ? '' : 'none'; });
-  [...$('modeTabs').children].forEach(b => { const on = b.dataset.mode === mode; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
-  if (mode === 'vars') renderVars();
-}
-$('modeTabs').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  showMode(b.dataset.mode);
-});
-
-/* ---------- Solve ---------- */
-function findRoots(lhs, rhs, varName, lo, hi){
-  const f = v => {
-    const l = evalWithVarTemp(lhs, varName, v);
-    const r = rhs.trim() === '' ? 0 : evalWithVarTemp(rhs, varName, v);
-    return l - r;
-  };
-  const safeF = v => { try { const y = f(v); return Number.isFinite(y) ? y : null; } catch (e) { return null; } };
-  const N = 500;
-  const step = (hi - lo) / N;
-  let roots = [];
-  let xPrev = lo, fPrev = safeF(xPrev);
-  if (fPrev === 0) roots.push(xPrev);
-  for (let i = 1; i <= N; i++) {
-    const x = lo + i * step;
-    const fx = safeF(x);
-    if (fPrev !== null && fx !== null) {
-      if (fx === 0) roots.push(x);
-      else if ((fPrev < 0) !== (fx < 0)) roots.push(bisectRoot(safeF, xPrev, x));
-    }
-    xPrev = x; fPrev = fx;
-  }
-  roots = roots.filter(r => r !== null && Number.isFinite(r));
-  roots.sort((a, b) => a - b);
-  const deduped = [];
-  roots.forEach(r => { if (!deduped.length || Math.abs(r - deduped[deduped.length - 1]) > 1e-6 * (Math.abs(r) + 1)) deduped.push(r); });
-  return deduped.slice(0, 8);
-}
-function bisectRoot(f, a, b){
-  let fa = f(a);
-  if (fa === null) return (a + b) / 2;
-  for (let i = 0; i < 80; i++) {
-    const m = (a + b) / 2, fm = f(m);
-    if (fm === null) break;
-    if (fm === 0) return m;
-    if ((fa < 0) !== (fm < 0)) { b = m; } else { a = m; fa = fm; }
-  }
-  return (a + b) / 2;
-}
-$('solveBtn').addEventListener('click', () => {
-  const out = $('solveOut');
-  out.classList.remove('err');
-  try {
-    const eqRaw = $('solveEq').value.trim();
-    if (!eqRaw) err('Enter an equation first');
-    const varName = parseVarName($('solveVar').value, 'x');
-    const lo = evalExpr(($('solveLo').value || '-1000').trim() || '-1000');
-    const hi = evalExpr(($('solveHi').value || '1000').trim() || '1000');
-    if (!Number.isFinite(lo) || !Number.isFinite(hi)) err('Bounds must be numbers');
-    if (lo >= hi) err('Lower bound must be less than upper bound');
-    const { lhs, rhs } = parseEquationSides(eqRaw);
-    const roots = findRoots(lhs, rhs, varName, lo, hi);
-    if (!roots.length) { out.textContent = 'No solution found in that range. Try a wider search range.'; out.classList.add('err'); return; }
-    out.innerHTML = '';
-    roots.forEach(r => {
-      const row = document.createElement('div'); row.className = 'root-item';
-      row.appendChild(document.createTextNode(varName + ' = ' + fmt(r)));
-      const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Use';
-      btn.addEventListener('click', () => { vars[varName] = r; ans = r; });
-      row.appendChild(btn);
-      out.appendChild(row);
-    });
-  } catch (e) {
-    out.textContent = e.message || 'Could not solve that equation';
-    out.classList.add('err');
-  }
-});
-['solveEq', 'solveVar', 'solveLo', 'solveHi'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('solveBtn').click(); } }));
-
-/* ---------- Calculus ---------- */
-$('derivBtn').addEventListener('click', () => {
-  const out = $('derivOut');
-  out.classList.remove('err');
-  try {
-    const expr = $('calcExpr').value.trim();
-    if (!expr) err('Enter a function first');
-    const varName = parseVarName($('calcVar').value, 'x');
-    const at = evalExpr(($('calcAt').value || '0').trim() || '0');
-    const f = v => evalWithVarTemp(expr, varName, v);
-    const h = (Math.abs(at) + 1) * 1e-6;
-    const d = (f(at + h) - f(at - h)) / (2 * h);
-    if (!Number.isFinite(d)) err('Math error at that point');
-    out.textContent = 'd/d' + varName + ' at ' + varName + ' = ' + fmt(at) + '  →  ' + fmt(d);
-  } catch (e) {
-    out.textContent = e.message || 'Could not compute that derivative';
-    out.classList.add('err');
-  }
-});
-$('intBtn').addEventListener('click', () => {
-  const out = $('intOut');
-  out.classList.remove('err');
-  try {
-    const expr = $('intExpr').value.trim();
-    if (!expr) err('Enter a function first');
-    const varName = parseVarName($('intVar').value, 'x');
-    const a = evalExpr(($('intLo').value || '0').trim() || '0');
-    const b = evalExpr(($('intHi').value || '1').trim() || '1');
-    if (a === b) { out.textContent = '0'; return; }
-    const f = v => evalWithVarTemp(expr, varName, v);
-    const n = 1000;
-    const lo = Math.min(a, b), hi = Math.max(a, b);
-    const hstep = (hi - lo) / n;
-    let s = f(lo) + f(hi);
-    for (let i = 1; i < n; i++) { const x = lo + i * hstep; s += f(x) * (i % 2 === 0 ? 2 : 4); }
-    let val = s * hstep / 3;
-    if (a > b) val = -val;
-    if (!Number.isFinite(val)) err('Math error over that range');
-    out.textContent = '∫ from ' + fmt(a) + ' to ' + fmt(b) + ' = ' + fmt(val);
-  } catch (e) {
-    out.textContent = e.message || 'Could not compute that integral';
-    out.classList.add('err');
-  }
-});
-['calcExpr', 'calcVar', 'calcAt'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('derivBtn').click(); } }));
-['intExpr', 'intVar', 'intLo', 'intHi'].forEach(id => $(id).addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); $('intBtn').click(); } }));
-
-/* ---------- Variables panel ---------- */
-const VAR_UI_LIST = ['x', 'y', 'z', 't', 'n', 'k', 'a', 'b'];
-function renderVars(){
-  const grid = $('varGrid');
-  grid.innerHTML = '';
-  VAR_UI_LIST.forEach(letter => {
-    const card = document.createElement('div'); card.className = 'var-card';
-    const vh = document.createElement('div'); vh.className = 'vh';
-    const strong = document.createElement('strong'); strong.textContent = letter;
-    const span = document.createElement('span'); span.textContent = '= ' + fmt(vars[letter]);
-    vh.append(strong, span);
-    const input = document.createElement('input'); input.type = 'text'; input.placeholder = 'New value'; input.autocomplete = 'off'; input.spellcheck = false;
-    const btns = document.createElement('div'); btns.className = 'vbtns';
-    const setBtn = document.createElement('button'); setBtn.type = 'button'; setBtn.textContent = 'Set';
-    setBtn.addEventListener('click', () => { try { vars[letter] = evalExpr(input.value.trim() || '0'); renderVars(); } catch (e) {} });
-    const ansBtn = document.createElement('button'); ansBtn.type = 'button'; ansBtn.textContent = '= ans';
-    ansBtn.addEventListener('click', () => { vars[letter] = ans; renderVars(); });
-    const insBtn = document.createElement('button'); insBtn.type = 'button'; insBtn.textContent = 'Insert';
-    insBtn.addEventListener('click', () => insert(letter));
-    btns.append(setBtn, ansBtn, insBtn);
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); setBtn.click(); } });
-    card.append(vh, input, btns);
-    grid.appendChild(card);
-  });
-}
-$('resetVars').addEventListener('click', () => { VARLETTERS.forEach(l => vars[l] = 0); renderVars(); });
-
-/* STO quick control */
-$('stoBtn').addEventListener('click', () => {
-  const v = currentValue();
-  if (v === null) { setRes('Fix the expression first', true); return; }
-  vars[$('stoVar').value] = v;
-  $('stoBtn').textContent = 'Stored';
-  setTimeout(() => { $('stoBtn').textContent = 'STO→'; }, 900);
-});
-
-/* angle + memory + misc */
-$('angleSeg').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  angle = b.dataset.a;
-  [...$('angleSeg').children].forEach(x => x.classList.toggle('on', x === b));
-  if (!justEval) update(); else { /* keep shown result */ }
-});
-document.querySelectorAll('.mem button').forEach(b => b.addEventListener('click', () => memAct(b.dataset.act)));
-$('clearHist').addEventListener('click', () => { history = []; try { localStorage.removeItem('inquiry_sci_history'); } catch (e) {} renderHistory(); });
-$('copyBtn').addEventListener('click', () => {
-  const t = resEl.textContent; if (!t || resEl.classList.contains('err')) return;
-  const done = () => { $('copyBtn').textContent = 'Copied'; setTimeout(() => $('copyBtn').textContent = 'Copy result', 1200); };
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(done, () => {});
-});
-
-/* keyboard */
-exprEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter') { e.preventDefault(); equals(); return; }
-  if (e.key === 'Escape') { clearAll(); return; }
-  if (justEval && e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-    startFresh(/^[+\-*\/^!%]$/.test(e.key));
-    exprEl.setSelectionRange(exprEl.value.length, exprEl.value.length);
-  } else if (justEval && (e.key === 'Backspace' || e.key === 'Delete')) { justEval = false; }
-});
-exprEl.addEventListener('input', () => { if (justEval) { justEval = false; } update(); });
-document.addEventListener('keydown', e => {
-  if (document.activeElement === document.body && e.key.length === 1 && !e.ctrlKey && !e.metaKey) exprEl.focus({ preventScroll: true });
-});
-
-/* theme */
-$('themeToggle').addEventListener('click', () => {
-  const r = document.documentElement, t = r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  r.setAttribute('data-theme', t);
-  try { localStorage.setItem('inquiry_theme', t); } catch (e) {}
-});
-$('yr').textContent = new Date().getFullYear();
-renderHistory();
-exprEl.focus({ preventScroll: true });
-})();
-</script>
-</body>
-</html>
+  acosh: 
