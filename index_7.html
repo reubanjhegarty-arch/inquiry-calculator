@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inquiry Calculator — 100 Precision Tools & AI Solver</title>
+<meta name="description" content="Free online calculators for math, finance, health, science, fitness, conversions and dates, plus an AI solver that shows its steps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+/* ---------- Theme variables: white on black + one accent colour ---------- */
+:root,
+html[data-theme="dark"]{
+  --bg:#050507;
+  --surface:rgba(255,255,255,.045);
+  --surface-strong:rgba(255,255,255,.08);
+  --border:rgba(255,255,255,.12);
+  --border-strong:rgba(255,255,255,.22);
+  --text:#ffffff;
+  --text-dim:rgba(255,255,255,.62);
+  --header-bg:rgba(5,5,7,.65);
+  --accent:#6f7bff;
+  --accent-soft:rgba(111,123,255,.14);
+  --accent-border:rgba(111,123,255,.38);
+  --accent-contrast:#ffffff;
+}
+html[data-theme="light"]{
+  --bg:#ffffff;
+  --surface:rgba(0,0,0,.035);
+  --surface-strong:rgba(0,0,0,.06);
+  --border:rgba(0,0,0,.12);
+  --border-strong:rgba(0,0,0,.22);
+  --text:#0a0a0c;
+  --text-dim:rgba(10,10,12,.62);
+  --header-bg:rgba(255,255,255,.72);
+  --accent:#4f46e5;
+  --accent-soft:rgba(79,70,229,.1);
+  --accent-border:rgba(79,70,229,.35);
+  --accent-contrast:#ffffff;
+}
+body{
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, var(--accent-soft), transparent),
+    var(--bg);
+  background-attachment:fixed;
+  position:relative;
+  color:var(--text);
+}
+body::before{
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:radial-gradient(var(--border) 1px, transparent 1px);
+  background-size:28px 28px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 85%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 0%, #000 40%, transparent 85%);
+}
+
+/* Everything calculator — fixed black/white "spotlight" card in both themes */
+.everything-wrap{max-width:1200px;margin:0 auto;padding:40px 24px 8px;position:relative; z-index:1;}
+.everything-eyebrow{
+  display:flex; align-items:center; gap:8px; margin:0 0 10px 2px;
+  font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--accent);
+}
+.everything-eyebrow::before{content:"";width:16px;height:2px;background:var(--accent);border-radius:2px}
+.everything-bar{
+  display:flex;align-items:center;gap:16px;padding:18px 22px;border-radius:16px;
+  text-decoration:none;transition:border-color .15s,transform .15s;
+  background:#000;
+  border:1px solid rgba(255,255,255,.14);
+  color:#fff;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 20px 50px -25px rgba(0,0,0,.8);
+}
+.everything-bar::before{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(420px circle at var(--mx,30%) var(--my,50%), var(--accent-soft), transparent 60%);
+  opacity:0; transition:opacity .3s;
+  pointer-events:none;
+}
+.everything-bar:hover::before{opacity:1}
+.everything-bar:hover{border-color:var(--accent-border); transform:translateY(-2px)}
+.everything-bar:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.eb-icon{
+  flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  background:var(--accent);color:#fff;
+  box-shadow:0 0 0 1px rgba(255,255,255,.1), 0 8px 24px -8px var(--accent-border);
+}
+.eb-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;position:relative;z-index:1}
+.eb-text strong{font-size:21px;font-weight:700;letter-spacing:-.01em;color:#fff;text-shadow:0 0 20px var(--accent-border)}
+.eb-text small{font-size:13px;line-height:1.4;color:rgba(255,255,255,.6)}
+.eb-arrow{flex:none;opacity:.8;transition:transform .15s;color:#fff;position:relative;z-index:1}
+.everything-bar:hover .eb-arrow{transform:translateX(4px);opacity:1}
+@media(max-width:600px){.everything-wrap{padding:32px 16px 8px}.everything-bar{padding:14px 16px}.eb-text small{display:none}}
+
+/* Calculator cards polish */
+.calc-card{position:relative; transition:transform .2s ease, border-color .2s ease, background .2s ease;}
+.calc-card:hover{transform:translateY(-3px); border-color:var(--accent-border);}
+.category-title{position:relative; letter-spacing:-.01em;}
+
+/* scroll reveal */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .5s ease, transform .5s ease}
+.reveal.in{opacity:1; transform:translateY(0)}
+</style>
+<link rel="stylesheet" href="hero.css">
+<script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('inquiry_theme')||'dark')}catch(e){}</script>
+</head>
+<body>
+
+<header class="glass-header">
+  <div class="nav-container">
+    <a href="index.html" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"/><path d="M4 10h16"/><path d="M10 4v16"/></svg>
+      Inquiry Calculator
+    </a>
+    <div class="nav-actions">
+      <a href="chat.html" class="nav-link">AI Solver</a>
+      <a href="about.html" class="nav-link">About</a>
+      <button id="searchBtn" class="icon-btn" aria-label="Search calculators">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero vz" id="vzHero">
+
+  <!-- shared SVG parts (buttons, roughen filter, render gradient) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <rect id="vzb" width="46" height="40" rx="10"/>
+    <g id="vzn">
+      <use href="#vzb" x="40" y="124"/><use href="#vzb" x="98" y="124"/><use href="#vzb" x="156" y="124"/>
+      <use href="#vzb" x="40" y="176"/><use href="#vzb" x="98" y="176"/><use href="#vzb" x="156" y="176"/>
+      <use href="#vzb" x="40" y="228"/><use href="#vzb" x="98" y="228"/><use href="#vzb" x="156" y="228"/>
+      <use href="#vzb" x="40" y="280"/><use href="#vzb" x="98" y="280"/><use href="#vzb" x="156" y="280"/>
+    </g>
+    <g id="vzo">
+      <use href="#vzb" x="214" y="124"/><use href="#vzb" x="214" y="176"/>
+      <use href="#vzb" x="214" y="228"/><use href="#vzb" x="214" y="280"/>
+    </g>
+    <filter id="vzr" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="2" seed="4"/>
+      <feDisplacementMap in="SourceGraphic" scale="3.5"/>
+    </filter>
+    <linearGradient id="vzg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a4b52"/><stop offset="1" stop-color="#141417"/>
+    </linearGradient>
+  </defs></svg>
+
+  <!-- headline (sits deepest, moves the opposite way) -->
+  <div class="vz-title-wrap" data-depth="-0.2">
+    <h1 class="hero-title">Make it add up.</h1>
+  </div>
+
+  <!-- left sketch: a house, for the mortgage maths -->
+  <figure class="vz-sketch vz-left" data-depth="0.5" aria-hidden="true">
+    <svg viewBox="0 0 240 240" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#vzr)">
+      <path d="M26 122 L120 36 L214 122"/>
+      <path d="M50 108 V208 H190 V108"/>
+      <path d="M98 208 V150 H142 V208"/>
+      <path d="M152 78 V50 H176 V100"/>
+      <path d="M68 136 h18 v18 h-18 z M154 136 h18 v18 h-18 z"/>
+      <path class="hatch" d="M58 180 l22 -22 M58 196 l38 -38 M62 206 l22 -22 M150 206 l34 -34 M168 206 l20 -20"/>
+      <path class="hatch" d="M76 100 l44 -40 M92 108 l30 -28"/>
+    </svg>
+  </figure>
+
+  <!-- right sketch: a flask, for the science maths -->
+  <figure class="vz-sketch vz-right" data-depth="0.5" aria-hidden="true">
+    <svg viewBox="0 0 200 260" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#vzr)">
+      <path d="M76 18 H124"/>
+      <path d="M86 18 V100 L34 212 Q26 242 58 242 H142 Q174 242 166 212 L114 100 V18"/>
+      <path d="M48 186 Q100 164 152 186"/>
+      <circle cx="94" cy="206" r="7"/><circle cx="120" cy="214" r="4"/><circle cx="104" cy="60" r="5"/>
+      <path class="hatch" d="M56 214 l22 -22 M58 232 l38 -38 M90 238 l30 -30 M120 238 l26 -26"/>
+    </svg>
+  </figure>
+
+  <!-- centre: sketch becomes render as the mouse moves; the prompt bar is the AI Solver form -->
+  <div class="vz-canvas" data-depth="0.9">
+    <div class="vz-art" aria-hidden="true">
+      <!-- sketch layer -->
+      <svg class="vz-sk" viewBox="0 0 300 360" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#vzr)">
+        <rect x="20" y="14" width="260" height="332" rx="28"/>
+        <rect x="40" y="38" width="220" height="64" rx="12"/>
+        <path d="M150 74 q8 -14 16 0 t16 0 t16 0 t16 0 t16 0"/>
+        <use href="#vzn"/><use href="#vzo"/>
+        <path class="hatch" stroke-width="1.4" opacity=".7" d="M262 30 l-26 30 M274 46 l-30 34 M276 70 l-22 26 M30 330 l30 -30 M30 312 l20 -20 M46 338 l38 -38"/>
+      </svg>
+      <!-- render layer (revealed from the cut line to the right) -->
+      <svg class="vz-rd" viewBox="0 0 300 360" aria-hidden="true">
+        <ellipse cx="150" cy="352" rx="112" ry="6" fill="rgba(0,0,0,.28)"/>
+        <rect x="20" y="14" width="260" height="332" rx="28" fill="url(#vzg)" stroke="rgba(255,255,255,.16)" stroke-width="1.5"/>
+        <rect x="40" y="38" width="220" height="64" rx="12" fill="#0b0c0e"/>
+        <text x="248" y="85" text-anchor="end" font-family="Inter,system-ui,sans-serif" font-size="34" font-weight="600" fill="#b9c0ff">1,284.50</text>
+        <g fill="#2b2c32" stroke="rgba(255,255,255,.09)"><use href="#vzn"/></g>
+        <use href="#vzo" class="vz-op"/>
+      </svg>
+      <span class="vz-cut"></span>
+    </div>
+    <i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i>
+
+    <form id="heroAiForm" class="vz-prompt">
+      <input type="text" id="heroAiInput" class="vz-input" placeholder="Solve this for me" autocomplete="off" aria-label="Ask the AI Solver" required>
+      <button type="submit" class="btn-command-submit" aria-label="Solve">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </form>
+  </div>
+
+  <div class="vz-foot">
+    <p class="vz-sub">100 calculators and an AI solver that shows its steps.</p>
+    <div class="vz-cta">
+      <a class="vz-btn primary" href="#content">Browse calculators</a>
+      <a class="vz-btn" href="chat.html">Open the AI Solver</a>
+    </div>
+    <p class="vz-hint">Press <kbd>Enter</kbd> to solve. Press <kbd>/</kbd> to search calculators.</p>
+    <p class="vz-note"><strong>New:</strong> snapshot a question from any other tab and drop it in here.</p>
+  </div>
+</section>
+
+<section class="everything-wrap" aria-label="Everything Calculator">
+  <div class="everything-eyebrow">Featured tool</div>
+  <a href="everything-calculator.html" class="everything-bar" id="everythingBar">
+    <span class="eb-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="12" y1="11" x2="12.01" y2="11"/><line x1="16" y1="11" x2="16.01" y2="11"/><line x1="8" y1="15" x2="8.01" y2="15"/><line x1="12" y1="15" x2="12.01" y2="15"/><line x1="16" y1="15" x2="16.01" y2="15"/><line x1="8" y1="19" x2="12" y2="19"/></svg>
+    </span>
+    <span class="eb-text">
+      <strong>Everything Calculator</strong>
+      <small>A full scientific calculator with trig, logs, powers, factorials and physical constants</small>
+    </span>
+    <span class="eb-arrow">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </span>
+  </a>
+</section>
+
+<main class="main-layout">
+  <aside class="sidebar-nav"><ul id="sideNav"></ul></aside>
+  <div class="content-area" id="content"></div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-about">
+      <div class="logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16v16H4z"/><path d="M4 10h16"/><path d="M10 4v16"/></svg>
+        Inquiry Calculator
+      </div>
+      <p>Precise calculators and a step-by-step AI solver, with nothing in the way.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col"><strong>Pages</strong><a href="index.html">Calculators</a><a href="everything-calculator.html">Everything Calculator</a><a href="chat.html">AI Solver</a><a href="about.html">About</a></div>
+      <div class="footer-col"><strong>Legal and contact</strong><a href="contact.html">Contact</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>&copy; <span id="yr">2026</span> Inquiry Calculator</span><span>inquirycalculator.com</span></div>
+</footer>
+
+<div id="searchOverlay" role="dialog" aria-label="Search calculators">
+  <div class="search-container">
+    <div class="search-header">
+      <input type="text" id="searchInput" placeholder="Search 100 calculators" autocomplete="off">
+      <button id="closeSearchBtn" class="close-search" aria-label="Close search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="searchResults" class="search-results-grid"></div>
+  </div>
+</div>
+
+<script>
+const DATA = [
+['math','Math',[
+'standard-calculator|Standard Calculator|Everyday arithmetic',
+'percentage-calculator|Percentage Calculator|Increase, decrease and difference',
+'fraction-calculator|Fraction Calculator|Add, subtract, multiply and simplify',
+'square-root-calculator|Square Root Calculator|Square roots, cube roots, radicals',
+'exponent-calculator|Exponent Calculator|Any positive or negative power',
+'logarithm-calculator|Logarithm Calculator|Natural and base-n logarithms',
+'ratio-calculator|Ratio Calculator|Solve proportions and scale ratios',
+'random-number-generator|Random Number Generator|Random integers in a range',
+'probability-calculator|Probability Calculator|Odds of single and multiple events',
+'standard-deviation-calculator|Standard Deviation Calculator|Mean, variance and deviation',
+'lcm-calculator|LCM Calculator|Least common multiple',
+'gcf-calculator|GCF Calculator|Greatest common factor',
+'quadratic-calculator|Quadratic Formula Calculator|Real and complex roots of ax² + bx + c',
+'area-calculator|Area Calculator|Circles, triangles and rectangles',
+'perimeter-calculator|Perimeter Calculator|Perimeter and circumference']],
+['finance','Finance',[
+'mortgage-calculator|Mortgage Calculator|Monthly payments and amortization',
+'loan-calculator|Loan Calculator|Repayments, interest and schedules',
+'compound-interest-calculator|Compound Interest Calculator|Project investment growth over time',
+'tip-calculator|Tip Calculator|Tip amounts and split bills',
+'tax-calculator|Income Tax Calculator|Tax brackets and take-home pay',
+'discount-calculator|Discount Calculator|Sale prices and total savings',
+'margin-calculator|Profit Margin Calculator|Gross and net margin percentages',
+'roi-calculator|ROI Calculator|Percentage return on investment',
+'rule-of-72-calculator|Rule of 72 Calculator|Years to double your money',
+'present-value-calculator|Present Value Calculator|Future cash flows in today’s money',
+'salary-calculator|Salary Calculator|Hourly, weekly, monthly and annual pay',
+'auto-loan-calculator|Auto Loan Calculator|Car payments, trade-in and interest',
+'cc-payoff-calculator|Credit Card Payoff Calculator|Time and interest to clear debt',
+'net-worth-calculator|Net Worth Calculator|Assets minus liabilities',
+'dti-calculator|DTI Ratio Calculator|Debt-to-income for mortgage approval',
+'sip-calculator|SIP Calculator|Wealth from systematic investing',
+'crypto-profit-calculator|Crypto Profit Calculator|Gains, losses and fees on trades',
+'markup-calculator|Markup Calculator|Selling price from wholesale cost',
+'inflation-calculator|Inflation Calculator|Purchasing power over time',
+'currency-converter|Currency Converter|Convert between world currencies']],
+['health','Health',[
+'bmi-calculator|BMI Calculator|Body mass index and healthy range',
+'bmr-calculator|BMR Calculator|Resting daily calorie needs',
+'water-intake-calculator|Daily Water Intake Calculator|Recommended daily fluids',
+'ideal-weight-calculator|Ideal Weight Calculator|Target weight by medical formulas',
+'bac-calculator|BAC Calculator|Estimated blood alcohol concentration',
+'target-hr-calculator|Target Heart Rate Calculator|Heart rate zones for exercise',
+'protein-calculator|Protein Intake Calculator|Daily protein for your goal',
+'calorie-calculator|Calorie Calculator|Maintenance, loss and gain targets',
+'body-fat-calculator|Body Fat Calculator|Body fat percentage, US Navy method',
+'macro-calculator|Macro Calculator|Carb, protein and fat split',
+'ovulation-calculator|Ovulation Calculator|Fertile window and peak days',
+'due-date-calculator|Due Date Calculator|Due date and trimester timeline',
+'lbm-calculator|Lean Body Mass Calculator|Fat-free mass, Boer and James',
+'sleep-calculator|Sleep Calculator|Bedtimes based on 90-minute cycles',
+'blood-volume-calculator|Blood Volume Calculator|Total blood volume from height and weight']],
+['conversion','Conversion',[
+'length-converter|Length Converter|Meters, feet, inches, miles and more',
+'weight-converter|Weight Converter|Kilograms, pounds, ounces and grams',
+'temperature-converter|Temperature Converter|Celsius, Fahrenheit and Kelvin',
+'volume-converter|Volume Converter|Liters, gallons, fluid ounces and cups',
+'speed-converter|Speed Converter|mph, km/h, knots and m/s',
+'time-converter|Time Converter|Milliseconds to years',
+'data-storage-converter|Data Storage Converter|Bytes, KB, MB, GB and TB',
+'area-converter|Area Converter|Acres, hectares, square meters and feet',
+'energy-converter|Energy Converter|Joules, calories and watt-hours',
+'pressure-converter|Pressure Converter|Pascal, bar, PSI, atm and torr',
+'power-converter|Power Converter|Watts, kilowatts and horsepower',
+'angle-converter|Angle Converter|Degrees, radians and gradians',
+'frequency-converter|Frequency Converter|Hz, kHz, MHz and GHz',
+'fuel-economy-converter|Fuel Economy Converter|MPG, L/100km and km/L',
+'force-converter|Force Converter|Newtons, dynes and pound-force']],
+['science','Science',[
+'physics-calculator|Physics Calculator|Force, mass and acceleration (F = ma)',
+'density-calculator|Density Calculator|Mass, volume and density (ρ = m/V)',
+'velocity-calculator|Velocity Calculator|Velocity, displacement and travel time',
+'kinetic-energy-calculator|Kinetic Energy Calculator|Energy of moving objects (½mv²)',
+'potential-energy-calculator|Potential Energy Calculator|Gravitational energy (mgh)',
+'wavelength-calculator|Wavelength Calculator|Wavelength from speed and frequency',
+'acceleration-calculator|Acceleration Calculator|Change in velocity over time',
+'ohms-law-calculator|Ohm’s Law Calculator|Voltage, current, resistance and power',
+'molar-mass-calculator|Molar Mass Calculator|Molecular weight of compounds',
+'gravity-calculator|Gravity Calculator|Gravitational force between two masses']],
+['date-time','Date & Time',[
+'date-calculator|Date Calculator|Add or subtract days, months and years',
+'age-calculator|Age Calculator|Exact age in years, months and days',
+'timezone-converter|Time Zone Converter|Convert time across zones',
+'hours-calculator|Hours Worked Calculator|Timesheet hours and breaks',
+'business-days-calculator|Business Days Calculator|Working days between dates',
+'days-from-today-calculator|Days From Today Calculator|The date X days from now',
+'duration-calculator|Time Duration Calculator|Elapsed time between two clock times',
+'leap-year-calculator|Leap Year Calculator|Check if a year is a leap year',
+'unix-timestamp-calculator|Unix Timestamp Converter|Epoch time to readable dates',
+'day-of-week-calculator|Day of the Week Calculator|The weekday of any date']],
+['fitness','Fitness',[
+'pace-calculator|Running Pace Calculator|Pace for 5k, 10k and marathons',
+'1rm-calculator|1RM Max Calculator|Estimated one-rep max',
+'vo2max-calculator|VO2 Max Calculator|Aerobic capacity estimate',
+'cycling-watt-calculator|Cycling Power Calculator|Watts from speed and gradient',
+'step-count-calculator|Step Count Converter|Steps to miles and kilometers',
+'wilks-calculator|Wilks Score Calculator|Powerlifting strength vs bodyweight',
+'marathon-predictor|Marathon Predictor|Marathon time from shorter races',
+'calorie-burn-calculator|Calories Burned Calculator|Workout calories using MET values']],
+['education','Education & Misc',[
+'gpa-calculator|GPA Calculator|High school or college GPA',
+'final-grade-calculator|Final Grade Calculator|Score needed on your final exam',
+'reading-time-calculator|Reading Time Calculator|Reading time from word count',
+'word-count|Word Counter|Words, characters, sentences, paragraphs',
+'test-score-calculator|Test Score Calculator|Grade a test from wrong answers',
+'tip-split-calculator|Tip Split Calculator|Split bills and tips evenly',
+'price-per-unit-calculator|Price Per Unit Calculator|Compare unit prices for the best value']]
+];
+
+const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const cards = [];
+let html = '', nav = '';
+DATA.forEach(([id, label, items]) => {
+  nav += `<li><a href="#${id}">${esc(label)} <span class="category-count">${items.length}</span></a></li>`;
+  html += `<section id="${id}" class="category-section"><h2 class="category-title">${esc(label)}</h2><div class="calc-grid">`;
+  items.forEach(row => {
+    const [slug, name, desc] = row.split('|');
+    const href = slug + '.html';
+    cards.push({ name, desc, href, label });
+    html += `<a href="${href}" class="calc-card"><div class="calc-name">${esc(name)}</div><div class="calc-desc">${esc(desc)}</div></a>`;
+  });
+  html += '</div></section>';
+});
+document.getElementById('content').innerHTML = html;
+document.getElementById('sideNav').innerHTML = nav;
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+cards.unshift({ name: 'Everything Calculator', desc: 'Full scientific calculator with trig, logs, powers and constants', href: 'everything-calculator.html', label: 'Math' });
+
+(function () {
+  const t = document.querySelector('.hero-title');
+  if (!t) return;
+  t.setAttribute('aria-label', t.textContent);
+  t.innerHTML = t.textContent.trim().split(' ').map((w, i) => `<span class="w" style="--i:${i}" aria-hidden="true">${w}</span>`).join(' ');
+  t.classList.add('split');
+})();
+
+document.getElementById('heroAiForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const q = document.getElementById('heroAiInput').value.trim();
+  if (!q) return;
+  try { sessionStorage.setItem('pending_question', q); } catch (err) {}
+  window.location.href = 'chat.html';
+});
+
+const root = document.documentElement;
+function setTheme(t) {
+  root.setAttribute('data-theme', t);
+  try { localStorage.setItem('inquiry_theme', t); } catch (e) {}
+}
+document.getElementById('themeToggle').addEventListener('click', () =>
+  setTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'));
+
+const overlay = document.getElementById('searchOverlay');
+const input = document.getElementById('searchInput');
+const results = document.getElementById('searchResults');
+function render(q) {
+  q = q.toLowerCase().trim();
+  const list = q ? cards.filter(c => (c.name + ' ' + c.desc + ' ' + c.label).toLowerCase().includes(q)) : cards.slice(0, 12);
+  results.innerHTML = list.length
+    ? list.map(c => `<a href="${c.href}" class="calc-card"><div class="calc-name">${esc(c.name)}</div><div class="calc-desc">${esc(c.desc)}</div></a>`).join('')
+    : '<div class="search-empty">No calculators match that search. Try a broader word, or ask the AI solver.</div>';
+}
+function openSearch() { overlay.classList.add('active'); render(''); setTimeout(() => input.focus(), 50); }
+function closeSearch() { overlay.classList.remove('active'); input.value = ''; }
+document.getElementById('searchBtn').addEventListener('click', openSearch);
+document.getElementById('closeSearchBtn').addEventListener('click', closeSearch);
+input.addEventListener('input', e => render(e.target.value));
+input.addEventListener('keydown', e => { if (e.key === 'Enter') { const a = results.querySelector('a'); if (a) location.href = a.href; } });
+overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
+document.addEventListener('keydown', e => {
+  const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+  if (e.key === 'Escape') closeSearch();
+  else if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) { e.preventDefault(); openSearch(); }
+});
+
+const links = [...document.querySelectorAll('.sidebar-nav a')];
+const io = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id));
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+document.querySelectorAll('.category-section').forEach(s => io.observe(s));
+links[0].classList.add('active');
+
+const ebar = document.getElementById('everythingBar');
+if (ebar) {
+  ebar.addEventListener('mousemove', e => {
+    const r = ebar.getBoundingClientRect();
+    ebar.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    ebar.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+}
+
+document.querySelectorAll('.category-section, .calc-card').forEach(el => el.classList.add('reveal'));
+const revealIO = new IntersectionObserver(entries => {
+  entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add('in'); revealIO.unobserve(en.target); }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+</script>
+<script src="hero.js" defer></script>
+</body>
+</html>
